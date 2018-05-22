@@ -22,8 +22,9 @@ class BaseController {
     private $layoutPath;
     private $pageTitle;
     private $redirect;
-    private $erro;
+    private $tipo;
     private $extenção;
+    private $mensagem;
 
     public function __construct() {
         $this->view = new \stdClass();
@@ -71,11 +72,12 @@ class BaseController {
         }
     }
 
-    protected function redirect($redirect, $erro = null) {
+    protected function redirect($redirect, $tipo = null, $mensagem = null) {
         $this->redirect = $redirect;
-        $this->erro = $erro;
+        $this->tipo = $tipo;
+        $this->mensagem = $mensagem;
         $this->getRedirect() === TRUE ?: Container::pageNotFoundLayout();
-        $this->setErro();
+        $this->setSession();
     }
 
     protected function getRedirect() {
@@ -84,10 +86,16 @@ class BaseController {
     }
 
     
-    protected function setErro() {
+    protected function setSession() {
         $data = Session::getInstance();
         //fornece qual sera o nome da sessao e sua mensagem
-        $data->erro = $this->erro;
+        switch ($this->tipo){
+            case 1: $data->erro = $this->mensagem;
+                break;
+            case 2: $data->sucess = $this->mensagem;
+                break;
+        }
+        
         
     }
 

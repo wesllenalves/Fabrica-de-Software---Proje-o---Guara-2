@@ -27,8 +27,10 @@ class AdminController extends BaseController{
         // cria um objeto da model cadastro
         $cadastro = new Cadastro();
         //chama o metodo resposavel pelo cadastro
-       if($cadastro->cadastrar($dados)){
-           echo 'cadastrado';
+       if($cadastro->cadastrar($dados)){ 
+           //1 = erro
+           //2 = sucess
+           $this->redirect('dashboard', '2', 'cadastrado com sucesso');
        }else{
            echo 'não cadastrado';
        }

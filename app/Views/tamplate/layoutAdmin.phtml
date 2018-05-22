@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if(isset($_SESSION['sucess'])){
+    echo $_SESSION['sucess']; 
+//    unset($_SESSION['sucess']);
+}
+
 ?>
 ﻿<!doctype html>
 <html lang="en">
