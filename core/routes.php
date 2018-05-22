@@ -6,7 +6,8 @@ $routes[] = ['/login', 'HomeController@login'];
 $routes[] = ['/login/verificar', 'HomeController@validarLogin'];
 $routes[] = ['/cadastro', 'HomeController@cadastro'];
 $routes[] = ['/cadastro/create', 'HomeController@cadastroCreat'];
-$routes[] = ['/admin', 'AdminController@index'];
+$routes[] = ['/dashboard', 'AdminController@index'];
+$routes[] = ['/dashboard/cadastro-produto', 'AdminController@cadastroProduto'];
 
 return $routes;
 

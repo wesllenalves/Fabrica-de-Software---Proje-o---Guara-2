@@ -2,7 +2,7 @@
    return  [
       
        "database" => [
-         "dbname" => "SVEP",
+         "dbname" => "mariathdoces",
          "host" => "localhost",
          "username" => "root",
          "password" => "",

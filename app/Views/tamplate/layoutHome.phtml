@@ -1,26 +1,56 @@
-<?php
-session_start();
-?>
-<!-- TODO: Jogar layout padrão em outro arquivo para reutilização -->
 <!DOCTYPE html>
-<html lang="pt-br">
-   <head>
-      <!-- Meta tags - informações de configuração da página -->
-      <meta charset="UTF-8">
-      <meta name="robots" content="index, follow">
-      <meta http-equiv="X-UA-Compatible" content="ie-edge">
-      <meta name="description" content="Alterar descrição">
-      <meta name="author" content="Lucas, Gustavo, Wesllen">
-      <meta name="viewport" content="width=device-width, intial-scale=1.0">
-      <!-- Tags relacionadas ao estilo - Fontes e Ícones -->
-      <link rel="stylesheet" href="css/linea-basic/styles.css">
-      <link rel="stylesheet" href="css/linea-ecommerce/styles.css">
-      <!-- Tags relacionadas ao estilo - Internas -->
-      <link rel="stylesheet" href="css/style.css">
+<html>
+<head>
+    <title>Exemplo de layout V1.5</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Style -- CSS -- LINK -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="css/Script.css" rel="stylesheet" />
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <!-- Script -- JS -- LINK -->
+    <script src="js/jquery.js"></script>
+    <script src="js/tether.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body ng-app="sistema" ng-controller="SistemaCtrl" ng-init="FnInit();">
 
-      <title><?php $this->getPageTitle('| SVEP')?></title>
-   </head>
-   <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top bg-dark">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" onclick="rolar_para('#section1')">Logo</a>
+            </div>
+
+            <div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav" style="float:right;">
+                        <li class="nav-item active"><a href="#" onclick="rolar_para('#section1')">Menu 1</a></li>
+                        <li><a href="#" ng-click="Getmodalcadastro();">Novo Cliente</a></li>
+                        <li><a href="#" onclick="rolar_para('#section2')">Sobre Nós</a></li>
+                        <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section3')">Serviços</a></li>
+                        <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section4')">Galeria</a></li>
+                        <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section5')">Agenda</a></li>
+                        <li><a href="#section4" onclick="rolar_para('#section6')">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <ul class="cb-slideshow">
+        <li class="li"><span></span><div><h3>Slide1</h3>Texto1</div></li>
+        <li class="li"><span></span><div><h3>Slide2</h3>Texto2</div></li>
+        <li class="li"><span></span><div><h3>Slide3</h3>Texto3</div></li>
+        <li class="li"><span></span><div><h3>Slide4</h3>Texto4</div></li>
+        <li class="li"><span></span><div><h3>Slide5</h3>Texto5</div></li>
+        <li class="li"><span></span><div><h3>Slide6</h3>Texto6</div></li>
+    </ul>
         <!--Conteudo-->
         <?php $this->content()?>
         <!--Fim Conteudo-->        

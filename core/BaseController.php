@@ -23,14 +23,16 @@ class BaseController {
     private $pageTitle;
     private $redirect;
     private $erro;
+    private $extenção;
 
     public function __construct() {
         $this->view = new \stdClass();
     }
 
-    protected function Render($view, $layoutPath = null) {
+    protected function Render($view, $layoutPath = null, $extenção = null) {
         $this->viewPath = $view;
         $this->layoutPath = $layoutPath;
+        $this->extenção = $extenção;
 
         //Se existir layout passa o caminho dele caso contrario passa so o caminho do arquivo da view
         if ($layoutPath) {
@@ -41,9 +43,10 @@ class BaseController {
     }
 
     protected function content() {
-        if (file_exists(__DIR__ . "/../app/Views/{$this->viewPath}.phtml")) {
-            require_once __DIR__ . "/../app/Views/{$this->viewPath}.phtml";
-        } else {
+        $ext = empty($this->extenção) ? ".phtml" : ".". $this->extenção;
+        if (file_exists(__DIR__ . "/../app/Views/{$this->viewPath}{$ext}")) {
+            require_once __DIR__ . "/../app/Views/{$this->viewPath}{$ext}";
+        } else {          
             Container::pageNotFoundView();
         }
     }
