@@ -10,6 +10,7 @@ namespace App\Controllers;
 use Core\BaseController;
 use App\Models\Admin\CadastroProduto;
 use App\Models\Admin\CadastroFuncionario;
+use App\Models\Admin\ListarClientes;
 /**
  * Description of AdminController
  *
@@ -27,7 +28,7 @@ class AdminController extends BaseController{
     }
 
 
-    public function CadastroFuncionario($request){
+    public function cadastroFuncionario($request){
         
         $cadastroFuncionario = new CadastroFuncionario();
         
@@ -36,7 +37,7 @@ class AdminController extends BaseController{
         }
     }
 
-        public function cadastroProduto($request){
+    public function cadastroProduto($request){
         //atribui a ua variavel todos os dados passados por post
         $dados = $request->post;
         // cria um objeto da model cadastro
@@ -50,4 +51,18 @@ class AdminController extends BaseController{
            echo 'não cadastrado';
        }
     }
+    
+    public function listarCliente(){
+        $cliente = new ListarClientes();
+       $this->view->clientes = $cliente->listar();
+        
+        
+        $this->Render("admin/lista-cliente");
+    }
+    
+    public function editarCliente($id){
+        
+      echo  $id;
+    }
+    
 }

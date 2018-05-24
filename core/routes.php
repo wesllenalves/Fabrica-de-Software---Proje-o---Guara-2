@@ -11,7 +11,9 @@ $routes[] = ['/cadastro/cliente', 'HomeController@cadastroCliente'];
 $routes[] = ['/dashboard', 'AdminController@index'];
 $routes[] = ['/dashboard/cadastro-produto', 'AdminController@cadastroProduto'];
 $routes[] = ['/dashboard/funcionario', 'AdminController@funcionario'];
-$routes[] = ['/dashboard/cadastro/funcionario', 'AdminController@CadastroFuncionario'];
+$routes[] = ['/dashboard/cadastro/funcionario', 'AdminController@cadastroFuncionario'];
+$routes[] = ['/dashboard/listar/clientes', 'AdminController@listarCliente'];
+$routes[] = ['/dashboard/alterar/cliente/{id}', 'AdminController@editarCliente'];
 
 return $routes;
 

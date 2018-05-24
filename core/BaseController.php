@@ -25,6 +25,7 @@ class BaseController {
     private $tipo;
     private $extenção;
     private $mensagem;
+    
 
     public function __construct() {
         $this->view = new \stdClass();
@@ -34,6 +35,7 @@ class BaseController {
         $this->viewPath = $view;
         $this->layoutPath = $layoutPath;
         $this->extenção = $extenção;
+        
 
         //Se existir layout passa o caminho dele caso contrario passa so o caminho do arquivo da view
         if ($layoutPath) {
