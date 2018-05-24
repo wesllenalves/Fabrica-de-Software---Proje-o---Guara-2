@@ -4,8 +4,7 @@ namespace App\Controllers;
 
 use Core\BaseController;
 use App\Models\Login;
-use App\Models\Cadastro;
-
+use App\Models\Home\CadastroCliente;
 
 class HomeController extends BaseController {
 
@@ -47,7 +46,24 @@ class HomeController extends BaseController {
         //seta o titulo da pagina 
         $this->setPageTitle('Cadastrar');
         //renderiza a pagina
-        $this->Render('home/cadastro', 'layoutHome');
+        $this->Render('home/cadastrar-cliente');
+    }
+
+    public function cadastroCliente($request) {
+        //traz todos as request post enviadas
+        $dados = $request->post;
+        //instacia o objeto da model Cadastro
+        $cadastro = new CadastroCliente();     
+            //verifica se foi cadastrado com sucesso retorna TRUE
+            if ($cadastro->cadastrar($dados)) {
+                //Apresenta a mensagem de cadastro efetuado com sucesso
+                echo 'Cadastrado com Sucesso';
+            } else {
+                //Apresenta a mensagem de erro ao tentar cadastrar
+                echo 'OPS algo deu errado no seu cadastro';
+            }
+        
+        
     }
 
     public function cadastroCreat($request) {

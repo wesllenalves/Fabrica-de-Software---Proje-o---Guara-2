@@ -8,7 +8,8 @@
 
 namespace App\Controllers;
 use Core\BaseController;
-use App\Models\Cadastro;
+use App\Models\Admin\CadastroProduto;
+use App\Models\Admin\CadastroFuncionario;
 /**
  * Description of AdminController
  *
@@ -21,11 +22,25 @@ class AdminController extends BaseController{
         $this->Render('admin/dashboard', 'layoutadmin');
     }
     
-    public function cadastroProduto($request){
+    public function funcionario(){
+        $this->Render('admin/cadastrar-funcionario');
+    }
+
+
+    public function CadastroFuncionario($request){
+        
+        $cadastroFuncionario = new CadastroFuncionario();
+        
+        if($cadastroFuncionario->cadastrar($request->post)){
+         
+        }
+    }
+
+        public function cadastroProduto($request){
         //atribui a ua variavel todos os dados passados por post
         $dados = $request->post;
         // cria um objeto da model cadastro
-        $cadastro = new Cadastro();
+        $cadastro = new CadastroProduto();
         //chama o metodo resposavel pelo cadastro
        if($cadastro->cadastrar($dados)){ 
            //1 = erro

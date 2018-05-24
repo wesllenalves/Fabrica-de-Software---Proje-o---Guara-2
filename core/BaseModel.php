@@ -9,6 +9,7 @@
 namespace Core;
 
 use Core\DataBase;
+use Core\Session;
 
 /**
  * Description of Model
@@ -25,6 +26,9 @@ abstract class BaseModel {
     protected $chaveEstrangeira;
     protected $chaveEstrangeira1;
     protected $chaveEstrangeira2;
+    private $redirect;
+    private $tipo;    
+    private $mensagem;
 
     public function __construct() {
         $this->con = new DataBase();
@@ -37,22 +41,36 @@ abstract class BaseModel {
     public function __get($atributo) {
         return $this->$atributo;
     }
-
-    public function read($campos = "*", $where = null) {
-        try {           
-
-            $where_sql = empty($where) ? "" : "WHERE " . $where;
-            $r = $this->con->conecta()->prepare("SELECT {$campos} FROM $this->tabela {$where_sql};");
-            if ($r->execute()) {
-                return $r->fetchAll();
-            } else {
-                print_r($r->errorInfo());
-            }
-        } catch (PDOException $ex) {
-            echo $ex->getMessage();
-        }
+    
+    protected function redirect($redirect, $tipo = null, $mensagem = null) {
+        $this->redirect = $redirect;
+        $this->tipo = $tipo;
+        $this->mensagem = $mensagem;
+        $this->getRedirect() === TRUE ?: Container::pageNotFoundLayout();
+        $this->setSession();
     }
 
+    protected function getRedirect() {
+        header('Location:' . base_url('/') . '' . $this->redirect);
+        return TRUE;
+    }
+
+    protected function setSession() {
+        $data = Session::getInstance();
+        //fornece qual sera o nome da sessao e sua mensagem
+        switch ($this->tipo) {
+            case 1: $data->success = $this->mensagem;
+                break;
+            case 2: $data->info = $this->mensagem;
+                break;
+            case 3: $data->warning = $this->mensagem;
+                break;
+            case 4: $data->danger = $this->mensagem;
+                break;
+            
+        }
+    }
+    
     public function insert(array $campos_values) {
         //atribui a uma variavel a quantidade de tabelas a ser usadas
         $total = $this->tabelaUse;
@@ -66,7 +84,7 @@ abstract class BaseModel {
                     $insert_values_0 = implode("','", $values_array_0);
 
                     $query1 = $this->con->conecta()->prepare("INSERT INTO $this->tabela ({$insert_campos_0}) VALUES('{$insert_values_0}');");
-
+                    print_r($query1);                    die();
                     if ($query1->execute()) {
                         return TRUE;
                     } else {
@@ -233,6 +251,41 @@ abstract class BaseModel {
                     echo $ex->getMessage();
                 }
                 break;
+        }
+    }
+
+    public function read($campos = "*", $where = null) {
+        try {
+
+            $where_sql = empty($where) ? "" : "WHERE " . $where;
+            $r = $this->con->conecta()->prepare("SELECT {$campos} FROM $this->tabela {$where_sql};");
+            
+            if ($r->execute()) {
+                return $r->fetchAll();
+            } else {
+                print_r($r->errorInfo());
+            }
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
+    public function readChave(array $campos_values, $campos = "*", $where = null) {
+        try {
+
+            $condicoes_array = array_values($campos_values);
+            $insert_values = implode("", $condicoes_array);
+
+            $where_sql = empty($where) ? "" : "WHERE " . $where;
+            $r = $this->con->conecta()->prepare("SELECT {$campos} FROM $this->tabela  {$insert_values} {$where_sql};");
+
+            if ($r->execute()) {
+                return $r->fetchAll();
+            } else {
+                print_r($r->errorInfo());
+            }
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
         }
     }
 

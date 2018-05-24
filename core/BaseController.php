@@ -90,9 +90,13 @@ class BaseController {
         $data = Session::getInstance();
         //fornece qual sera o nome da sessao e sua mensagem
         switch ($this->tipo){
-            case 1: $data->erro = $this->mensagem;
+             case 1: $data->success = $this->mensagem;
                 break;
-            case 2: $data->sucess = $this->mensagem;
+            case 2: $data->info = $this->mensagem;
+                break;
+            case 3: $data->warning = $this->mensagem;
+                break;
+            case 4: $data->danger = $this->mensagem;
                 break;
         }
         
