@@ -5,6 +5,7 @@ namespace App\Controllers;
 use Core\BaseController;
 use App\Models\Login;
 use App\Models\Home\CadastroCliente;
+use App\Models\Cliente;
 
 class HomeController extends BaseController {
 
@@ -53,15 +54,11 @@ class HomeController extends BaseController {
         //traz todos as request post enviadas
         $dados = $request->post;
         //instacia o objeto da model Cadastro
-        $cadastro = new CadastroCliente();
+        $cadastro = new Cliente();
         if ($dados->senha1 <= 5) {
             $this->redirect('cadastro', '4', 'OPS a senha deve ter mais que 5 caracteres');
         } elseif ($dados->senha2 <= 5) {
-            $this->redirect('cadastro', '4', 'OPS a senha deve ter mais que 5 caracteres');
-        } elseif ($dados->senha1 >= 25) {
-            $this->redirect('cadastro', '4', 'OPS a senha deve ter menos que 25 caracteres');
-        } elseif ($dados->senha2 >= 25) {
-           $this->redirect('cadastro', '4', 'OPS a senha deve ter menos que 25 caracteres');
+            $this->redirect('cadastro', '4', 'OPS a senha deve ter mais que 5 caracteres');        
         } else {
             //verifica se foi cadastrado com sucesso retorna TRUE
             if ($cadastro->cadastrar($dados)) {
@@ -74,19 +71,6 @@ class HomeController extends BaseController {
         }
     }
 
-    public function cadastroCreat($request) {
-        //traz todos as request post enviadas
-        $dados = $request->post;
-        //instacia o objeto da model Cadastro
-        $cadastro = new Cadastro();
-        //verifica se foi cadastrado com sucesso retorna TRUE
-        if ($cadastro->cadastrar($dados)) {
-            //Apresenta a mensagem de cadastro efetuado com sucesso
-            echo 'Cadastrado com Sucesso';
-        } else {
-            //Apresenta a mensagem de erro ao tentar cadastrar
-            echo 'OPS algo deu errado no seu cadastro';
-        }
-    }
+    
 
 }

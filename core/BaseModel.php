@@ -27,7 +27,7 @@ abstract class BaseModel {
     protected $chaveEstrangeira1;
     protected $chaveEstrangeira2;
     private $redirect;
-    private $tipo;    
+    private $tipo;
     private $mensagem;
 
     public function __construct() {
@@ -41,7 +41,7 @@ abstract class BaseModel {
     public function __get($atributo) {
         return $this->$atributo;
     }
-    
+
     protected function redirect($redirect, $tipo = null, $mensagem = null) {
         $this->redirect = $redirect;
         $this->tipo = $tipo;
@@ -67,10 +67,9 @@ abstract class BaseModel {
                 break;
             case 4: $data->danger = $this->mensagem;
                 break;
-            
         }
     }
-    
+
     public function insert(array $campos_values) {
         //atribui a uma variavel a quantidade de tabelas a ser usadas
         $total = $this->tabelaUse;
@@ -258,7 +257,7 @@ abstract class BaseModel {
 
             $where_sql = empty($where) ? "" : "WHERE " . $where;
             $r = $this->con->conecta()->prepare("SELECT {$campos} FROM $this->tabela {$where_sql};");
-            
+
             if ($r->execute()) {
                 return $r->fetchAll();
             } else {
@@ -286,6 +285,47 @@ abstract class BaseModel {
         } catch (PDOException $ex) {
             echo $ex->getMessage();
         }
+    }
+
+    public function update(array $campos_values, $where = null) {
+        try {
+            $where_sql = empty($where) ? "" : "WHERE " . $where;
+
+            $sql_text_array = array();
+            foreach ($campos_values as $campo => $valor) {
+                array_push($sql_text_array, "{$campo}='{$valor}'");
+            }
+            $sql_text = implode(",", $sql_text_array);
+
+            $r = $this->con->conecta()->prepare("UPDATE {$this->tabela} SET {$sql_text} {$where_sql}");
+
+            $r->execute();
+            if ($r->rowCount()) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } catch (\PDOException $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
+    public function delete($where_sql) {
+        try {
+            $r = $this->con->conecta()->prepare("DELETE FROM $this->tabela WHERE {$where_sql}");
+            
+
+            $r->execute();
+            if($r->rowCount()) {
+              return TRUE;  
+            } else {
+                return FALSE; 
+            }
+        } catch (\PDOException $ex) {
+             echo $ex->getMessage();
+        }
+        
+        
     }
 
 }

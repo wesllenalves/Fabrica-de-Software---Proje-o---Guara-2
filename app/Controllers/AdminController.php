@@ -10,7 +10,8 @@ namespace App\Controllers;
 use Core\BaseController;
 use App\Models\Admin\CadastroProduto;
 use App\Models\Admin\CadastroFuncionario;
-use App\Models\Admin\ListarClientes;
+
+use App\Models\Cliente;
 /**
  * Description of AdminController
  *
@@ -54,16 +55,42 @@ class AdminController extends BaseController{
     }
     
     public function listarCliente(){
-        $cliente = new ListarClientes();
-       $this->view->clientes = $cliente->listar();
+        $cliente = new Cliente();
+       $this->view->clientes = $cliente->listarAll();
         
         
         $this->Render("admin/lista-cliente");
     }
     
     public function editarCliente($id){
+        $editar = new Cliente();
+        $clientesEditar = $editar->listarWhere($id);
         
-      echo  $id;
+        $this->view->clientesEditar = $clientesEditar;
+        $this->Render("admin/editar-clientes");
+    }
+    
+    public function updateCliente($request){        
+       
+        $dados = $request->post;
+        $update = new Cliente();
+        if($update->atualizar($dados)){
+            $this->redirect('dashboard/listar/clientes', '2', 'cadastrado com sucesso');
+        } else {
+            $this->redirect('dashboard/listar/clientes', '4', 'Erro ao tentar atualizar');
+        }
+        
+    }
+    
+    public function deleteCliente($id){
+        
+       
+        $deletar = new Cliente();
+        if($deletar->deletar($id)){
+            $this->redirect('dashboard/listar/clientes', '3', 'cadastrado Deletado');
+        }else{
+            $this->redirect('dashboard/listar/clientes', '4', 'Erro ao tentar deletar cadastro');
+        }
     }
     
 }

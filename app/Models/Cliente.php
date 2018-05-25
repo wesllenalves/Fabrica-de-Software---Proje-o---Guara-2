@@ -1,27 +1,16 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-namespace App\Models\Home;
-
+namespace App\Models;
 use Core\BaseModel;
-
-class CadastroCliente extends BaseModel {
-
+class Cliente extends BaseModel{
     protected $tabela = "cliente";
-    //Definir a quantidade de tabelas que serao usadas maximo de 4
     protected $tabelaUse = 1;
-
+    
     public function checkPassword($request) {
         if ($request->senha1 === $request->senha2) {
             return TRUE;
         } else {
-            $this->redirect('cadastro', '2', 'As senhas não sao igaus');
-            exit();
+            return FALSE;
         }
     }
 
@@ -50,7 +39,7 @@ class CadastroCliente extends BaseModel {
     public function cadastrar($request) {
 
         if ($this->CheckIsNull($request) != TRUE) {
-            if ($this->checkPassword($request)) {
+            if ($this->checkPassword($request) === TRUE) {
                 if ($this->checkExists($request) != TRUE) {
 
                     $array = array(
@@ -71,12 +60,61 @@ class CadastroCliente extends BaseModel {
                     $this->redirect('cadastro', '4', 'Dados já cadastrados');
                     exit();
                 }
+            } else {
+                $this->redirect('cadastro', '2', 'As senhas não sao igaus');
+            exit();
             }
         } else {
             $this->redirect('cadastro', '2', 'preencha todos os dados');
-
             exit();
         }
     }
-
+    
+    public function listarAll(){
+        $lista = $this->read("*");
+        return $lista;
+    }
+    
+    public function listarWhere($id){
+        $lista = $this->read("*", "idCliente = {$id}");
+        return $lista;
+    }
+    
+    public function atualizar($request){
+        $id = $request->id;
+               
+        if($this->CheckIsNull($request) != TRUE){
+            if ($this->checkPassword($request) === TRUE) {
+                $array = array(
+                        
+                            'nome' => $request->nome, 'cpf' => $request->cpf, 'tipoCliente' => $request->tipoCliente,
+                            'email' => $request->email, 'login' => $request->login, 'cidade' => $request->cidade,
+                            'cep' => $request->cep, 'endereco' => $request->endereco, 'uf' => $request->uf,
+                            'complemento' => $request->complemento
+                        
+                    );            
+                if($this->update($array, "idCliente = {$id}")){
+                    return TRUE;
+                }else{
+                    return FALSE;
+                }
+                
+            } else {
+                $this->redirect('dashboard/alterar/cliente/'.$id, '2', 'As senhas não sao igaus');
+            exit();
+            }
+        } else {
+             $this->redirect('dashboard/alterar/cliente/'.$id, '2', 'preencha todos os dados');
+            exit();
+        }
+    }
+    
+    public function deletar($id){
+        
+        if($this->delete("idCliente = {$id}")){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
 }

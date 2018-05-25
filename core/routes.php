@@ -14,6 +14,8 @@ $routes[] = ['/dashboard/funcionario', 'AdminController@funcionario'];
 $routes[] = ['/dashboard/cadastro/funcionario', 'AdminController@cadastroFuncionario'];
 $routes[] = ['/dashboard/listar/clientes', 'AdminController@listarCliente'];
 $routes[] = ['/dashboard/alterar/cliente/{id}', 'AdminController@editarCliente'];
+$routes[] = ['/dashboard/update/cliente', 'AdminController@updateCliente'];
+$routes[] = ['/dashboard/delete/cliente/{id}', 'AdminController@deleteCliente'];
 
 return $routes;
 

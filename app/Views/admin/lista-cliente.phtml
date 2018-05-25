@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>       
@@ -35,7 +38,9 @@
                 <div class="col-xs-12">
                     <h2 class="bgPadding bg-primary">Lista de Endereço</h2>
                 </div>
-
+                <?php
+                $this->alerta();
+                ?>
                 <div class="col-xs-12">
                     <table class="table table-striped">                
                         <thead>
@@ -70,7 +75,7 @@
                                     <td><?php echo $linha->endereco ?></td>
                                     <td><?php echo $linha->uf ?></td>
                                     <td><a href="/dashboard/alterar/cliente/<?php echo $linha->idCliente ?>"  class="btn btn-info" >Atualizar</a></td>
-                                    <td><a  class="btn btn-danger">Excluir</a></td>
+                                    <td><a  href="/dashboard/delete/cliente/<?php echo $linha->idCliente ?>" class="btn btn-danger">Excluir</a></td>
                                 </tr>
                             <?php endforeach ?>
                         </tbody><!-- janela modal Editar Cliente -->   
