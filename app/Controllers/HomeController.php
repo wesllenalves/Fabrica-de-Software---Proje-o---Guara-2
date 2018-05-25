@@ -53,17 +53,25 @@ class HomeController extends BaseController {
         //traz todos as request post enviadas
         $dados = $request->post;
         //instacia o objeto da model Cadastro
-        $cadastro = new CadastroCliente();     
+        $cadastro = new CadastroCliente();
+        if ($dados->senha1 <= 5) {
+            $this->redirect('cadastro', '4', 'OPS a senha deve ter mais que 5 caracteres');
+        } elseif ($dados->senha2 <= 5) {
+            $this->redirect('cadastro', '4', 'OPS a senha deve ter mais que 5 caracteres');
+        } elseif ($dados->senha1 >= 25) {
+            $this->redirect('cadastro', '4', 'OPS a senha deve ter menos que 25 caracteres');
+        } elseif ($dados->senha2 >= 25) {
+           $this->redirect('cadastro', '4', 'OPS a senha deve ter menos que 25 caracteres');
+        } else {
             //verifica se foi cadastrado com sucesso retorna TRUE
             if ($cadastro->cadastrar($dados)) {
                 //Apresenta a mensagem de cadastro efetuado com sucesso
-                echo 'Cadastrado com Sucesso';
+                $this->redirect('cadastro', '1', 'Cadastrado com secesso');
             } else {
                 //Apresenta a mensagem de erro ao tentar cadastrar
-                echo 'OPS algo deu errado no seu cadastro';
+                $this->redirect('cadastro', '4', 'OPS algo deu errado no seu cadastro');
             }
-        
-        
+        }
     }
 
     public function cadastroCreat($request) {

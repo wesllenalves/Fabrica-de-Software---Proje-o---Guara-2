@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 ?>
 <!DOCTYPE html>
@@ -37,79 +37,72 @@ session_start();
                 <div class="col-xs-12 col-md-12">
                     <h2 class="bgPadding bg-primary algunsH2">Cadastrar de Cliente</h2>
                 </div>
-
-                <?php if(isset($_SESSION['danger'])){
-                ?>
-                <div class="row"> 
-                    <div class="col-xs-12 col-md-12">
-                        <div class="alert alert-danger" role="alert"><?= $_SESSION['danger'] ?></div>
-                    </div>
-                </div>
                 <?php
-                unset($_SESSION['danger']);
+                $this->alerta();
+                ?>
 
-                }?>
+
                 <form method = "POST" action = "cadastro/cliente" enctype = "multipart/form-data">
-                <div class = "col-xs-12">
-                <div class = "form-group">
-                <label for = "Nome">Nome</label>
-                <input type = "text" class = "form-control" name = "nome" placeholder = "Rodrigo" required/>
-                <label for = "cep">CPF</label>
-                <input type = "text" class = "form-control" name = "cpf" required />
-                <label for = "endereco">Tipo Cliente</label>
-                <select class = "form-control" id = "tipoCliente" name = "tipoCliente">
-                <option>-</option>
-                <option value = "P.F.">Pessoa Fisiaca</option>
-                <option value = "P.J.">Pessoa Juridica</option>
+                    <div class = "col-xs-12">
+                        <div class = "form-group">
+                            <label for = "Nome">Nome</label>
+                            <input type = "text" class = "form-control" name = "nome" placeholder = "Rodrigo" />
+                            <label for = "cep">CPF</label>
+                            <input type = "text" class = "form-control" name = "cpf"  />
+                            <label for = "endereco">Tipo Cliente</label>
+                            <select class = "form-control" id = "tipoCliente" name = "tipoCliente">
+                                <option>-</option>
+                                <option value = "P.F.">Pessoa Fisiaca</option>
+                                <option value = "P.J.">Pessoa Juridica</option>
 
-                </select>
-                <label for = "uf">E-mail</label>
-                <input type = "text" class = "form-control" name = "email" required/>
-                <label for = "uf">Login</label>
-                <input type = "text" class = "form-control" name = "login" required/>
-                <label for = "complemento">Senha</label>
-                <input type = "password" class = "form-control" name = "senha1" required />
-                <label for = "complemento">Confirma Senha</label>
-                <input type = "password" class = "form-control" name = "senha2" required />
+                            </select>
+                            <label for = "uf">E-mail</label>
+                            <input type = "text" class = "form-control" name = "email"/>
+                            <label for = "uf">Login</label>
+                            <input type = "text" class = "form-control" name = "login" />
+                            <label for = "complemento">Senha</label>
+                            <input type = "password" class = "form-control" name = "senha1"  />
+                            <label for = "complemento">Confirma Senha</label>
+                            <input type = "password" class = "form-control" name = "senha2"  />
 
-                </div>
-                </div>
-                <div class = "container">
-                <div class = "row">
-                <div class = "col-xs-12 col-md-12">
-                <h2 class = "bgPadding bg-primary algunsH2">Endereço</h2>
-                </div>
+                        </div>
+                    </div>
+                    <div class = "container">
+                        <div class = "row">
+                            <div class = "col-xs-12 col-md-12">
+                                <h2 class = "bgPadding bg-primary algunsH2">Endereço</h2>
+                            </div>
 
-                <div class = "col-xs-12">
-                <div class = "form-group">
-                <label for = "cidade">Cidade</label>
-                <input type = "text" class = "form-control" name = "cidade" placeholder = "Brasília" />
-                <label for = "cep">CEP</label>
-                <input type = "text" class = "form-control" name = "cep" />
-                <label for = "endereco">Endereco</label>
-                <input type = "text" class = "form-control" name = "endereco" />
-                <label for = "uf">UF</label>
-                <input type = "text" class = "form-control" name = "uf" />
-                <label for = "complemento">Complemento</label>
-                <input type = "text" class = "form-control" name = "complemento" />
-                </div>
-                </div>
+                            <div class = "col-xs-12">
+                                <div class = "form-group">
+                                    <label for = "cidade">Cidade</label>
+                                    <input type = "text" class = "form-control" name = "cidade" placeholder = "Brasília" />
+                                    <label for = "cep">CEP</label>
+                                    <input type = "text" class = "form-control" name = "cep" />
+                                    <label for = "endereco">Endereco</label>
+                                    <input type = "text" class = "form-control" name = "endereco" />
+                                    <label for = "uf">UF</label>
+                                    <input type = "text" class = "form-control" name = "uf" />
+                                    <label for = "complemento">Complemento</label>
+                                    <input type = "text" class = "form-control" name = "complemento" />
+                                </div>
+                            </div>
 
-                <br>
-                </div>
-                </div>
-                <div class = "col-xs-12">
-                <div class = "form-group"><br>
-                <input type = "submit" value = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cadastrar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class = "btn btn-primary btn-lg" />
-                <input type = "reset" value = "&nbsp;&nbsp;&nbsp; Cancelar &nbsp;&nbsp;&nbsp;" class = "btn btn-danger btn-lg" />
-                </div>
-                </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class = "col-xs-12">
+                        <div class = "form-group"><br>
+                            <input type = "submit" value = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cadastrar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class = "btn btn-primary btn-lg" />
+                            <input type = "reset" value = "&nbsp;&nbsp;&nbsp; Cancelar &nbsp;&nbsp;&nbsp;" class = "btn btn-danger btn-lg" />
+                        </div>
+                    </div>
                 </form>
                 <br>
-                </div>
-                </div> Funcionário - Mariath Doces</footer>
+            </div>
+        </div> Funcionário - Mariath Doces</footer>
 
-                <!--jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!--jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="public/js/bootstrap.min.js"></script>

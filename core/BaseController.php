@@ -44,6 +44,44 @@ class BaseController {
             $this->content();
         }
     }
+    
+    protected function alerta(){
+        if(isset($_SESSION['success'])){
+            echo "<div class='row'> 
+                    <div class='col-xs-12 col-md-12'>
+                        <div class='alert alert-success' role='alert'>{$_SESSION['success']}</div>
+                    </div>
+                </div>";          
+                unset($_SESSION['success']);
+        }
+        
+        if(isset($_SESSION['info'])){
+            echo "<div class='row'> 
+                    <div class='col-xs-12 col-md-12'>
+                        <div class='alert alert-info' role='alert'>{$_SESSION['info']}</div>
+                    </div>
+                </div>";          
+                unset($_SESSION['info']);
+        }
+        
+        if(isset($_SESSION['warning'])){
+            echo "<div class='row'> 
+                    <div class='col-xs-12 col-md-12'>
+                        <div class='alert alert-warning' role='alert'>{$_SESSION['warning']}</div>
+                    </div>
+                </div>";          
+                unset($_SESSION['warning']);
+        }
+        
+        if(isset($_SESSION['danger'])){
+            echo "<div class='row'> 
+                    <div class='col-xs-12 col-md-12'>
+                        <div class='alert alert-danger' role='alert'>{$_SESSION['danger']}</div>
+                    </div>
+                </div>";          
+                unset($_SESSION['danger']);
+        }
+    }
 
     protected function content() {
         $ext = empty($this->extenção) ? ".phtml" : ".". $this->extenção;
