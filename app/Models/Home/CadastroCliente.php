@@ -56,11 +56,12 @@ class CadastroCliente extends BaseModel {
                     return FALSE;
                 }
            }else{
-              echo 'Dados ja cadastrado';
+               $this->redirect('cadastro', '4', 'Dados já cadastrados');
              exit(); 
            }    
         }else{
-            echo 'preencha todos os dados';
+            $this->redirect('cadastro', '2', 'preencha todos os dados');
+            
             exit();
         }
    }

@@ -38,7 +38,9 @@ class CadastroFuncionario extends BaseModel{
     
     
     
-    public function cadastrar($request){        
+    public function cadastrar($request){    
+        
+        
         if($this->CheckIsNull($request) != TRUE){            
            if($this->checkExists($request) !=TRUE){
         

@@ -44,9 +44,10 @@ class AdminController extends BaseController{
         $cadastro = new CadastroProduto();
         //chama o metodo resposavel pelo cadastro
        if($cadastro->cadastrar($dados)){ 
-           //1 = erro
+           
+            //1 = erro
            //2 = sucess
-           $this->redirect('dashboard', '2', 'cadastrado com sucesso');
+          $this->redirect('dashboard', '2', 'cadastrado com sucesso');
        }else{
            echo 'não cadastrado';
        }

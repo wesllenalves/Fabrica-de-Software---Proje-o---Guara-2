@@ -1,7 +1,10 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>        
-            <meta charset="utf-8">
+        <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Funcionário</title>
@@ -26,77 +29,87 @@
         <!-- //menu inicial -->      
         <div class="container">
             <div class="col-xs-12">
-            <a href="lista-cliente.php">
-            <button type="button" class="btn btn-default"   pull-left> &nbsp;&nbsp;Listar&nbsp;&nbsp;&nbsp;</button>
-            </a>
-        </div>
+                <a href="lista-cliente.php">
+                    <button type="button" class="btn btn-default"   pull-left> &nbsp;&nbsp;Listar&nbsp;&nbsp;&nbsp;</button>
+                </a>
+            </div>
             <div class="row">
                 <div class="col-xs-12 col-md-12">
                     <h2 class="bgPadding bg-primary algunsH2">Cadastrar de Cliente</h2>
                 </div>
-                
 
-                <form method="POST" action="cadastro/cliente" enctype="multipart/form-data">
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <label for="Nome">Nome</label>
-                            <input type="text" class="form-control" name="nome" placeholder="Rodrigo" required/>
-                            <label for="cep">CPF</label>
-                            <input type="text" class="form-control" name="cpf" required />
-                            <label for="endereco">Tipo Cliente</label>
-                            <select class="form-control" id="tipoCliente" name="tipoCliente">
-                                <option>-</option>
-                                <option value="P.F.">Pessoa Fisiaca</option>
-                                <option value="P.J.">Pessoa Juridica</option>
-                                
-                            </select>
-                            <label for="uf">E-mail</label>
-                            <input type="text" class="form-control" name="email"  required/>
-                            <label for="uf">Login</label>
-                            <input type="text" class="form-control" name="login"  required/>
-                            <label for="complemento">Senha</label>
-                            <input type="password" class="form-control" name="senha1" required />
-                            <label for="complemento">Confirma Senha</label>
-                            <input type="password" class="form-control" name="senha2" required />
-
-                        </div>
+                <?php if(isset($_SESSION['danger'])){
+                ?>
+                <div class="row"> 
+                    <div class="col-xs-12 col-md-12">
+                        <div class="alert alert-danger" role="alert"><?= $_SESSION['danger'] ?></div>
                     </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-12">
-                                <h2 class="bgPadding bg-primary algunsH2">Endereço</h2>
-                            </div>
+                </div>
+                <?php
+                unset($_SESSION['danger']);
 
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="cidade">Cidade</label>
-                                    <input type="text" class="form-control" name="cidade" placeholder="Brasília" />
-                                    <label for="cep">CEP</label>
-                                    <input type="text" class="form-control" name="cep"  />
-                                    <label for="endereco">Endereco</label>
-                                    <input type="text" class="form-control" name="endereco"  />
-                                    <label for="uf">UF</label>
-                                    <input type="text" class="form-control" name="uf"  />
-                                    <label for="complemento">Complemento</label>
-                                    <input type="text" class="form-control" name="complemento"  />
-                                </div>
-                            </div>            
+                }?>
+                <form method = "POST" action = "cadastro/cliente" enctype = "multipart/form-data">
+                <div class = "col-xs-12">
+                <div class = "form-group">
+                <label for = "Nome">Nome</label>
+                <input type = "text" class = "form-control" name = "nome" placeholder = "Rodrigo" required/>
+                <label for = "cep">CPF</label>
+                <input type = "text" class = "form-control" name = "cpf" required />
+                <label for = "endereco">Tipo Cliente</label>
+                <select class = "form-control" id = "tipoCliente" name = "tipoCliente">
+                <option>-</option>
+                <option value = "P.F.">Pessoa Fisiaca</option>
+                <option value = "P.J.">Pessoa Juridica</option>
 
-                            <br>      
-                        </div>
-                    </div>  
-                    <div class="col-xs-12">
-                        <div class="form-group"><br>
-                            <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cadastrar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary btn-lg" />
-                            <input type="reset" value="&nbsp;&nbsp;&nbsp; Cancelar &nbsp;&nbsp;&nbsp;" class="btn btn-danger btn-lg" />
-                        </div>
-                    </div>
+                </select>
+                <label for = "uf">E-mail</label>
+                <input type = "text" class = "form-control" name = "email" required/>
+                <label for = "uf">Login</label>
+                <input type = "text" class = "form-control" name = "login" required/>
+                <label for = "complemento">Senha</label>
+                <input type = "password" class = "form-control" name = "senha1" required />
+                <label for = "complemento">Confirma Senha</label>
+                <input type = "password" class = "form-control" name = "senha2" required />
+
+                </div>
+                </div>
+                <div class = "container">
+                <div class = "row">
+                <div class = "col-xs-12 col-md-12">
+                <h2 class = "bgPadding bg-primary algunsH2">Endereço</h2>
+                </div>
+
+                <div class = "col-xs-12">
+                <div class = "form-group">
+                <label for = "cidade">Cidade</label>
+                <input type = "text" class = "form-control" name = "cidade" placeholder = "Brasília" />
+                <label for = "cep">CEP</label>
+                <input type = "text" class = "form-control" name = "cep" />
+                <label for = "endereco">Endereco</label>
+                <input type = "text" class = "form-control" name = "endereco" />
+                <label for = "uf">UF</label>
+                <input type = "text" class = "form-control" name = "uf" />
+                <label for = "complemento">Complemento</label>
+                <input type = "text" class = "form-control" name = "complemento" />
+                </div>
+                </div>
+
+                <br>
+                </div>
+                </div>
+                <div class = "col-xs-12">
+                <div class = "form-group"><br>
+                <input type = "submit" value = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cadastrar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class = "btn btn-primary btn-lg" />
+                <input type = "reset" value = "&nbsp;&nbsp;&nbsp; Cancelar &nbsp;&nbsp;&nbsp;" class = "btn btn-danger btn-lg" />
+                </div>
+                </div>
                 </form>
-                <br>      
-            </div>
-        </div>  Funcionário - Mariath Doces</footer>   
+                <br>
+                </div>
+                </div> Funcionário - Mariath Doces</footer>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+                <!--jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="public/js/bootstrap.min.js"></script>
@@ -105,7 +118,7 @@
     <script src="public/js/calendario.js" type="text/javascript"></script>
     <script>
         $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle = "tooltip"]').tooltip();
         });
     </script>
 </body>

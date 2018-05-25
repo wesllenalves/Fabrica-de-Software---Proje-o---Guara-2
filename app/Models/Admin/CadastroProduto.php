@@ -15,7 +15,7 @@ use Core\BaseModel;
  *
  * @author laboratorio
  */
-class Cadastro extends BaseModel {
+class CadastroProduto extends BaseModel {
     //definir os nomes da tabelas maximo de 4
     protected $tabela = "produto";
     
@@ -24,6 +24,7 @@ class Cadastro extends BaseModel {
 
     public function cadastrar($dados) {
 
+        
         $array = array(
             "0" =>
             array(
