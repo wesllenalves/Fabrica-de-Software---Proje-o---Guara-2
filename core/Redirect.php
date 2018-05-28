@@ -15,9 +15,9 @@ use Core\Session;
  */
 class Redirect {   
     
-    public $redirect;
-    public $tipo;    
-    public $mensagem;
+    private $redirect;
+    private $tipo;    
+    private $mensagem;
 
 
     public static function redirect($redirect, $tipo = null, $mensagem = null) {
@@ -28,14 +28,12 @@ class Redirect {
         $this->setSession();
     }
 
-    public function getRedirect() {
-        header('Location:' . base_url('/') . '' . $this->redirect);
-        $r = 'Location:' . base_url('/') . '' . $this->redirect;
-        print_r($r); die();
+    protected function getRedirect() {
+        header('Location:' . base_url('/') . '' . $this->redirect);               
         return TRUE;
     }
     
-    public function setSession() {
+    protected function setSession() {
         $data = Session::getInstance();
         //fornece qual sera o nome da sessao e sua mensagem
         switch ($this->tipo){
@@ -47,8 +45,7 @@ class Redirect {
                 break;
             case 4: $data->danger = $this->mensagem;
                 break;
-        }
-        
+        }       
         
     }
 }

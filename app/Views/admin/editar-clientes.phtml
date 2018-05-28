@@ -35,7 +35,11 @@ session_start();
                 </div>
                 <?php
                 $this->alerta();
-                ?>
+//                $sessoes = $_SESSION['danger']['nome'] ;
+//                foreach ($_SESSION['danger'] as $sessao ){
+//                    echo $sessao ;
+//                }
+//                ?>
 
                 <?php 
                
@@ -54,12 +58,16 @@ session_start();
                 ?>
                 <form  action = "/dashboard/update/cliente"  method="POST" enctype = "multipart/form-data">
                     <div class = "col-xs-12">
-                        <div class = "form-group">
+                        <div class = "form-group <?php if(is_null($this->alerta())){echo '';}else{echo 'has-error'; }?>">
                             <input TYPE="hidden" name="id" value="<?=$id?>">
                             <label for = "Nome">Nome</label>
                             <input type = "text" class = "form-control" name = "nome" value="<?=$nome?>" placeholder = "Rodrigo" />
+                        </div>
+                        <div class = "form-group">                            
                             <label for = "cep">CPF</label>
                             <input type = "text" class = "form-control" name = "cpf"  value="<?=$cpf?>" />
+                        </div>
+                        <div class = "form-group"> 
                             <label for = "tipo">Tipo Cliente</label>
                             <select class = "form-control" id = "tipoCliente" name = "tipoCliente">
                                 <option>-</option>
@@ -67,14 +75,22 @@ session_start();
                                 <option value = "P.J.">Pessoa Juridica</option>
 
                             </select>
+                        </div>
+                        <div class = "form-group"> 
                             <label for = "email">E-mail</label>
                             <input type = "text" class = "form-control" name = "email" value="<?=$email?>" />
+                        </div>
+                        <div class = "form-group"> 
                             <label for = "login">Login</label>
                             <input type = "text" class = "form-control" name = "login" value="<?=$login?>" />
+                        </div>
+                        <div class = "form-group"> 
                             <label for = "senha">Senha</label>
-                            <input type = "password" class = "form-control" name = "senha1"  />
+                            <input type = "password" class = "form-control" name = "senha"  />
+                        </div>
+                        <div class = "form-group"> 
                             <label for = "senha">Confirma Senha</label>
-                            <input type = "password" class = "form-control" name = "senha2"  />
+                            <input type = "password" class = "form-control" name = "confirmaSenha"  />
 
                         </div>
                     </div>
@@ -88,12 +104,20 @@ session_start();
                                 <div class = "form-group">
                                     <label for = "cidade">Cidade</label>
                                     <input type = "text" class = "form-control" name = "cidade" placeholder = "Brasília" value="<?=$cidade?>" />
+                                </div>
+                                <div class = "form-group"> 
                                     <label for = "cep">CEP</label>
                                     <input type = "text" class = "form-control" name = "cep" value="<?=$cep?>" />
+                                </div>
+                                <div class = "form-group"> 
                                     <label for = "endereco">Endereco</label>
                                     <input type = "text" class = "form-control" name = "endereco" value="<?=$endereco?>" />
+                                </div>
+                                <div class = "form-group"> 
                                     <label for = "uf">UF</label>
                                     <input type = "text" class = "form-control" name = "uf" value="<?=$uf?>" />
+                                </div>
+                                <div class = "form-group"> 
                                     <label for = "complemento">Complemento</label>
                                     <input type = "text" class = "form-control" name = "complemento" value="<?=$complemento?>" />
                                 </div>

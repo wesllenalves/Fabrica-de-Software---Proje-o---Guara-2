@@ -4,21 +4,20 @@ namespace App\Controllers;
 
 use Core\BaseController;
 use App\Models\Login;
-use App\Models\Home\CadastroCliente;
 use App\Models\Cliente;
 
 class HomeController extends BaseController {
 
     public function index() {
         //seta o titulo da pagina
-        $this->setPageTitle("Home");
+        echo $this->setPageTitle("Home");
         //renderiza a pagina e o layout
         $this->Render('home/index', 'layoutHome');
     }
 
     public function login() {
         //seta o titulo da pagina
-        $this->setPageTitle("Login");
+        echo $this->setPageTitle("Login");
         //renderiza a pagina e o layout
         $this->Render("home/login", 'layoutHome');
     }

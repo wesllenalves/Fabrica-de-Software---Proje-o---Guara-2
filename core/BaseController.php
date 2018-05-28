@@ -39,9 +39,9 @@ class BaseController {
 
         //Se existir layout passa o caminho dele caso contrario passa so o caminho do arquivo da view
         if ($layoutPath) {
-            $this->layout();
+            return $this->layout();
         } else {
-            $this->content();
+            return $this->content();
         }
     }
     
@@ -76,9 +76,13 @@ class BaseController {
         if(isset($_SESSION['danger'])){
             echo "<div class='row'> 
                     <div class='col-xs-12 col-md-12'>
-                        <div class='alert alert-danger' role='alert'>{$_SESSION['danger']}</div>
-                    </div>
-                </div>";          
+                    <div class='alert alert-danger' role='alert'>";
+            foreach ($_SESSION['danger'] as $sessao ){
+                   echo "{$sessao}<br>";
+                }
+                echo '</div></div>
+                </div>';
+                      
                 unset($_SESSION['danger']);
         }
     }
@@ -86,17 +90,17 @@ class BaseController {
     protected function content() {
         $ext = empty($this->extenção) ? ".phtml" : ".". $this->extenção;
         if (file_exists(__DIR__ . "/../app/Views/{$this->viewPath}{$ext}")) {
-            require_once __DIR__ . "/../app/Views/{$this->viewPath}{$ext}";
+            return require_once __DIR__ . "/../app/Views/{$this->viewPath}{$ext}";
         } else {          
-            Container::pageNotFoundView();
+            return Container::pageNotFoundView();
         }
     }
 
     protected function layout() {
         if (file_exists(__DIR__ . "/../app/Views/tamplate/{$this->layoutPath}.phtml")) {
-            require_once __DIR__ . "/../app/Views/tamplate/{$this->layoutPath}.phtml";
+            return require_once __DIR__ . "/../app/Views/tamplate/{$this->layoutPath}.phtml";
         } else {
-            Container::pageNotFoundLayout();
+            return Container::pageNotFoundLayout();
         }
     }
 
@@ -106,9 +110,9 @@ class BaseController {
 
     protected function getPageTitle($separator = null) {
         if ($separator) {
-            echo $this->pageTitle . " " . $separator . " ";
+            return $this->pageTitle . " " . $separator . " ";
         } else {
-            echo $this->pageTitle;
+            return $this->pageTitle;
         }
     }
 
