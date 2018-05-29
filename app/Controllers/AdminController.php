@@ -12,7 +12,7 @@ use App\Models\Admin\CadastroProduto;
 use App\Models\Admin\CadastroFuncionario;
 use App\Models\Cliente;
 use Core\Validator;
-use Core\Session;
+
 /**
  * Description of AdminController
  *

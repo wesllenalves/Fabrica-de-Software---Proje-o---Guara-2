@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use Core\BaseModel;
+use Core\Validator;
 class Cliente extends BaseModel{
     protected $tabela = "cliente";
     protected $tabelaUse = 1;
@@ -37,37 +38,60 @@ class Cliente extends BaseModel{
     }
 
     public function cadastrar($request) {
-
-        if ($this->CheckIsNull($request) != TRUE) {
-            if ($this->checkPassword($request) === TRUE) {
-                if ($this->checkExists($request) != TRUE) {
-
-                    $array = array(
-                        '0' => array(
-                            'nome' => $request->nome, 'cpf' => $request->cpf, 'tipoCliente' => $request->tipoCliente,
-                            'email' => $request->email, 'login' => $request->login, 'cidade' => $request->cidade,
-                            'cep' => $request->cep, 'endereco' => $request->endereco, 'uf' => $request->uf,
-                            'complemento' => $request->complemento
-                        )
-                    );
-
-                    if ($this->insert($array)) {
-                        return TRUE;
-                    } else {
-                        return FALSE;
-                    }
-                } else {
-                    $this->redirect('cadastro', '4', 'Dados já cadastrados');
-                    exit();
-                }
-            } else {
-                $this->redirect('cadastro', '2', 'As senhas não sao igaus');
-            exit();
-            }
-        } else {
-            $this->redirect('cadastro', '2', 'preencha todos os dados');
-            exit();
+        
+        $data = [
+            'nome' => $request->post->nome, 'email' => $request->post->email, 'telefone' => $request->post->telefone,
+            'login' => $request->post->user, 'password' => $request->post->password, 
+            'password_repeat' => $request->post->password_repeat
+        ];
+        
+        print_r($data); die();
+        
+        $rules = [
+            'nome' => 'required', 'email' => 'required', 'telefone' => 'required', 'login' => 'required', 
+            'password' => 'required|min:6', 'password_repeat' => 'required|min:6'
+        ];
+        
+        if(Validator::make($data, $rules)){
+            return False;
         }
+        return TRUE;
+        
+        
+        
+        
+        
+        
+//        if ($this->CheckIsNull($request) != TRUE) {
+//            if ($this->checkPassword($request) === TRUE) {
+//                if ($this->checkExists($request) != TRUE) {
+//
+//                    $array = array(
+//                        '0' => array(
+//                            'nome' => $request->nome, 'cpf' => $request->cpf, 'tipoCliente' => $request->tipoCliente,
+//                            'email' => $request->email, 'login' => $request->login, 'cidade' => $request->cidade,
+//                            'cep' => $request->cep, 'endereco' => $request->endereco, 'uf' => $request->uf,
+//                            'complemento' => $request->complemento
+//                        )
+//                    );
+//
+//                    if ($this->insert($array)) {
+//                        return TRUE;
+//                    } else {
+//                        return FALSE;
+//                    }
+//                } else {
+//                    $this->redirect('cadastro', '4', 'Dados já cadastrados');
+//                    exit();
+//                }
+//            } else {
+//                $this->redirect('cadastro', '2', 'As senhas não sao igaus');
+//            exit();
+//            }
+//        } else {
+//            $this->redirect('cadastro', '2', 'preencha todos os dados');
+//            exit();
+//        }
     }
     
     public function listarAll(){

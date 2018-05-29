@@ -14,6 +14,8 @@
     <script src="public/js/angular.js"></script>
     <script src="public/js/script.js"></script>
     <script src="public/js/bootstrap.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+   
 </head>
 <body ng-app="sistema" ng-controller="SistemaCtrl" ng-init="FnInit();">
 
@@ -31,12 +33,12 @@
             <div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav" style="float:right;">
-                        <li class="nav-item active"><a href="#" onclick="rolar_para('#section1')">Menu 1</a></li>
-                        <li><a href="#" ng-click="Getmodalcadastro();">Novo Cliente</a></li>
+                        <li class="nav-item active"><a href="#" onclick="rolar_para('#section1')">Menu</a></li>                        
                         <li><a href="#" onclick="rolar_para('#section2')">Sobre Nós</a></li>
                         <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section3')">Serviços</a></li>
                         <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section4')">Galeria</a></li>
                         <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section5')">Agenda</a></li>
+                        <li><a href="#" ng-click="Getmodalcadastro();">Login | Cadastro</a></li>
                         <li><a href="#section4" onclick="rolar_para('#section6')">Contato</a></li>
                     </ul>
                 </div>

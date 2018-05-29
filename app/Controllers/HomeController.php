@@ -7,6 +7,11 @@ use App\Models\Login;
 use App\Models\Cliente;
 
 class HomeController extends BaseController {
+    private $cliente;
+    
+    public function __construct() {
+        $this->cliente = new Cliente();
+    }
 
     public function index() {
         //seta o titulo da pagina
@@ -51,23 +56,29 @@ class HomeController extends BaseController {
 
     public function cadastroCliente($request) {
         //traz todos as request post enviadas
-        $dados = $request->post;
-        //instacia o objeto da model Cadastro
-        $cadastro = new Cliente();
-        if ($dados->senha1 <= 5) {
-            $this->redirect('cadastro', '4', 'OPS a senha deve ter mais que 5 caracteres');
-        } elseif ($dados->senha2 <= 5) {
-            $this->redirect('cadastro', '4', 'OPS a senha deve ter mais que 5 caracteres');        
-        } else {
-            //verifica se foi cadastrado com sucesso retorna TRUE
-            if ($cadastro->cadastrar($dados)) {
-                //Apresenta a mensagem de cadastro efetuado com sucesso
-                $this->redirect('cadastro', '1', 'Cadastrado com secesso');
-            } else {
-                //Apresenta a mensagem de erro ao tentar cadastrar
-                $this->redirect('cadastro', '4', 'OPS algo deu errado no seu cadastro');
-            }
+        //$dados = $request->post;
+        
+        if($this->cliente->cadastrar($request)){
+            
+        }else{
+            $this->redirect('cadastro', '4', 'OPS algo deu errado no seu cadastro');
         }
+        //instacia o objeto da model Cadastro
+        
+//        if ($dados->password <= 5) {
+//            $this->redirect('cadastro', '4', 'OPS a senha deve ter mais que 5 caracteres');
+//        } elseif ($dados->password_repeat <= 5) {
+//            $this->redirect('cadastro', '4', 'OPS a senha deve ter mais que 5 caracteres');        
+//        } else {
+//            //verifica se foi cadastrado com sucesso retorna TRUE
+//            if ($this->cliente->cadastrar($request)) {
+//                //Apresenta a mensagem de cadastro efetuado com sucesso
+//                $this->redirect('cadastro', '1', 'Cadastrado com secesso');
+//            } else {
+//                //Apresenta a mensagem de erro ao tentar cadastrar
+//                $this->redirect('cadastro', '4', 'OPS algo deu errado no seu cadastro');
+//            }
+//        }
     }
 
     

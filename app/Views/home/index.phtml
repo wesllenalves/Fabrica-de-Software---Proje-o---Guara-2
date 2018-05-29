@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+$_SESSION['login'] = "sim";
+$_SESSION['modal_aberta'];
+
+//print_r($_SESSION);
+?>
 <div id="section1" class="container-fluid">
         <div class="col-md-4 offset-md-4">
             <!--<h1>Sessão 1</h1>
@@ -74,35 +82,23 @@
     <!------------------------------------------------------------------------------
         ALERTA de Cadastro.
     -------------------------------------------------------------------------------->
-    <!-- Modal -->
-    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="loginmodal-container">
-                <h1>Faça login na sua conta</h1><br>
-                <form>
-                    <input type="text" name="user" placeholder="Usuário">
-                    <input type="password" name="psw" placeholder="Senha">
-                    <input type="submit" name="login" class="login loginmodal-submit" value="Entrar">
-                </form>
-
-                <div class="login-help">
-                    <a href="#"ng-click="Getmodallogincadastro();">Registro</a> - <a href="#">Esqueceu a senha</a>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Modal cadastro -->
     <div class="modal fade" id="cadastro-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
         <div class="modal-dialog">
+            
             <div class="loginmodal-container">
                 <h1>Faça seu cadastro</h1><br>
-                <form>
+                <form action="cadastro/cliente" method="POST">
                     <input type="text" name="nome" placeholder="nome">
                     <input type="text" name="email" placeholder="E-mail">
-                    <input type="text" name="fone" placeholder="Telefone">
+                    <input type="text" name="telefone" placeholder="Telefone">
                     <input type="text" name="user" placeholder="Usuário">
-                    <input type="password" name="psw" placeholder="Senha">
-                    <input type="submit" name="login" class="login loginmodal-submit" value="Cadastrar">
+                    <input type="password" name="password" placeholder="Senha">
+                    <input type="password" name="password_repeat" placeholder="Repita a Senha">
+                    <input type="submit" id="uploadf" name="cadastrar" class="login loginmodal-submit" value="Cadastrar">
                 </form>
 
             </div>
