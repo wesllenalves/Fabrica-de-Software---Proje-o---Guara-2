@@ -71,7 +71,7 @@ session_start();
                                     <td><?php echo $linha->cep ?></td>
                                     <td><?php echo $linha->endereco ?></td>
                                     <td><?php echo $linha->uf ?></td>
-                                    <td><a href="/dashboard/alterar/cliente/<?php echo $linha->idCliente ?>"  class="btn btn-info" >Atualizar</a></td>
+                                    <td><a href="/dashboard/alterar/cliente/<?php echo $linha->idCliente ?>?teste=20"  class="btn btn-info" >Atualizar</a></td>
                                     <td><a  href="/dashboard/delete/cliente/<?php echo $linha->idCliente ?>" class="btn btn-danger">Excluir</a></td>
                                 </tr>
                             <?php endforeach ?>

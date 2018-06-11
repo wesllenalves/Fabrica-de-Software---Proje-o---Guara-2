@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use Core\BaseController;
-use App\Models\Login;
+use App\Models\Home\Login;
 use App\Models\Cliente;
 
 class HomeController extends BaseController {
@@ -27,19 +27,17 @@ class HomeController extends BaseController {
         $this->Render("home/login", 'layoutHome');
     }
 
-    public function validarLogin($request) {
-        $login = new Login();
-
-
+    public function validarLogin($request) {        
+           $login = new Login();
         if ($login->isNull($request->post) === FALSE) {
 
             //verifica se existe o usuario digitado, se sim retorna TRUE
             if ($login->verificarlogin($request->post)) {
                 //se existe usuario chama o metodo que redireciona para a pagina especificada
-                $this->redirect("admin");
+                $this->redirect("dashboard");
             } else {
                 //Seto a pagina que vai ser redirecionada e se eu quizer passo uma menssagem via session
-                $this->redirect("login", "Usuario Invalido");
+                $this->redirect("index", "Usuario Invalido");
             }
         } else {
             //Seto a pagina que vai ser redirecionada e se eu quizer passo uma menssagem via session

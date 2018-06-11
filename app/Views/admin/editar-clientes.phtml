@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -13,6 +15,7 @@ session_start();
         <link rel="stylesheet" href="/public/css/redmond/jquery-ui-1.10.1.custom.css" />
     </head>
     <body>
+        
         <!-- menu inicial -->
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
@@ -33,6 +36,9 @@ session_start();
                 <div class="col-xs-12 col-md-12">
                     <h2 class="bgPadding bg-primary algunsH2">Editar Clientes</h2>
                 </div>
+                <?php
+        print_r($_GET);
+        ?>
                 <?php
                 $this->alerta();
 //                $sessoes = $_SESSION['danger']['nome'] ;

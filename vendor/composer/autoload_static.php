@@ -29,13 +29,21 @@ class ComposerStaticInitb010f24c6a7d8586e7dea7592837ad0b
     );
 
     public static $classMap = array (
+        'App\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Controllers/AdminController.php',
         'App\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Controllers/HomeController.php',
-        'App\\Models\\Login' => __DIR__ . '/../..' . '/app/Models/Login.php',
+        'App\\Models\\Admin\\CadastroFuncionario' => __DIR__ . '/../..' . '/app/Models/Admin/CadastroFuncionario.php',
+        'App\\Models\\Admin\\CadastroProduto' => __DIR__ . '/../..' . '/app/Models/Admin/CadastroProduto.php',
+        'App\\Models\\Cliente' => __DIR__ . '/../..' . '/app/Models/Cliente.php',
+        'App\\Models\\Home\\Login' => __DIR__ . '/../..' . '/app/Models/Home/Login.php',
         'Core\\BaseController' => __DIR__ . '/../..' . '/core/BaseController.php',
         'Core\\BaseModel' => __DIR__ . '/../..' . '/core/BaseModel.php',
         'Core\\Container' => __DIR__ . '/../..' . '/core/Container.php',
         'Core\\DataBase' => __DIR__ . '/../..' . '/core/DataBase.php',
+        'Core\\Redirect' => __DIR__ . '/../..' . '/core/Redirect.php',
         'Core\\Route' => __DIR__ . '/../..' . '/core/Route.php',
+        'Core\\Session' => __DIR__ . '/../..' . '/core/Session.php',
+        'Core\\Session1' => __DIR__ . '/../..' . '/core/Session_.php',
+        'Core\\Validator' => __DIR__ . '/../..' . '/core/Validator.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

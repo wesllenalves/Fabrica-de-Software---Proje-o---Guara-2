@@ -14,7 +14,7 @@ use Core\Session;
  * @author Wesllen
  */
 class Login extends BaseModel {
-    protected $tabela = "usuario";
+    protected $tabela = "cliente";
     
     public function isNull($dados){        
         if(($dados->usuario === "") || ($dados->password === "")){
@@ -26,7 +26,7 @@ class Login extends BaseModel {
     
     public function verificarlogin($dados){
         $senha = md5($dados->password);
-        $verificar = $this->read("*", "login = '{$dados->usuario}' and senha = '{$senha}';");
+        $verificar = $this->read("*", "login = '$dados->usuario' AND senha = '$senha'");
         if (count($verificar) > 0) {
             $login = $verificar[0]->login;
             $id = $verificar[0]->idusuario;

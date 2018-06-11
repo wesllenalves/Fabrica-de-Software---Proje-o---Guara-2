@@ -21,8 +21,27 @@ class DataBase {
     private $dbName;
     private static $pdo;
     
-//    public function __construct() {
+   public function __construct() {
 
+       
+        $this->usuario = "root";
+        $this->servidor = "localhost";
+        $this->dbName = "mariathdoces";
+        $this->senha = "";
+        $this->charset = "utf8";
+    }
+    
+    
+    
+//    public function __construct() {
+//        $conf = require_once __DIR__.'/../app/Config/config.php';
+//        
+//        $dbname = $conf['database']['dbname'];
+//        $host = $conf['database']['host'];
+//        $username = $conf['database']['username'];
+//        $password = $conf['database']['password'];
+//        $charset = $conf['database']['charset'];
+//        $collation = $conf['database']['collation'];
 //        
 //        $this->usuario = $username;
 //        $this->servidor = $host;
@@ -31,31 +50,12 @@ class DataBase {
 //        $this->charset = $charset;
 //    }
     
-    
-    
-    public function __construct() {
-        $conf = require_once __DIR__.'/../app/Config/config.php';
-        
-        $dbname = $conf['database']['dbname'];
-        $host = $conf['database']['host'];
-        $username = $conf['database']['username'];
-        $password = $conf['database']['password'];
-        $charset = $conf['database']['charset'];
-        $collation = $conf['database']['collation'];
-        
-        $this->usuario = $username;
-        $this->servidor = $host;
-        $this->dbName = $dbname;
-        $this->senha = $password;
-        $this->charset = $charset;
-    }
-    
      public function conecta() {
         try {
             if (is_null(self::$pdo)) {
                 self::$pdo = new PDO("mysql:host=".$this->servidor."; dbname=$this->dbName;, charset=".$this->charset, $this->usuario, $this->senha);
                 self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);               
-                self::$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+                self::$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             }
             return self::$pdo;
         } catch (PDOException $ex) {

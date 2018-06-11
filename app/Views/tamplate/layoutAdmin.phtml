@@ -3,12 +3,25 @@ session_start();
 
 if(isset($_SESSION['sucess'])){
     echo $_SESSION['sucess']; 
-//    unset($_SESSION['sucess']);
+   unset($_SESSION['sucess']);
 }
 
+if($_SESSION['authenticado'] === TRUE){
+    echo 'Autenticado';
+} else {
+    header("Location:".base_url('')."/index");
+}
+
+if (isset($_GET['sair']) == 'sim') {
+    session_destroy();
+    session_unset();
+    header("Location:" . base_url("") . "/index");
+}
 ?>
-﻿<!doctype html>
-<html lang="en">
+
+
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="/admin/img/apple-icon.png">

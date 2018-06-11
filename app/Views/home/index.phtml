@@ -1,12 +1,7 @@
-<?php
-session_start();
 
-$_SESSION['login'] = "sim";
-$_SESSION['modal_aberta'];
-
-//print_r($_SESSION);
-?>
-<div id="section1" class="container-fluid">
+    
+    
+    <div id="section1" class="container-fluid">
         <div class="col-md-4 offset-md-4">
             <!--<h1>Sessão 1</h1>
             <p>Clique nos diferentes links da Seção na barra de navegação</p>-->
@@ -82,25 +77,58 @@ $_SESSION['modal_aberta'];
     <!------------------------------------------------------------------------------
         ALERTA de Cadastro.
     -------------------------------------------------------------------------------->
+    <!-- Modal -->
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="loginmodal-container">
+                <h1>Faça login na sua conta</h1><br>
+                <form method="POST" action="<?= base_url('')?>/login/verificar">
+                <span class="field">
+                <input type="text" class="form-cadastro" ng-model="cpf" name="usuario" id="cpf" required placeholder="CPF">
+                <label for="cpf">CPF:</label>
+                </span>
+                <span class="field">
+                <input type="text" class="form-cadastro" ng-model="psw" name="password" id="psw" required placeholder="Senha">
+                <label for="psw">Senha:</label>
+                </span>
+                    <input type="submit" name="login" ng-click="Getverificaacesso(cpf,psw);" class="login loginmodal-submit" value="Entrar">
+                </form>
+                
+                <h1 ng-repeat="x in verifica">{{x.psw}}</h1>
+                <span id='labelsenha'>Favor, verifique os dados digitados</span>
+                <div class="login-help">
+                    <a href="#"ng-click="Getmodallogincadastro();">Registro</a> - <a href="#">Esqueceu a senha</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Modal cadastro -->
     <div class="modal fade" id="cadastro-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
         <div class="modal-dialog">
-            
             <div class="loginmodal-container">
                 <h1>Faça seu cadastro</h1><br>
-                <form action="cadastro/cliente" method="POST">
-                    <input type="text" name="nome" placeholder="nome">
-                    <input type="text" name="email" placeholder="E-mail">
-                    <input type="text" name="telefone" placeholder="Telefone">
-                    <input type="text" name="user" placeholder="Usuário">
-                    <input type="password" name="password" placeholder="Senha">
-                    <input type="password" name="password_repeat" placeholder="Repita a Senha">
-                    <input type="submit" id="uploadf" name="cadastrar" class="login loginmodal-submit" value="Cadastrar">
+              
+                <form method="POST" enctype="multipart/form-data">
+                <span class="field">
+                <input type="text" class="form-cadastro" ng-model="nome" name="nome" id="nome" required placeholder="Nome">
+                <label for="nome">Nome:</label>
+                </span>
+                <span class="field">
+                <input type="text" class="form-cadastro" ng-model="email" name="email" id="email" required placeholder="E-mail">
+                <label for="email">E-mail:</label>
+                </span>
+                <span class="field">
+                <input type="text" class="form-cadastro" ng-model="cpf" name="cpf" id="cpf" required placeholder="CPF">
+                <label for="cpf">CPF:</label>
+                </span>
+                <span class="field">
+                <input type="text" class="form-cadastro" ng-model="psw" name="psw" id="psw" required placeholder="senha">
+                <label for="psw">Senha:</label>
+                </span>
+                    <input type="submit" name="login" class="login loginmodal-submit" ng-click="GetLogin(cpf,nome,email,psw);" value="Cadastrar">
                 </form>
-
+                <span id='labelrecuperar'>Desejo recuperar minha senha <a href="#">Clique aqui</a></span>
+                <h1 ng-repeat="x in dados"><?php $str = '{{x.psw}}'; echo md5($str)?></h1>
             </div>
         </div>
     </div>
@@ -140,4 +168,4 @@ $_SESSION['modal_aberta'];
             </div>
         </div>
     </div>
-   
+

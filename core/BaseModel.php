@@ -257,8 +257,9 @@ abstract class BaseModel {
 
             $where_sql = empty($where) ? "" : "WHERE " . $where;
             $r = $this->con->conecta()->prepare("SELECT {$campos} FROM $this->tabela {$where_sql};");
-
+            
             if ($r->execute()) {
+
                 return $r->fetchAll();
             } else {
                 print_r($r->errorInfo());
