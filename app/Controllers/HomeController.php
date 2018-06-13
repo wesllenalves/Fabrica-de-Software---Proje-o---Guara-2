@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Core\BaseController;
 use App\Models\Home\Login;
+use App\Models\Home\cadastroOrcamento;
 use App\Models\Cliente;
 
 class HomeController extends BaseController {
@@ -77,6 +78,17 @@ class HomeController extends BaseController {
 //                $this->redirect('cadastro', '4', 'OPS algo deu errado no seu cadastro');
 //            }
 //        }
+    }
+    
+    public function cadastroOrcamento($request){
+        $dados = $request->post;
+//        print_r($dados); die();
+        $orcamento = new cadastroOrcamento();
+    if($orcamento->cadastrar($dados)){
+        session_start();
+        $_SESSION['orcamento'] = "Orçamento efetuado com sucesso";
+        $this->redirect("index", "Orçamento efetuado com sucesso");
+    }
     }
 
     

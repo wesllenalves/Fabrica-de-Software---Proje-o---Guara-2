@@ -9,6 +9,7 @@
 namespace Core;
 
 use Core\Session;
+use stdClass;
 
 /**
  * Description of BaseController
@@ -28,11 +29,13 @@ class BaseController {
     
 
     public function __construct() {
-        $this->view = new \stdClass();
+        $this->view = NULL;
+        if(!isset($this->view)){
+        $this->view = new stdClass();}
     }
 
     protected function Render($view, $layoutPath = null, $extenção = null) {
-        $this->viewPath = $view;
+        @$this->viewPath = $view;
         $this->layoutPath = $layoutPath;
         $this->extenção = $extenção;
         
@@ -46,6 +49,7 @@ class BaseController {
     }
     
     protected function alerta(){
+        
         if(isset($_SESSION['success'])){
             echo "<div class='row'> 
                     <div class='col-xs-12 col-md-12'>

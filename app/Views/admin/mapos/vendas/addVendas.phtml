@@ -1,0 +1,86 @@
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="https://www.ultramapos.online/" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="https://www.ultramapos.online/index.php/vendas" class="tip-bottom" title="Vendas">Vendas</a> </a> </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+          
+                                                
+                          <a href="https://www.ultramapos.online/index.php/vendas/adicionar" class="btn btn-success"><i class="icon-plus icon-white"></i> Adicionar Venda</a>
+
+	<div class="widget-box">
+     <div class="widget-title">
+        <span class="icon">
+            <i class="icon-tags"></i>
+         </span>
+        <h5>Vendas</h5>
+
+     </div>
+
+<div class="widget-content nopadding">
+
+
+<table class="table table-bordered ">
+    <thead>
+        <tr style="backgroud-color: #2D335B">
+            <th>#</th>
+            <th>Data da Venda</th>
+            <th>Cliente</th>
+            <th>Faturado</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td colspan="6">Nenhuma venda Cadastrada</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>
+
+
+<!-- Modal -->
+<div id="modal-excluir" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:76%; max-width:400px;">
+  <form action="https://www.ultramapos.online/index.php/vendas/excluir" method="post" >
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h5 id="myModalLabel">Excluir Venda</h5>
+  </div>
+  <div class="modal-body">
+    <input type="hidden" id="idVenda" name="id" value="" />
+    <h5 style="text-align: center">Deseja realmente excluir esta Venda?</h5>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+    <button class="btn btn-danger">Excluir</button>
+  </div>
+  </form>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+
+   $(document).on('click', 'a', function(event) {
+        
+        var venda = $(this).attr('venda');
+        $('#idVenda').val(venda);
+
+    });
+
+});
+
+</script>
+
+      </div>
+    </div>
+  </div>
+</div>

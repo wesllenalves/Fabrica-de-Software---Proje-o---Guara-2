@@ -1,0 +1,379 @@
+
+<div id="sidebar"> <a href="#" class="visible-phone"><i class="icon icon-list"></i> Menu</a>
+  <ul>
+
+
+    <li class=""><a href=""><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
+    
+            <li class=""><a href="<?= base_url('')?>/clientes"><i class="icon icon-group"></i> <span>Clientes</span></a></li>
+        
+            <li class=""><a href="<?= base_url('')?>/produtos"><i class="icon icon-barcode"></i> <span>Produtos</span></a></li>
+        
+            <li class=""><a href="<?= base_url('')?>/servicos"><i class="icon icon-wrench"></i> <span>Serviços</span></a></li>
+    
+            <li class="active"><a href="<?= base_url('')?>/os"><i class="icon icon-tags"></i> <span>Ordens de Serviço</span></a></li>
+    
+            <li class=""><a href="<?= base_url('')?>/vendas"><i class="icon icon-shopping-cart"></i> <span>Vendas</span></a></li>
+        
+            <li class=""><a href="arquivos.php"><i class="icon icon-hdd"></i> <span>Arquivos</span></a></li>
+    
+
+<li class=""><a href="#" title="faleconosco.php" onClick="abrirnotificacao(this)"><i class="icon icon-hdd"></i> <span>Fale Conosco</span></a></li>
+
+            <li class="submenu ">
+          <a href="#"><i class="icon icon-money"></i> <span>Financeiro</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+          <ul>
+            <li><a href="index.php/financeiro/lancamentos">Lançamentos</a></li>
+            <li><a title="recibo.php" onClick="abrirnotificacao(this)" style="cursor:pointer">Recibo</a></li>
+      <li><a title="taxascartao.php?plano=1" onClick="abrirnotificacao(this)" style="cursor:pointer">Conf. Taxas cartão</a></li>       
+          </ul>
+        </li>
+    
+            
+        <li class="submenu " >
+          <a href="#"><i class="icon icon-list-alt"></i> <span>Relatórios</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+          <ul>
+
+                            <li><a href="index.php/relatorios/clientes">Clientes</a></li>
+                                        <li><a href="/./LayoutFabrica/relatorios/produtos.php">Produtos</a></li>
+                                        <li><a href="/./LayoutFabrica/relatorios/servicos.php">Serviços</a></li>
+                                         <li><a href="/./LayoutFabrica/relatorios/os.php">Ordens de Serviço</a></li>
+                                        <li><a href="/./LayoutFabrica/relatorios/vendas.php">Vendas(Clientes)</a></li>
+                         <li><a title="consultarVendas.php?cache=1" onClick="abrirnotificacao(this)" style="cursor:pointer">vendas(itens)</a></li> 
+                            <li><a href="index.php/relatorios/financeiro">Financeiro</a></li>
+                        
+          </ul>
+        </li>
+
+    
+            <li class="submenu ">
+          <a href="#"><i class="icon icon-cog"></i> <span>Configurações</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+          <ul>
+                            <li><a href="index.php/usuarios">Usuários</a></li>
+                                        <li><a href="index.php/mapos/emitente">Emitente</a></li>
+                                        <!--<li><a href="index.php/permissoes">Permissões</a></li>-->
+                                        <!--<li><a href="index.php/mapos/backup">Backup</a></li>-->
+            <!-- <li><a  href="#" title="configuraremail" onClick="abrirnotificacao(this)">Email(imap)</a></li>-->
+ <li><a  href="#" title="configurarpagseguro.php" onClick="abrirnotificacao(this)">PagSeguro</a></li>
+          </ul>
+        </li>
+        
+    
+  </ul>
+</div>
+
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="https://www.ultramapos.online/" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="https://www.ultramapos.online/index.php/os" class="tip-bottom" title="Os">Os</a> <a href="https://www.ultramapos.online/index.php/os/adicionar/" class="current tip-bottom" title="Adicionar">Adicionar</a> </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+          
+                                                
+                      <style> 
+.ui-autocomplete-loading { background:url(http://sintaxse.com/mapos/img/ajax-loader2.gif) no-repeat right center;
+width:1px;
+height:1px;
+margin-right:10px;
+};
+
+</style>
+
+
+
+<link rel="stylesheet" href="https://www.ultramapos.online/js/jquery-ui/css/smoothness/jquery-ui-1.9.2.custom.css" />
+<script type="text/javascript" src="https://www.ultramapos.online/js/jquery-ui/js/jquery-ui-1.9.2.custom.js"></script>
+<script type="text/javascript" src="https://www.ultramapos.online/js/jquery.validate.js"></script>
+<div class="row-fluid" style="margin-top:0">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon">
+                    <i class="icon-tags"></i>
+                </span>
+                <h5>Cadastro de OS</h5>
+            </div>
+            <div class="widget-content nopadding">
+                
+
+                <div class="span12" id="divProdutosServicos" style=" margin-left: 0">
+                    <ul class="nav nav-tabs">
+                        <li class="active" id="tabDetalhes"><a href="#tab1" data-toggle="tab">Detalhes da OS</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+
+                          <div class="span12" id="divCadastrarOs">
+                              
+                                <div id="diverror" class="span12 alert alert-danger" id="divInfo" style="padding: 1%; display:none" >Dados incompletos, verifique os campos com asterisco ou se selecionou corretamente cliente e responsável.</div>
+                            
+                                <form action="" method="post" enctype="multipart/form-data" id="formOs" >
+
+                                    <div class="span12" style="padding: 1%">
+                                        <div class="span6">
+                                            <label for="cliente">Cliente*</label>
+                                            <input id="cliente" class="span12" type="text" name="cliente" value=""   required  onKeyDown="if (event.keyCode == '13'){ document.getElementById('tecnico').focus(); return false; } "/>
+                                            <input id="clientes_id" class="span12" type="hidden" name="clientes_id" value=""  />
+                                        </div>
+                                  <div class="span6">
+                                            <label for="tecnico">Técnico / Responsável*</label>
+                                            <input id="tecnico" class="span12" type="text" name="tecnico" value="wesllen alves teste de cadastro"  onKeyDown="if (event.keyCode == '13'){ document.getElementById('status').focus(); return false }; " readonly />
+                                            <input id="usuarios_id" class="span12" type="hidden" name="usuarios_id" value=""  required />
+                                        </div>
+                                    </div>
+                                    <div class="span12" style="padding: 1%; margin-left: 0">
+                                        <div class="span3">
+                                            <label for="status">Status<span class="required">*</span></label>
+                                            <select class="span12" name="status" id="status" value="" onKeyDown="if (event.keyCode == '13'){ document.getElementById('dataInicial').focus(); return false }; ">
+                                                <option value="Orçamento">Orçamento</option>
+                                               <option value="Aberto">Aberto</option>
+                                                <option value="Em Andamento">Em Andamento</option>
+                                                <option value="Finalizado">Finalizado</option>
+                                                <option value="Cancelado">Cancelado</option>
+                                            </select>
+                                        </div>
+                                        <div class="span3">
+                                            <label for="dataInicial">Data Inicial<span class="required">*</span></label>
+                                            <input id="dataInicial" class="span12 datepicker" type="text" name="dataInicial" value="12/06/2018"  onKeyDown="if (event.keyCode == '13'){ document.getElementById('dataFinal').focus(); return false }; "/>
+                                        </div>
+                                        <div class="span3">
+                                            <label for="dataFinal">Data Final</label>
+                                            <input id="dataFinal" class="span12 datepicker" type="text" name="dataFinal" value=""  onKeyDown="if (event.keyCode == '13'){ document.getElementById('garantia').focus(); return false }; "/>
+                                        </div>
+
+                                        <div class="span3">
+                                            <label for="garantia">Garantia</label>
+                                            <input id="garantia" type="text" class="span12" name="garantia" value=""  onKeyDown="if (event.keyCode == '13'){ document.getElementById('descricaoProduto').focus(); return false }"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="span12" style="padding: 1%; margin-left: 0">
+
+                                        <div class="span6">
+                                            <label for="descricaoProduto">Descrição Produto/Serviço</label>
+                                            <textarea class="span12" name="descricaoProduto" id="descricaoProduto" cols="30" rows="5"></textarea>
+                                        </div>
+                                        <div class="span6">
+                                            <label for="defeito">Defeito</label>
+                                            <textarea class="span12" name="defeito" id="defeito" cols="30" rows="5"></textarea>
+                                        </div>
+
+                                    </div>
+                                    <div class="span12" style="padding: 1%; margin-left: 0">
+                                        <div class="span6">
+                                            <label for="observacoes">Observações</label>
+                                            <textarea class="span12" name="observacoes" id="observacoes" cols="30" rows="5"></textarea>
+                                        </div>
+                                        <div class="span6">
+                                            <label for="laudoTecnico">Laudo Técnico</label>
+                                            <textarea class="span12" name="laudoTecnico" id="laudoTecnico" cols="30" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="span12" style="padding: 1%; margin-left: 0">
+                                        <div class="span6 offset3" style="text-align: center">
+                                            <button class="btn btn-success" id="btnContinuar"><i class="icon-share-alt icon-white"></i> Continuar</button>
+                                            <a href="https://www.ultramapos.online/index.php/os" class="btn"><i class="icon-arrow-left"></i> Voltar</a>
+                                        </div>
+                                    </div>
+                                </form>
+                      </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                
+.
+             
+        </div>
+        
+    </div>
+</div>
+</div>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+      $("#cliente").autocomplete({
+            source: "https://www.ultramapos.online/index.php/os/autoCompleteCliente",
+            minLength: 1,
+            select: function( event, ui ) {
+
+                 $("#clientes_id").val(ui.item.id);
+                
+
+            }
+      });
+
+//     $("#tecnico").autocomplete({
+//            source: "index.php/os/autoCompleteUsuario",
+//       minLength: 1,
+//            select: function( event, ui ) {
+
+//                 $("#usuarios_id").val(ui.item.id);
+
+//
+//            }
+//      });
+
+      
+      
+
+      $("#formOs").validate({
+          rules:{
+             cliente: {required:true},
+             tecnico: {required:true},
+             dataInicial: {required:true}
+          },
+          messages:{
+             cliente: {required: 'Campo Requerido.'},
+             tecnico: {required: 'Campo Requerido.'},
+             dataInicial: {required: 'Campo Requerido.'}
+          },
+
+            errorClass: "help-inline",
+            errorElement: "span",
+            highlight:function(element, errorClass, validClass) {
+                $(element).parents('.control-group').addClass('error');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).parents('.control-group').removeClass('error');
+                $(element).parents('.control-group').addClass('success');
+            }
+       });
+
+    $(".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
+   
+});
+
+
+$(document).ready(function(){
+		$('#formOs').submit(function(){
+			document.getElementById('formOs').readOnly='true';
+		
+		
+	if	(document.getElementById('cliente').value=='')
+	return false;
+	
+		if	(document.getElementById('tecnico').value=='')
+	return false;
+	
+		if	(document.getElementById('dataInicial').value=='')
+	return false;
+		  
+		if	(document.getElementById('btnContinuar').innerHTML=='Aguarde...')
+	return false;	
+		
+		document.getElementById('btnContinuar').innerHTML='Aguarde...';
+			
+			var dados = jQuery( this ).serialize();
+ //aqui botar progresso depois
+			$.ajax({
+				type: "post",
+				timeout:20000,
+				url: "https://www.ultramapos.online/cadastrarOs.php",
+				data: dados,
+				
+			//	beforeSend:function()
+		//	{
+		//			$('#divaguarde').show("fast");
+		//		},
+		//		complete:function()
+		//		{
+		//			$('#divaguarde').hide("slow");
+		//		},
+				
+				
+				error:function()
+				{
+					alert('Houve um problema com a conexão');
+							document.getElementById('btnContinuar').readOnly='false';
+							document.getElementById('btnContinuar').innerHTML='continuar';
+							document.getElementById('formOs').readOnly='false';
+		
+					},
+					
+				success: function( data )
+				{
+
+	//			while(data2.indexOf(" ") != -1)
+//data2 = data2.replace(" ", "");
+var erroremail=data;
+                  if (erroremail.indexOf('EMAIL') == -1)
+				  {
+				  	 var mensagem = data.length;
+					 if (mensagem>6)
+					 {
+						 
+						 document.getElementById("diverror").innerHTML=data;
+						 document.getElementById("diverror").style.display="block";
+					
+			 				}
+							else
+							{
+						 data2= data.replace(/[^\d]+/g,'') ;
+
+
+alert('Os criada com sucesso, agora você pode incluir produtos e serviços nas abas produtos/serviços');
+
+						 data2= data.replace(/[^\d]+/g,'') ;
+							var url = "https://www.ultramapos.online/index.php/os/editar/"+data2;
+							var id=data2;
+							url = url.split(data2).join(id);
+					location.replace(url);
+						
+							}
+				  }
+				else
+				{
+					alert(data);
+					 data2= data.replace(/[^\d]+/g,'') ;
+							var url = "https://www.ultramapos.online//index.php/os/editar/"+data2;
+							var id=data2;
+							url = url.split(data2).join(id);
+				//	location.replace(url);
+					
+					}
+				
+				
+				}
+				
+				
+			});
+			
+			return false;
+		});
+	});	
+
+
+$(function() {
+	 var tecnicoauto = [{"label":"wesllen alves teste de cadastro","id":"50"}];
+   $("#tecnico").autocomplete({
+            source: tecnicoauto,
+            minLength: 2,
+            select: function( event, ui ) {
+
+                 $("#usuarios_id").val(ui.item.id);
+
+
+            }
+      });
+});	
+
+</script>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--Footer-part-->
+<div class="row-fluid">
+  <div id="footer" class="span12"> 2018 &copy; ULTRAmap OS</div>
+</div>

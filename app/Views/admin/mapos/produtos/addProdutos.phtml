@@ -1,0 +1,196 @@
+
+<div id="sidebar"> <a href="#" class="visible-phone"><i class="icon icon-list"></i> Menu</a>
+  <ul>
+
+
+    <li class=""><a href=""><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
+    
+            <li class=""><a href="<?= base_url('')?>/clientes"><i class="icon icon-group"></i> <span>Clientes</span></a></li>
+        
+            <li class="active"><a href="<?= base_url('')?>/produtos"><i class="icon icon-barcode"></i> <span>Produtos</span></a></li>
+        
+            <li class=""><a href="<?= base_url('')?>/servicos"><i class="icon icon-wrench"></i> <span>Serviços</span></a></li>
+    
+            <li class=""><a href="<?= base_url('')?>/os"><i class="icon icon-tags"></i> <span>Ordens de Serviço</span></a></li>
+    
+            <li class=""><a href="<?= base_url('')?>/vendas"><i class="icon icon-shopping-cart"></i> <span>Vendas</span></a></li>
+        
+            <li class=""><a href="arquivos.php"><i class="icon icon-hdd"></i> <span>Arquivos</span></a></li>
+    
+
+<li class=""><a href="#" title="faleconosco.php" onClick="abrirnotificacao(this)"><i class="icon icon-hdd"></i> <span>Fale Conosco</span></a></li>
+
+            <li class="submenu">
+          <a href="#"><i class="icon icon-money"></i> <span>Financeiro</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+          <ul >
+            <li><a href="index.php/financeiro/lancamentos">Lançamentos</a></li>
+            <li><a title="recibo.php" onClick="abrirnotificacao(this)" style="cursor:pointer">Recibo</a></li>
+      <li><a title="taxascartao.php?plano=1" onClick="abrirnotificacao(this)" style="cursor:pointer">Conf. Taxas cartão</a></li>       
+          </ul>
+        </li>
+    
+           
+        <li class="submenu" >
+          <a href="#"><i class="icon icon-list-alt"></i> <span>Relatórios</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+          <ul>
+
+                            <li><a href="index.php/relatorios/clientes">Clientes</a></li>
+                                        <li><a href="/./LayoutFabrica/relatorios/produtos.php">Produtos</a></li>
+                                        <li><a href="/./LayoutFabrica/relatorios/servicos.php">Serviços</a></li>
+                                         <li><a href="/./LayoutFabrica/relatorios/os.php">Ordens de Serviço</a></li>
+                                        <li><a href="/./LayoutFabrica/relatorios/vendas.php">Vendas(Clientes)</a></li>
+                         <li><a title="consultarVendas.php?cache=1" onClick="abrirnotificacao(this)" style="cursor:pointer">vendas(itens)</a></li> 
+                            <li><a href="index.php/relatorios/financeiro">Financeiro</a></li>
+                        
+          </ul>
+        </li>
+
+    
+            <li class="submenu ">
+          <a href="#"><i class="icon icon-cog"></i> <span>Configurações</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+          <ul>
+                            <li><a href="index.php/usuarios">Usuários</a></li>
+                                        <li><a href="index.php/mapos/emitente">Emitente</a></li>
+                                        <!--<li><a href="index.php/permissoes">Permissões</a></li>-->
+                                        <!--<li><a href="index.php/mapos/backup">Backup</a></li>-->
+            <!-- <li><a  href="#" title="configuraremail" onClick="abrirnotificacao(this)">Email(imap)</a></li>-->
+ <li><a  href="#" title="configurarpagseguro.php" onClick="abrirnotificacao(this)">PagSeguro</a></li>
+          </ul>
+        </li>
+        
+    
+  </ul>
+</div>
+
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="https://www.ultramapos.online/" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="https://www.ultramapos.online/index.php/produtos" class="tip-bottom" title="Produtos">Produtos</a> <a href="https://www.ultramapos.online/index.php/produtos/adicionar/" class="current tip-bottom" title="Adicionar">Adicionar</a> </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+          
+                                                
+                      <div class="row-fluid" style="margin-top:0">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon">
+                    <i class="icon-align-justify"></i>
+                </span>
+                <h5>Cadastro de Produto</h5>
+              
+            </div>
+            <div class="widget-content nopadding">
+                <form action="<?= base_url('')?>/produtos/adicionar/salvar" id="formProduto" method="post" class="form-horizontal" >
+                     <div class="control-group">
+                        <label for="descricao" class="control-label">Descrição<span class="required">*</span></label>
+                        <div class="controls">
+                            <input id="descricao" type="text" name="descricao" value=""  />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="unidade" class="control-label">Unidade<span class="required">*</span></label>
+                        <div class="controls">
+                            <input id="unidade" type="text" name="unidade" value=""  />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="precoCompra" class="control-label">Preço de Compra<span class="required">*</span></label>
+                        <div class="controls">
+                            <input id="precoCompra" class="money" type="number" step="0.01" name="precoCompra" value=""  />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="precoVenda" class="control-label">Preço de Venda<span class="required">*</span></label>
+                        <div class="controls">
+                            <input id="precoVenda" class="money" type="text" name="precoVenda" value=""  />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="estoque" class="control-label">Estoque<span class="required">*</span></label>
+                        <div class="controls">
+                            <input id="estoque" type="number" name="estoque" value=""  />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="estoqueMinimo" class="control-label">Estoque Mínimo</label>
+                        <div class="controls">
+                            <input id="estoqueMinimo" type="number" name="estoqueMinimo" value=""  />
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="validade" class="control-label">Validade</label>
+                        <div class="controls">
+                            <input id="validade" type="date" name="validade" value=""  />
+                        </div>
+                    </div>                   
+
+                    <div class="form-actions">
+                        <div class="span12">
+                            <div class="span6 offset3">
+                            
+                            <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> Adicionar</button>  
+                             <!--  <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> Adicionar</button>-->
+                                <a href="https://www.ultramapos.online/index.php/produtos" id="" class="btn"><i class="icon-arrow-left"></i> Voltar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </form>
+            </div>
+
+         </div>
+     </div>
+</div>
+
+<script src="https://www.ultramapos.online/js/jquery.validate.js"></script>
+<script src="https://www.ultramapos.online/js/maskmoney.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".money").maskMoney();
+
+        $('#formProduto').validate({
+            rules :{
+                  descricao: { required: true},
+                  unidade: { required: true},
+                  precoCompra: { required: true},
+                  precoVenda: { required: true},
+                  estoque: { required: true}
+            },
+            messages:{
+                  descricao: { required: 'Campo Requerido.'},
+                  unidade: {required: 'Campo Requerido.'},
+                  precoCompra: { required: 'Campo Requerido.'},
+                  precoVenda: { required: 'Campo Requerido.'},
+                  estoque: { required: 'Campo Requerido.'}
+            },
+
+            errorClass: "help-inline",
+            errorElement: "span",
+            highlight:function(element, errorClass, validClass) {
+                $(element).parents('.control-group').addClass('error');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).parents('.control-group').removeClass('error');
+                $(element).parents('.control-group').addClass('success');
+            }
+           });
+    });
+</script>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

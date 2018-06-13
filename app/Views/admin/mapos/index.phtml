@@ -1,0 +1,209 @@
+
+<div id="sidebar"> <a href="#" class="visible-phone"><i class="icon icon-list"></i> Menu</a>
+  <ul>
+
+
+    <li class="active"><a href=""><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
+    
+            <li class=""><a href="<?= base_url('')?>/clientes"><i class="icon icon-group"></i> <span>Clientes</span></a></li>
+        
+            <li class=""><a href="<?= base_url('')?>/produtos"><i class="icon icon-barcode"></i> <span>Produtos</span></a></li>
+        
+            <li class=""><a href="<?= base_url('')?>/servicos"><i class="icon icon-wrench"></i> <span>Serviços</span></a></li>
+    
+            <li class=""><a href="<?= base_url('')?>/os"><i class="icon icon-tags"></i> <span>Ordens de Serviço</span></a></li>
+    
+            <li class=""><a href="<?= base_url('')?>/vendas"><i class="icon icon-shopping-cart"></i> <span>Vendas</span></a></li>
+        
+            <li class=""><a href="arquivos.php"><i class="icon icon-hdd"></i> <span>Arquivos</span></a></li>
+    
+
+<li class=""><a href="#" title="faleconosco.php" onClick="abrirnotificacao(this)"><i class="icon icon-hdd"></i> <span>Fale Conosco</span></a></li>
+
+            <li class="submenu ">
+          <a href="#"><i class="icon icon-money"></i> <span>Financeiro</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+          <ul>
+            <li><a href="<?= base_url('')?>lancamentos.php">Lançamentos</a></li>
+            <li><a title="recibo.php" onClick="abrirnotificacao(this)" style="cursor:pointer">Recibo</a></li>
+      <li><a title="taxascartao.php?plano=1" onClick="abrirnotificacao(this)" style="cursor:pointer">Conf. Taxas cartão</a></li>       
+          </ul>
+        </li>
+    
+            
+        <li class="submenu " >
+          <a href="#"><i class="icon icon-list-alt"></i> <span>Relatórios</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+          <ul>
+
+                            <li><a href="index.php/relatorios/clientes">Clientes</a></li>
+                                        <li><a href="/./LayoutFabrica/relatorios/produtos.php">Produtos</a></li>
+                                        <li><a href="/./LayoutFabrica/relatorios/servicos.php">Serviços</a></li>
+                                         <li><a href="/./LayoutFabrica/relatorios/os.php">Ordens de Serviço</a></li>
+                                        <li><a href="/./LayoutFabrica/relatorios/vendas.php">Vendas(Clientes)</a></li>
+                         <li><a title="consultarVendas.php?cache=1" onClick="abrirnotificacao(this)" style="cursor:pointer">vendas(itens)</a></li> 
+                            <li><a href="index.php/relatorios/financeiro">Financeiro</a></li>
+                        
+          </ul>
+        </li>
+
+    
+            <li class="submenu ">
+          <a href="#"><i class="icon icon-cog"></i> <span>Configurações</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+          <ul>
+                            <li><a href="/./LayoutFabrica/configuracoes/usuarios">Usuários</a></li>
+                                        <li><a href="/./LayoutFabrica/configuracoes/emitente">Emitente</a></li>
+                                        <!--<li><a href="index.php/permissoes">Permissões</a></li>-->
+                                        <!--<li><a href="index.php/mapos/backup">Backup</a></li>-->
+            <!-- <li><a  href="#" title="configuraremail" onClick="abrirnotificacao(this)">Email(imap)</a></li>-->
+ <li><a  href="#" title="configurarpagseguro.php" onClick="abrirnotificacao(this)">PagSeguro</a></li>
+          </ul>
+        </li>
+        
+    
+  </ul>
+</div>
+        <div id="content">
+            <div id="content-header">
+                <div id="breadcrumb"> <a href="<?= base_url('')?>/dashboard" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span12">
+
+
+<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="js/dist/excanvas.min.js"></script><![endif]-->
+                        <script>document.getElementById("pagseguronotificacao").innerHTML = "notificações(0)"</script>
+                        <script language="javascript" type="text/javascript" src="https://www.ultramapos.online/js/dist/jquery.jqplot.min.js"></script>
+                        <link rel="stylesheet" type="text/css" href="https://www.ultramapos.online/js/dist/jquery.jqplot.min.css" />
+
+                        <script type="text/javascript" src="https://www.ultramapos.online/js/dist/plugins/jqplot.pieRenderer.min.js"></script>
+                        <script type="text/javascript" src="https://www.ultramapos.online/js/dist/plugins/jqplot.donutRenderer.min.js"></script>
+
+                        <!--Action boxes-->
+                        <div class="container-fluid">
+                            <div class="quick-actions_homepage">
+                                <ul class="quick-actions">
+
+
+                                    <li class="bg_lo"><a href="#" title="migrarplano" onClick="abrirnotificacao(this)"><i><img src="https://www.ultramapos.online/img/planopremium.png" width="40" height="40" alt="migrarPlanopremiun" title="Migrar para o plano prêmio."/><br></i>Premium</a></li>
+
+
+                                    <li class="bg_lb"> <a href="clientes.php"> <i class="icon-group"></i> Clientes</a> </li>
+                                    <li class="bg_lg"> <a href="produtos.php"> <i class="icon-barcode"></i> Produtos</a> </li>
+                                    <li class="bg_ly"> <a href="servicos.php"> <i class="icon-wrench"></i> Serviços</a> </li>
+                                    <li class="bg_lo"> <a href="os.php.php"> <i class="icon-tags"></i> OS</a> </li>
+                                    <li class="bg_ls"> <a href="vendas.php"><i class="icon-shopping-cart"></i> Vendas</a></li>
+                                    <li class="bg_lo"><a href="#" onClick="alert('Função não habilitada, migra para a versão PREMIUM para ter direito a essa função.')"><i><img src="https://www.ultramapos.online/img/email.png" width="40" height="40" alt="" style="-webkit-filter:grayscale(100%);"/><br></i>Email(0)</a></li>
+
+
+                                </ul>
+                            </div>
+                        </div>  
+                        <!--End-Action boxes-->  
+
+
+
+                        <div class="row-fluid" style="margin-top: 0">
+
+                            <div class="span12">
+
+                                <div class="widget-box">
+                                    <div class="widget-title"><span class="icon"><i class="icon-signal"></i></span><h5>Produtos Com Estoque Mínimo</h5></div>
+                                    <div class="widget-content">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Produto</th>
+                                                    <th>Preço de Venda</th>
+                                                    <th>Estoque</th>
+                                                    <th>Estoque Mínimo</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td colspan="3">Nenhum produto com estoque baixo.</td></tr>                    </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="span12" style="margin-left: 0">
+
+                                <div class="widget-box">
+                                    <div class="widget-title"><span class="icon"><i class="icon-signal"></i></span><h5>Ordens de Serviço Em Aberto</h5></div>
+                                    <div class="widget-content">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Data Inic./Final</th>
+                                                    <!--<th>Data Final</th>-->
+                                                    <th>Cliente</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td colspan="3">Nenhuma OS em aberto.</td></tr>                    </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+                        <div class="row-fluid" style="margin-top: 0">
+
+                            <div class="span12">
+
+                                <div class="widget-box">
+                                    <div class="widget-title"><span class="icon"><i class="icon-signal"></i></span><h5>Estatísticas do Sistema</h5></div>
+                                    <div class="widget-content">
+                                        <div class="row-fluid">           
+                                            <div class="span12">
+                                                <ul class="site-stats">
+                                                    <li class="bg_lh"><i class="icon-group"></i> <strong>0</strong> <small>Clientes</small></li>
+                                                    <li class="bg_lh"><i class="icon-barcode"></i> <strong>0</strong> <small>Produtos </small></li>
+                                                    <li class="bg_lh"><i class="icon-tags"></i> <strong>0</strong> <small>Ordens de Serviço</small></li>
+                                                    <li class="bg_lh"><i class="icon-wrench"></i> <strong>0</strong> <small>Serviços</small></li>
+
+                                                </ul>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <script src="https://www.ultramapos.online/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Footer-part-->
+        <div class="row-fluid">
+            <div id="footer" class="span12"> 2018 &copy; ULTRAmap OS</div>
+        </div>
+        <!--end-Footer-part-->
+
+
+        <script src="assets/js/bootstrap.min.js"></script> 
+        <script src="assets/js/matrix.js"></script> 
+    </body>
+</html>
+

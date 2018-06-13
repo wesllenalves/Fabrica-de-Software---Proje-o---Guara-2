@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ultra MapOS | ordem de serviços</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/css/bootstrap.min.css" />
+<link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/css/matrix-style.css" />
+<link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/css/matrix-media.css" />
+<link href="<?= base_url('')?>/public/admin/mapes/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/css/fullcalendar.css" /> 
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+<script type="text/javascript"  src="<?= base_url('')?>/public/admin/mapes/assets/js/jquery-1.10.2.min.js"></script>
+
+<style>
+ .container {
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.50);
+        display: none;
+        flex-direction: row;
+        justify-content: center;
+		position:fixed;
+		z-index:50;
+        align-items: center
+    }
+    .box {
+        width: 80%;
+		max-width:700px;
+        height: 80%;
+		padding:10px;
+		overflow:auto;
+		border-radius:20px;
+        background: #fff;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="container" id="notificacao">
+        <div class="box" id="notificacaofilho">
+        Aguarde...
+       </div>
+   </div>
+
+<!--Header-part-->
+<div id="header">
+    <!--<img src="<?= base_url('')?>/public/admin/mapes/assets/lobo.png" alt="" width="89" height="62"/>-->
+<h1><a href=""></a></h1>
+</div>
+<!--close-Header-part--> 
+
+<!--top-Header-menu-->
+<div id="user-nav" class="navbar navbar-inverse">
+  <ul class="nav">
+   
+    <li class=""><a title="" href="index.php/mapos/minhaConta"><i class="icon icon-star"></i> <span class="text">Minha Conta</span></a></li>
+ 
+ <li class=""><a title="pagseguronotificacoes.php"  onClick=" alert('Função não habilitada') " style="cursor:pointer"><i class="icon icon-share-alt"></i> <span class="text" id="pagseguronotificacao">notificações(0)</span></a></li>  
+ 
+ <li class=""><a title="pagsegurotransacoes.php"  onClick=" alert('Função não habilitada') " style="cursor:pointer"><i class="icon icon-share-alt"></i> <span class="text" id="pagsegurotransacoes">PagSeguro Transações</span></a></li>   
+    
+    <li class=""><a title="" href="index.php/mapos/sair"><i class="icon icon-share-alt"></i> <span class="text">Sair do Sistema</span></a></li>
+ 
+  </ul>
+</div>
+
+<!--start-top-serch-->
+<div id="search">
+  <form action="index.php/mapos/pesquisar">
+    <input type="text" name="termo" placeholder="Pesquisar..."/>
+    <button type="submit"  class="tip-bottom" title="Pesquisar"><i class="icon-search icon-white"></i></button>
+    
+  </form>
+</div>
+
+<!--Conteudo-->
+        <?php $this->content()?>
+        <!--Fim Conteudo-->  
+
+<!--Footer-part-->
+<div class="row-fluid">
+  <div id="footer" class="span12"> 2018 &copy; ULTRAmap OS</div>
+</div>
+<!--end-Footer-part-->
+
+
+<script src="<?= base_url('')?>/public/admin/mapes/assets/js/bootstrap.min.js"></script> 
+<script src="<?= base_url('')?>/public/admin/mapes/assets/js/matrix.js"></script> 
+
+
+</body>
+</html>
+
+
+
+

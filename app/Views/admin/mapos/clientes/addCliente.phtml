@@ -1,0 +1,276 @@
+<div id="sidebar"> <a href="#" class="visible-phone"><i class="icon icon-list"></i> Menu</a>
+    <ul>
+
+
+        <li class=""><a href=""><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
+
+        <li class="active"><a href="<?= base_url('') ?>/clientes"><i class="icon icon-group"></i> <span>Clientes</span></a></li>
+
+        <li class=""><a href="<?= base_url('') ?>/produtos"><i class="icon icon-barcode"></i> <span>Produtos</span></a></li>
+
+        <li class=""><a href="<?= base_url('') ?>/servicos"><i class="icon icon-wrench"></i> <span>Serviços</span></a></li>
+
+        <li class=""><a href="<?= base_url('') ?>/os"><i class="icon icon-tags"></i> <span>Ordens de Serviço</span></a></li>
+
+        <li class=""><a href="<?= base_url('') ?>/vendas"><i class="icon icon-shopping-cart"></i> <span>Vendas</span></a></li>
+
+        <li class=""><a href="arquivos.php"><i class="icon icon-hdd"></i> <span>Arquivos</span></a></li>
+
+
+        <li class=""><a href="#" title="faleconosco.php" onClick="abrirnotificacao(this)"><i class="icon icon-hdd"></i> <span>Fale Conosco</span></a></li>
+
+        <li class="submenu ">
+            <a href="#"><i class="icon icon-money"></i> <span>Financeiro</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+            <ul>
+                <li><a href="/./LayoutFabrica/financeiro/lancamentos.php">Lançamentos</a></li>
+                <li><a title="recibo.php" onClick="abrirnotificacao(this)" style="cursor:pointer">Recibo</a></li>
+                <li><a title="taxascartao.php?plano=1" onClick="abrirnotificacao(this)" style="cursor:pointer">Conf. Taxas cartão</a></li>       
+            </ul>
+        </li>
+
+
+        <li class="submenu " >
+            <a href="#"><i class="icon icon-list-alt"></i> <span>Relatórios</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+            <ul>
+
+                <li><a href="index.php/relatorios/clientes">Clientes</a></li>
+                <li><a href="/./LayoutFabrica/relatorios/produtos.php">Produtos</a></li>
+                <li><a href="/./LayoutFabrica/relatorios/servicos.php">Serviços</a></li>
+                <li><a href="/./LayoutFabrica/relatorios/os.php">Ordens de Serviço</a></li>
+                <li><a href="/./LayoutFabrica/relatorios/vendas.php">Vendas(Clientes)</a></li>
+                <li><a title="consultarVendas.php?cache=1" onClick="abrirnotificacao(this)" style="cursor:pointer">vendas(itens)</a></li> 
+                <li><a href="index.php/relatorios/financeiro">Financeiro</a></li>
+
+            </ul>
+        </li>
+
+
+        <li class="submenu ">
+            <a href="#"><i class="icon icon-cog"></i> <span>Configurações</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+            <ul>
+                <li><a href="/./LayoutFabrica/configuracoes/usuarios">Usuários</a></li>
+                <li><a href="/./LayoutFabrica/configuracoes/emitente">Emitente</a></li>
+                <!--<li><a href="index.php/permissoes">Permissões</a></li>-->
+                <!--<li><a href="index.php/mapos/backup">Backup</a></li>-->
+                <!-- <li><a  href="#" title="configuraremail" onClick="abrirnotificacao(this)">Email(imap)</a></li>-->
+                <li><a  href="#" title="configurarpagseguro.php" onClick="abrirnotificacao(this)">PagSeguro</a></li>
+            </ul>
+        </li>
+
+
+    </ul>
+</div>
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb"> <a href="https://www.ultramapos.online/" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="https://www.ultramapos.online/index.php/clientes" class="tip-bottom" title="Clientes">Clientes</a> <a href="https://www.ultramapos.online/index.php/clientes/adicionar/" class="current tip-bottom" title="Adicionar">Adicionar</a> </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+
+
+                <div class="row-fluid" style="margin-top:0">
+                    <div class="span12">
+                        <div class="widget-box">
+                            <div class="widget-title">
+                                <span class="icon">
+                                    <i class="icon-user"></i>
+                                </span>
+                                <h5>Cadastro de Cliente</h5>
+                            </div>
+                            <div class="widget-content nopadding">
+                                <form action="<?= base_url('') ?>/clientes/adicionar/enviar" id="formCliente" method="post" class="form-horizontal" >
+                                    <div class="control-group">
+                                        <label for="nomeCliente" class="control-label">Nome<span class="required">*</span></label>
+                                        <div class="controls">
+                                            <input id="nomeCliente" type="text" name="nomeCliente" value=""  />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="documento" class="control-label">CPF/CNPJ</label>
+                                        <div class="controls">
+                                            <input id="documento" type="text" name="cpf" value=""  />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="Pessoa" class="control-label">PESSOA FISICA /<br>PESSOA JURIDICA</label>
+                                        <div class="controls">
+                                          <!--  <input id="estado" type="text" name="estado" value=""  />-->
+                                            <select form="formCliente" id="estado" type="text" name="pessoa" value="">
+                                                <option value="">-</option>
+                                                <option value="PF">Pessoa Fisica</option>
+                                                <option value="PJ">Pessoa Juridica</option>
+                                                
+
+                                            </select>                         
+
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="telefone" class="control-label">Telefone</label>
+                                        <div class="controls">
+
+                                            <input id="telefone" type="text" name="telefone" value=""  />
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label for="celular" class="control-label">Celular<span class="required">*</span></label>
+                                        <div class="controls">
+                                            <input id="ddd" type="text" name="ddd" value="" style="max-width:30px" />
+                                            <input id="celular" type="text" name="celular" value=""  />
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label for="email" class="control-label">Email</label>
+                                        <div class="controls">
+                                            <input id="email" type="text" name="email" value=""  />
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group" class="control-label">
+                                        <label for="rua" class="control-label">Rua</label>
+                                        <div class="controls">
+                                            <input id="rua" type="text" name="rua" value=""  />
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label for="numero" class="control-label">Número</label>
+                                        <div class="controls">
+                                            <input id="numero" type="text" name="numero" value=""  />
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group" class="control-label">
+                                        <label for="bairro" class="control-label">Bairro</label>
+                                        <div class="controls">
+                                            <input id="bairro" type="text" name="bairro" value=""  />
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group" class="control-label">
+                                        <label for="cidade" class="control-label">Cidade</label>
+                                        <div class="controls">
+                                            <input id="cidade" type="text" name="cidade" value=""  />
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group" class="control-label">
+                                        <label for="estado" class="control-label">Estado</label>
+                                        <div class="controls">
+                                          <!--  <input id="estado" type="text" name="estado" value=""  />-->
+                                            <select form="formCliente" id="estado" type="text" name="estado" value="">
+                                                <option value="">-</option>
+                                                <option value="AC">Acre</option>
+                                                <option value="AL">Alagoas</option>
+                                                <option value="AP">Amapá</option>
+                                                <option value="AM">Amazonas</option>
+                                                <option value="BA">Bahia</option>
+                                                <option value="CE">Ceará</option>
+                                                <option value="DF">Distrito Federal</option>
+                                                <option value="ES">Espírito Santo</option>
+                                                <option value="GO">Goiás</option>
+                                                <option value="MA">Maranhão</option>
+                                                <option value="MT">Mato Grosso</option>
+                                                <option value="MS">Mato Grosso do Sul</option>
+                                                <option value="MG">Minas Gerais</option>
+                                                <option value="PA">Pará</option>
+                                                <option value="PB">Paraíba</option>
+                                                <option value="PR">Paraná</option>
+                                                <option value="PE">Pernambuco</option>
+                                                <option value="PI">Piauí</option>
+                                                <option value="RJ">Rio de Janeiro</option>
+                                                <option value="RN">Rio Grande do Norte</option>
+                                                <option value="RS">Rio Grande do Sul</option>
+                                                <option value="RO">Rondônia</option>
+                                                <option value="RR">Roraima</option>
+                                                <option value="SC">Santa Catarina</option>
+                                                <option value="SP">São Paulo</option>
+                                                <option value="SE">Sergipe</option>
+                                                <option value="TO">Tocantins</option>
+
+                                            </select>                         
+
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group" class="control-label">
+                                        <label for="cep" class="control-label">CEP</label>
+                                        <div class="controls">
+                                            <input id="cep" type="text" name="cep" value=""  />
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-actions">
+                                        <div class="span12">
+                                            <div class="span6 offset3">
+
+                                    <input type="submit" class="btn btn-success" value=" Adicionar">                          <!-- <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> Adicionar</button>-->
+                                                <a href="<?= base_url('') ?>/clientes" id="" class="btn"><i class="icon-arrow-left"></i> Voltar</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <script src="https://www.ultramapos.online/js/jquery.validate.js"></script>
+                <script type="text/javascript">
+                     $(document).ready(function () {
+                         $('#formCliente').validate({
+                             rules: {
+                                 nomeCliente: {required: true},
+                                 //     documento:{ required: true},
+                                 //     telefone:{ required: true},
+                                 //     email:{ required: true}
+                                 //      rua:{ required: true},
+                                 //      numero:{ required: true},
+                                 //      bairro:{ required: true},
+                                 //      cidade:{ required: true},
+                                 //      estado:{ required: true},
+                                 //     cep:{ required: true}
+                             },
+                             messages: {
+                                 nomeCliente: {required: 'Campo Requerido.'},
+                                 //  documento :{ required: 'Campo Requerido.'},
+                                 //    telefone:{ required: 'Campo Requerido.'},
+                                 email: {required: 'Campo Requerido.'}
+                                 //   rua:{ required: 'Campo Requerido.'},
+                                 //   numero:{ required: 'Campo Requerido.'},
+                                 //    bairro:{ required: 'Campo Requerido.'},
+                                 //    cidade:{ required: 'Campo Requerido.'},
+                                 //   estado:{ required: 'Campo Requerido.'},
+                                 //    cep:{ required: 'Campo Requerido.'}
+
+                             },
+
+                             errorClass: "help-inline",
+                             errorElement: "span",
+                             highlight: function (element, errorClass, validClass) {
+                                 $(element).parents('.control-group').addClass('error');
+                             },
+                             unhighlight: function (element, errorClass, validClass) {
+                                 $(element).parents('.control-group').removeClass('error');
+                                 $(element).parents('.control-group').addClass('success');
+                             }
+                         });
+                     });
+                </script>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

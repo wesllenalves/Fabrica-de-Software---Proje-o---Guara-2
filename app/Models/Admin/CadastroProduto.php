@@ -20,8 +20,9 @@ class CadastroProduto extends BaseModel {
     protected $tabela = "produto";
     
     //Definir a quantidade de tabelas que serao usadas maximo de 4
-    protected $tabelaUse = 1;    
-
+    protected $tabelaUse = 1; 
+    
+    
     public function cadastrar($dados) {
 
         
