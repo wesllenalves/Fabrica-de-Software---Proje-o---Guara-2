@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 23-Maio-2018 às 21:02
--- Versão do servidor: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- Generation Time: 14-Jun-2018 às 03:25
+-- Versão do servidor: 10.1.32-MariaDB
+-- PHP Version: 5.6.36
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -34,12 +36,25 @@ CREATE TABLE `cliente` (
   `email` varchar(50) NOT NULL,
   `login` varchar(100) NOT NULL,
   `senha` varchar(45) NOT NULL,
+  `ddd` varchar(255) NOT NULL,
+  `celular` varchar(255) NOT NULL,
   `cidade` varchar(70) DEFAULT NULL,
+  `bairro` varchar(255) NOT NULL,
+  `rua` varchar(255) NOT NULL,
   `cep` varchar(10) DEFAULT NULL,
-  `endereco` varchar(100) DEFAULT NULL,
-  `uf` char(2) DEFAULT NULL,
-  `complemento` varchar(100) DEFAULT NULL
+  `uf` char(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `cliente`
+--
+
+INSERT INTO `cliente` (`idCliente`, `nome`, `cpf`, `tipoCliente`, `email`, `login`, `senha`, `ddd`, `celular`, `cidade`, `bairro`, `rua`, `cep`, `uf`) VALUES
+(2, 'wesllen', '03230944143', 'pf', 'wesllenalves@gmail.com', 'wesllenalves', 'e10adc3949ba59abbe56e057f20f883e', '', '', 'brasilia', '', '', '70645160', NULL),
+(4, 'wesllen', '03230944143', 'PF', 'wesllenalves@gmail.com', '0', '0', '61', '12221', 'brasilioa', 'cruzeiro', 'sres', '70645160', 'DF'),
+(5, 'wesllen', '03230944143', 'PF', 'wesllenalves@gmail.com', '0', '0', '61', '12221', 'brasilioa', 'cruzeiro', 'sres', '70645160', 'DF'),
+(6, 'wesllen', '03230944143', 'PF', 'wesllenalves@gmail.com', '0', '0', '61', '12221', 'brasilioa', 'cruzeiro', 'sres', '70645160', 'DF'),
+(7, 'wesllen', '03230944143', 'PF', 'wesllenalves@gmail.com', '0', '0', '61', '12221', 'brasilioa', 'cruzeiro', 'sres', '70645160', 'DF');
 
 -- --------------------------------------------------------
 
@@ -150,18 +165,113 @@ CREATE TABLE `funcionario` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `orcamento`
+--
+
+CREATE TABLE `orcamento` (
+  `idOrcamento` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `telefone` varchar(20) NOT NULL,
+  `cidade` varchar(100) NOT NULL,
+  `fkProduto` int(11) NOT NULL,
+  `qtd` int(11) NOT NULL,
+  `data` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `orcamento`
+--
+
+INSERT INTO `orcamento` (`idOrcamento`, `nome`, `telefone`, `cidade`, `fkProduto`, `qtd`, `data`) VALUES
+(0, 'wes', '619817456958', 'eeee', 0, 100, '2018-06-15'),
+(0, 'wes', '619817456958', 'brasilioa', 0, 100, '2018-06-09'),
+(0, 'wes', '619817456958', 'brasilioa', 0, 100, '2018-06-14');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `os`
+--
+
+CREATE TABLE `os` (
+  `idOs` int(11) NOT NULL,
+  `dataInicial` date DEFAULT NULL,
+  `dataFinal` date DEFAULT NULL,
+  `garantia` varchar(45) DEFAULT NULL,
+  `descricaoProduto` varchar(150) DEFAULT NULL,
+  `defeito` varchar(150) DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  `observacoes` varchar(150) DEFAULT NULL,
+  `laudoTecnico` varchar(150) DEFAULT NULL,
+  `valorTotal` varchar(15) DEFAULT NULL,
+  `clientes_id` int(11) NOT NULL,
+  `usuarios_id` int(11) NOT NULL,
+  `lancamento` int(11) DEFAULT NULL,
+  `faturado` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `produto`
 --
 
 CREATE TABLE `produto` (
   `idProduto` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
-  `valorUnitario` decimal(10,2) NOT NULL,
-  `valorGasto` decimal(10,2) NOT NULL,
-  `qtd` int(11) NOT NULL,
-  `qtdMin` int(11) DEFAULT NULL,
-  `validade` date DEFAULT NULL,
-  `categoria` varchar(45) DEFAULT NULL
+  `unidade` varchar(255) NOT NULL,
+  `precoCompra` decimal(10,2) NOT NULL,
+  `precoVenda` decimal(10,2) NOT NULL,
+  `estoque` int(11) NOT NULL,
+  `estoqueMinimo` int(11) DEFAULT NULL,
+  `validade` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `produto`
+--
+
+INSERT INTO `produto` (`idProduto`, `nome`, `unidade`, `precoCompra`, `precoVenda`, `estoque`, `estoqueMinimo`, `validade`) VALUES
+(1, 'bolo', 'KG', '20.00', '25.00', 10, 2, '1993-09-24'),
+(2, 'bolo', 'KG', '200.00', '300.00', 20, 10, '2018-06-13'),
+(3, 'bolo', 'KG', '0.02', '0.03', 20, 1, '2018-06-13'),
+(4, 'bolo', 'KG', '0.00', '0.00', 1, 1, '2018-06-13');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `servicos`
+--
+
+CREATE TABLE `servicos` (
+  `idServicos` int(11) NOT NULL,
+  `nome` varchar(45) NOT NULL,
+  `descricao` varchar(45) DEFAULT NULL,
+  `preco` decimal(10,2) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `servicos`
+--
+
+INSERT INTO `servicos` (`idServicos`, `nome`, `descricao`, `preco`) VALUES
+(7, 'pessoa fisica', 'bolo', '0.00');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `vendas`
+--
+
+CREATE TABLE `vendas` (
+  `idVendas` int(11) NOT NULL,
+  `dataVenda` date DEFAULT NULL,
+  `valorTotal` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `desconto` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `faturado` tinyint(1) DEFAULT NULL,
+  `clientes_id` int(11) NOT NULL,
+  `usuarios_id` int(11) DEFAULT NULL,
+  `lancamentos_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -217,10 +327,31 @@ ALTER TABLE `funcionario`
   ADD PRIMARY KEY (`idFuncionario`);
 
 --
+-- Indexes for table `os`
+--
+ALTER TABLE `os`
+  ADD PRIMARY KEY (`idOs`),
+  ADD KEY `fk_os_clientes1` (`clientes_id`),
+  ADD KEY `fk_os_usuarios1` (`usuarios_id`),
+  ADD KEY `fk_os_lancamentos1` (`lancamento`);
+
+--
 -- Indexes for table `produto`
 --
 ALTER TABLE `produto`
   ADD PRIMARY KEY (`idProduto`);
+
+--
+-- Indexes for table `servicos`
+--
+ALTER TABLE `servicos`
+  ADD PRIMARY KEY (`idServicos`);
+
+--
+-- Indexes for table `vendas`
+--
+ALTER TABLE `vendas`
+  ADD PRIMARY KEY (`idVendas`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -230,42 +361,68 @@ ALTER TABLE `produto`
 -- AUTO_INCREMENT for table `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `endereco`
 --
 ALTER TABLE `endereco`
   MODIFY `idEndereco` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `evento`
 --
 ALTER TABLE `evento`
   MODIFY `codigoVenda` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `eventofuncionario`
 --
 ALTER TABLE `eventofuncionario`
   MODIFY `idEventoFuncionario` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `fluxoanual`
 --
 ALTER TABLE `fluxoanual`
   MODIFY `idFluxoAnual` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `fluxomensal`
 --
 ALTER TABLE `fluxomensal`
   MODIFY `idFluxoMensal` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `os`
+--
+ALTER TABLE `os`
+  MODIFY `idOs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `idProduto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idProduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `servicos`
+--
+ALTER TABLE `servicos`
+  MODIFY `idServicos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `vendas`
+--
+ALTER TABLE `vendas`
+  MODIFY `idVendas` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- Constraints for dumped tables
 --
@@ -295,6 +452,7 @@ ALTER TABLE `fluxoanual`
 --
 ALTER TABLE `fluxomensal`
   ADD CONSTRAINT `fluxomensal_ibfk_1` FOREIGN KEY (`fkEvento`) REFERENCES `evento` (`codigoVenda`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
