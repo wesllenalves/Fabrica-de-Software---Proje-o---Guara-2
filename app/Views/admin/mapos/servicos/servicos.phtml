@@ -69,7 +69,11 @@
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span12">
-          
+          <div class="container-fluid col-sm-5">
+                <?php
+                $this->alerta();
+                ?>
+                </div>
                                                 
           <a href="<?= base_url('')?>/servicos/adicionar" class="btn btn-success"><i class="icon-plus icon-white"></i> Adicionar Serviço</a>
 
@@ -95,13 +99,46 @@
             <th>Descrição</th>
             <th></th>
         </tr>
-    </thead>
-    <tbody>
-
-        <tr>
-            <td colspan="5">Nenhum Serviço Cadastrado</td>
-        </tr>
-    </tbody>
+    </thead><?php
+        $total = 0;
+        foreach ($this->view->servicos as $linha) {
+            $id = count($linha['idServicos']);
+            $total = $total + $id;
+        }
+        if ($total > 0) {
+            ?>
+                                <tbody>
+        <?php foreach ($this->view->servicos as $linha) { ?>
+                                        <tr>
+                                            <td><?php echo $linha['idServicos'] ?></td>
+                                            <td><?php echo $linha['nome'] ?></td>
+                                            <td><?php echo $linha['descricao'] ?></td>
+                                            <td><?php echo $linha['preco'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                
+                                                <a href="<?= base_url('') ?>/produtos/editar?id=<?= $linha['idServicos'] ?>" style="margin-right: 1%" class="btn btn-info tip-top" title="Editar Cliente"><i class="icon-pencil icon-white"></i></a>
+                                                <a href="#modal-excluir" role="button" data-toggle="modal" cliente="80" style="margin-right: 1%" class="btn btn-danger tip-top" title="Excluir Cliente"><i class="icon-remove icon-white"></i></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+        <?php
+            } 
+        ?>
+                                        </tr>
+                                </tbody>
+        <?php
+        }else{
+        ?>
+                                <tbody>
+                                        <tr>
+                                            <td colspan = "5">Nenhum Cliente Cadastrado</td>
+                                        </tr>
+                                </tbody>
+        <?php
+            }
+        ?>
 </table>
 </div>
 </div>

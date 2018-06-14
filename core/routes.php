@@ -22,9 +22,12 @@ $routes[] = ['/clientes/adicionar/enviar', 'AdminController@clientesPost'];
 $routes[] = ['/produtos', 'AdminController@produtos'];
 $routes[] = ['/produtos/adicionar', 'AdminController@produtosAdicionar'];
 $routes[] = ['/produtos/adicionar/salvar', 'AdminController@produtosSalvar'];
+$routes[] = ['/produtos/visualizar', 'AdminController@produtosVisualizar'];
+$routes[] = ['/produtos/editar', 'AdminController@produtosEditar'];
 /*Serviços*/
 $routes[] = ['/servicos', 'AdminController@servicos'];
 $routes[] = ['/servicos/adicionar', 'AdminController@servicosAdicionar'];
+$routes[] = ['/servicos/adicionar/salvar', 'AdminController@servicosSalvar'];
 /*OS*/
 $routes[] = ['/os', 'AdminController@os'];
 $routes[] = ['/os/adicionar', 'AdminController@osAdicionar'];

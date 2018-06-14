@@ -1,84 +1,601 @@
+
+<div id="sidebar"> <a href="#" class="visible-phone"><i class="icon icon-list"></i> Menu</a>
+  <ul>
+
+
+    <li class=""><a href=""><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
+    
+            <li class=""><a href="<?= base_url('')?>/clientes"><i class="icon icon-group"></i> <span>Clientes</span></a></li>
+        
+            <li class=""><a href="<?= base_url('')?>/produtos"><i class="icon icon-barcode"></i> <span>Produtos</span></a></li>
+        
+            <li class=""><a href="<?= base_url('')?>/servicos"><i class="icon icon-wrench"></i> <span>Serviços</span></a></li>
+    
+            <li class=""><a href="<?= base_url('')?>/os"><i class="icon icon-tags"></i> <span>Ordens de Serviço</span></a></li>
+    
+            <li class="active"><a href="<?= base_url('')?>/vendas"><i class="icon icon-shopping-cart"></i> <span>Vendas</span></a></li>
+        
+            <li class=""><a href="arquivos.php"><i class="icon icon-hdd"></i> <span>Arquivos</span></a></li>
+    
+
+<li class=""><a href="#" title="faleconosco.php" onClick="abrirnotificacao(this)"><i class="icon icon-hdd"></i> <span>Fale Conosco</span></a></li>
+
+            <li class="submenu ">
+          <a href="#"><i class="icon icon-money"></i> <span>Financeiro</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+          <ul>
+            <li><a href="index.php/financeiro/lancamentos">Lançamentos</a></li>
+            <li><a title="recibo.php" onClick="abrirnotificacao(this)" style="cursor:pointer">Recibo</a></li>
+      <li><a title="taxascartao.php?plano=1" onClick="abrirnotificacao(this)" style="cursor:pointer">Conf. Taxas cartão</a></li>       
+          </ul>
+        </li>
+    
+            
+        <li class="submenu " >
+          <a href="#"><i class="icon icon-list-alt"></i> <span>Relatórios</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+          <ul>
+
+                            <li><a href="index.php/relatorios/clientes">Clientes</a></li>
+                                        <li><a href="/./LayoutFabrica/relatorios/produtos.php">Produtos</a></li>
+                                        <li><a href="/./LayoutFabrica/relatorios/servicos.php">Serviços</a></li>
+                                         <li><a href="/./LayoutFabrica/relatorios/os.php">Ordens de Serviço</a></li>
+                                        <li><a href="/./LayoutFabrica/relatorios/vendas.php">Vendas(Clientes)</a></li>
+                         <li><a title="consultarVendas.php?cache=1" onClick="abrirnotificacao(this)" style="cursor:pointer">vendas(itens)</a></li> 
+                            <li><a href="index.php/relatorios/financeiro">Financeiro</a></li>
+                        
+          </ul>
+        </li>
+
+    
+            <li class="submenu ">
+          <a href="#"><i class="icon icon-cog"></i> <span>Configurações</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+          <ul>
+                            <li><a href="index.php/usuarios">Usuários</a></li>
+                                        <li><a href="index.php/mapos/emitente">Emitente</a></li>
+                                        <!--<li><a href="index.php/permissoes">Permissões</a></li>-->
+                                        <!--<li><a href="index.php/mapos/backup">Backup</a></li>-->
+            <!-- <li><a  href="#" title="configuraremail" onClick="abrirnotificacao(this)">Email(imap)</a></li>-->
+ <li><a  href="#" title="configurarpagseguro.php" onClick="abrirnotificacao(this)">PagSeguro</a></li>
+          </ul>
+        </li>
+        
+    
+  </ul>
+</div>
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="https://www.ultramapos.online/" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="https://www.ultramapos.online/index.php/vendas" class="tip-bottom" title="Vendas">Vendas</a> </a> </div>
+    <div id="breadcrumb"> <a href="https://www.ultramapos.online/" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="https://www.ultramapos.online/index.php/vendas" class="tip-bottom" title="Vendas">Vendas</a> <a href="https://www.ultramapos.online/index.php/vendas/editar/115" class="current tip-bottom" title="Editar">Editar</a> </div>
   </div>
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span12">
           
                                                 
-                          <a href="https://www.ultramapos.online/index.php/vendas/adicionar" class="btn btn-success"><i class="icon-plus icon-white"></i> Adicionar Venda</a>
+                      
 
-	<div class="widget-box">
-     <div class="widget-title">
-        <span class="icon">
-            <i class="icon-tags"></i>
-         </span>
-        <h5>Vendas</h5>
-
-     </div>
-
-<div class="widget-content nopadding">
+<link rel="stylesheet" href="https://www.ultramapos.online/js/jquery-ui/css/smoothness/jquery-ui-1.9.2.custom.css" />
+<script type="text/javascript" src="https://www.ultramapos.online/js/jquery-ui/js/jquery-ui-1.9.2.custom.js"></script>
 
 
-<table class="table table-bordered ">
-    <thead>
-        <tr style="backgroud-color: #2D335B">
-            <th>#</th>
-            <th>Data da Venda</th>
-            <th>Cliente</th>
-            <th>Faturado</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="row-fluid" style="margin-top:0">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon">
+                    <i class="icon-tags"></i>
+                </span>
+                <h5>Editar Venda</h5>
+            </div>
+            <div class="widget-content nopadding">
 
-        <tr>
-            <td colspan="6">Nenhuma venda Cadastrada</td>
-        </tr>
-    </tbody>
-</table>
+
+                <div class="span12" id="divProdutosServicos" style=" margin-left: 0">
+                    <ul class="nav nav-tabs">
+                        <li class="active" id="tabDetalhes"><a href="#tab1" data-toggle="tab">Detalhes da Venda</a></li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+
+                            <div class="span12" id="divEditarVenda">
+                                
+                                <form action="https://www.ultramapos.online/index.php/vendas/editar/115" method="post" id="formVendas">
+                                    
+<input type="hidden" name="idVendas" value="115" />
+                                    
+                                    <div class="span12" style="padding: 1%; margin-left: 0">
+                                        <h3>#Venda: 115</h3>
+                                        <div class="span2" style="margin-left: 0">
+                                            <label for="dataFinal">Data Final</label>
+                                            <input id="dataVenda" class="span12 datepicker" type="text" name="dataVenda" value="14/06/2018"  />
+                                        </div>
+                                        <div class="span5" >
+                                            <label for="cliente">Cliente<span class="required">*</span></label>
+                                            <input id="cliente" class="span12" type="text" name="cliente" value="Anônimo"  />
+                                            <input id="clientes_id" class="span12" type="hidden" name="clientes_id" value="1"  />
+                                            <input id="valorTotal" type="hidden" name="valorTotal" value=""  />
+                                        </div>
+                                        <div class="span5">
+                                            <label for="tecnico">Vendedor<span class="required">*</span></label>
+                                            <input id="tecnico" class="span12" type="text" name="tecnico" value="wesllen alves teste de cadastro"  />
+                                            <input id="usuarios_id" class="span12" type="hidden" name="usuarios_id" value="50"  />
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    
+                                   
+                                   
+                                    <div class="span12" style="padding: 1%; margin-left: 0">
+            
+                                        <div class="span8 offset2" style="text-align: center">
+                                                                                        <a href="#modal-faturar" id="btn-faturar" role="button" data-toggle="modal" class="btn btn-success"><i class="icon-file"></i> Faturar</a>
+                                                                                        <button class="btn btn-primary" id="btnContinuar"><i class="icon-white icon-ok"></i> Alterar</button>
+                                            <a href="https://www.ultramapos.online/index.php/vendas/visualizar/115" class="btn btn-inverse"><i class="icon-eye-open"></i> Visualizar Venda</a>
+                                            <a href="https://www.ultramapos.online/index.php/vendas" class="btn"><i class="icon-arrow-left"></i> Voltar</a>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+                                
+                                <div class="span12 well" style="padding: 1%; margin-left: 0">
+                                        
+                                        <form id="formProdutos" action="" method="post">
+                                            <div class="span8">
+                                                <input type="hidden" name="idProduto" id="idProduto" />
+                                                <input type="hidden" name="idVendasProduto" id="idVendasProduto" value="115" />
+                                                <input type="hidden" name="estoque" id="estoque" value=""/>
+                                                <input type="hidden" name="preco" id="preco" value=""/>
+                                                <label for="">Produto</label>
+                                                <input type="text" class="span12" name="produto" id="produto" placeholder="Digite o nome do produto" />
+                                            </div>
+                                            <div class="span2">
+                                                <label for="">Quantidade</label>
+                                                <input type="text" placeholder="Quantidade" id="quantidade" name="quantidade" class="span12" />
+                                            </div>
+                                            <div class="span2">
+                                                <label for="">&nbsp</label>
+                                                <button class="btn btn-success span12" id="btnAdicionarProduto"><i class="icon-white icon-plus"></i> Adicionar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="span12" id="divProdutos" style="margin-left: 0">
+                                        <table class="table table-bordered" id="tblProdutos">
+                                            <thead>
+                                                <tr>
+                                                    <th>Produto</th>
+                                                    <th>Quantidade</th>
+                                                    <th>Ações</th>
+                                                    <th>Sub-total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                                                               
+                                                <tr>
+                                                    <td colspan="3" style="text-align: right"><strong>Total:</strong></td>
+                                                    <td><strong>R$ 0,00</strong> <input type="hidden" id="total-venda" value="0.00"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                        
+
+
+                                    </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+.
+
+        </div>
+
+    </div>
 </div>
 </div>
 
 
-<!-- Modal -->
-<div id="modal-excluir" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:76%; max-width:400px;">
-  <form action="https://www.ultramapos.online/index.php/vendas/excluir" method="post" >
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h5 id="myModalLabel">Excluir Venda</h5>
-  </div>
-  <div class="modal-body">
-    <input type="hidden" id="idVenda" name="id" value="" />
-    <h5 style="text-align: center">Deseja realmente excluir esta Venda?</h5>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-    <button class="btn btn-danger">Excluir</button>
-  </div>
-  </form>
+<!-- Modal Faturar-->
+<div id="modal-faturar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<form id="formFaturar" action="https://www.ultramapos.online/index.php/vendas/editar/115" method="post">
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <h3 id="myModalLabel">Faturar Venda</h3>
 </div>
+<div class="modal-body">
+    
+    <div class="span12 alert alert-info" style="margin-left: 0"> Obrigatório o preenchimento dos campos com asterisco.</div>
+    <div class="span12" style="margin-left: 0"> 
+      <label for="descricao">Descrição</label>
+      <input class="span12" id="descricao" type="text" name="descricao" value="Fatura de Venda - #115 "  />
+      
+    </div>  
+    <div class="span12" style="margin-left: 0"> 
+      <div class="span12" style="margin-left: 0"> 
+        <label for="cliente">Cliente*</label>
+        <input class="span12" id="cliente" type="text" name="cliente" value="Anônimo" />
+        <input type="hidden" name="clientes_id" id="clientes_id" value="1">
+        <input type="hidden" name="vendas_id" id="vendas_id" value="115">
+      </div>
+      
+      
+    </div>
+    <div class="span12" style="margin-left: 0"> 
+      <div class="span4" style="margin-left: 0">  
+        <label for="valor">Valor*</label>
+        <input type="hidden" id="tipo" name="tipo" value="receita" /> 
+        <input class="span12 money" id="valor" type="text" name="valor" value="0.00 "  />
+      </div>
+      <div class="span4" >
+        <label for="vencimento">Data Vencimento*</label>
+        <input class="span12" id="vencimento" type="date" name="vencimento" value="2018-06-14" />
+      </div>
+      
+    </div>
+    
+    <div class="span12" style="margin-left: 0"> 
+      <div class="span4" style="margin-left: 0">
+        <label for="recebido">Recebido?</label>
+        <input  id="recebido" type="checkbox" name="recebido" value="3" /> 
+      </div>
+      <div id="divRecebimento" class="span8" style=" display: none">
+        <div class="span6">
+          <label for="recebimento">Data Recebimento</label>
+          <input class="span12" id="recebimento" type="date" name="recebimento" value="2018-06-14"/> 
+        </div>
+        <div class="span6">
+          <label for="formaPgto">Forma Pgto</label>
+          <select name="formaPgto" id="formaPgto" class="span12" onChange="aparecetaxa();">
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de Crédito">Cartão de Crédito</option>
+            <option value="Cheque">Cheque</option>
+            <option value="Boleto">Boleto</option>
+            <option value="Depósito">Depósito</option>
+            <option value="Débito">Débito</option>        
+          </select>
+          
+          </div> 
+           <div   class="span4" style="display:none" id="divparcelasc">
+          <label for="parcelasc">Parcelas(cartão)</label>
+           <select name="parcelasc" id="parcelasc" class="span12" onChange="setartaxaparcela(this)" disabled>
+            <option value="0">-</option>
+            <option value="p1">1 parcela</option>
+            <option value="p2">2 parcelas</option>
+            <option value="p3">3 parcelas</option>
+            <option value="p4">4 parcelas</option>
+            <option value="p5">5 parcelas</option>
+            <option value="p6">6 parcelas</option> 
+             <option value="p7">7 parcelas</option> 
+              <option value="p8">8 parcelas</option>
+               <option value="p9">9 parcelas</option>
+                <option value="p10">10 parcelas</option>
+                 <option value="p11">11 parcelas</option>
+                  <option value="p12">12 parcelas</option>
+            </select>
+            </div>  
+          
+          <div  id="divtaxa" style="display:none" class="span6">
+          <label for="taxa">Taxa do cartão (%)</label>
+          <input class="span12" id="taxa" type="number" name="taxa" disabled placeholder='Desabilitado'/> 
+        
+          
+        </div>
+      </div>
+      
+    </div>
+    
+    
+</div>
+<div class="modal-footer">
+  <button class="btn" data-dismiss="modal" aria-hidden="true" id="btn-cancelar-faturar">Cancelar</button>
+  <button class="btn btn-primary">Faturar</button>
+</div>
+</form>
+</div>
+ 
 
-
-
-
-
+<script type="text/javascript" src="https://www.ultramapos.online/js/jquery.validate.js"></script>
+<script src="https://www.ultramapos.online/js/maskmoney.js"></script>
+<script src="https://www.ultramapos.online/cookie.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function(){
 
+     $(".money").maskMoney(); 
 
-   $(document).on('click', 'a', function(event) {
-        
-        var venda = $(this).attr('venda');
-        $('#idVenda').val(venda);
+     $('#recebido').click(function(event) {
+        var flag = $(this).is(':checked');
+        if(flag == true){
+          $('#divRecebimento').show();
+        }
+        else{
+          $('#divRecebimento').hide();
+        }
+     });
 
-    });
+     $(document).on('click', '#btn-faturar', function(event) {
+       event.preventDefault();
+         valor = $('#total-venda').val();
+         valor = valor.replace(',', '' );
+         $('#valor').val(valor);
+     });
+     
+     $("#formFaturar").validate({
+          rules:{
+             descricao: {required:true},
+             cliente: {required:true},
+             valor: {required:true},
+             vencimento: {required:true}
+      
+          },
+          messages:{
+             descricao: {required: 'Campo Requerido.'},
+             cliente: {required: 'Campo Requerido.'},
+             valor: {required: 'Campo Requerido.'},
+             vencimento: {required: 'Campo Requerido.'}
+          },
+          submitHandler: function( form ){       
+            var dados = $( form ).serialize();
+            $('#btn-cancelar-faturar').trigger('click');
+            $.ajax({
+              type: "POST",
+              url: "https://www.ultramapos.online/faturarVenda.php",
+              data: dados,
+            //  dataType: 'json',
+              success: function(data)
+              {
+              //alert(data);
+                   
+				   if (data.length>5)
+				   {
+				   alert(data);
+                   $('#progress-fatura').hide();
+				   }
+				   else
+                    window.location.reload(true);
+					
+				//	alert('Ocorreu um erro ao tentar faturar venda.');
+                 //   $('#progress-fatura').hide();
+                
+              }
+              });
+
+              return false;
+          }
+     });
+
+//     $("#produto").autocomplete({
+ //           source: "index.php/os/autoCompleteProduto",
+ //           minLength: 2,
+  //          select: function( event, ui ) {
+
+   //              $("#idProduto").val(ui.item.id);
+   //              $("#estoque").val(ui.item.estoque);
+   //              $("#preco").val(ui.item.preco);
+   //              $("#quantidade").focus();
+                 
+
+  //          }
+  //    });
+
+
+
+      $("#cliente").autocomplete({
+            source: "https://www.ultramapos.online/index.php/os/autoCompleteCliente",
+            minLength: 2,
+            select: function( event, ui ) {
+
+                 $("#clientes_id").val(ui.item.id);
+
+
+            }
+      });
+
+ 
+
+
+      $("#formVendas").validate({
+          rules:{
+             cliente: {required:true},
+             tecnico: {required:true},
+             dataVenda: {required:true}
+          },
+          messages:{
+             cliente: {required: 'Campo Requerido.'},
+             tecnico: {required: 'Campo Requerido.'},
+             dataVenda: {required: 'Campo Requerido.'}
+          },
+
+            errorClass: "help-inline",
+            errorElement: "span",
+            highlight:function(element, errorClass, validClass) {
+                $(element).parents('.control-group').addClass('error');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).parents('.control-group').removeClass('error');
+                $(element).parents('.control-group').addClass('success');
+            }
+       });
+
+
+
+
+      $("#formProdutos").validate({
+          rules:{
+             quantidade: {required:true}
+          },
+          messages:{
+             quantidade: {required: 'Insira a quantidade'}
+          },
+          submitHandler: function( form ){
+             var quantidade = parseInt($("#quantidade").val());
+             var estoque = parseInt($("#estoque").val());
+             if(estoque < quantidade){
+                alert('Você não possui estoque suficiente.');
+             }
+             else{
+                 var dados = $( form ).serialize();
+                $("#divProdutos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
+                $.ajax({
+                  type: "POST",
+                  url: "https://www.ultramapos.online/index.php/vendas/adicionarProduto",
+                  data: dados,
+                  dataType: 'json',
+                  success: function(data)
+                  {
+                    if(data.result == true){
+                        $("#divProdutos" ).load("https://www.ultramapos.online/index.php/vendas/editar/115 #divProdutos" );
+                        $("#quantidade").val('');
+                        $("#produto").val('').focus();
+                    }
+                    else{
+                        alert('Ocorreu um erro ao tentar adicionar produto.');
+						alert(data.idproduto);
+                    $("#divProdutos" ).load("https://www.ultramapos.online/index.php/vendas/editar/115 #divProdutos" );
+					}
+                  }
+                  });
+
+                  return false;
+                }
+
+             }
+             
+       });
+
+     
+
+       $(document).on('click', 'a', function(event) {
+            var idProduto = $(this).attr('idAcao');
+            var quantidade = $(this).attr('quantAcao');
+            var produto = $(this).attr('prodAcao');
+            if((idProduto % 1) == 0){
+                $("#divProdutos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
+                $.ajax({
+                  type: "POST",
+                  url: "https://www.ultramapos.online/index.php/vendas/excluirProduto",
+                  data: "idProduto="+idProduto+"&quantidade="+quantidade+"&produto="+produto,
+                  dataType: 'json',
+                  success: function(data)
+                  {
+					  
+					  
+                    if(data.result == true){
+                        $( "#divProdutos" ).load("https://www.ultramapos.online/index.php/vendas/editar/115 #divProdutos" );
+                     
+					 
+					 
+	 var prodauto = [{"label":"Mantega | Pre\u00e7o: R$100.00 | Estoque: 200","estoque":"200","id":"1139","preco":"100.00"}];				 
+					 $(function() {
+ 
+  $("#produto" ).autocomplete({
+    source: prodauto,
+	
+	        minLength: 2,
+         select: function( event, ui ) {
+				
+                $("#idProduto").val(ui.item.id);
+             $("#estoque").val(ui.item.estoque);
+              $("#preco").val(ui.item.preco);
+              $("#quantidade").focus();
+                 
+
+           }
+	
+  });
+});
+					 
+					    
+                    }
+                    else{
+                        alert('Ocorreu um erro ao tentar excluir produto.');
+                    }
+                  }
+                  });
+                  return false;
+            }
+            
+       });
+
+       $(".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
+
+
+
 
 });
 
+
+$(function() {
+  var prodauto = [{"label":"Mantega | Pre\u00e7o: R$100.00 | Estoque: 200","estoque":"200","id":"1139","preco":"100.00"}];
+  $("#produto" ).autocomplete({
+    source: prodauto,
+	
+	        minLength: 2,
+         select: function( event, ui ) {
+				
+                $("#idProduto").val(ui.item.id);
+             $("#estoque").val(ui.item.estoque);
+              $("#preco").val(ui.item.preco);
+              $("#quantidade").focus();
+                 
+
+           }
+	
+  });
+});
+
+
+$(function() {
+	 var tecnicoauto = [{"label":"wesllen alves teste de cadastro","id":"50"}];
+   $("#tecnico").autocomplete({
+            source: tecnicoauto,
+            minLength: 2,
+            select: function( event, ui ) {
+
+                 $("#usuarios_id").val(ui.item.id);
+
+
+            }
+      });
+});
+
+
+function aparecetaxa(){
+	
+//	alert('olá');
+	
+	if ((document.getElementById('formaPgto').value=='Cartão de Crédito' || document.getElementById('formaPgto').value=='Débito')) 
+	{
+	document.getElementById('divtaxa').style.display='block';
+	document.getElementById('divparcelasc').style.display='block';
+	}
+	else
+	{
+		document.getElementById('divparcelasc').style.display='none';
+	document.getElementById('divtaxa').style.display='none';	
+		}
+	
+	
+	}	
+	
+function setartaxaparcela(elemento)
+{
+	
+valor=elemento.value;
+	
+document.getElementById('taxa').value=getCookie(valor);	
+	}
+
 </script>
+
+
 
       </div>
     </div>

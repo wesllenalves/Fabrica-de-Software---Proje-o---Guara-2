@@ -23,25 +23,26 @@ class CadastroProduto extends BaseModel {
     protected $tabelaUse = 1; 
     
     
-    public function cadastrar($dados) {
-
+    public function cadastrar($request) {      
         
         $array = array(
-            "0" =>
-            array(
-                "nome" => $dados->nome, "valorUnitario" => $dados->valorUnitario, "valorGasto" => $dados->valorGasto,
-                "qtd" => $dados->qtd, "qtdMin" => $dados->qtdMin, "validade" => $dados->validade,
-                "categoria" => $dados->categoria
-            )
-            
-        );
-
-
+                    "0" => array(
+            'nome' => $request->post->descricao, 'unidade' => $request->post->unidade, 'precoCompra' => $request->post->precoCompra, 
+            'precoVenda' => $request->post->precoVenda, 'estoque' => $request->post->estoque,
+            'estoqueMinimo' => $request->post->estoqueMinimo, 'validade' => $request->post->validade
+        )
+            );
+        
         if ($this->insert($array)) {
             return TRUE;
         } else {
             return FALSE;
         }
+    }
+    
+    public function ler(){
+        $dados = $this->read("*");
+        return $dados;
     }
 
 }

@@ -127,13 +127,46 @@
             <th>Status</th>
             <th></th>
         </tr>
-    </thead>
-    <tbody>
-
-        <tr>
-            <td colspan="6">Nenhuma OS Cadastrada</td>
-        </tr>
-    </tbody>
+    </thead><?php
+        $total = 0;
+        foreach ($this->view->os as $linha) {
+            $id = count($linha['idOs']);
+            $total = $total + $id;
+        }
+        if ($total > 0) {
+            ?>
+                                <tbody>
+        <?php foreach ($this->view->os as $linha) { ?>
+                                        <tr>
+                                            <td><?php echo $linha['idOs'] ?></td>
+                                            <td><?php echo $linha['nome'] ?></td>
+                                            <td><?php echo $linha['preco'] ?></td>
+                                            <td><?php echo $linha['descricao'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                <a href="<?= base_url('') ?>/produtos/visualizar?id=<?= $linha['idOs'] ?>" style="margin-right: 1%" class="btn tip-top" title="Ver mais detalhes"><i class="icon-eye-open"></i></a>
+                                                <a href="<?= base_url('') ?>/produtos/editar?id=<?= $linha['idOs'] ?>" style="margin-right: 1%" class="btn btn-info tip-top" title="Editar Cliente"><i class="icon-pencil icon-white"></i></a>
+                                                <a href="#modal-excluir" role="button" data-toggle="modal" cliente="80" style="margin-right: 1%" class="btn btn-danger tip-top" title="Excluir Cliente"><i class="icon-remove icon-white"></i></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+        <?php
+            } 
+        ?>
+                                        </tr>
+                                </tbody>
+        <?php
+        }else{
+        ?>
+                                <tbody>
+                                        <tr>
+                                            <td colspan = "5">Nenhum Cliente Cadastrado</td>
+                                        </tr>
+                                </tbody>
+        <?php
+            }
+        ?>
 </table>
 </div>
 </div>

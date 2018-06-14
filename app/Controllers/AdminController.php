@@ -11,6 +11,7 @@ use Core\BaseController;
 use App\Models\Admin\CadastroProduto;
 use App\Models\Admin\CadastroFuncionario;
 use App\Models\Admin\CadastroCliente;
+use App\Models\Admin\cadastroServico;
 use App\Models\Cliente;
 use Core\Validator;
 
@@ -45,10 +46,10 @@ class AdminController extends BaseController{
     }
     
     public function clientesVisualizar($request){
-//        $this->setPageTitle("Admin");
-//        $clientes = new CadastroCliente();
-//        $dados = $clientes->ler();
-//        @$this->view->clientes = $dados;
+        $this->setPageTitle("Admin");
+        $clientes = new CadastroCliente();
+        $dados = $clientes->ler();
+        @$this->view->clientes = $dados;
         
         $this->Render('admin/mapos/clientes/vizualizarCliente', 'layoutadminMapos');  
     }
@@ -85,17 +86,40 @@ class AdminController extends BaseController{
     
     public function produtos(){
 //        $this->setPageTitle("Admin");
+        $produtos =  new CadastroProduto();
+        $dados = $produtos->read();
+        @$this->view->produtos = $dados;
         $this->Render('admin/mapos/produtos/produtos', 'layoutadminMapos');
+    }
+    
+    public function produtosVisualizar($request){
+        $id =  $request->get->id;        
+        
+//        $this->setPageTitle("Admin");
+        $produtos =  new CadastroProduto();
+        $dados = $produtos->read("*", "idProduto = $id");
+        
+        @$this->view->produtos1 = $dados;
+        $this->Render('admin/mapos/produtos/visualizarProdutos', 'layoutadminMapos');
+    }
+    
+    public function produtosEditar(){
+//        $this->setPageTitle("Admin");
+        $produtos =  new CadastroProduto();
+//        $dados = $produtos->read();
+//        @$this->view->produtos = $dados;
+        $this->Render('admin/mapos/produtos/editProdutos', 'layoutadminMapos');
     }
     
     public function produtosAdicionar(){
 //        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/produtos/addProdutos', 'layoutadminMapos');
     }
+    
     public function produtosSalvar($request){
         //$this->setPageTitle("Admin");
         $data = [
-            'descricao' => $request->post->descricao, 'unidade' => $request->post->unidade, 'precoCompra' => $request->post->precoCompra, 
+            'nome' => $request->post->descricao, 'unidade' => $request->post->unidade, 'precoCompra' => $request->post->precoCompra, 
             'precoVenda' => $request->post->precoVenda, 'estoque' => $request->post->estoque,
             'estoqueMinimo' => $request->post->estoqueMinimo, 'validade' => $request->post->validade
         ];
@@ -108,19 +132,47 @@ class AdminController extends BaseController{
         if (Validator::make($data, $rules)){
            $this->redirect("produtos"); 
         }else{
-            
+            $cadastro = new CadastroProduto();
+            if($cadastro->cadastrar($request)){
+                $this->redirect("produtos", "1", "Produto Cadastrado com Sucesso");
+            } else {
+                $this->redirect("produtos", "4", "Algo deu errado ao tentar cadastrar produtos");
+            }
         }
 
-        print_r($request->post);
+        
     }
     
     public function servicos(){
-//        $this->setPageTitle("Admin");
+        $servico = new cadastroServico();
+        $dados = $servico->read("*");
+        @$this->view->servicos = $dados;
+      
         $this->Render('admin/mapos/servicos/servicos', 'layoutadminMapos');
     }
     public function servicosAdicionar(){
 //        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/servicos/addServico', 'layoutadminMapos');
+    }
+    public function servicosSalvar($request){        
+        $data = [
+            'nome' => $request->post->nome, 'descricao' => $request->post->descricao, 'preco' => $request->post->preco
+        ];
+        
+        $rules = [
+            'nome' => 'required', 'descricao' => 'required', 'preco' => 'required'
+        ];
+        
+        if (Validator::make($data, $rules)){
+           $this->redirect("servicos"); 
+        }else{
+            $servico = new cadastroServico();
+            if ($servico->cadastrar($request)){
+                $this->redirect("servicos", "1", "Servicos Cadastrado com Sucesso");
+            }else{
+                $this->redirect("servicos", "4", "Ocorreu um erro ao tentar cadastar Servicos");
+            }
+        }
     }
     
     public function os(){
