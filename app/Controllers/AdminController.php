@@ -7,12 +7,12 @@
  */
 
 namespace App\Controllers;
+
 use Core\BaseController;
 use App\Models\Admin\CadastroProduto;
 use App\Models\Admin\CadastroFuncionario;
 use App\Models\Admin\CadastroCliente;
 use App\Models\Admin\cadastroServico;
-use App\Models\Cliente;
 use Core\Validator;
 
 /**
@@ -20,194 +20,262 @@ use Core\Validator;
  *
  * @author laboratorio
  */
-class AdminController extends BaseController{
-    private $Cliente;
+class AdminController extends BaseController {
+
+    private $Clientes;
     private $Produto;
     private $Funcionario;
-    
+    private $Servico;
+
     public function __construct() {
-        $this->Cliente = new Cliente();
+        $this->Clientes = new CadastroCliente();
         $this->Produto = new CadastroProduto();
-        $this->Funcionario =  new CadastroFuncionario();
+        $this->Funcionario = new CadastroFuncionario();
+        $this->Servico = new cadastroServico();
     }
 
-    public function index(){
+    public function index() {
 //        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/index', 'layoutadminMapos');
     }
-    
-    public function clientes(){
+
+    public function clientes() {
 //        $this->setPageTitle("Admin");
-        $clientes = new CadastroCliente();
-        $dados = $clientes->ler();
+        $dados = $this->Clientes->read("*");
         @$this->view->clientes = $dados;
-        
-        $this->Render('admin/mapos/clientes/clientes', 'layoutadminMapos');  
+
+        $this->Render('admin/mapos/clientes/clientes', 'layoutadminMapos');
     }
-    
-    public function clientesVisualizar($request){
+
+    public function clientesVisualizar($request) {
         $this->setPageTitle("Admin");
-        $clientes = new CadastroCliente();
-        $dados = $clientes->ler();
-        @$this->view->clientes = $dados;
-        
-        $this->Render('admin/mapos/clientes/vizualizarCliente', 'layoutadminMapos');  
+        $id = $request->get->id;
+        $dados = $this->Clientes->read("*", "idClientes = $id");
+        @$this->view->oneClientes = $dados;
+
+        $this->Render('admin/mapos/clientes/vizualizarCliente', 'layoutadminMapos');
     }
-    
-    public function clientesAdicionar(){
+
+    public function clientesAdicionar() {
 //        $this->setPageTitle("Admin");
-                
+
         $this->Render('admin/mapos/clientes/addCliente', 'layoutadminMapos');
     }
     
-    
-    public function clientesEditar($request){
+    public function clientesAdicionarSalvar($request) {
+        $data = [
+            'nomeCliente' => $request->post->nomeCliente, 'documento' => $request->post->documento,
+            'pessoa' => $request->post->pessoa, 'telefone' => $request->post->telefone,  'ddd_celular' => $request->post->ddd_celular,
+            'celular' => $request->post->celular, 'email' => $request->post->email, 'rua' => $request->post->rua, 'numero' => $request->post->numero,
+            'bairro' => $request->post->bairro, 'cidade' => $request->post->cidade, 'estado' => $request->post->estado,  'cep' => $request->post->cep, 
+        ];
+
+        $rules = [
+            'nomeCliente' => 'required', 'documento' => 'required', 'pessoa' => 'required', 'telefone' => 'required',
+            'ddd_celular' => 'required', 'celular' => 'required', 'email' => 'required', 'rua' => 'required', 'numero' => 'required',
+            'bairro' => 'required', 'cidade' => 'required', 'estado' => 'required', 'cep' => 'required'
+        ];
+
+        if (Validator::make($data, $rules)) {
+            $this->redirect("clientes/adicionar");
+        } else {
+
+            if ($this->Clientes->cadastrar($request)) {
+                $this->redirect("clientes", "1", "Cadstrado com sucesso");
+                exit();
+            } else {
+                
+            }
+        }
+    }
+
+    public function clientesEditar($request) {
 //        $this->setPageTitle("Admin");
-           $dados = $request->get;
-           
+        $id = $request->get->id;
+        $dados = $this->Clientes->read("*", "idClientes = $id");
+        @$this->view->oneClientes = $dados;
         $this->Render('admin/mapos/clientes/editCliente', 'layoutadminMapos');
     }
-    public function clientesRemover($request){
+    
+    public function clientesEditarSalvar($request) {
+        $id = $request->post->idClientes; 
+        
+        $data = [
+            'nomeCliente' => $request->post->nomeCliente, 'documento' => $request->post->documento,
+            'pessoa' => $request->post->pessoa, 'telefone' => $request->post->telefone,  'ddd_celular' => $request->post->ddd_celular,
+            'celular' => $request->post->celular, 'email' => $request->post->email, 'rua' => $request->post->rua, 'numero' => $request->post->numero,
+            'bairro' => $request->post->bairro, 'cidade' => $request->post->cidade, 'estado' => $request->post->estado,  'cep' => $request->post->cep, 
+        ];
+
+        $rules = [
+            'nomeCliente' => 'required', 'documento' => 'required', 'pessoa' => 'required', 'telefone' => 'required',
+            'ddd_celular' => 'required', 'celular' => 'required', 'email' => 'required', 'rua' => 'required', 'numero' => 'required',
+            'bairro' => 'required', 'cidade' => 'required', 'estado' => 'required', 'cep' => 'required'
+        ];
+
+        if (Validator::make($data, $rules)) {
+            $this->redirect("clientes/editar?id={$id}");
+        } else {
+            if($this->Clientes->atualizar($request)){
+               $this->redirect("clientes", "1", "Editado com sucesso"); 
+            }else{
+               $this->redirect("clientes", "4", " POS Erro ao editar cliente");  
+            }
+        }
+    }
+
+    public function clientesRemover($request) {
+        $id = $request->get->id;    
+        
+        if($this->Clientes->deletar($id)){
+            $this->redirect("clientes", "1", "Deletado com sucesso"); 
+        }else{
+            $this->redirect("clientes", "4", " POS Erro ao deletar cliente");  
+        }
+        
+    }
+
+    
+
+    public function produtos() {
 //        $this->setPageTitle("Admin");
-           $dados = $request->get;
-           print_r($dados); die();
-        //$this->Render('admin/mapos/clientes/editCliente', 'layoutadminMapos');
-    }
-    
-    
-    public function clientesPost($request){
-        $dados = $request->post;
-        $cliente =  new CadastroCliente();
-    if($cliente->cadastrar($dados)){
-      $this->redirect("clientes", "1", "Cadstrado com sucesso");
-            exit();  
-    }
-    }
-    
-    public function produtos(){
-//        $this->setPageTitle("Admin");
-        $produtos =  new CadastroProduto();
+        $produtos = new CadastroProduto();
         $dados = $produtos->read();
         @$this->view->produtos = $dados;
         $this->Render('admin/mapos/produtos/produtos', 'layoutadminMapos');
     }
-    
-    public function produtosVisualizar($request){
-        $id =  $request->get->id;        
-        
+
+    public function produtosVisualizar($request) {
+        $id = $request->get->id;
+
 //        $this->setPageTitle("Admin");
-        $produtos =  new CadastroProduto();
+        $produtos = new CadastroProduto();
         $dados = $produtos->read("*", "idProduto = $id");
-        
+
         @$this->view->produtos1 = $dados;
         $this->Render('admin/mapos/produtos/visualizarProdutos', 'layoutadminMapos');
     }
-    
-    public function produtosEditar(){
+
+    public function produtosEditar() {
 //        $this->setPageTitle("Admin");
-        $produtos =  new CadastroProduto();
+        $produtos = new CadastroProduto();
 //        $dados = $produtos->read();
 //        @$this->view->produtos = $dados;
         $this->Render('admin/mapos/produtos/editProdutos', 'layoutadminMapos');
     }
-    
-    public function produtosAdicionar(){
+
+    public function produtosAdicionar() {
 //        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/produtos/addProdutos', 'layoutadminMapos');
     }
-    
-    public function produtosSalvar($request){
+
+    public function produtosSalvar($request) {
         //$this->setPageTitle("Admin");
         $data = [
-            'nome' => $request->post->descricao, 'unidade' => $request->post->unidade, 'precoCompra' => $request->post->precoCompra, 
+            'nome' => $request->post->descricao, 'unidade' => $request->post->unidade, 'precoCompra' => $request->post->precoCompra,
             'precoVenda' => $request->post->precoVenda, 'estoque' => $request->post->estoque,
             'estoqueMinimo' => $request->post->estoqueMinimo, 'validade' => $request->post->validade
         ];
-        
+
         $rules = [
-            'descricao' => 'required', 'unidade' => 'required', 'precoCompra' => 'required', 'precoVenda' => 'required', 
+            'descricao' => 'required', 'unidade' => 'required', 'precoCompra' => 'required', 'precoVenda' => 'required',
             'estoque' => 'required', 'estoqueMinimo' => 'required', 'validade' => 'required'
         ];
-        
-        if (Validator::make($data, $rules)){
-           $this->redirect("produtos"); 
-        }else{
+
+        if (Validator::make($data, $rules)) {
+            $this->redirect("produtos");
+        } else {
             $cadastro = new CadastroProduto();
-            if($cadastro->cadastrar($request)){
+            if ($cadastro->cadastrar($request)) {
                 $this->redirect("produtos", "1", "Produto Cadastrado com Sucesso");
             } else {
                 $this->redirect("produtos", "4", "Algo deu errado ao tentar cadastrar produtos");
             }
         }
-
-        
     }
-    
-    public function servicos(){
+
+    public function servicos() {
         $servico = new cadastroServico();
         $dados = $servico->read("*");
         @$this->view->servicos = $dados;
-      
+
         $this->Render('admin/mapos/servicos/servicos', 'layoutadminMapos');
     }
-    public function servicosAdicionar(){
+
+    public function servicosAdicionar() {
 //        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/servicos/addServico', 'layoutadminMapos');
     }
-    public function servicosSalvar($request){        
+
+    public function servicosSalvar($request) {
         $data = [
             'nome' => $request->post->nome, 'descricao' => $request->post->descricao, 'preco' => $request->post->preco
         ];
-        
+
         $rules = [
             'nome' => 'required', 'descricao' => 'required', 'preco' => 'required'
         ];
-        
-        if (Validator::make($data, $rules)){
-           $this->redirect("servicos"); 
-        }else{
+
+        if (Validator::make($data, $rules)) {
+            $this->redirect("servicos");
+        } else {
             $servico = new cadastroServico();
-            if ($servico->cadastrar($request)){
+            if ($servico->cadastrar($request)) {
                 $this->redirect("servicos", "1", "Servicos Cadastrado com Sucesso");
-            }else{
+            } else {
                 $this->redirect("servicos", "4", "Ocorreu um erro ao tentar cadastar Servicos");
             }
         }
     }
-    
-    public function os(){
+
+    public function servicosEditar($request) {
+        $id = $request->get->id;
+        $dados = $this->Servico->read("*", "idServicos = $id");
+        @$this->view->oneServico = $dados;
+        $this->Render('admin/mapos/servicos/editServicos', 'layoutadminMapos');
+    }
+
+    public function servicosUpdate($request) {
+        $dados = $request->post;
+        print_r($dados);
+        die();
+    }
+
+    public function os() {
 //        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/os/os', 'layoutadminMapos');
     }
-    public function osAdicionar(){
+
+    public function osAdicionar() {
 //        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/os/addOs', 'layoutadminMapos');
     }
-    
-    public function vendas(){
+
+    public function vendas() {
 //        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/vendas/vendas', 'layoutadminMapos');
     }
-    public function vendasAdicionar(){
+
+    public function vendasAdicionar() {
 //        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/vendas/addVendas', 'layoutadminMapos');
     }
-    
-    public function financeiro(){
+
+    public function financeiro() {
 //        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/index', 'layoutadminMapos');
     }
-    
-    public function Relatorios(){
+
+    public function Relatorios() {
 //        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/index', 'layoutadminMapos');
     }
-    
-    public function configuracoes(){
+
+    public function configuracoes() {
 //        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/index', 'layoutadminMapos');
     }
-    
+
 //    public function funcionario(){
 //        $this->Render('admin/cadastrar-funcionario');
 //    }
@@ -242,7 +310,7 @@ class AdminController extends BaseController{
 //    
 //    public function editarCliente($id){
 //        
-        //$clientesEditar = $this->Cliente->listarWhere($id);        
+    //$clientesEditar = $this->Cliente->listarWhere($id);        
 //        $this->view->clientesEditar = $clientesEditar;
 //        $this->Render("admin/editar-clientes");
 //    }
@@ -288,5 +356,4 @@ class AdminController extends BaseController{
 //            $this->redirect('dashboard/listar/clientes', '4', 'Erro ao tentar deletar cadastro');
 //        }
 //    }
-    
 }

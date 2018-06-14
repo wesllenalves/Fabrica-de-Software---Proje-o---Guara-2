@@ -5,61 +5,69 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 namespace App\Models\Admin;
 
 use Core\BaseModel;
+
 /**
  * Description of CadastroCliente
  *
  * @author Wesllen
  */
-class CadastroCliente extends BaseModel{
-     protected $tabela = "cliente";
+class CadastroCliente extends BaseModel {
+
+    protected $tabela = "clientes";
     //Definir a quantidade de tabelas que serao usadas maximo de 4
     protected $tabelaUse = 1;
-    
-    protected function CheckIsNull($request) {
-        
-        if ( $request->nomeCliente === '' ||  $request->cpf === '' ||  
-             $request->telefone === '' ||  $request->ddd === '' || $request->celular === '' || 
-             $request->email === '' || $request->rua === '' ||   $request->numero === '' ||   $request->bairro === '' ||  
-             $request->cidade === '' || $request->estado === '' || $request->cep === ''
-                ) {
-            return TRUE;
-        }
-        return FALSE;
-    }
-    
-     public function cadastrar($request){    
-        
-        
-        if($this->CheckIsNull($request) != TRUE){            
-           
-        
-                $array = array(
-                    "0" => array(
-                        'nome' => $request->nomeCliente, 'cpf' => $request->cpf, 
-                        'tipoCliente' => $request->pessoa, 'email' => $request->email, 'login' => '0', 
-                        'senha' => '0', 'ddd' => $request->ddd, 'celular' => $request->celular, 
-                        'bairro' => $request->bairro, 'cidade' => $request->cidade, 'rua' => $request->rua,                        
-                        'cep' => $request->cep, 'uf' => $request->estado
-                    )
-                );
 
-                if($this->insert($array)){
-                    return TRUE;
-                }else{
-                    return False;
-                }
-           
-        }else{
-            $this->redirect("clientes", "4", "Preencha todos os campos");
-            exit();
+    public function cadastrar($request) {
+        date_default_timezone_set('America/Sao_Paulo');
+        $dataAtual = date("Y-d-m H:m:s");
+
+        $array = array(
+            "0" => array(
+                'nomeCliente' => $request->post->nomeCliente, 'documento' => $request->post->documento,
+                'pessoa' => $request->post->pessoa, 'telefone' => $request->post->telefone, 'ddd_celular' => $request->post->ddd_celular,
+                'celular' => $request->post->celular, 'email' => $request->post->email,
+                'rua' => $request->post->rua, 'numero' => $request->post->numero,
+                'bairro' => $request->post->bairro, 'cidade' => $request->post->cidade, 'estado' => $request->post->estado,
+                'cep' => $request->post->cep, 'dataCadastro' => $dataAtual,
+            )
+        );
+
+        if ($this->insert($array)) {
+            return TRUE;
+        } else {
+            return False;
         }
     }
-    
-    public function ler(){
-        $dados = $this->read("*");
-        return $dados;
+
+    public function atualizar($request) {
+        $id = $request->post->idClientes;
+        date_default_timezone_set('America/Sao_Paulo');
+        $dataAtual = date("Y-d-m H:m:s");
+        $array = array(
+            'nomeCliente' => $request->post->nomeCliente, 'documento' => $request->post->documento,
+            'pessoa' => $request->post->pessoa, 'telefone' => $request->post->telefone, 'ddd_celular' => $request->post->ddd_celular,
+            'celular' => $request->post->celular, 'email' => $request->post->email, 'rua' => $request->post->rua, 'numero' => $request->post->numero,
+            'bairro' => $request->post->bairro, 'cidade' => $request->post->cidade, 'estado' => $request->post->estado,
+            'cep' => $request->post->cep, "dataUpdate" => $dataAtual
+        );
+        if ($this->update($array, "idClientes = {$id}")) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
+
+    public function deletar($id) {
+
+        if ($this->delete("idClientes = {$id}")) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
 }

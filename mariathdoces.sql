@@ -28,33 +28,28 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `cliente`
 --
 
-CREATE TABLE `cliente` (
-  `idCliente` int(11) NOT NULL,
-  `nome` varchar(100) NOT NULL,
-  `cpf` varchar(20) NOT NULL,
-  `tipoCliente` char(2) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `login` varchar(100) NOT NULL,
-  `senha` varchar(45) NOT NULL,
-  `ddd` varchar(255) NOT NULL,
-  `celular` varchar(255) NOT NULL,
-  `cidade` varchar(70) DEFAULT NULL,
-  `bairro` varchar(255) NOT NULL,
-  `rua` varchar(255) NOT NULL,
-  `cep` varchar(10) DEFAULT NULL,
-  `uf` char(2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `clientes` (
+  `idClientes` int(11) NOT NULL AUTO_INCREMENT,
+  `nomeCliente` varchar(255) NOT NULL,
+  `documento` varchar(20) NOT NULL,
+  `telefone` varchar(20) NOT NULL,
+  `celular` varchar(20) DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `dataCadastro` date DEFAULT NULL,
+  `rua` varchar(70) DEFAULT NULL,
+  `numero` varchar(15) DEFAULT NULL,
+  `bairro` varchar(45) DEFAULT NULL,
+  `cidade` varchar(45) DEFAULT NULL,
+  `estado` varchar(20) DEFAULT NULL,
+  `cep` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`idClientes`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Extraindo dados da tabela `cliente`
 --
 
-INSERT INTO `cliente` (`idCliente`, `nome`, `cpf`, `tipoCliente`, `email`, `login`, `senha`, `ddd`, `celular`, `cidade`, `bairro`, `rua`, `cep`, `uf`) VALUES
-(2, 'wesllen', '03230944143', 'pf', 'wesllenalves@gmail.com', 'wesllenalves', 'e10adc3949ba59abbe56e057f20f883e', '', '', 'brasilia', '', '', '70645160', NULL),
-(4, 'wesllen', '03230944143', 'PF', 'wesllenalves@gmail.com', '0', '0', '61', '12221', 'brasilioa', 'cruzeiro', 'sres', '70645160', 'DF'),
-(5, 'wesllen', '03230944143', 'PF', 'wesllenalves@gmail.com', '0', '0', '61', '12221', 'brasilioa', 'cruzeiro', 'sres', '70645160', 'DF'),
-(6, 'wesllen', '03230944143', 'PF', 'wesllenalves@gmail.com', '0', '0', '61', '12221', 'brasilioa', 'cruzeiro', 'sres', '70645160', 'DF'),
-(7, 'wesllen', '03230944143', 'PF', 'wesllenalves@gmail.com', '0', '0', '61', '12221', 'brasilioa', 'cruzeiro', 'sres', '70645160', 'DF');
+
 
 -- --------------------------------------------------------
 

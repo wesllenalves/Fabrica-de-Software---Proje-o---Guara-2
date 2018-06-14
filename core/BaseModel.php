@@ -299,7 +299,6 @@ abstract class BaseModel {
             $sql_text = implode(",", $sql_text_array);
 
             $r = $this->con->conecta()->prepare("UPDATE {$this->tabela} SET {$sql_text} {$where_sql}");
-
             $r->execute();
             if ($r->rowCount()) {
                 return TRUE;
