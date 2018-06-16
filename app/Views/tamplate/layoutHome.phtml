@@ -17,10 +17,14 @@
     <script src="public/js/angular.js"></script>
     <script src="public/js/script.js"></script>
     <script src="public/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="<?= base_url('')?>/public/home/css/bootstrap.min.css">
+    <link href="<?= base_url('')?>/public/home/css/chosen.css" rel="stylesheet" />
+    <script src="<?= base_url('')?>/public/home/js/chosen.jquery.js"></script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
    
-</head>
-<body ng-app="sistema" ng-controller="SistemaCtrl" ng-init="FnInit();">
+</head >
+<body ng-app="sistema" ng-controller="SistemaCtrl" ng-init="FnInit();" >
 
     <nav class="navbar navbar-inverse navbar-fixed-top bg-dark">
         <div class="container-fluid">
@@ -59,6 +63,14 @@
     </ul>
         <!--Conteudo-->
         <?php $this->content()?>
-        <!--Fim Conteudo-->        
+        <!--Fim Conteudo--> 
+        
+        <script>
+    $(document).ready(function () {
+        $('#sel').chosen();
+
+
+    });
+</script>
     </body>
 </html>
