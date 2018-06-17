@@ -83,6 +83,7 @@ abstract class BaseModel {
                     $insert_values_0 = implode("','", $values_array_0);
 
                     $query1 = $this->con->conecta()->prepare("INSERT INTO $this->tabela ({$insert_campos_0}) VALUES('{$insert_values_0}');");
+                    
                     if ($query1->execute()) {
                         return TRUE;
                     } else {

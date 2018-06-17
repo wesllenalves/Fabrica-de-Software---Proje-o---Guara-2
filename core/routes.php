@@ -33,6 +33,10 @@ $routes[] = ['/servicos/adicionar/update', 'AdminController@servicosUpdate'];
 /*OS*/
 $routes[] = ['/os', 'AdminController@os'];
 $routes[] = ['/os/adicionar', 'AdminController@osAdicionar'];
+$routes[] = ['/os/adicionar/salvar', 'AdminController@osAdicionarSalvar'];
+$routes[] = ['/os/visualizar', 'AdminController@osVisualizar'];
+$routes[] = ['/os/editar', 'AdminController@osEditar'];
+$routes[] = ['/os/remover', 'AdminController@osRemover'];
 /*Vendas*/
 $routes[] = ['/vendas', 'AdminController@vendas'];
 $routes[] = ['/vendas/adicionar', 'AdminController@vendasAdicionar'];

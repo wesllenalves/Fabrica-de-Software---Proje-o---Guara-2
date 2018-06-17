@@ -88,6 +88,11 @@ margin-right:10px;
 <div class="row-fluid" style="margin-top:0">
     <div class="span12">
         <div class="widget-box">
+            <div class="container-fluid col-sm-5  nopadding" style="margin-left: 3%;">
+                        <?php
+                        $this->alerta();
+                        ?>
+                    </div>
             <div class="widget-title">
                 <span class="icon">
                     <i class="icon-tags"></i>
@@ -108,24 +113,24 @@ margin-right:10px;
                               
                                 <div id="diverror" class="span12 alert alert-danger" id="divInfo" style="padding: 1%; display:none" >Dados incompletos, verifique os campos com asterisco ou se selecionou corretamente cliente e responsável.</div>
                             
-                                <form action="" method="post" enctype="multipart/form-data" id="formOs" >
+                                <form action="<?= base_url("")?>/os/adicionar/salvar" method="post" enctype="multipart/form-data" id="formOs" >
 
                                     <div class="span12" style="padding: 1%">
                                         <div class="span6">
-                                            <label for="cliente">Cliente*</label>
-                                            <input id="cliente" class="span12" type="text" name="cliente" value=""   required  onKeyDown="if (event.keyCode == '13'){ document.getElementById('tecnico').focus(); return false; } "/>
-                                            <input id="clientes_id" class="span12" type="hidden" name="clientes_id" value=""  />
+                                            <label for="nome">Cliente*</label>
+                                            <input id="nome" class="span12" type="text" name="nome" value=""   required  />
+                                            
                                         </div>
                                   <div class="span6">
-                                            <label for="tecnico">Técnico / Responsável*</label>
-                                            <input id="tecnico" class="span12" type="text" name="tecnico" value="wesllen alves teste de cadastro"  onKeyDown="if (event.keyCode == '13'){ document.getElementById('status').focus(); return false }; " readonly />
-                                            <input id="usuarios_id" class="span12" type="hidden" name="usuarios_id" value=""  required />
+                                            <label for="funcionario">Técnico / Responsável*</label>
+                                            <input id="funcionario" class="span12" type="text" name="funcionario" value="wesllen alves teste de cadastro"  />
+                                            
                                         </div>
                                     </div>
                                     <div class="span12" style="padding: 1%; margin-left: 0">
-                                        <div class="span3">
+                                        <div class="span2">
                                             <label for="status">Status<span class="required">*</span></label>
-                                            <select class="span12" name="status" id="status" value="" onKeyDown="if (event.keyCode == '13'){ document.getElementById('dataInicial').focus(); return false }; ">
+                                            <select class="span12" name="status" id="status" >
                                                 <option value="Orçamento">Orçamento</option>
                                                <option value="Aberto">Aberto</option>
                                                 <option value="Em Andamento">Em Andamento</option>
@@ -133,47 +138,51 @@ margin-right:10px;
                                                 <option value="Cancelado">Cancelado</option>
                                             </select>
                                         </div>
-                                        <div class="span3">
+                                        <div class="span2">
                                             <label for="dataInicial">Data Inicial<span class="required">*</span></label>
-                                            <input id="dataInicial" class="span12 datepicker" type="text" name="dataInicial" value="12/06/2018"  onKeyDown="if (event.keyCode == '13'){ document.getElementById('dataFinal').focus(); return false }; "/>
+                                            <input id="dataInicial" class="span12 datepicker" type="date" name="dataInicial" value=""  />
                                         </div>
-                                        <div class="span3">
+                                        <div class="span2">
                                             <label for="dataFinal">Data Final</label>
-                                            <input id="dataFinal" class="span12 datepicker" type="text" name="dataFinal" value=""  onKeyDown="if (event.keyCode == '13'){ document.getElementById('garantia').focus(); return false }; "/>
+                                            <input id="dataFinal" class="span12 datepicker" type="date" name="dataFinal" value=""  />
                                         </div>
-
+                                        <div class="span2">
+                                            <label for="telefone">Telefone</label>
+                                            <input id="telefone" class="span12" type="tel" name="telefone" value="">
+                                        </div>
+                                        <div class="span1">
+                                            <label for="quantidade">Quantidade</label>
+                                            <input id="quantidade" class="span12" type="number" name="quantidade" value="">
+                                        </div>
                                         <div class="span3">
-                                            <label for="garantia">Garantia</label>
-                                            <input id="garantia" type="text" class="span12" name="garantia" value=""  onKeyDown="if (event.keyCode == '13'){ document.getElementById('descricaoProduto').focus(); return false }"/>
+                                            <label for="cidade">Cidade</label>
+                                            <input id="cidade" class="span8" type="text" name="cidade" value="">
                                         </div>
+                                        
+                                        
                                     </div>
 
                                     <div class="span12" style="padding: 1%; margin-left: 0">
-
+                                        
+                                        
+                                        
+                                        <div class="span12" style="padding: 1%; margin-left: 0">
                                         <div class="span6">
-                                            <label for="descricaoProduto">Descrição Produto/Serviço</label>
-                                            <textarea class="span12" name="descricaoProduto" id="descricaoProduto" cols="30" rows="5"></textarea>
+                                            <label for="descricaoServico">Descrição Serviço</label>
+                                            <textarea class="span12" name="descricaoServico" id="descricaoServico" cols="30" rows="5"></textarea>
                                         </div>
                                         <div class="span6">
-                                            <label for="defeito">Defeito</label>
-                                            <textarea class="span12" name="defeito" id="defeito" cols="30" rows="5"></textarea>
+                                            <label for="produtos">Produtos</label>
+                                            <textarea class="span12" name="produtos" id="produtos" cols="30" rows="5"></textarea>
+                                        </div>
                                         </div>
 
                                     </div>
-                                    <div class="span12" style="padding: 1%; margin-left: 0">
-                                        <div class="span6">
-                                            <label for="observacoes">Observações</label>
-                                            <textarea class="span12" name="observacoes" id="observacoes" cols="30" rows="5"></textarea>
-                                        </div>
-                                        <div class="span6">
-                                            <label for="laudoTecnico">Laudo Técnico</label>
-                                            <textarea class="span12" name="laudoTecnico" id="laudoTecnico" cols="30" rows="5"></textarea>
-                                        </div>
-                                    </div>
+                                    
                                     <div class="span12" style="padding: 1%; margin-left: 0">
                                         <div class="span6 offset3" style="text-align: center">
                                             <button class="btn btn-success" id="btnContinuar"><i class="icon-share-alt icon-white"></i> Continuar</button>
-                                            <a href="https://www.ultramapos.online/index.php/os" class="btn"><i class="icon-arrow-left"></i> Voltar</a>
+                                            <a href="<?= base_url('');?>/os" class="btn"><i class="icon-arrow-left"></i> Voltar</a>
                                         </div>
                                     </div>
                                 </form>
@@ -183,11 +192,8 @@ margin-right:10px;
 
                     </div>
 
-                </div>
-
-                
+                </div>               
 .
-             
         </div>
         
     </div>
@@ -197,18 +203,7 @@ margin-right:10px;
 
 
 <script type="text/javascript">
-$(document).ready(function(){
 
-      $("#cliente").autocomplete({
-            source: "https://www.ultramapos.online/index.php/os/autoCompleteCliente",
-            minLength: 1,
-            select: function( event, ui ) {
-
-                 $("#clientes_id").val(ui.item.id);
-                
-
-            }
-      });
 
 //     $("#tecnico").autocomplete({
 //            source: "index.php/os/autoCompleteUsuario",
@@ -252,118 +247,7 @@ $(document).ready(function(){
 });
 
 
-$(document).ready(function(){
-		$('#formOs').submit(function(){
-			document.getElementById('formOs').readOnly='true';
-		
-		
-	if	(document.getElementById('cliente').value=='')
-	return false;
 	
-		if	(document.getElementById('tecnico').value=='')
-	return false;
-	
-		if	(document.getElementById('dataInicial').value=='')
-	return false;
-		  
-		if	(document.getElementById('btnContinuar').innerHTML=='Aguarde...')
-	return false;	
-		
-		document.getElementById('btnContinuar').innerHTML='Aguarde...';
-			
-			var dados = jQuery( this ).serialize();
- //aqui botar progresso depois
-			$.ajax({
-				type: "post",
-				timeout:20000,
-				url: "https://www.ultramapos.online/cadastrarOs.php",
-				data: dados,
-				
-			//	beforeSend:function()
-		//	{
-		//			$('#divaguarde').show("fast");
-		//		},
-		//		complete:function()
-		//		{
-		//			$('#divaguarde').hide("slow");
-		//		},
-				
-				
-				error:function()
-				{
-					alert('Houve um problema com a conexão');
-							document.getElementById('btnContinuar').readOnly='false';
-							document.getElementById('btnContinuar').innerHTML='continuar';
-							document.getElementById('formOs').readOnly='false';
-		
-					},
-					
-				success: function( data )
-				{
-
-	//			while(data2.indexOf(" ") != -1)
-//data2 = data2.replace(" ", "");
-var erroremail=data;
-                  if (erroremail.indexOf('EMAIL') == -1)
-				  {
-				  	 var mensagem = data.length;
-					 if (mensagem>6)
-					 {
-						 
-						 document.getElementById("diverror").innerHTML=data;
-						 document.getElementById("diverror").style.display="block";
-					
-			 				}
-							else
-							{
-						 data2= data.replace(/[^\d]+/g,'') ;
-
-
-alert('Os criada com sucesso, agora você pode incluir produtos e serviços nas abas produtos/serviços');
-
-						 data2= data.replace(/[^\d]+/g,'') ;
-							var url = "https://www.ultramapos.online/index.php/os/editar/"+data2;
-							var id=data2;
-							url = url.split(data2).join(id);
-					location.replace(url);
-						
-							}
-				  }
-				else
-				{
-					alert(data);
-					 data2= data.replace(/[^\d]+/g,'') ;
-							var url = "https://www.ultramapos.online//index.php/os/editar/"+data2;
-							var id=data2;
-							url = url.split(data2).join(id);
-				//	location.replace(url);
-					
-					}
-				
-				
-				}
-				
-				
-			});
-			
-			return false;
-		});
-	});	
-
-
-$(function() {
-	 var tecnicoauto = [{"label":"wesllen alves teste de cadastro","id":"50"}];
-   $("#tecnico").autocomplete({
-            source: tecnicoauto,
-            minLength: 2,
-            select: function( event, ui ) {
-
-                 $("#usuarios_id").val(ui.item.id);
-
-
-            }
-      });
-});	
 
 </script>
 

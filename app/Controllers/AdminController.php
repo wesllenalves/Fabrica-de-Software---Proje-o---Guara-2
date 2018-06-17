@@ -13,6 +13,7 @@ use App\Models\Admin\CadastroProduto;
 use App\Models\Admin\CadastroFuncionario;
 use App\Models\Admin\CadastroCliente;
 use App\Models\Admin\cadastroServico;
+use App\Models\Admin\Os;
 use Core\Validator;
 
 /**
@@ -26,12 +27,14 @@ class AdminController extends BaseController {
     private $Produto;
     private $Funcionario;
     private $Servico;
+    private $os;
 
     public function __construct() {
         $this->Clientes = new CadastroCliente();
         $this->Produto = new CadastroProduto();
         $this->Funcionario = new CadastroFuncionario();
         $this->Servico = new cadastroServico();
+        $this->os =  new Os();
     }
 
     public function index() {
@@ -243,12 +246,63 @@ class AdminController extends BaseController {
 
     public function os() {
 //        $this->setPageTitle("Admin");
+        $dados = $this->os->read("*");
+        @$this->view->os = $dados;
         $this->Render('admin/mapos/os/os', 'layoutadminMapos');
     }
 
     public function osAdicionar() {
 //        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/os/addOs', 'layoutadminMapos');
+    }
+    public function osAdicionarSalvar($request) {
+        $dados = $request->post;
+        //print_r($dados); die();
+        $data = [
+            'nome' => $request->post->nome, 'usuarios_id' => $request->post->funcionario,
+            'status' => $request->post->status, 'dataInicial' => $request->post->dataInicial,
+            'telefone' => $request->post->telefone,'quantidade' => $request->post->quantidade,
+            'cidade' => $request->post->cidade,'produtos' => $request->post->produtos,
+            'descricaoServico' => $request->post->descricaoServico
+        ];
+
+        $rules = [
+            'nome' => 'required', 'usuarios_id' => 'required', 'status' => 'required', 'dataInicial' => 'required',
+            'telefone' => 'required', 'quantidade' => 'required', 'cidade' => 'required', 'descricaoServico' => 'required'
+            
+        ];
+
+        if (Validator::make($data, $rules)) {
+            $this->redirect("os/adicionar");
+        } else {
+            if ($this->os->cadastrar($request)) {
+                $this->redirect("os", "1", "OS Cadastrado com Sucesso");
+            } else {
+                $this->redirect("os", "4", "Ocorreu um erro ao tentar cadastar OS");
+            }
+            
+        }
+    }
+    
+    public function osVisualizar() {
+//        $this->setPageTitle("Admin");
+        $this->Render('admin/mapos/os/visualizarOs', 'layoutadminMapos');
+    }
+    
+    public function osEditar() {
+//        $this->setPageTitle("Admin");
+        $this->Render('admin/mapos/os/editOs', 'layoutadminMapos');
+    }
+    
+    public function osRemover($request) {
+        $id = $request->get->id;    
+        
+        if($this->os->deletar($id)){
+            $this->redirect("os", "1", "Deletado com sucesso"); 
+        }else{
+            $this->redirect("os", "4", " POS Erro ao deletar cliente");  
+        }
+        
     }
 
     public function vendas() {

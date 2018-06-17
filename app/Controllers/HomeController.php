@@ -6,17 +6,24 @@ use Core\BaseController;
 use App\Models\Home\Login;
 use App\Models\Home\cadastroOrcamento;
 use App\Models\Cliente;
+use App\Models\Home\Produtos;
 
 class HomeController extends BaseController {
     private $cliente;
-    
+    private $orcamento;
+    private $produto;
     public function __construct() {
         $this->cliente = new Cliente();
+        $this->orcamento = new cadastroOrcamento();
+        $this->produto =  new Produtos();
     }
 
     public function index() {
         //seta o titulo da pagina
         echo $this->setPageTitle("Home");
+        $dados = $this->produto->read("*");
+        @$this->view->produtos = $dados;
+        
         //renderiza a pagina e o layout
         $this->Render('home/index', 'layoutHome');
     }
@@ -81,10 +88,9 @@ class HomeController extends BaseController {
     }
     
     public function cadastroOrcamento($request){
-        $dados = $request->post;
-//        print_r($dados); die();
-        $orcamento = new cadastroOrcamento();
-    if($orcamento->cadastrar($dados)){
+        $dados = $request->post;        
+        
+    if($this->orcamento->cadastrar($dados)){
         session_start();
         $_SESSION['orcamento'] = "Orçamento efetuado com sucesso";
         $this->redirect("index", "Orçamento efetuado com sucesso");

@@ -7,52 +7,38 @@
  */
 
 namespace App\Models\Home;
+
 use Core\BaseModel;
+
 /**
  * Description of cadastroOrçamento
  *
  * @author Wesllen
  */
-class cadastroOrcamento extends BaseModel{
-    protected $tabela = "orcamento";
+class cadastroOrcamento extends BaseModel {
+
+    protected $tabela = "os";
     //Definir a quantidade de tabelas que serao usadas maximo de 4
     protected $tabelaUse = 1;
-    
-    
-    protected function CheckIsNull($request) {
-        
-        if ( $request->nome === '' ||  $request->telefone === '' ||  
-             $request->cidade === '' ||  $request->produto === '' || $request->qtd === '' || 
-             $request->data === '' 
-                ) {
-            return TRUE;
-        }
-        return FALSE;
-    }
-    
-     public function cadastrar($request){    
-         
-        
-        if($this->CheckIsNull($request) != TRUE){            
-           
-        
-                $array = array(
-                    "0" => array(
-                        "nome" => $request->nome,  "telefone" => $request->telefone ,  
-              "cidade" => $request->cidade ,   "fkProduto" => $request->produto ,  "qtd" => $request->qtd  , 
-              "data" => $request->data 
-                    )
-                );
 
-                if($this->insert($array)){
-                    return TRUE;
-                }else{
-                    return False;
-                }
-           
-        }else{
-            $this->redirect("clientes", "4", "Preencha todos os campos");
-            exit();
+    public function cadastrar($request) {
+        $values_array_0 = array_values($request->produto);
+        $insert_values_0 = implode(" , ", $values_array_0);
+        
+        $array = array(
+            "0" => array(
+                "nome" => $request->nome, "status" => "Aberto", "dataInicial" => $request->data, "telefone" => $request->telefone,
+                "quantidade" => $request->qtd,"cidade" => $request->cidade, "produtos" => $insert_values_0, "descricaoServico" => $request->descricao
+                 
+                
+            )
+        );        
+
+        if ($this->insert($array)) {
+            return TRUE;
+        } else {
+            return False;
         }
     }
+
 }
