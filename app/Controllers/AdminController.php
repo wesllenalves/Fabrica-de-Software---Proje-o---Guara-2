@@ -275,8 +275,8 @@ class AdminController extends BaseController {
         if (Validator::make($data, $rules)) {
             $this->redirect("os/adicionar");
         } else {
-            if ($this->os->cadastrar($request)) {
-                $this->redirect("os", "1", "OS Cadastrado com Sucesso");
+            if ($id = $this->os->cadastrar($request)) {
+                $this->redirect("os/editar?id=$id", "1", "OS Cadastrado com Sucesso");
             } else {
                 $this->redirect("os", "4", "Ocorreu um erro ao tentar cadastar OS");
             }
@@ -289,7 +289,10 @@ class AdminController extends BaseController {
         $this->Render('admin/mapos/os/visualizarOs', 'layoutadminMapos');
     }
     
-    public function osEditar() {
+    public function osEditar($request) {
+          $id = $request->get->id;
+          $dados = $this->os->read("*", "idOs = $id");
+        @$this->view->oneOs = $dados;
 //        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/os/editOs', 'layoutadminMapos');
     }

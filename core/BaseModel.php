@@ -85,7 +85,9 @@ abstract class BaseModel {
                     $query1 = $this->con->conecta()->prepare("INSERT INTO $this->tabela ({$insert_campos_0}) VALUES('{$insert_values_0}');");
                     
                     if ($query1->execute()) {
-                        return TRUE;
+                        $id = $this->con->conecta()->lastInsertId();
+                        
+                        return $id;
                     } else {
                         print_r($query1->errorInfo());
                         return FALSE;

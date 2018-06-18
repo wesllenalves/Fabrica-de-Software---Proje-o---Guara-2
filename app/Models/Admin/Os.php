@@ -32,8 +32,8 @@ class Os extends BaseModel{
             )
         );
 
-        if ($this->insert($array)) {
-            return TRUE;
+        if ($dados = $this->insert($array)) {
+            return $dados;
         } else {
             return False;
         }

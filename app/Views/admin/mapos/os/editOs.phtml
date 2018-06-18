@@ -121,10 +121,11 @@ O firefox 35+ e o edge 16+ já suportam sem precisar usar prefixo.*/
                                 
                                 <form action="https://www.ultramapos.online/index.php/os/editar/103" method="post" id="formOs">
                                     <h3>Protocolo #1210</h3>
+                                    <?php foreach (@$this->view->oneOs as $os){ ?>
                                 <div class="span12" style="padding: 1%; margin-left: 1%; ">
                                         <div class="span6">
                                             <label for="cliente">Cliente*</label>
-                                            <input id="cliente" class="span12" type="text" name="cliente" value=""   required  onKeyDown="if (event.keyCode == '13'){ document.getElementById('tecnico').focus(); return false; } "/>
+                                            <input id="cliente" class="span12" type="text" name="cliente" value="<?=$os['']?>"   required  onKeyDown="if (event.keyCode == '13'){ document.getElementById('tecnico').focus(); return false; } "/>
                                             <input id="clientes_id" class="span12" type="hidden" name="clientes_id" value=""  />
                                         </div>
                                   <div class="span6">
@@ -184,6 +185,7 @@ O firefox 35+ e o edge 16+ já suportam sem precisar usar prefixo.*/
                                         </div>
 
                                     </div>
+                                    <?php} ?>
                                     <div class="span12" style="padding: 1%; margin-left: 0">
                                         <div class="span6 offset3" style="text-align: center">
                                                                                             <a href="#modal-faturar" id="btn-faturar" role="button" data-toggle="modal" class="btn btn-success" onClick="redefinir2();"><i class="icon-file"></i> Faturar</a>

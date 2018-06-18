@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 14-Jun-2018 às 03:25
+-- Generation Time: 18-Jun-2018 às 04:30
 -- Versão do servidor: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -25,11 +25,11 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cliente`
+-- Estrutura da tabela `clientes`
 --
 
-CREATE TABLE IF NOT EXISTS `clientes` (
-  `idClientes` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `clientes` (
+  `idClientes` int(11) NOT NULL,
   `nomeCliente` varchar(255) NOT NULL,
   `documento` varchar(20) NOT NULL,
   `telefone` varchar(20) NOT NULL,
@@ -41,15 +41,8 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   `bairro` varchar(45) DEFAULT NULL,
   `cidade` varchar(45) DEFAULT NULL,
   `estado` varchar(20) DEFAULT NULL,
-  `cep` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`idClientes`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Extraindo dados da tabela `cliente`
---
-
-
+  `cep` varchar(20) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -167,20 +160,20 @@ CREATE TABLE `orcamento` (
   `idOrcamento` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `telefone` varchar(20) NOT NULL,
+  `descricao` text NOT NULL,
   `cidade` varchar(100) NOT NULL,
-  `fkProduto` int(11) NOT NULL,
+  `produto` varchar(255) NOT NULL,
   `qtd` int(11) NOT NULL,
-  `data` date NOT NULL
+  `data` date NOT NULL,
+  `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `orcamento`
 --
 
-INSERT INTO `orcamento` (`idOrcamento`, `nome`, `telefone`, `cidade`, `fkProduto`, `qtd`, `data`) VALUES
-(0, 'wes', '619817456958', 'eeee', 0, 100, '2018-06-15'),
-(0, 'wes', '619817456958', 'brasilioa', 0, 100, '2018-06-09'),
-(0, 'wes', '619817456958', 'brasilioa', 0, 100, '2018-06-14');
+INSERT INTO `orcamento` (`idOrcamento`, `nome`, `telefone`, `descricao`, `cidade`, `produto`, `qtd`, `data`, `status`) VALUES
+(1, 'pessoa fisica', '61981745695', 'uma festa muito boa                                         \r\n                                    ', 'brasilia', 'bolo , bolo , bolo', 2, '2018-06-16', 'Aguardando Atendimento');
 
 -- --------------------------------------------------------
 
@@ -190,20 +183,35 @@ INSERT INTO `orcamento` (`idOrcamento`, `nome`, `telefone`, `cidade`, `fkProduto
 
 CREATE TABLE `os` (
   `idOs` int(11) NOT NULL,
+  `nome` varchar(11) NOT NULL,
+  `usuarios_id` varchar(255) DEFAULT NULL,
+  `status` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
   `dataInicial` date DEFAULT NULL,
-  `dataFinal` date DEFAULT NULL,
-  `garantia` varchar(45) DEFAULT NULL,
-  `descricaoProduto` varchar(150) DEFAULT NULL,
-  `defeito` varchar(150) DEFAULT NULL,
-  `status` varchar(45) DEFAULT NULL,
-  `observacoes` varchar(150) DEFAULT NULL,
-  `laudoTecnico` varchar(150) DEFAULT NULL,
+  `dataFinal` date DEFAULT '0000-00-00',
+  `telefone` varchar(255) NOT NULL,
+  `quantidade` int(11) NOT NULL,
+  `cidade` varchar(255) NOT NULL,
+  `produtos` varchar(255) NOT NULL,
+  `descricaoServico` varchar(150) DEFAULT NULL,
   `valorTotal` varchar(15) DEFAULT NULL,
-  `clientes_id` int(11) NOT NULL,
-  `usuarios_id` int(11) NOT NULL,
   `lancamento` int(11) DEFAULT NULL,
-  `faturado` tinyint(1) NOT NULL
+  `faturado` tinyint(1) NOT NULL,
+  `dataCadastro` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `os`
+--
+
+INSERT INTO `os` (`idOs`, `nome`, `usuarios_id`, `status`, `dataInicial`, `dataFinal`, `telefone`, `quantidade`, `cidade`, `produtos`, `descricaoServico`, `valorTotal`, `lancamento`, `faturado`, `dataCadastro`) VALUES
+(4, 'wesllen alv', '', 'Aberto', '2018-06-17', '2018-06-30', '61981745695', 12, 'brasilia', 'bolo,casquinha', 'festa para um casamento ', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(5, 'pessoa fisi', '', 'Em Andamento', '2018-06-17', '2018-06-25', '61981745695', 1, 'brasilia', 'bolo', 'servico', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(3, 'wesllen alv', '', 'Em Andamento', '2018-06-16', '2018-09-14', '61981745695', 12, 'brasilia', 'caro, bolo', 'festa', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(6, 'pessoa fisi', '', 'Aberto', '2018-06-17', '2018-06-17', '61981745695', 1, 'brasilia', 'bolo', 'ws', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(7, 'pessoa fisi', '', 'Aberto', '2018-06-17', '2018-06-17', '61981745695', 1, 'brasilia', 'bolo', 'ws', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(8, 'pessoa fisi', '', 'OrÃ§amento', '2018-06-15', '2018-06-17', '61981745695', 1, 'brasilia', 'festa', 'festa', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(9, 'pessoa fisi', '', 'OrÃ§amento', '2018-06-15', '2018-06-17', '61981745695', 1, 'brasilia', 'festa', 'festa', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(10, 'pessoa fisi', '', 'OrÃ§amento', '2018-06-15', '2018-06-17', '61981745695', 1, 'brasilia', 'festa', 'festa', NULL, NULL, 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -274,10 +282,10 @@ CREATE TABLE `vendas` (
 --
 
 --
--- Indexes for table `cliente`
+-- Indexes for table `clientes`
 --
-ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`idCliente`);
+ALTER TABLE `clientes`
+  ADD PRIMARY KEY (`idClientes`);
 
 --
 -- Indexes for table `endereco`
@@ -322,11 +330,17 @@ ALTER TABLE `funcionario`
   ADD PRIMARY KEY (`idFuncionario`);
 
 --
+-- Indexes for table `orcamento`
+--
+ALTER TABLE `orcamento`
+  ADD PRIMARY KEY (`idOrcamento`);
+
+--
 -- Indexes for table `os`
 --
 ALTER TABLE `os`
   ADD PRIMARY KEY (`idOs`),
-  ADD KEY `fk_os_clientes1` (`clientes_id`),
+  ADD KEY `fk_os_clientes1` (`nome`),
   ADD KEY `fk_os_usuarios1` (`usuarios_id`),
   ADD KEY `fk_os_lancamentos1` (`lancamento`);
 
@@ -353,10 +367,10 @@ ALTER TABLE `vendas`
 --
 
 --
--- AUTO_INCREMENT for table `cliente`
+-- AUTO_INCREMENT for table `clientes`
 --
-ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+ALTER TABLE `clientes`
+  MODIFY `idClientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `endereco`
@@ -395,10 +409,16 @@ ALTER TABLE `funcionario`
   MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `orcamento`
+--
+ALTER TABLE `orcamento`
+  MODIFY `idOrcamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `os`
 --
 ALTER TABLE `os`
-  MODIFY `idOs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idOs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `produto`
@@ -421,13 +441,6 @@ ALTER TABLE `vendas`
 --
 -- Constraints for dumped tables
 --
-
---
--- Limitadores para a tabela `evento`
---
-ALTER TABLE `evento`
-  ADD CONSTRAINT `evento_ibfk_1` FOREIGN KEY (`fkProduto`) REFERENCES `produto` (`idProduto`),
-  ADD CONSTRAINT `evento_ibfk_2` FOREIGN KEY (`fkCliente`) REFERENCES `cliente` (`idCliente`);
 
 --
 -- Limitadores para a tabela `eventofuncionario`
