@@ -40,4 +40,27 @@ class cadastroServico extends BaseModel{
         $dados = $this->read("*");
         return $dados;
     }
+    
+    public function atualizar($request) {
+        $id = $request->post->idServicos;
+        date_default_timezone_set('America/Sao_Paulo');
+        $dataAtual = date("Y-d-m H:m:s");
+        $array = array(
+            'nome' => $request->post->nome, 'descricao' => $request->post->descricao, 'preco' => $request->post->preco, 'dataModificado' => $dataAtual
+        );
+        if ($this->update($array, "idServicos = {$id}")) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function deletar($id) {
+
+        if ($this->delete("idServicos = {$id}")) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 18-Jun-2018 às 04:30
+-- Generation Time: 19-Jun-2018 às 08:02
 -- Versão do servidor: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -32,6 +32,7 @@ CREATE TABLE `clientes` (
   `idClientes` int(11) NOT NULL,
   `nomeCliente` varchar(255) NOT NULL,
   `documento` varchar(20) NOT NULL,
+  `tipoPessoa` varchar(255) NOT NULL,
   `telefone` varchar(20) NOT NULL,
   `celular` varchar(20) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
@@ -153,6 +154,38 @@ CREATE TABLE `funcionario` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `lancamentos`
+--
+
+CREATE TABLE `lancamentos` (
+  `idLancamentos` int(11) NOT NULL,
+  `descricao` varchar(255) DEFAULT NULL,
+  `valor` varchar(15) NOT NULL,
+  `data_vencimento` date NOT NULL,
+  `data_pagamento` date DEFAULT NULL,
+  `baixado` tinyint(1) DEFAULT NULL,
+  `cliente_fornecedor` varchar(255) DEFAULT NULL,
+  `forma_pgto` varchar(100) DEFAULT NULL,
+  `tipo` varchar(45) DEFAULT NULL,
+  `anexo` varchar(250) DEFAULT NULL,
+  `clientes_id` int(11) DEFAULT NULL,
+  `dataModificado` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `lancamentos`
+--
+
+INSERT INTO `lancamentos` (`idLancamentos`, `descricao`, `valor`, `data_vencimento`, `data_pagamento`, `baixado`, `cliente_fornecedor`, `forma_pgto`, `tipo`, `anexo`, `clientes_id`, `dataModificado`) VALUES
+(1, 'bolo', '2.00', '0000-00-00', '0000-00-00', NULL, NULL, 'Dinheiro', 'receita', NULL, NULL, '0000-00-00 00:00:00'),
+(2, 'bolo', '1.11', '0000-00-00', '0000-00-00', NULL, NULL, 'Dinheiro', 'despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(4, 'Mantega teste', '20.00', '0000-00-00', '0000-00-00', NULL, NULL, 'Dinheiro', 'receita', NULL, NULL, '0000-00-00 00:00:00'),
+(5, 'bolo', '2.00', '0000-00-00', '0000-00-00', NULL, 'wes', 'Dinheiro', 'receita', NULL, NULL, '0000-00-00 00:00:00'),
+(6, 'bolo', '200.00', '2018-06-19', '0000-00-00', NULL, 'wes', 'Dinheiro', 'receita', NULL, NULL, '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `orcamento`
 --
 
@@ -227,18 +260,18 @@ CREATE TABLE `produto` (
   `precoVenda` decimal(10,2) NOT NULL,
   `estoque` int(11) NOT NULL,
   `estoqueMinimo` int(11) DEFAULT NULL,
-  `validade` date DEFAULT NULL
+  `validade` date DEFAULT NULL,
+  `dataModificado` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `produto`
 --
 
-INSERT INTO `produto` (`idProduto`, `nome`, `unidade`, `precoCompra`, `precoVenda`, `estoque`, `estoqueMinimo`, `validade`) VALUES
-(1, 'bolo', 'KG', '20.00', '25.00', 10, 2, '1993-09-24'),
-(2, 'bolo', 'KG', '200.00', '300.00', 20, 10, '2018-06-13'),
-(3, 'bolo', 'KG', '0.02', '0.03', 20, 1, '2018-06-13'),
-(4, 'bolo', 'KG', '0.00', '0.00', 1, 1, '2018-06-13');
+INSERT INTO `produto` (`idProduto`, `nome`, `unidade`, `precoCompra`, `precoVenda`, `estoque`, `estoqueMinimo`, `validade`, `dataModificado`) VALUES
+(2, 'bolo', 'KG', '200.00', '300.00', 20, 10, '2018-06-13', '0000-00-00 00:00:00'),
+(3, 'bolo', 'KG', '0.02', '0.03', 20, 1, '2018-06-13', '0000-00-00 00:00:00'),
+(4, 'bolo', 'KG', '0.00', '0.00', 1, 1, '2018-06-13', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -250,15 +283,16 @@ CREATE TABLE `servicos` (
   `idServicos` int(11) NOT NULL,
   `nome` varchar(45) NOT NULL,
   `descricao` varchar(45) DEFAULT NULL,
-  `preco` decimal(10,2) NOT NULL
+  `preco` decimal(10,2) NOT NULL,
+  `dataModificado` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `servicos`
 --
 
-INSERT INTO `servicos` (`idServicos`, `nome`, `descricao`, `preco`) VALUES
-(7, 'pessoa fisica', 'bolo', '0.00');
+INSERT INTO `servicos` (`idServicos`, `nome`, `descricao`, `preco`, `dataModificado`) VALUES
+(8, 'pessoa fisica', 'bolo', '0.00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -330,6 +364,13 @@ ALTER TABLE `funcionario`
   ADD PRIMARY KEY (`idFuncionario`);
 
 --
+-- Indexes for table `lancamentos`
+--
+ALTER TABLE `lancamentos`
+  ADD PRIMARY KEY (`idLancamentos`),
+  ADD KEY `fk_lancamentos_clientes1` (`clientes_id`);
+
+--
 -- Indexes for table `orcamento`
 --
 ALTER TABLE `orcamento`
@@ -370,7 +411,7 @@ ALTER TABLE `vendas`
 -- AUTO_INCREMENT for table `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idClientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idClientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `endereco`
@@ -409,6 +450,12 @@ ALTER TABLE `funcionario`
   MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `lancamentos`
+--
+ALTER TABLE `lancamentos`
+  MODIFY `idLancamentos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `orcamento`
 --
 ALTER TABLE `orcamento`
@@ -430,7 +477,7 @@ ALTER TABLE `produto`
 -- AUTO_INCREMENT for table `servicos`
 --
 ALTER TABLE `servicos`
-  MODIFY `idServicos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idServicos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `vendas`

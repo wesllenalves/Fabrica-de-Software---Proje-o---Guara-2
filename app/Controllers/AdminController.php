@@ -14,6 +14,7 @@ use App\Models\Admin\CadastroFuncionario;
 use App\Models\Admin\CadastroCliente;
 use App\Models\Admin\cadastroServico;
 use App\Models\Admin\Os;
+use App\Models\Admin\Lancamentos;
 use Core\Validator;
 
 /**
@@ -28,6 +29,7 @@ class AdminController extends BaseController {
     private $Funcionario;
     private $Servico;
     private $os;
+    private $lancamentos;
 
     public function __construct() {
         $this->Clientes = new CadastroCliente();
@@ -35,6 +37,7 @@ class AdminController extends BaseController {
         $this->Funcionario = new CadastroFuncionario();
         $this->Servico = new cadastroServico();
         $this->os =  new Os();
+        $this->lancamentos =  new Lancamentos();        
     }
 
     public function index() {
@@ -136,9 +139,7 @@ class AdminController extends BaseController {
             $this->redirect("clientes", "4", " POS Erro ao deletar cliente");  
         }
         
-    }
-
-    
+    }    
 
     public function produtos() {
 //        $this->setPageTitle("Admin");
@@ -159,12 +160,36 @@ class AdminController extends BaseController {
         $this->Render('admin/mapos/produtos/visualizarProdutos', 'layoutadminMapos');
     }
 
-    public function produtosEditar() {
-//        $this->setPageTitle("Admin");
-        $produtos = new CadastroProduto();
-//        $dados = $produtos->read();
-//        @$this->view->produtos = $dados;
+    public function produtosEditar($request) {
+         $id = $request->get->id; 
+         $dados = $this->Produto->read("*", "idProduto = $id");
+        @$this->view->oneProdutos = $dados;   
         $this->Render('admin/mapos/produtos/editProdutos', 'layoutadminMapos');
+    }
+    
+    public function produtosEditarSalvar($request) {
+        
+         $data = [
+            'nome' => $request->post->descricao, 'unidade' => $request->post->unidade, 'precoCompra' => $request->post->precoCompra,
+            'precoVenda' => $request->post->precoVenda, 'estoque' => $request->post->estoque,
+            'estoqueMinimo' => $request->post->estoqueMinimo
+        ];
+
+        $rules = [
+            'descricao' => 'required', 'unidade' => 'required', 'precoCompra' => 'required', 'precoVenda' => 'required',
+            'estoque' => 'required', 'estoqueMinimo' => 'required'
+        ];
+        
+        if (Validator::make($data, $rules)) {
+            $this->redirect("produtos");
+        } else {
+             if($this->Produto->atualizar($request)){
+               $this->redirect("produtos", "1", "Editado com sucesso"); 
+            }else{
+               $this->redirect("produtos", "4", " POS Erro ao editar cliente");  
+            }
+        }
+         
     }
 
     public function produtosAdicionar() {
@@ -195,6 +220,16 @@ class AdminController extends BaseController {
                 $this->redirect("produtos", "4", "Algo deu errado ao tentar cadastrar produtos");
             }
         }
+    }
+    public function produtosRemover($request) {
+        $id = $request->get->id; 
+                
+        if($this->Produto->deletar($id)){
+            $this->redirect("produtos", "1", "Deletado com sucesso"); 
+        }else{
+            $this->redirect("produtos", "4", " POS Erro ao deletar cliente");  
+        }
+        
     }
 
     public function servicos() {
@@ -239,9 +274,34 @@ class AdminController extends BaseController {
     }
 
     public function servicosUpdate($request) {
-        $dados = $request->post;
-        print_r($dados);
-        die();
+        $data = [
+            'nome' => $request->post->nome, 'descricao' => $request->post->descricao, 'preco' => $request->post->preco
+        ];
+
+        $rules = [
+            'nome' => 'required', 'descricao' => 'required', 'preco' => 'required'
+        ];
+
+        if (Validator::make($data, $rules)) {
+            $this->redirect("servicos");
+        } else {
+            if($this->Servico->atualizar($request)){
+                $this->redirect("servicos", "1", "Servicos Editado com Sucesso");
+            }else{
+                $this->redirect("servicos", "4", "Ocorreu um erro ao tentar Editar Servicos");
+            }
+        }
+        
+    }
+    public function servicosRemover($request) {
+        $id = $request->get->id; 
+                
+        if($this->Servico->deletar($id)){
+            $this->redirect("servicos", "1", "Deletado com sucesso"); 
+        }else{
+            $this->redirect("servicos", "4", " POS Erro ao deletar cliente");  
+        }
+        
     }
 
     public function os() {
@@ -308,20 +368,72 @@ class AdminController extends BaseController {
         
     }
 
-    public function vendas() {
-//        $this->setPageTitle("Admin");
-        $this->Render('admin/mapos/vendas/vendas', 'layoutadminMapos');
-    }
 
-    public function vendasAdicionar() {
+    
+    public function financeiroLancamentos() {
 //        $this->setPageTitle("Admin");
-        $this->Render('admin/mapos/vendas/addVendas', 'layoutadminMapos');
+        $dados = $this->lancamentos->read("*");
+        @$this->view->Lancamentos = $dados;
+        $this->Render('admin/mapos/financeiro/lancamentos', 'layoutadminMapos');
     }
+    
+    public function adicionarReceita($request) {
+        $data = [
+            'descricao' => $request->post->descricao, 'valor' => $request->post->valor, 'data_vencimento' => $request->post->vencimento
+        ];
 
-    public function financeiro() {
-//        $this->setPageTitle("Admin");
-        $this->Render('admin/mapos/index', 'layoutadminMapos');
+        $rules = [
+            'nome' => 'required', 'valor' => 'required', 'data_vencimento' => 'required'
+            
+        ];
+        if (Validator::make($data, $rules)) {
+            $this->redirect("financeiro/lancamentos");
+        } else {
+            if ($id = $this->lancamentos->cadastrar($request)) {
+                $this->redirect("financeiro/lancamentos", "1", "OS Cadastrado com Sucesso");
+            } else {
+                $this->redirect("financeiro/lancamentos", "4", "Ocorreu um erro ao tentar cadastar OS");
+            }
+            
+        }
     }
+    public function adicionarDespesa($request) {
+        $data = [
+            'descricao' => $request->post->descricao, 'valor' => $request->post->valor, 'data_vencimento' => $request->post->vencimento
+        ];
+
+        $rules = [
+            'nome' => 'required', 'valor' => 'required', 'data_vencimento' => 'required'
+            
+        ];
+        if (Validator::make($data, $rules)) {
+            $this->redirect("financeiro/lancamentos");
+        } else {
+            if ($id = $this->lancamentos->cadastrar($request)) {
+                $this->redirect("financeiro/lancamentos", "1", "OS Cadastrado com Sucesso");
+            } else {
+                $this->redirect("financeiro/lancamentos", "4", "Ocorreu um erro ao tentar cadastar OS");
+            }
+            
+        }
+    }
+    
+    
+    public function financeiroLancamentosEditar($request) {
+        $id = $request->get->id;
+        $dados = $this->lancamentos->read("*", "idLancamentos = $id");
+        @$this->view->oneLancamentEdit = $dados;
+    }
+    public function lacamentosRemover($request) {
+        $id = $request->get->id;
+        if($this->lancamentos->deletar($id)){
+            $this->redirect("financeiro/lancamentos", "1", "Deletado com sucesso"); 
+        }else{
+            $this->redirect("financeiro/lancamentos", "4", " POS Erro ao deletar cliente");  
+        }
+    }
+    
+    
 
     public function Relatorios() {
 //        $this->setPageTitle("Admin");

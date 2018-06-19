@@ -13,9 +13,7 @@
 
         <li class=""><a href="<?= base_url('') ?>/os"><i class="icon icon-tags"></i> <span>Ordens de Serviço</span></a></li>
 
-        <li class=""><a href="<?= base_url('') ?>/vendas"><i class="icon icon-shopping-cart"></i> <span>Vendas</span></a></li>
-
-        <li class=""><a href="arquivos.php"><i class="icon icon-hdd"></i> <span>Arquivos</span></a></li>
+        
 
 
         <li class=""><a href="#" title="faleconosco.php" onClick="abrirnotificacao(this)"><i class="icon icon-hdd"></i> <span>Fale Conosco</span></a></li>
@@ -23,9 +21,7 @@
         <li class="submenu">
             <a href="#"><i class="icon icon-money"></i> <span>Financeiro</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
             <ul >
-                <li><a href="index.php/financeiro/lancamentos">Lançamentos</a></li>
-                <li><a title="recibo.php" onClick="abrirnotificacao(this)" style="cursor:pointer">Recibo</a></li>
-                <li><a title="taxascartao.php?plano=1" onClick="abrirnotificacao(this)" style="cursor:pointer">Conf. Taxas cartão</a></li>       
+                <li><a href="<?= base_url('')?>/financeiro/lancamentos">Lançamentos</a></li>                
             </ul>
         </li>
 
@@ -69,11 +65,11 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">
-                <div class="container-fluid col-sm-5">
-                <?php
-                $this->alerta();
-                ?>
-                </div>
+                <div class="container-fluid col-sm-5  nopadding" style="margin-left: 3%;">
+                        <?php                        
+                        $this->alerta();
+                        ?>
+                    </div>
 
                 <a href="<?= base_url('') ?>/produtos/adicionar" class="btn btn-success"><i class="icon-plus icon-white"></i> Adicionar Produto</a>
 
@@ -100,15 +96,15 @@
                                     <th></th>
                                 </tr>
                             </thead><?php
-        $total = 0;
-        foreach ($this->view->produtos as $linha) {
-            $id = count($linha['idProduto']);
-            $total = $total + $id;
-        }
-        if ($total > 0) {
-            ?>
+                            $total = 0;
+                            foreach ($this->view->produtos as $linha) {
+                                $id = count($linha['idProduto']);
+                                $total = $total + $id;
+                            }
+                            if ($total > 0) {
+                                ?>
                                 <tbody>
-        <?php foreach ($this->view->produtos as $linha) { ?>
+                                    <?php foreach ($this->view->produtos as $linha) { ?>
                                         <tr>
                                             <td><?php echo $linha['idProduto'] ?></td>
                                             <td><?php echo $linha['nome'] ?></td>
@@ -124,22 +120,39 @@
                                             </td>
                                         </tr>
                                         <tr>
-        <?php
-            } 
-        ?>
-                                        </tr>
+
+                                    <div id="modal-excluir" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:76%; max-width:400px;">
+                                        <form action="<?= base_url('') ?>/produtos/remover?id=<?= $linha['idProduto'] ?>" method="post" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <h5 id="myModalLabel">Excluir Produto</h5>
+                                            </div>
+                                            <div class="modal-body">                                                
+                                                <h5 style="text-align: center">Deseja realmente excluir este produto?</h5>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                                                <button class="btn btn-danger">Excluir</button>
+                                            </div>
+                                        </form>
+                                    </div>                              
+                                    <?php
+                                }
+                                ?>                                           
+
+                                </tr>
                                 </tbody>
-        <?php
-        }else{
-        ?>
+                                <?php
+                            } else {
+                                ?>
                                 <tbody>
-                                        <tr>
-                                            <td colspan = "5">Nenhum Cliente Cadastrado</td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan = "5">Nenhum Cliente Cadastrado</td>
+                                    </tr>
                                 </tbody>
-        <?php
-            }
-        ?>
+                                <?php
+                            }
+                            ?>
                         </table>
                     </div>
                 </div>
@@ -147,23 +160,7 @@
 
 
 
-                <!-- Modal -->
-                <div id="modal-excluir" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:76%; max-width:400px;">
-                    <form action="index.php/produtos/excluir" method="post" >
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h5 id="myModalLabel">Excluir Produto</h5>
-                        </div>
-                        <div class="modal-body">
-                            <input type="hidden" id="idProduto" name="id" value="" />
-                            <h5 style="text-align: center">Deseja realmente excluir este produto?</h5>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                            <button class="btn btn-danger">Excluir</button>
-                        </div>
-                    </form>
-                </div>
+
 
 
 

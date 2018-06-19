@@ -24,9 +24,12 @@ $routes[] = ['/produtos/adicionar', 'AdminController@produtosAdicionar'];
 $routes[] = ['/produtos/adicionar/salvar', 'AdminController@produtosSalvar'];
 $routes[] = ['/produtos/visualizar', 'AdminController@produtosVisualizar'];
 $routes[] = ['/produtos/editar', 'AdminController@produtosEditar'];
+$routes[] = ['/produtos/editar/salvar', 'AdminController@produtosEditarSalvar'];
+$routes[] = ['/produtos/remover', 'AdminController@produtosRemover'];
 /*Serviços*/
 $routes[] = ['/servicos', 'AdminController@servicos'];
 $routes[] = ['/servicos/adicionar', 'AdminController@servicosAdicionar'];
+$routes[] = ['/servicos/Remover', 'AdminController@servicosRemover'];
 $routes[] = ['/servicos/adicionar/salvar', 'AdminController@servicosSalvar'];
 $routes[] = ['/servicos/adicionar/editar', 'AdminController@servicosEditar'];
 $routes[] = ['/servicos/adicionar/update', 'AdminController@servicosUpdate'];
@@ -40,6 +43,12 @@ $routes[] = ['/os/remover', 'AdminController@osRemover'];
 /*Vendas*/
 $routes[] = ['/vendas', 'AdminController@vendas'];
 $routes[] = ['/vendas/adicionar', 'AdminController@vendasAdicionar'];
+/*Finaceiro*/
+$routes[] = ['/financeiro/lancamentos', 'AdminController@financeiroLancamentos'];
+$routes[] = ['/financeiro/lancamentos/adicionarReceita', 'AdminController@adicionarReceita'];
+$routes[] = ['/financeiro/lancamentos/adicionarDespesa', 'AdminController@adicionarDespesa'];
+$routes[] = ['/financeiro/lancamentos/remover', 'AdminController@lacamentosRemover'];
+$routes[] = ['/financeiro/lancamentos/editar', 'AdminController@financeiroLancamentosEditar'];
 
 
 

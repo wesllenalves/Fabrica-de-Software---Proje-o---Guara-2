@@ -28,8 +28,8 @@ class CadastroCliente extends BaseModel {
         $array = array(
             "0" => array(
                 'nomeCliente' => $request->post->nomeCliente, 'documento' => $request->post->documento,
-                'pessoa' => $request->post->pessoa, 'telefone' => $request->post->telefone, 'ddd_celular' => $request->post->ddd_celular,
-                'celular' => $request->post->celular, 'email' => $request->post->email,
+                'tipoPessoa' => $request->post->pessoa, 'telefone' => $request->post->telefone, 
+                'celular' => $request->post->ddd_celular. "+" .$request->post->celular, 'email' => $request->post->email,
                 'rua' => $request->post->rua, 'numero' => $request->post->numero,
                 'bairro' => $request->post->bairro, 'cidade' => $request->post->cidade, 'estado' => $request->post->estado,
                 'cep' => $request->post->cep, 'dataCadastro' => $dataAtual,

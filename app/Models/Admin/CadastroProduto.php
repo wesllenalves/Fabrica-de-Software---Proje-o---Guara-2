@@ -44,5 +44,31 @@ class CadastroProduto extends BaseModel {
         $dados = $this->read("*");
         return $dados;
     }
+    
+    public function atualizar($request) {
+        $id = $request->post->idProdutos;
+        date_default_timezone_set('America/Sao_Paulo');
+        $dataAtual = date("Y-d-m H:m:s");
+        $array = array(
+            'nome' => $request->post->descricao, 'unidade' => $request->post->unidade, 'precoCompra' => $request->post->precoCompra,
+            'precoVenda' => $request->post->precoVenda, 'estoque' => $request->post->estoque,
+            'estoqueMinimo' => $request->post->estoqueMinimo, 'validade' => $request->post->validade, "dataModificado" => $dataAtual
+        );
+        
+        if ($this->update($array, "idProduto = {$id}")) {
+           
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    public function deletar($id) {        
+        if ($this->delete("idProduto = {$id}")) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
 
 }

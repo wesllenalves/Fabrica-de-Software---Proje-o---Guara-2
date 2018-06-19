@@ -48,8 +48,7 @@ class BaseController {
         }
     }
     
-    protected function alerta(){
-        
+    protected function alerta(){        
         if(isset($_SESSION['success'])){
             echo "<div class='row'> 
                     <div class='col-xs-12 col-md-12'>
