@@ -17,16 +17,13 @@ class Produtos_os extends BaseModel {
     protected $tabela = "produtos_os";
      protected $tabelaUse = 1;
      
-     public function cadastrar($request) {
-        date_default_timezone_set('America/Sao_Paulo');
-        $dataAtual = date("Y-d-m H:m:s");
-
+     public function cadastrar(array $result) {
+         
         $array = array(
-            "0" => array(
-                'quantidade' => $request->post->nome, 'os_id' => $request->post->usuarios_id,
-                'produtos_id' => $request->post->status, 'subTotal' => $request->post->dataInicial, 'DataCadastro' => $request->post->dataInicial
-                )
-        );
+             "0" => array(
+            'quantidade' => $result['quantidade'], 'os_id' => $result['os_id'], 'produtos_id' => $result['produtos_id'],
+            'subTotal' => $result['subTotal'], 'DataCadastro' => $result['DataCadastro']
+        ));
 
         if ($dados = $this->insert($array)) {
             return $dados;

@@ -26,19 +26,7 @@
         </li>
 
 
-        <li class="submenu " >
-            <a href="#"><i class="icon icon-list-alt"></i> <span>Relatórios</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
-            <ul>
-
-                <li><a href="index.php/relatorios/clientes">Clientes</a></li>
-                <li><a href="/./LayoutFabrica/relatorios/produtos.php">Produtos</a></li>
-                <li><a href="/./LayoutFabrica/relatorios/servicos.php">Serviços</a></li>
-                <li><a href="/./LayoutFabrica/relatorios/os.php">Ordens de Serviço</a></li>                
-                <li><a title="consultarVendas.php?cache=1" onClick="abrirnotificacao(this)" style="cursor:pointer">vendas(itens)</a></li> 
-                <li><a href="index.php/relatorios/financeiro">Financeiro</a></li>
-
-            </ul>
-        </li>
+        
 
 
         <li class="submenu ">
@@ -61,7 +49,7 @@
 
 <div id="content">
     <div id="content-header">
-        <div id="breadcrumb"> <a href="https://www.ultramapos.online/" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="https://www.ultramapos.online/index.php/os" class="tip-bottom" title="Os">Os</a> <a href="https://www.ultramapos.online/index.php/os/editar/104" class="current tip-bottom" title="Editar">Editar</a> </div>
+        <div id="breadcrumb"> <a href="" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="https://www.ultramapos.online/index.php/os" class="tip-bottom" title="Os">Os</a> <a href="https://www.ultramapos.online/index.php/os/editar/104" class="current tip-bottom" title="Editar">Editar</a> </div>
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
@@ -119,13 +107,13 @@
 
                                             <div class="span12" id="divCadastrarOs">
 
-                                                <form action="https://www.ultramapos.online/index.php/os/editar/103" method="post" id="formOs">
+                                                <form action="" method="post" id="formOs">
                                                     <h3>Protocolo #1210</h3>
                                                     <?php foreach ($this->view->oneOs as $os) { ?>
                                                         <div class="span12" style="padding: 1%; margin-left: 1%; ">
                                                             <div class="span6">
                                                                 <label for="cliente">Cliente*</label>
-                                                                <input id="cliente" class="span12" type="text" name="cliente" value="<?= $os['nome'] ?>"   required  onKeyDown="if (event.keyCode == '13') {
+                                                                <input id="cliente" class="span12" type="text" name="cliente" value="<?= $os['nome_pessoa'] ?>"   required  onKeyDown="if (event.keyCode == '13') {
                                                                             document.getElementById('tecnico').focus();
                                                                             return false;
                                                                         }
@@ -194,11 +182,7 @@
                                                                 <div class="span6">
                                                                     <label for="descricaoServico">Descrição Serviço</label>
                                                                     <textarea class="span12" name="descricaoServico" id="descricaoServico" cols="30" rows="5"></textarea>
-                                                                </div>
-                                                                <div class="span6">
-                                                                    <label for="produtos">Produtos</label>
-                                                                    <textarea class="span12" name="produtos" id="produtos" cols="30" rows="5"></textarea>
-                                                                </div>
+                                                                </div>                                                                
                                                             </div>
 
                                                         </div>
@@ -228,7 +212,7 @@
                                                             
                                                         <?php foreach ($this->view->allProdutos as $allproduto){?>
                                                             <option value="<?=$allproduto['idProduto']?>">
-                                                        <?php echo $allproduto['nome']; ?>
+                                                        <?php echo $allproduto['nome_produto']; ?>
                                                             </option>                                                            
                                                         <?php } ?>
                                                             
@@ -257,11 +241,24 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr><td>Mantega</td><td>1</td><td><a href="" idAcao="118" prodAcao="1139" quantAcao="1" title="118" prodAcao="1139" quantAcao="1" class="btn btn-danger"><i class="icon-remove icon-white"></i></a></td><td>  <input type="text" class="span12" name="118" id="118" placeholder="Digite o nome do produto" value="100,00" onBlur="alterarpreco(this)" onKeyUp="alterado();"  required/> </td></tr>                                       
+                                                        <?php 
+                                                        $total = 0;
+                                                        foreach ($this->view->oneProsutos as $oneProdutos){
+                                                                 $subTotal = $oneProdutos['subTotal'];
+                                                                 $total = $total + $subTotal;
+                                                            ?>
                                                         <tr>
+                                                            <td><?=$oneProdutos['nome_produto']?></td>
+                                                            <td><?=$oneProdutos['quantidade']?></td>
+                                                            <td><a href="<?= base_url('')?>/os/oRemoverProduto?id=<?=$oneProdutos['idProdutos_os']?>"   title="Remover"  class="btn btn-danger"><i class="icon-remove icon-white"></i></a></td>
+                                                            <td><?=$oneProdutos['subTotal']?></td>
+                                                        </tr>                                       
+                                                        <tr>
+                                                            <?php } ?>
                                                             <td colspan="3" style="text-align: right"><strong>Total:</strong></td>
-                                                            <td><strong><div id="totalprodutos">R$ 100,00</div><input type="hidden" id="total-venda" value="100.00"></strong></td>
+                                                            <td><strong><div id="totalprodutos"><?=$total?></div><input type="hidden" id="total-venda" value="100.00"></strong></td>
                                                         </tr>
+                                                        
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -273,13 +270,19 @@
                                             <div class="span12" style="padding: 1%; margin-left: 0">
                                                 <div class="span12 well" style="padding: 1%; margin-left: 0">
 
-                                                    <form id="formServicoss" action="" method="post">
+                                                    <form id="formServicoss" action="<?= base_url('')?>/os/salvarOsServico" method="post">
                                                         <div class="span10">
-                                                            <input type="hidden" name="idServico" id="idServico" />
-                                                            <input type="hidden" name="idOsServico" id="idOsServico" value="104" />
-                                                            <input type="hidden" name="precoServico" id="precoServico" value=""/>
-                                                            <label for="">Serviço</label>
-                                                            <input type="text" class="span12" name="servico" id="servico" placeholder="Digite o nome do serviço" />
+                                                         <input type="hidden" name="os_id" id="idOsProduto" value="<?=$os['idOs']?>" />                                                        
+                                                        <label for="">Produto</label>
+                                                        <select class="span12" name="idServicos">
+                                                            
+                                                        <?php foreach ($this->view->allServicos as $allservico){?>
+                                                            <option value="<?=$allservico['idServicos']?>">
+                                                        <?php echo $allservico['nome_servico']; ?>
+                                                            </option>                                                            
+                                                        <?php } ?>
+                                                            
+                                                        </select>
                                                         </div>
                                                         <div class="span2">
                                                             <label for="">.</label>
@@ -297,10 +300,22 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                            <?php
+                                                            $total = 0;
+                                                            foreach ($this->view->oneServicos as $oneservicos) {
+                                                                $total = $total + $oneservicos['subTotal'];
+                                                            }?>
 
                                                             <tr>
+                                                            <td><?=$oneservicos['nome_servico']?></td>
+                                                            
+                                                            <td><a href="<?= base_url('')?>/os/oRemoverProduto?id=<?=$oneservicos['idProdutos_os']?>"   title="Remover"  class="btn btn-danger"><i class="icon-remove icon-white"></i></a></td>
+                                                            <td><?=$oneservicos['subTotal']?></td>
+                                                        </tr>
+                                                            <?}?>
+                                                            <tr>
                                                                 <td colspan="2" style="text-align: right"><strong>Total:</strong></td>
-                                                                <td><strong>R$ 0,00<input type="hidden" id="total-servico" value="0.00"></strong></td>
+                                                                <td><strong><?=$total?><input type="hidden" id="total-servico" value="0.00"></strong></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -459,891 +474,7 @@
                                         <script type="text/javascript" src="https://www.ultramapos.online/js/jquery.validate.js"></script>
                                         <script src="https://www.ultramapos.online/js/maskmoney.js"></script>
                                         <script src="https://www.ultramapos.online/cookie.js"></script>
-                                        <script type="text/javascript">
-
-                                                                    $(document).on('click', 'a', function (event) {
-                                                                        var idProduto = $(this).attr('idAcao');
-
-                                                                        var quantidade = $(this).attr('quantAcao');
-                                                                        var produto = $(this).attr('prodAcao');
-                                                                        if ((idProduto % 1) == 0) {
-                                                                            $("#divProdutos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
-                                                                            $.ajax({
-                                                                                type: "POST",
-                                                                                url: "https://www.ultramapos.online/osprodutos.php?deletar=1",
-                                                                                data: "idProduto=" + idProduto + "&quantidade=" + quantidade + "&produto=" + produto,
-                                                                                //   dataType: 'json',
-                                                                                error: function ()
-                                                                                {
-                                                                                    alert('Houve um problema com a conexão');
-                                                                                    $("#divProdutos").load("https://www.ultramapos.online/index.php/os/editar/104 #divProdutos");
-                                                                                },
-                                                                                success: function (data)
-                                                                                {
-
-                                                                                    $("#divProdutos").load("https://www.ultramapos.online/index.php/os/editar/104 #divProdutos");
-                                                                                    var mensagem = data.length;
-                                                                                    if (mensagem > 2)
-                                                                                    {
-
-                                                                                        document.getElementById("divnotificacoes2").style.display = "block";
-
-                                                                                        document.getElementById("divnotificacoes").innerHTML = data;
-
-
-                                                                                    }
-
-                                                                                }
-                                                                            });
-                                                                            return false;
-                                                                        }
-
-                                                                    });
-
-
-                                                                    $(document).ready(function () {
-                                                                        $('#formProdutoss').submit(function () {
-                                                                            var dados = jQuery(this).serialize();
-                                                                            $("#divProdutos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
-                                                                            $.ajax({
-                                                                                type: "post",
-                                                                                timeout: 20000,
-                                                                                url: "https://www.ultramapos.online/osprodutos.php",
-                                                                                data: dados,
-
-                                                                                //	beforeSend:function()
-                                                                                //	{
-                                                                                //			$('#divaguarde').show("fast");
-                                                                                //		},
-                                                                                //		complete:function()
-                                                                                //		{
-                                                                                //			$('#divaguarde').hide("slow");
-                                                                                //		},
-
-
-                                                                                error: function ()
-                                                                                {
-                                                                                    alert('Houve um problema com a conexão');
-                                                                                    $("#divProdutos").load("https://www.ultramapos.online/index.php/os/editar/104 #divProdutos");
-                                                                                    $("#quantidade").val('');
-                                                                                    $("#produto").val('').focus();
-                                                                                },
-
-                                                                                success: function (data)
-                                                                                {
-
-                                                                                    var mensagem = data.length;
-                                                                                    if (mensagem > 2)
-
-                                                                                    {
-
-                                                                                        document.getElementById("divnotificacoes2").style.display = "block";
-
-                                                                                        document.getElementById("divnotificacoes").innerHTML = data;
-                                                                                    }
-
-
-                                                                                    $("#divProdutos").load("https://www.ultramapos.online/index.php/os/editar/104 #divProdutos");
-                                                                                    $("#quantidade").val('');
-                                                                                    $("#produto").val('').focus();
-
-                                                                                }
-
-
-                                                                            });
-
-                                                                            return false;
-                                                                        });
-                                                                    });
-
-
-                                                                    /*$(function() {
-                                                                     var tecnicoauto = ;
-                                                                     $("#tecnico").autocomplete({
-                                                                     source: tecnicoauto,
-                                                                     minLength: 2,
-                                                                     select: function( event, ui ) {
-                                                                     
-                                                                     $("#usuarios_id").val(ui.item.id);
-                                                                     
-                                                                     
-                                                                     }
-                                                                     });
-                                                                     });*/
-
-                                                                    //AQUI FALTA COLOCAR A VARIAVEL SESSAO IGUAL AOS OUTROS AUTO COMPLETE
-                                                                    $(function () {
-                                                                        $("#cliente").autocomplete({
-                                                                            source: "https://www.ultramapos.online/index.php/os/autoCompleteCliente",
-                                                                            minLength: 2,
-                                                                            select: function (event, ui) {
-
-                                                                                $("#clientes_id").val(ui.item.id);
-
-
-                                                                            }
-                                                                        });
-
-                                                                    });
-
-                                                                    $(function () {
-                                                                        var prodauto = [{"label": "Mantega | Pre\u00e7o: R$100.00 | Estoque: 199", "estoque": "199", "id": "1139", "preco": "100.00"}];
-                                                                        $("#produto").autocomplete({
-                                                                            source: prodauto,
-
-                                                                            minLength: 2,
-                                                                            select: function (event, ui) {
-
-                                                                                $("#idProduto").val(ui.item.id);
-                                                                                $("#estoque").val(ui.item.estoque);
-                                                                                $("#preco").val(ui.item.preco);
-                                                                                $("#quantidade").focus();
-
-
-                                                                            }
-
-                                                                        });
-                                                                    });
-                                        </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        <script type="text/javascript">
-                                            $(document).ready(function () {
-
-                                                $(".money").maskMoney();
-
-                                                $('#recebido').click(function (event) {
-                                                    var flag = $(this).is(':checked');
-                                                    if (flag == true) {
-                                                        $('#divRecebimento').show();
-                                                    } else {
-                                                        $('#divRecebimento').hide();
-                                                    }
-                                                });
-
-                                                $(document).on('click', '#btn-faturar', function (event) {
-                                                    event.preventDefault();
-                                                    valor = $('#total-venda').val();
-                                                    total_servico = $('#total-servico').val();
-                                                    valor = valor.replace(',', '');
-                                                    total_servico = total_servico.replace(',', '');
-                                                    total_servico = parseFloat(total_servico);
-                                                    valor = parseFloat(valor);
-                                                    $('#valor').val(valor + total_servico);
-                                                });
-
-                                                $("#formFaturarr").validate({
-
-                                                    rules: {
-                                                        descricao: {required: true}
-                                                        //       cliente: {required:true},
-                                                        //       valor: {required:true},
-                                                        //      vencimento: {required:true}
-
-
-                                                    },
-                                                    messages: {
-                                                        descricao: {required: 'Campo Requerido.'}
-                                                        //    cliente: {required: 'Campo Requerido.'},
-                                                        //    valor: {required: 'Campo Requerido.'},
-                                                        //    vencimento: {required: 'Campo Requerido.'}
-                                                    },
-                                                    submitHandler: function (form) {
-                                                        document.getElementById('desabilitarbody').style.display = 'block';
-                                                        var dados = $(form).serialize();
-                                                        $('#btn-cancelar-faturar').trigger('click');
-                                                        $.ajax({
-
-                                                            type: "POST",
-                                                            url: "https://www.ultramapos.online/faturarOS.php",
-                                                            data: dados,
-                                                            //   dataType: 'json',
-                                                            error: function ()
-                                                            {
-                                                                document.getElementById('desabilitarbody').style.display = 'none';
-                                                                alert('Ocorreu um erro ao tentar faturar OS.');
-                                                            },
-                                                            success: function (data)
-                                                            {
-                                                                if (data.length < 7) {
-
-                                                                    window.location.reload(true);
-
-                                                                    if (document.getElementById('formaPgto').value == 'Cartão de Crédito' || document.getElementById('formaPgto').value == 'Débito')
-                                                                    {
-                                                                        alert('Os faturada com sucesso. Os valores (taxa do cartão e faturamento) foi automaticamente para o lançamentos financeiros. (Despesas, receita respectivamente)');
-                                                                    } else
-                                                                    {
-                                                                        alert('Os faturada com sucesso. O valor foi automaticamente para o lançamentos financeiros.');
-                                                                    }
-
-
-
-                                                                } else {
-                                                                    document.getElementById('desabilitarbody').style.display = 'none';
-                                                                    document.getElementById("divnotificacoes2").style.display = "block";
-
-                                                                    document.getElementById("divnotificacoes").innerHTML = data;
-
-                                                                    //         $('#progress-fatura').hide();
-                                                                }
-                                                            }
-                                                        });
-
-                                                        return false;
-                                                    }
-                                                });
-
-                                                //    $("#produto").autocomplete({
-
-
-
-                                                //          source: "index.php/os/autoCompleteProduto",
-                                                //          minLength: 2,
-                                                //          select: function( event, ui ) {
-
-                                                //              $("#idProduto").val(ui.item.id);
-                                                //              $("#estoque").val(ui.item.estoque);
-                                                //              $("#preco").val(ui.item.preco);
-                                                //             $("#quantidade").focus();
-
-
-                                                //        }
-                                                //   });
-
-
-
-
-
-
-                                                //    $("#servico").autocomplete({
-                                                //          source: "index.php/os/autoCompleteServico",
-                                                //        minLength: 2,
-                                                //           select: function( event, ui ) {
-
-                                                //               $("#idServico").val(ui.item.id);
-                                                //              $("#precoServico").val(ui.item.preco);
-
-
-                                                //          }
-                                                //    });
-
-
-
-                                                //    $("#tecnico").autocomplete({
-                                                //          source: "index.php/os/autoCompleteUsuario",
-                                                //           minLength: 2,
-                                                //           select: function( event, ui ) {
-
-                                                //                $("#usuarios_id").val(ui.item.id);
-
-                                                //
-                                                //          }
-                                                //      });
-
-
-
-
-                                                $("#formOs").validate({
-                                                    rules: {
-                                                        cliente: {required: true},
-                                                        tecnico: {required: true},
-                                                        dataInicial: {required: true}
-                                                    },
-                                                    messages: {
-                                                        cliente: {required: 'Campo Requerido.'},
-                                                        tecnico: {required: 'Campo Requerido.'},
-                                                        dataInicial: {required: 'Campo Requerido.'}
-                                                    },
-
-                                                    errorClass: "help-inline",
-                                                    errorElement: "span",
-                                                    highlight: function (element, errorClass, validClass) {
-                                                        $(element).parents('.control-group').addClass('error');
-                                                    },
-                                                    unhighlight: function (element, errorClass, validClass) {
-                                                        $(element).parents('.control-group').removeClass('error');
-                                                        $(element).parents('.control-group').addClass('success');
-                                                    }
-                                                });
-
-
-
-
-                                                /*$("#formProdutos").validate({
-                                                 rules:{
-                                                 quantidade: {required:true}
-                                                 },
-                                                 messages:{
-                                                 quantidade: {required: 'Insira a quantidade'}
-                                                 },
-                                                 submitHandler: function( form ){
-                                                 var quantidade = parseInt($("#quantidade").val());
-                                                 var estoque = parseInt($("#estoque").val());
-                                                 if(estoque < quantidade){
-                                                 alert('Você não possui estoque suficiente.');
-                                                 }
-                                                 else{
-                                                 var dados = $( form ).serialize();
-                                                 $("#divProdutos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
-                                                 $.ajax({
-                                                 type: "POST",
-                                                 url: "index.php/os/adicionarProduto",
-                                                 data: dados,
-                                                 dataType: 'json',
-                                                 success: function(data)
-                                                 {
-                                                 if(data.result == true){
-                                                 $( "#divProdutos" ).load(" #divProdutos" );
-                                                 $("#quantidade").val('');
-                                                 $("#produto").val('').focus();
-                                                 
-                                                 }
-                                                 else{
-                                                 alert('Ocorreu um erro ao tentar adicionar produto.');
-                                                 alert(data.idproduto);
-                                                 
-                                                 $( "#divProdutos" ).load(" #divProdutos" );
-                                                 $("#quantidade").val('');
-                                                 $("#produto").val('').focus();
-                                                 
-                                                 }
-                                                 }
-                                                 });
-                                                 
-                                                 return false;
-                                                 }
-                                                 
-                                                 }
-                                                 
-                                                 });*/
-
-                                                $("#formServicos").validate({
-                                                    rules: {
-                                                        servico: {required: true}
-                                                    },
-                                                    messages: {
-                                                        servico: {required: 'Insira um serviço'}
-                                                    },
-                                                    submitHandler: function (form) {
-                                                        var dados = $(form).serialize();
-
-                                                        $("#divServicos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
-                                                        $.ajax({
-                                                            type: "POST",
-                                                            url: "https://www.ultramapos.online/index.php/os/adicionarServico",
-                                                            data: dados,
-                                                            dataType: 'json',
-                                                            success: function (data)
-                                                            {
-                                                                if (data.result == true) {
-                                                                    $("#divServicos").load("https://www.ultramapos.online/index.php/os/editar/104 #divServicos");
-                                                                    $("#servico").val('').focus();
-                                                                } else {
-                                                                    alert('Ocorreu um erro ao tentar adicionar serviço.');
-                                                                    alert(data.servico);
-                                                                    $("#divServicos").load("https://www.ultramapos.online/index.php/os/editar/104 #divServicos");
-                                                                    $("#servico").val('').focus();
-                                                                }
-                                                            }
-                                                        });
-
-                                                        return false;
-                                                    }
-
-                                                });
-
-
-                                                $("#formAnexos").validate({
-
-                                                    submitHandler: function (form) {
-                                                        //var dados = $( form ).serialize();
-                                                        var dados = new FormData(form);
-                                                        $("#form-anexos").hide('1000');
-                                                        $("#divAnexos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
-                                                        $.ajax({
-                                                            type: "POST",
-                                                            url: "https://www.ultramapos.online/osAnexar.php",
-                                                            data: dados,
-                                                            mimeType: "multipart/form-data",
-                                                            contentType: false,
-                                                            cache: false,
-                                                            processData: false,
-                                                            //  dataType: 'json',
-
-                                                            success: function (data)
-                                                            {
-                                                                if (data.length < 3) {
-
-                                                                    $("#divAnexos").load("https://www.ultramapos.online/index.php/os/editar/104 #divAnexos");
-                                                                    $("#userfile").val('');
-
-                                                                } else {
-                                                                    //	alert(data);
-                                                                    document.getElementById("divnotificacoes2").style.display = "block";
-
-                                                                    document.getElementById("divnotificacoes").innerHTML = data;
-
-                                                                    $("#divAnexos").html('<div class="alert fade in"><button type="button" class="close" data-dismiss="alert">×</button><strong>Atenção!</strong> ' + data.mensagem + '</div>');
-                                                                }
-                                                            },
-                                                            error: function () {
-                                                                $("#divAnexos").html('<div class="alert alert-danger fade in"><button type="button" class="close" data-dismiss="alert">×</button><strong>Atenção!</strong> Ocorreu um erro. Verifique se você anexou o(s) arquivo(s).</div>');
-                                                            }
-
-                                                        });
-
-                                                        $("#form-anexos").show('1000');
-                                                        return false;
-                                                    }
-
-                                                });
-
-
-
-
-
-                                                $(document).on('click', 'span', function (event) {
-                                                    var idServico = $(this).attr('idAcao');
-                                                    if ((idServico % 1) == 0) {
-                                                        $("#divServicos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
-                                                        $.ajax({
-                                                            type: "POST",
-                                                            url: "https://www.ultramapos.online/osservicos.php?deletar=1",
-                                                            data: "idServico=" + idServico,
-                                                            //  dataType: 'json',
-                                                            success: function (data)
-                                                            {
-                                                                var mensagem = data.length;
-
-                                                                if (mensagem > 5)
-                                                                {
-
-                                                                    document.getElementById("divnotificacoes2").style.display = "block";
-
-                                                                    document.getElementById("divnotificacoes").innerHTML = data;
-                                                                }
-
-
-                                                                $("#divServicos").load("https://www.ultramapos.online/index.php/os/editar/104 #divServicos");
-
-
-                                                            }
-                                                        });
-                                                        return false;
-                                                    }
-
-                                                });
-
-
-                                                $(document).on('click', '.anexo', function (event) {
-                                                    event.preventDefault();
-                                                    var link = $(this).attr('link');
-                                                    var id = $(this).attr('imagem');
-                                                    var url = 'https://www.ultramapos.online/os/excluirAnexo/';
-                                                    $("#div-visualizar-anexo").html('<img src="' + link + '" alt="">');
-                                                    $("#excluir-anexo").attr('link', url + id);
-
-                                                    $("#download").attr('href', "https://www.ultramapos.online/index.php/os/downloadanexo/" + id);
-
-                                                });
-
-                                                $(document).on('click', '#excluir-anexo', function (event) {
-                                                    event.preventDefault();
-
-                                                    var link = $(this).attr('link');
-                                                    $('#modal-anexo').modal('hide');
-                                                    $("#divAnexos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
-
-                                                    $.ajax({
-                                                        type: "POST",
-                                                        url: link,
-                                                        dataType: 'json',
-                                                        success: function (data)
-                                                        {
-                                                            if (data.result == true) {
-                                                                $("#divAnexos").load("https://www.ultramapos.online/index.php/os/editar/104 #divAnexos");
-                                                            } else {
-                                                                alert(data.mensagem);
-                                                            }
-                                                        }
-                                                    });
-                                                });
-
-
-
-                                                $(".datepicker").datepicker({dateFormat: 'dd/mm/yy'});
-
-
-
-
-                                            });
-
-
-
-
-
-
-                                            $(document).ready(function () {
-                                                $('#formServicoss').submit(function () {
-                                                    var dados = jQuery(this).serialize();
-                                                    $("#divServicos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
-                                                    $.ajax({
-                                                        type: "post",
-                                                        timeout: 20000,
-                                                        url: "https://www.ultramapos.online/osservicos.php",
-                                                        data: dados,
-
-                                                        //	beforeSend:function()
-                                                        //	{
-                                                        //			$('#divaguarde').show("fast");
-                                                        //		},
-                                                        //		complete:function()
-                                                        //		{
-                                                        //			$('#divaguarde').hide("slow");
-                                                        //		},
-
-
-                                                        error: function ()
-                                                        {
-                                                            alert('Houve um problema com a conexão');
-                                                            $("#divServicos").load("https://www.ultramapos.online/index.php/os/editar/104 #divServicos");
-                                                            $("#servico").val('').focus();
-                                                        },
-
-                                                        success: function (data)
-                                                        {
-                                                            var mensagem = data.length;
-                                                            if (mensagem > 2)
-                                                            {
-
-                                                                document.getElementById("divnotificacoes2").style.display = "block";
-
-                                                                document.getElementById("divnotificacoes").innerHTML = data;
-                                                            }
-
-                                                            $("#divServicos").load("https://www.ultramapos.online/index.php/os/editar/104 #divServicos");
-                                                            $("#servico").val('').focus();
-                                                        }
-
-
-                                                    });
-
-                                                    return false;
-                                                });
-                                            });
-
-                                            function fecharnotif()
-                                            {
-                                                document.getElementById("divnotificacoes2").style.display = "none";
-
-                                            }
-
-                                            function readURL(input, id) {
-                                                if (input.files && input.files[0]) {
-                                                    var reader = new FileReader();
-
-                                                    reader.onload = function (e) {
-                                                        $('#' + id)
-                                                                .attr('src', e.target.result)
-                                                                ;
-                                                    }
-
-                                                    reader.readAsDataURL(input.files[0]);
-                                                }
-                                            }
-
-
-
-
-
-
-
-
-
-                                            $(function () {
-                                                var servauto = [{"label": "pessoa fisica | Pre\u00e7o: R$20.00", "id": "81", "preco": "20.00"}];
-                                                $("#servico").autocomplete({
-                                                    source: servauto,
-                                                    minLength: 2,
-                                                    select: function (event, ui) {
-
-                                                        $("#idServico").val(ui.item.id);
-                                                        $("#precoServico").val(ui.item.preco);
-
-
-                                                    }
-                                                });
-                                            });
-                                            var Valterado = false;
-
-                                            function alterado()
-                                            {
-                                                Valterado = true;
-
-                                            }
-
-                                            function alterarpreco(elemento)
-                                            {
-                                                if (Valterado == true)
-                                                {
-                                                    id = elemento.id;
-                                                    valor = elemento.value;
-                                                    document.getElementById('desabilitarbody').style.display = 'block';
-                                                    $.ajax({
-                                                        timeout: 18000,
-                                                        type: "GET",
-
-                                                        url: 'https://www.ultramapos.online/mudarpreco.php?id=' + id + '&valor=' + valor,
-
-                                                        /*		beforeSend:function()
-                                                         {
-                                                         $('#divaguarde').show("fast");
-                                                         },
-                                                         complete:function()
-                                                         {
-                                                         $('#divaguarde').hide("slow");
-                                                         },
-                                                         
-                                                         error:function()
-                                                         {
-                                                         alert('Houve um problema com a conexão');
-                                                         },
-                                                         
-                                                         */
-                                                        success: function (data)
-                                                        {
-
-                                                            //	if (mensagem!='1')
-                                                            // 	alert(data);
-
-
-                                                            //		document.getElementById('rodapeposicao').style.display='block';
-                                                            //		document.getElementById('divposicaopai').style.display='block';
-                                                            //$("#divposicao").load("pontuacao.php");
-                                                            //$("#carrinho").load("'../../imagens/intens/3.png'");
-
-                                                            if (data.length > 5)
-                                                            {
-                                                                alert('houve um problema com a conexão');
-
-                                                            }
-                                                            //	document.body.disabled=true;
-
-
-                                                            document.getElementById('formProdutoss').disabled = true;
-                                                            document.getElementById('totalprodutos').innerHTML = 'NaN';
-                                                            document.getElementById('total-venda').innerHTML = 'NaN';
-                                                            window.location.reload(true);
-
-                                                            // pcarrinho.innerHTML = parseInt(quantcarrinho)-parseInt(1);
-                                                            //   document.getElementById("divcarrinho").style.width='40%';
-                                                            //	document.getElementById("divcarrinho").style.height='20%';
-
-                                                        }
-
-
-                                                    });
-
-
-
-                                                }
-                                                Valterado = false;
-
-
-                                            }
-
-
-
-                                            function enviaremail() {
-                                                document.getElementById('desabilitarbody').style.display = 'block';
-                                                $.ajax({
-                                                    type: "get",
-                                                    url: "https://www.ultramapos.online/enviarEmailOs.php?idOs=104&protocolo=812483",
-                                                    dataType: 'html',
-                                                    //data:dados,
-                                                    //		beforeSend:function()
-                                                    //	{
-                                                    //			$('#divaguarde').show("fast");
-                                                    //		},
-                                                    //		complete:function()
-                                                    //		{
-                                                    //			$('#divaguarde').hide("slow");
-                                                    //		},
-
-                                                    error: function ()
-                                                    {
-                                                        document.getElementById('desabilitarbody').style.display = 'none';
-                                                        alert('Houve um problema com a conexão');
-
-                                                    },
-
-                                                    success: function (data)
-                                                    {
-                                                        document.getElementById('desabilitarbody').style.display = 'none';
-
-                                                        if (data.length > 5)
-                                                        {
-                                                            alert(data);
-
-                                                        } else
-                                                        {
-
-                                                            alert('Email enviado com sucesso');
-                                                        }
-
-
-
-
-
-
-                                                    }
-                                                });
-
-                                            }
-
-                                            var valortotal = "0";
-
-                                            function redefinir2() {
-
-                                                document.getElementById('modal-faturar').style.display = 'block';
-                                                document.getElementById('desconto').value = '0';
-
-                                                document.getElementById("parcelas").options[0].selected = true;
-                                                document.getElementById('valorporparcela').innerHTML = '';
-
-                                            }
-
-                                            function recuperarvalortotal() {
-                                                var Vdesconto = document.getElementById('desconto').value;
-                                                if (Vdesconto > 100)
-                                                {
-
-                                                    return false;
-                                                }
-
-                                                if (Vdesconto < 0)
-                                                {
-
-                                                    return false;
-                                                }
-
-                                                //regra de tres;
-                                                porcetagem = 100 - Vdesconto;
-                                                valortotal2 = document.getElementById('valor').value * 100;
-                                                valortotal = (valortotal2 / porcetagem);
-
-                                            }
-
-                                            function fdesconto() {
-                                                var Vdesconto = document.getElementById('desconto').value;
-
-                                                if (Vdesconto > 100)
-                                                {
-                                                    alert('O desconto não pode ser maior que 100%');
-                                                    return false;
-                                                }
-
-                                                if (Vdesconto < 0)
-                                                {
-                                                    alert('O desconto não pode ser menor que 0%');
-                                                    return false;
-                                                }
-
-                                                valortotal2 = valortotal - (valortotal / 100 * Vdesconto);
-                                                document.getElementById('valor').value = valortotal2.toFixed(2);
-
-                                                parcelasF();
-
-                                            }
-
-                                            fdesconto();
-
-
-                                            var parcelas = 0;
-
-                                            function parcelasF() {
-                                                var valor = document.getElementById("valor").value;
-                                                var valorparcelas = document.getElementById("parcelas").value;
-
-                                                if (valorparcelas == '-')
-                                                {
-                                                    document.getElementById('valorporparcela').innerHTML = '';
-
-                                                    document.getElementById('datavencimentoprimeiro').innerHTML = 'data Vencimento*';
-                                                    document.getElementById('recebido').disabled = false;
-                                                } else
-                                                {
-                                                    //if (document.getElementById('divRecebimento').style.display=="block")
-                                                    document.getElementById('divRecebimento').style.display = "none";
-
-                                                    document.getElementById('recebido').checked = false;
-                                                    document.getElementById('recebido').disabled = true;
-                                                    document.getElementById('valorporparcela').innerHTML = 'Valor por parcelas: ' + ((valor / valorparcelas).toFixed(2));
-                                                    document.getElementById('datavencimentoprimeiro').innerHTML = 'Data 1° Pagto*';
-
-                                                }
-                                            }
-
-                                            function aparecetaxa() {
-
-                                                //	alert('olá');
-
-                                                if ((document.getElementById('formaPgto').value == 'Cartão de Crédito' || document.getElementById('formaPgto').value == 'Débito'))
-                                                {
-                                                    document.getElementById('divtaxa').style.display = 'block';
-                                                    document.getElementById('divparcelasc').style.display = 'block';
-
-
-                                                } else
-                                                {
-
-                                                    document.getElementById('divtaxa').style.display = 'none';
-                                                    document.getElementById('divparcelasc').style.display = 'none';
-                                                }
-
-
-                                            }
-
-
-                                            function setartaxaparcela(elemento)
-                                            {
-
-                                                valor = elemento.value;
-
-                                                document.getElementById('taxa').value = getCookie(valor);
-                                            }
-
-
-                                            function enviarfaturar()
-                                            {
-
-
-
-                                                document.getElementById('formFaturarr').submit();
-                                                alert('oi');
-                                            }
-
-                                        </script>
+                                        
 
 
 

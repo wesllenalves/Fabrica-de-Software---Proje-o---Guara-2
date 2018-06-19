@@ -71,6 +71,7 @@ abstract class BaseModel {
     }
 
     public function insert(array $campos_values) {
+       
         //atribui a uma variavel a quantidade de tabelas a ser usadas
         $total = $this->tabelaUse;
         switch ($total) {
@@ -83,7 +84,7 @@ abstract class BaseModel {
                     $insert_values_0 = implode("','", $values_array_0);
 
                     $query1 = $this->con->conecta()->prepare("INSERT INTO $this->tabela ({$insert_campos_0}) VALUES('{$insert_values_0}');");
-                    
+//                    print_r($query1); die();
                     if ($query1->execute()) {
                         $id = $this->con->conecta()->lastInsertId();
                         
@@ -260,7 +261,7 @@ abstract class BaseModel {
 
             $where_sql = empty($where) ? "" : "WHERE " . $where;
             $r = $this->con->conecta()->prepare("SELECT {$campos} FROM $this->tabela {$where_sql};");
-//            print_r($r); die();
+//print_r($r); die();
             if ($r->execute()) {
                 //print_r($r->fetchAll()); die();
                 return $r->fetchAll();

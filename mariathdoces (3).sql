@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 19-Jun-2018 às 08:02
+-- Generation Time: 19-Jun-2018 às 23:33
 -- Versão do servidor: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -216,7 +216,7 @@ INSERT INTO `orcamento` (`idOrcamento`, `nome`, `telefone`, `descricao`, `cidade
 
 CREATE TABLE `os` (
   `idOs` int(11) NOT NULL,
-  `nome` varchar(11) NOT NULL,
+  `nome_pessoa` varchar(11) NOT NULL,
   `usuarios_id` varchar(255) DEFAULT NULL,
   `status` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
   `dataInicial` date DEFAULT NULL,
@@ -236,10 +236,8 @@ CREATE TABLE `os` (
 -- Extraindo dados da tabela `os`
 --
 
-INSERT INTO `os` (`idOs`, `nome`, `usuarios_id`, `status`, `dataInicial`, `dataFinal`, `telefone`, `quantidade`, `cidade`, `produtos`, `descricaoServico`, `valorTotal`, `lancamento`, `faturado`, `dataCadastro`) VALUES
-(4, 'wesllen alv', '', 'Aberto', '2018-06-17', '2018-06-30', '61981745695', 12, 'brasilia', 'bolo,casquinha', 'festa para um casamento ', NULL, NULL, 0, '0000-00-00 00:00:00'),
+INSERT INTO `os` (`idOs`, `nome_pessoa`, `usuarios_id`, `status`, `dataInicial`, `dataFinal`, `telefone`, `quantidade`, `cidade`, `produtos`, `descricaoServico`, `valorTotal`, `lancamento`, `faturado`, `dataCadastro`) VALUES
 (5, 'pessoa fisi', '', 'Em Andamento', '2018-06-17', '2018-06-25', '61981745695', 1, 'brasilia', 'bolo', 'servico', NULL, NULL, 0, '0000-00-00 00:00:00'),
-(3, 'wesllen alv', '', 'Em Andamento', '2018-06-16', '2018-09-14', '61981745695', 12, 'brasilia', 'caro, bolo', 'festa', NULL, NULL, 0, '0000-00-00 00:00:00'),
 (6, 'pessoa fisi', '', 'Aberto', '2018-06-17', '2018-06-17', '61981745695', 1, 'brasilia', 'bolo', 'ws', NULL, NULL, 0, '0000-00-00 00:00:00'),
 (7, 'pessoa fisi', '', 'Aberto', '2018-06-17', '2018-06-17', '61981745695', 1, 'brasilia', 'bolo', 'ws', NULL, NULL, 0, '0000-00-00 00:00:00'),
 (8, 'pessoa fisi', '', 'OrÃ§amento', '2018-06-15', '2018-06-17', '61981745695', 1, 'brasilia', 'festa', 'festa', NULL, NULL, 0, '0000-00-00 00:00:00'),
@@ -254,7 +252,7 @@ INSERT INTO `os` (`idOs`, `nome`, `usuarios_id`, `status`, `dataInicial`, `dataF
 
 CREATE TABLE `produto` (
   `idProduto` int(11) NOT NULL,
-  `nome` varchar(100) NOT NULL,
+  `nome_produto` varchar(100) NOT NULL,
   `unidade` varchar(255) NOT NULL,
   `precoCompra` decimal(10,2) NOT NULL,
   `precoVenda` decimal(10,2) NOT NULL,
@@ -268,10 +266,37 @@ CREATE TABLE `produto` (
 -- Extraindo dados da tabela `produto`
 --
 
-INSERT INTO `produto` (`idProduto`, `nome`, `unidade`, `precoCompra`, `precoVenda`, `estoque`, `estoqueMinimo`, `validade`, `dataModificado`) VALUES
+INSERT INTO `produto` (`idProduto`, `nome_produto`, `unidade`, `precoCompra`, `precoVenda`, `estoque`, `estoqueMinimo`, `validade`, `dataModificado`) VALUES
 (2, 'bolo', 'KG', '200.00', '300.00', 20, 10, '2018-06-13', '0000-00-00 00:00:00'),
-(3, 'bolo', 'KG', '0.02', '0.03', 20, 1, '2018-06-13', '0000-00-00 00:00:00'),
-(4, 'bolo', 'KG', '0.00', '0.00', 1, 1, '2018-06-13', '0000-00-00 00:00:00');
+(3, 'nescal', 'KG', '0.02', '10.00', 20, 1, '2018-06-13', '0000-00-00 00:00:00'),
+(4, 'pao', 'KG', '0.00', '0.00', 1, 1, '2018-06-13', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `produtos_os`
+--
+
+CREATE TABLE `produtos_os` (
+  `idProdutos_os` int(11) NOT NULL,
+  `quantidade` int(11) NOT NULL,
+  `os_id` int(11) NOT NULL,
+  `produtos_id` int(11) NOT NULL,
+  `subTotal` varchar(15) DEFAULT NULL,
+  `DataCadastro` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `produtos_os`
+--
+
+INSERT INTO `produtos_os` (`idProdutos_os`, `quantidade`, `os_id`, `produtos_id`, `subTotal`, `DataCadastro`) VALUES
+(1, 2, 10, 3, '20', '0000-00-00 00:00:00'),
+(2, 1, 10, 3, '10', '0000-00-00 00:00:00'),
+(4, 20, 10, 3, '200', '0000-00-00 00:00:00'),
+(5, 10, 10, 3, '100', '0000-00-00 00:00:00'),
+(6, 20, 10, 3, '200', '0000-00-00 00:00:00'),
+(7, 20, 10, 3, '200', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -281,7 +306,8 @@ INSERT INTO `produto` (`idProduto`, `nome`, `unidade`, `precoCompra`, `precoVend
 
 CREATE TABLE `servicos` (
   `idServicos` int(11) NOT NULL,
-  `nome` varchar(45) NOT NULL,
+  `id_os` int(11) NOT NULL,
+  `nome_servico` varchar(45) NOT NULL,
   `descricao` varchar(45) DEFAULT NULL,
   `preco` decimal(10,2) NOT NULL,
   `dataModificado` datetime NOT NULL
@@ -291,8 +317,30 @@ CREATE TABLE `servicos` (
 -- Extraindo dados da tabela `servicos`
 --
 
-INSERT INTO `servicos` (`idServicos`, `nome`, `descricao`, `preco`, `dataModificado`) VALUES
-(8, 'pessoa fisica', 'bolo', '0.00', '0000-00-00 00:00:00');
+INSERT INTO `servicos` (`idServicos`, `id_os`, `nome_servico`, `descricao`, `preco`, `dataModificado`) VALUES
+(8, 0, 'pessoa fisica', 'bolo', '0.00', '0000-00-00 00:00:00'),
+(10, 0, 'decoraÃ§Ã£o', 'decora toda sua casa', '200.00', '2018-06-19 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `servicos_os`
+--
+
+CREATE TABLE `servicos_os` (
+  `idServicos_os` int(11) NOT NULL,
+  `os_id` int(11) NOT NULL,
+  `servicos_id` int(11) NOT NULL,
+  `subTotal` varchar(15) DEFAULT NULL,
+  `dataCadastro` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `servicos_os`
+--
+
+INSERT INTO `servicos_os` (`idServicos_os`, `os_id`, `servicos_id`, `subTotal`, `dataCadastro`) VALUES
+(1, 10, 10, '200.00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -381,7 +429,7 @@ ALTER TABLE `orcamento`
 --
 ALTER TABLE `os`
   ADD PRIMARY KEY (`idOs`),
-  ADD KEY `fk_os_clientes1` (`nome`),
+  ADD KEY `fk_os_clientes1` (`nome_pessoa`),
   ADD KEY `fk_os_usuarios1` (`usuarios_id`),
   ADD KEY `fk_os_lancamentos1` (`lancamento`);
 
@@ -392,10 +440,26 @@ ALTER TABLE `produto`
   ADD PRIMARY KEY (`idProduto`);
 
 --
+-- Indexes for table `produtos_os`
+--
+ALTER TABLE `produtos_os`
+  ADD PRIMARY KEY (`idProdutos_os`),
+  ADD KEY `fk_produtos_os_os1` (`os_id`),
+  ADD KEY `fk_produtos_os_produtos1` (`produtos_id`);
+
+--
 -- Indexes for table `servicos`
 --
 ALTER TABLE `servicos`
   ADD PRIMARY KEY (`idServicos`);
+
+--
+-- Indexes for table `servicos_os`
+--
+ALTER TABLE `servicos_os`
+  ADD PRIMARY KEY (`idServicos_os`),
+  ADD KEY `fk_servicos_os_os1` (`os_id`),
+  ADD KEY `fk_servicos_os_servicos1` (`servicos_id`);
 
 --
 -- Indexes for table `vendas`
@@ -474,10 +538,22 @@ ALTER TABLE `produto`
   MODIFY `idProduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `produtos_os`
+--
+ALTER TABLE `produtos_os`
+  MODIFY `idProdutos_os` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `servicos`
 --
 ALTER TABLE `servicos`
-  MODIFY `idServicos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idServicos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `servicos_os`
+--
+ALTER TABLE `servicos_os`
+  MODIFY `idServicos_os` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `vendas`

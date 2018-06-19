@@ -15,6 +15,8 @@ use App\Models\Admin\CadastroCliente;
 use App\Models\Admin\cadastroServico;
 use App\Models\Admin\Os;
 use App\Models\Admin\Lancamentos;
+use App\Models\Admin\Produtos_os;
+use App\Models\Admin\Servicos_os;
 use Core\Validator;
 
 /**
@@ -30,6 +32,8 @@ class AdminController extends BaseController {
     private $Servico;
     private $os;
     private $lancamentos;
+    private $Produtos_os;
+    private $Servicos_os;
 
     public function __construct() {
         $this->Clientes = new CadastroCliente();
@@ -37,7 +41,9 @@ class AdminController extends BaseController {
         $this->Funcionario = new CadastroFuncionario();
         $this->Servico = new cadastroServico();
         $this->os =  new Os();
-        $this->lancamentos =  new Lancamentos();        
+        $this->lancamentos =  new Lancamentos();
+        $this->Produtos_os =  new Produtos_os();        
+        $this->Servicos_os =  new Servicos_os();        
     }
 
     public function index() {
@@ -351,17 +357,26 @@ class AdminController extends BaseController {
     
     public function osEditar($request) {
           $id = $request->get->id;
+          
           $dados = $this->os->read("*", "idOs = $id");
         @$this->view->oneOs = $dados;
         
         $produtos = $this->Produto->read("*");
         @$this->view->allProdutos = $produtos;
-//        $array = array(
-//            "chave" => " as s JOIN produto as p ON s.produtos_id = p.idProduto"
-//        );
-//        $dados1 = $this->os->readChave($array, "*");        
-//        print_r($dados1); die();
-        @$this->view->oneProsutos = $dados1;
+        
+        $servicos = $this->Servico->read("*");
+        @$this->view->allServicos = $servicos;
+        $array = array(
+            "chave" => " s JOIN produtos_os ps ON s.idOs = ps.os_id LEFT JOIN produto p ON p.idProduto = ps.idProdutos_os where ps.os_id = $id"
+        );
+        $dados1 = $this->os->readChave($array, "*");
+        
+        $array = array(
+            "chave" => " s JOIN servicos_os ps ON s.idOs = ps.os_id LEFT JOIN servicos p ON p.idServicos = ps.servicos_id where ps.os_id = $id"
+        );
+        $dados2 = $this->os->readChave($array, "*");
+        
+        @$this->view->oneServicos = $dados2;
         
         $this->setPageTitle("Admin");
         $this->Render('admin/mapos/os/editOs', 'layoutadminMapos');
@@ -374,16 +389,73 @@ class AdminController extends BaseController {
             $this->redirect("os", "1", "Deletado com sucesso"); 
         }else{
             $this->redirect("os", "4", " POS Erro ao deletar cliente");  
+        }        
+    }
+    
+    public function osRemoverProduto($request) {
+        $id = $request->get->id;            
+        if($this->os->deletar($id)){
+            $this->redirect("os/editar?id=$id", "1", "Deletado com sucesso"); 
+        }else{
+            $this->redirect("os/editar?id=$id", "4", " POS Erro ao deletar Produto da os");  
+        }        
+    }
+    
+    public function salvarOsProduto($request) {
+        
+        $dataAtual = date("Y-d-m H:m:s");
+        date_default_timezone_set('America/Sao_Paulo');
+        $id = $request->post->idProduto;    
+        $dados = $request->post;
+        
+        
+        $dados1 = $this->Produto->read("*", "idProduto = $id"); 
+        $preco = $dados1[0]['precoVenda'];
+        
+        
+        $quantidade =  $request->post->quantidade;
+        $total = $preco * $quantidade;
+        
+        $result = array(
+            'quantidade' => $quantidade, 'os_id' => $request->post->os_id, 'produtos_id' => $dados1[0]['idProduto'],
+            'subTotal' => $total, 'DataCadastro' => $dataAtual
+        );
+        
+        if($this->Produtos_os->cadastrar($result)){
+             $this->redirect("os", "1", "Cadastrado com sucesso"); 
+        }else{
+             $this->redirect("os", "1", "Errro ao tentar cadastrar"); 
         }
         
     }
-    public function salvarOsProduto($request) {
-        $id = $request->post->idProduto;    
+    
+    public function salvarOsServico($request) {
+        
+        $dataAtual = date("Y-d-m H:m:s");
+        date_default_timezone_set('America/Sao_Paulo');
+        $id = $request->post->idServicos;    
+        $dados = $request->post;
         
         
-        $dados1 = $this->Produto->read("*", "idProdutos = $id"); 
+        $dados1 = $this->Servico->read("*", "idServicos = $id"); 
         
-        print_r($dados1);
+        $preco = $dados1[0]['preco'];
+        
+        
+        
+        $total = $preco ;
+        
+        $result = array(
+            'os_id' => $request->post->os_id , 'servicos_id' => $dados1[0]['idServicos'], 'subTotal' => $total,
+            'DataCadastro' => $dataAtual
+        );
+        
+        
+        if($this->Servicos_os->cadastrar($result)){
+             $this->redirect("os", "1", "Cadastrado com sucesso"); 
+        }else{
+             $this->redirect("os", "1", "Errro ao tentar cadastrar"); 
+        }
         
     }
 
