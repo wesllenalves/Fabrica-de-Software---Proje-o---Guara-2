@@ -353,7 +353,17 @@ class AdminController extends BaseController {
           $id = $request->get->id;
           $dados = $this->os->read("*", "idOs = $id");
         @$this->view->oneOs = $dados;
-//        $this->setPageTitle("Admin");
+        
+        $produtos = $this->Produto->read("*");
+        @$this->view->allProdutos = $produtos;
+//        $array = array(
+//            "chave" => " as s JOIN produto as p ON s.produtos_id = p.idProduto"
+//        );
+//        $dados1 = $this->os->readChave($array, "*");        
+//        print_r($dados1); die();
+        @$this->view->oneProsutos = $dados1;
+        
+        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/os/editOs', 'layoutadminMapos');
     }
     
@@ -365,6 +375,15 @@ class AdminController extends BaseController {
         }else{
             $this->redirect("os", "4", " POS Erro ao deletar cliente");  
         }
+        
+    }
+    public function salvarOsProduto($request) {
+        $id = $request->post->idProduto;    
+        
+        
+        $dados1 = $this->Produto->read("*", "idProdutos = $id"); 
+        
+        print_r($dados1);
         
     }
 

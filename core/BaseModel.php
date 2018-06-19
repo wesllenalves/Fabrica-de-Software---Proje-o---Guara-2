@@ -260,9 +260,9 @@ abstract class BaseModel {
 
             $where_sql = empty($where) ? "" : "WHERE " . $where;
             $r = $this->con->conecta()->prepare("SELECT {$campos} FROM $this->tabela {$where_sql};");
-            
+//            print_r($r); die();
             if ($r->execute()) {
-
+                //print_r($r->fetchAll()); die();
                 return $r->fetchAll();
             } else {
                 print_r($r->errorInfo());
@@ -280,8 +280,9 @@ abstract class BaseModel {
 
             $where_sql = empty($where) ? "" : "WHERE " . $where;
             $r = $this->con->conecta()->prepare("SELECT {$campos} FROM $this->tabela  {$insert_values} {$where_sql};");
-
+            //print_r($r); die();
             if ($r->execute()) {
+//                print_r($r->fetchAll()); die();
                 return $r->fetchAll();
             } else {
                 print_r($r->errorInfo());

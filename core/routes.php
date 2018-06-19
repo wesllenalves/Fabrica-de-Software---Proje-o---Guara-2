@@ -40,6 +40,7 @@ $routes[] = ['/os/adicionar/salvar', 'AdminController@osAdicionarSalvar'];
 $routes[] = ['/os/visualizar', 'AdminController@osVisualizar'];
 $routes[] = ['/os/editar', 'AdminController@osEditar'];
 $routes[] = ['/os/remover', 'AdminController@osRemover'];
+$routes[] = ['/os/salvarOsProduto', 'AdminController@salvarOsProduto'];
 /*Vendas*/
 $routes[] = ['/vendas', 'AdminController@vendas'];
 $routes[] = ['/vendas/adicionar', 'AdminController@vendasAdicionar'];
