@@ -1,6 +1,8 @@
 
 
-
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,15 +20,40 @@
     <script src="public/js/script.js"></script>
     <script src="public/js/bootstrap.min.js"></script>
     
+    
     <link rel="stylesheet" href="<?= base_url('')?>/public/home/css/bootstrap.min.css">
     <link href="<?= base_url('')?>/public/home/css/chosen.css" rel="stylesheet" />
+    <script src="<?= base_url('')?>/public/js/sweetalert2.js"></script>
     <script src="<?= base_url('')?>/public/home/js/chosen.jquery.js"></script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
    
 </head >
 <body ng-app="sistema" ng-controller="SistemaCtrl" ng-init="FnInit();" >
-
+<?php echo '<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$("#myModal").modal("show")
+</script>
+';
+ 
+        ?>
     <nav class="navbar navbar-inverse navbar-fixed-top bg-dark">
+       
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">

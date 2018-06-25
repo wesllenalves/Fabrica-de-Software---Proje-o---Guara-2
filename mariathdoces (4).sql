@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 19-Jun-2018 às 23:33
+-- Generation Time: 25-Jun-2018 às 04:17
 -- Versão do servidor: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -59,6 +59,13 @@ CREATE TABLE `endereco` (
   `uf` char(2) NOT NULL,
   `complemento` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `endereco`
+--
+
+INSERT INTO `endereco` (`idEndereco`, `cidade`, `cep`, `endereco`, `uf`, `complemento`) VALUES
+(1, 'Brasilia', '70645160', 'SRES Quaadra 10 bloco p ', 'DF', 'Apartamento green park');
 
 -- --------------------------------------------------------
 
@@ -345,6 +352,29 @@ INSERT INTO `servicos_os` (`idServicos_os`, `os_id`, `servicos_id`, `subTotal`, 
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `user` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL,
+  `id_endereco` int(11) NOT NULL,
+  `data_update` datetime DEFAULT NULL,
+  `data_cadastro` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `user`, `password`, `status`, `id_endereco`, `data_update`, `data_cadastro`) VALUES
+(1, 'wesllenalves', 'e10adc3949ba59abbe56e057f20f883e', 0, 1, '0000-00-00 00:00:00', '2018-06-23 00:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `vendas`
 --
 
@@ -462,6 +492,13 @@ ALTER TABLE `servicos_os`
   ADD KEY `fk_servicos_os_servicos1` (`servicos_id`);
 
 --
+-- Indexes for table `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fkEndereco_Usuario` (`id_endereco`);
+
+--
 -- Indexes for table `vendas`
 --
 ALTER TABLE `vendas`
@@ -481,7 +518,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT for table `endereco`
 --
 ALTER TABLE `endereco`
-  MODIFY `idEndereco` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idEndereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `evento`
@@ -556,6 +593,12 @@ ALTER TABLE `servicos_os`
   MODIFY `idServicos_os` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `vendas`
 --
 ALTER TABLE `vendas`
@@ -583,6 +626,12 @@ ALTER TABLE `fluxoanual`
 --
 ALTER TABLE `fluxomensal`
   ADD CONSTRAINT `fluxomensal_ibfk_1` FOREIGN KEY (`fkEvento`) REFERENCES `evento` (`codigoVenda`);
+
+--
+-- Limitadores para a tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `fkEndereco_Usuario` FOREIGN KEY (`id_endereco`) REFERENCES `endereco` (`idEndereco`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

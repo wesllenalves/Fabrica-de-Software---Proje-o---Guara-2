@@ -7,6 +7,8 @@ use App\Models\Home\Login;
 use App\Models\Home\cadastroOrcamento;
 use App\Models\Cliente;
 use App\Models\Home\Produtos;
+use App\Models\Home\Usuarios;
+use Core\Session;
 
 class HomeController extends BaseController {
     private $cliente;
@@ -36,20 +38,38 @@ class HomeController extends BaseController {
     }
 
     public function validarLogin($request) {        
-           $login = new Login();
-        if ($login->isNull($request->post) === FALSE) {
-
+           $usuario = new Usuarios();
+           
+        if ($dados = $usuario->validar($request)) {
+            
+            $this->redirect("index?#myModal");
+        }else{
             //verifica se existe o usuario digitado, se sim retorna TRUE
             if ($login->verificarlogin($request->post)) {
                 //se existe usuario chama o metodo que redireciona para a pagina especificada
+                $session = Session::getInstance();
+                $this->setSessionMessage(self::SUCCESS, "Logado com sucesso!");
+                echo json_encode([
+                    "success" => true,
+                    "nivel" => $session->nivel
+                ]);
                 $this->redirect("dashboard");
-            } else {
-                //Seto a pagina que vai ser redirecionada e se eu quizer passo uma menssagem via session
-                $this->redirect("index", "Usuario Invalido");
+            } else {                
+                
+                echo '<script>
+			$(document).ready(function(){
+				swal("Ops...","Usuario Invalido","warning");
+			});
+			</script>';
+
             }
-        } else {
-            //Seto a pagina que vai ser redirecionada e se eu quizer passo uma menssagem via session
-            $this->redirect("login", "Por favor preencha todos os campos", "/login");
+//        } else {
+//                echo json_encode([
+//                "success" => false,
+//                "message" => "Por favor, preencha todos os campos!"
+//            ]);
+//            //Seto a pagina que vai ser redirecionada e se eu quizer passo uma menssagem via session
+////            $this->redirect("login", "Por favor preencha todos os campos", "/login");
         }
     }
 

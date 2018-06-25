@@ -14,7 +14,7 @@ use Core\Session;
  * @author Wesllen
  */
 class Login extends BaseModel {
-    protected $tabela = "cliente";
+    protected $tabela = "usuarios";
     
     public function isNull($dados){        
         if(($dados->usuario === "") || ($dados->password === "")){

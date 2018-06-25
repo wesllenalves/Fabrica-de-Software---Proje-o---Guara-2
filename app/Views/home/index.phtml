@@ -9,6 +9,7 @@
 
 <div id="section2" class="container-fluid">
     <center>
+        
         <div class="sectionint">
             <h1>Sessão 2</h1>
             <p>Clique nos diferentes links da Seção na barra de navegação</p>
@@ -73,22 +74,52 @@
         </div>
     </footer>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
 <!------------------------------------------------------------------------------
 ALERTA de Cadastro.
 -------------------------------------------------------------------------------->
-<!-- Modal -->
+<div class="mostrar" ></div>
+<!-- Modal  Login-->
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="loginmodal-container">
             <h1>Faça login na sua conta</h1><br>
-            <form method="POST" action="<?= base_url('') ?>/login/verificar">
+            <form method="POST" class="form" action="<?= base_url('') ?>/login/verificar">
                 <span class="field">
-                    <input type="text" class="form-cadastro" ng-model="cpf" name="usuario" id="cpf" required placeholder="CPF">
-                    <label for="cpf">CPF:</label>
+                    <label for="cpf">Usuario:</label>
+                    <input type="text" class="form-cadastro" ng-model="cpf" name="usuario" id="cpf"  placeholder="Usuario">
+                    
                 </span>
                 <span class="field">
-                    <input type="text" class="form-cadastro" ng-model="psw" name="password" id="psw" required placeholder="Senha">
                     <label for="psw">Senha:</label>
+                    <input type="text" class="form-cadastro" ng-model="psw" name="password" id="psw"  placeholder="Senha">
+                    
                 </span>
                 <input type="submit" name="login" ng-click="Getverificaacesso(cpf, psw);" class="login loginmodal-submit" value="Entrar">
             </form>
@@ -101,6 +132,28 @@ ALERTA de Cadastro.
         </div>
     </div>
 </div>
+
+
+<script>
+	$(function(){
+		$('.form').submit(function(){
+//			$('.loading').html("<img src='loading.gif' width='45'>");
+			$.ajax({
+				url: '<?=base_url('') ?>/login/verificar',
+				type: 'POST',
+				data: $('.form').serialize(),
+				success: function(data){
+					$('.mostrar').html(data);
+//					$('.loading').hide();
+//					$('.form')[0].reset();
+				}
+			});
+			return true;
+		});
+	});
+</script>	
+
+
 <!-- Modal cadastro -->
 <div class="modal fade" id="cadastro-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">

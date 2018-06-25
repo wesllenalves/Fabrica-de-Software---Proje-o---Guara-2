@@ -9,7 +9,7 @@
 namespace Core;
 
 use Core\Session;
-use stdClass;
+use Core\FlashMessage;
 
 /**
  * Description of BaseController
@@ -24,27 +24,30 @@ class BaseController {
     private $pageTitle;
     private $redirect;
     private $tipo;
-    private $extenção;
+    private $extencao;
     private $mensagem;
+    protected $session;
     
+    # Enumerados
+    const SUCCESS = 1;
+    const INFO = 2;
+    const WARNING = 3;
+    const DANGER = 4;
 
     public function __construct() {
-        $this->view = NULL;
-        if(!isset($this->view)){
-        $this->view = new stdClass();}
+        $this->view = new \stdClass();
+        $this->session = Session::getInstance();
     }
 
-    protected function Render($view, $layoutPath = null, $extenção = null) {
-        @$this->viewPath = $view;
+    protected function Render($view, $layoutPath = null, $extencao = null) {
+        $this->viewPath = $view;
         $this->layoutPath = $layoutPath;
-        $this->extenção = $extenção;
-        
-
+        $this->extencao = $extencao;
         //Se existir layout passa o caminho dele caso contrario passa so o caminho do arquivo da view
         if ($layoutPath) {
-            return $this->layout();
+            $this->layout();
         } else {
-            return $this->content();
+            $this->content();
         }
     }
     
@@ -77,33 +80,67 @@ class BaseController {
         }
         
         if(isset($_SESSION['danger'])){
-            echo "<div class='row'> 
-                    <div class='col-xs-12 col-md-12'>
-                    <div class='alert alert-danger' role='alert'>";
-            foreach ($_SESSION['danger'] as $sessao ){
-                   echo "{$sessao}<br>";
-                }
-                echo '</div></div>
-                </div>';
+            
+            
+//            echo '<script>
+//			$(document).ready(function(){
+//				swal("Ops...","Usuario Invalido","warning");
+//                                
+//			});
+//                        
+//			</script>';
+           echo '<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$("#myModal").modal("show")
+</script>
+';
+            
+//            
+            unset($_SESSION['danger']);
+            
+//            echo "<div class='row'> 
+//                    <div class='col-xs-12 col-md-12'>
+//                    <div class='alert alert-danger' role='alert'>";
+//            foreach ($_SESSION['danger'] as $sessao ){
+//                   echo "{$sessao}<br>";
+//                }
+//                echo '</div></div>
+//                </div>';
                       
-                unset($_SESSION['danger']);
+                
         }
     }
 
     protected function content() {
         $ext = empty($this->extenção) ? ".phtml" : ".". $this->extenção;
         if (file_exists(__DIR__ . "/../app/Views/{$this->viewPath}{$ext}")) {
-            return require_once __DIR__ . "/../app/Views/{$this->viewPath}{$ext}";
+            require_once __DIR__ . "/../app/Views/{$this->viewPath}{$ext}";
         } else {          
-            return Container::pageNotFoundView();
+            Container::pageNotFoundView();
         }
     }
 
     protected function layout() {
         if (file_exists(__DIR__ . "/../app/Views/tamplate/{$this->layoutPath}.phtml")) {
-            return require_once __DIR__ . "/../app/Views/tamplate/{$this->layoutPath}.phtml";
+            require_once __DIR__ . "/../app/Views/tamplate/{$this->layoutPath}.phtml";
         } else {
-            return Container::pageNotFoundLayout();
+            Container::pageNotFoundLayout();
         }
     }
 
@@ -121,9 +158,14 @@ class BaseController {
 
     protected function redirect($redirect, $tipo = null, $mensagem = null) {
         $this->redirect = $redirect;
+        $this->setSessionMessage($tipo, $mensagem);
+        $this->getRedirect() === TRUE ?: Container::pageNotFoundLayout();
+        exit;
+    }
+    
+    protected function setSessionMessage($tipo, $mensagem) {
         $this->tipo = $tipo;
         $this->mensagem = $mensagem;
-        $this->getRedirect() === TRUE ?: Container::pageNotFoundLayout();
         $this->setSession();
     }
 
@@ -134,20 +176,21 @@ class BaseController {
 
     
     protected function setSession() {
-        $data = Session::getInstance();
-        //fornece qual sera o nome da sessao e sua mensagem
-        switch ($this->tipo){
-             case 1: $data->success = $this->mensagem;
-                break;
-            case 2: $data->info = $this->mensagem;
-                break;
-            case 3: $data->warning = $this->mensagem;
-                break;
-            case 4: $data->danger = $this->mensagem;
-                break;
-        }
-        
-        
+      //fornece qual sera o nome da sessao e sua mensagem
+      switch ($this->tipo) {
+          case 1: $this->session->success = $this->mensagem;
+              break;
+          case 2: $this->session->info = $this->mensagem;
+              break;
+          case 3: $this->session->warning = $this->mensagem;
+              break;
+          case 4: $this->session->danger = $this->mensagem;
+              break;
+      }
+    }
+    
+    protected function displayMessage(bool $isModal = false, bool $hasYesNoOptions = false) {
+      FlashMessage::show($isModal, $hasYesNoOptions);
     }
 
 }
