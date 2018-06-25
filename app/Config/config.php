@@ -1,12 +1,11 @@
 <?php
-   return  [
-      
-       "database" => [
-         "dbname" => "mariathdoces",
-         "host" => "localhost",
-         "username" => "root",
-         "password" => "",
-         "charset" => "utf8",
-         "collation" => "utf8_unicode_ci"
-        ]
-    ];
+   return [  
+    'driver'    => "mysql",
+    'host'      => "localhost",
+    'database'  => "einstein",
+    'username'  => "root",
+    'password'  => "",
+    'charset'   => "utf8",
+    'collation' => "utf8_unicode_ci",
+    
+        ];

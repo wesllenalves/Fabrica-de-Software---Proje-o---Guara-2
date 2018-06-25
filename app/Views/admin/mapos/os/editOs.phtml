@@ -243,15 +243,15 @@
                                                     <tbody>
                                                         <?php 
                                                         $total = 0;
-                                                        foreach ($this->view->oneProsutos as $oneProdutos){
-                                                                 $subTotal = $oneProdutos['subTotal'];
+                                                        foreach ($this->view->oneProdutos as $oneProduto){                                                            
+                                                                 $subTotal = $oneProduto['subTotal'];
                                                                  $total = $total + $subTotal;
                                                             ?>
                                                         <tr>
-                                                            <td><?=$oneProdutos['nome_produto']?></td>
-                                                            <td><?=$oneProdutos['quantidade']?></td>
-                                                            <td><a href="<?= base_url('')?>/os/oRemoverProduto?id=<?=$oneProdutos['idProdutos_os']?>"   title="Remover"  class="btn btn-danger"><i class="icon-remove icon-white"></i></a></td>
-                                                            <td><?=$oneProdutos['subTotal']?></td>
+                                                            <td><?=$oneProduto['nome_produto']?></td>
+                                                            <td><?=$oneProduto['quantidade']?></td>
+                                                            <td><a href="<?= base_url('')?>/os/oRemoverProduto?id=<?=$oneProduto['idProdutos_os']?>&idOs=<?=$os['idOs']?>"   title="Remover"  class="btn btn-danger"><i class="icon-remove icon-white"></i></a></td>
+                                                            <td><?=$oneProduto['subTotal']?></td>
                                                         </tr>                                       
                                                         <tr>
                                                             <?php } ?>
@@ -272,11 +272,12 @@
 
                                                     <form id="formServicoss" action="<?= base_url('')?>/os/salvarOsServico" method="post">
                                                         <div class="span10">
-                                                         <input type="hidden" name="os_id" id="idOsProduto" value="<?=$os['idOs']?>" />                                                        
+                                                         <input type="hidden" name="os_id" id="idOsServico" value="<?=$os['idOs']?>" />                                                        
                                                         <label for="">Produto</label>
                                                         <select class="span12" name="idServicos">
                                                             
-                                                        <?php foreach ($this->view->allServicos as $allservico){?>
+                                                        <?php foreach ($this->view->allServicos as $allservico){                                                         
+                                                            ?>
                                                             <option value="<?=$allservico['idServicos']?>">
                                                         <?php echo $allservico['nome_servico']; ?>
                                                             </option>                                                            
@@ -302,17 +303,17 @@
                                                         <tbody>
                                                             <?php
                                                             $total = 0;
-                                                            foreach ($this->view->oneServicos as $oneservicos) {
+                                                            foreach ($this->view->oneServicos as $oneservicos) {                                                               
                                                                 $total = $total + $oneservicos['subTotal'];
-                                                            }?>
+                                                            ?>
 
                                                             <tr>
                                                             <td><?=$oneservicos['nome_servico']?></td>
                                                             
-                                                            <td><a href="<?= base_url('')?>/os/oRemoverProduto?id=<?=$oneservicos['idProdutos_os']?>"   title="Remover"  class="btn btn-danger"><i class="icon-remove icon-white"></i></a></td>
+                                                            <td><a href="<?= base_url('')?>/os/oRemoverServico?id=<?=$oneservicos['idServicos_os']?>&idOs=<?=$os['idOs']?>"   title="Remover"  class="btn btn-danger"><i class="icon-remove icon-white"></i></a></td>
                                                             <td><?=$oneservicos['subTotal']?></td>
                                                         </tr>
-                                                            <?}?>
+                                                            <?php } ?>
                                                             <tr>
                                                                 <td colspan="2" style="text-align: right"><strong>Total:</strong></td>
                                                                 <td><strong><?=$total?><input type="hidden" id="total-servico" value="0.00"></strong></td>

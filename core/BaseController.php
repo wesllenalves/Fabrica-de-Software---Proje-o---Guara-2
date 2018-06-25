@@ -26,7 +26,7 @@ class BaseController {
     private $tipo;
     private $extencao;
     private $mensagem;
-    //protected $session;
+    protected $session;
     
     # Enumerados
     const SUCCESS = 1;
@@ -35,12 +35,16 @@ class BaseController {
     const DANGER = 4;
 
     public function __construct() {
-        $this->view = new \stdClass();
-       // $this->session = Session::getInstance();
+        $this->view = NULL;
+        if(!isset($this->view)){
+        $this->view = new stdClass();
+
+}
+        $this->session = Session::getInstance();
     }
 
     protected function Render($view, $layoutPath = null, $extencao = null) {
-        $this->viewPath = $view;
+        @$this->viewPath = $view;
         $this->layoutPath = $layoutPath;
         $this->extencao = $extencao;
         //Se existir layout passa o caminho dele caso contrario passa so o caminho do arquivo da view

@@ -31,4 +31,12 @@ class Servicos_os extends BaseModel{
             return False;
         }
     }
+    
+    public function deletar($id) {       
+        if ($this->delete("idServicos_os = {$id}")) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
 }

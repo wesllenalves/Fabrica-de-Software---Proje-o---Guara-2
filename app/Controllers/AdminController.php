@@ -35,7 +35,7 @@ class AdminController extends BaseController {
     private $lancamentos;
     private $Produtos_os;
     private $Servicos_os;
-    private $session;
+    protected $sessao;
 
     public function __construct() {
         $this->Clientes = new CadastroCliente();
@@ -46,12 +46,12 @@ class AdminController extends BaseController {
         $this->lancamentos =  new Lancamentos();
         $this->Produtos_os =  new Produtos_os();        
         $this->Servicos_os =  new Servicos_os();
-        $this->session = Session::getInstance();
+        $this->sessao = Session::getInstance();
     }
 
     public function index() {
         
-        if ($this->session->nivel !== "2"){
+        if ($this->sessao->nivel !== "2"){
             $this->redirect("?Erro=Permissao", self::WARNING, "Você não tem permissão para acessar a página!");
         }else{
             $this->Render('admin/mapos/index', 'layoutadminMapos');
@@ -373,21 +373,36 @@ class AdminController extends BaseController {
         @$this->view->oneOs = $dados;
         
         $produtos = $this->Produto->read("*");
-        @$this->view->allProdutos = $produtos;
+       
+        @$this->view->allProdutos = $produtos;       
+        
         
         $servicos = $this->Servico->read("*");
         @$this->view->allServicos = $servicos;
-        $array = array(
+        
+        $arrayos = array(
             "chave" => " s JOIN produtos_os ps ON s.idOs = ps.os_id LEFT JOIN produto p ON p.idProduto = ps.idProdutos_os where ps.os_id = $id"
         );
-        $dados1 = $this->os->readChave($array, "*");
+        $dados1 = $this->os->readChave($arrayos, "*");
         
-        $array = array(
-            "chave" => " s JOIN servicos_os ps ON s.idOs = ps.os_id LEFT JOIN servicos p ON p.idServicos = ps.servicos_id where ps.os_id = $id"
+        
+        $arrayproduto = array(
+            "chave" => "s JOIN produtos_os ps ON s.idOs = ps.os_id LEFT JOIN produto p ON p.idProduto = ps.idProdutos_os where ps.os_id = $id"
+        );        
+        $dados2 = $this->os->readChave($arrayproduto, "*");       
+        
+        @$this->view->oneProdutos = $dados2;
+        
+        
+        
+        $arraysevico = array(
+            "chave" => "s JOIN servicos_os ps ON s.idOs = ps.os_id LEFT JOIN servicos p ON p.idServicos = ps.servicos_id where ps.os_id = $id"
         );
-        $dados2 = $this->os->readChave($array, "*");
+        $dados3 = $this->os->readChave($arraysevico, "*");
         
-        @$this->view->oneServicos = $dados2;
+        @$this->view->oneServicos = $dados3;
+        
+        
         
         $this->setPageTitle("Admin");
         $this->Render('admin/mapos/os/editOs', 'layoutadminMapos');
@@ -404,11 +419,22 @@ class AdminController extends BaseController {
     }
     
     public function osRemoverProduto($request) {
-        $id = $request->get->id;            
-        if($this->os->deletar($id)){
-            $this->redirect("os/editar?id=$id", "1", "Deletado com sucesso"); 
+        $id = $request->get->id;
+        $idOs = $request->get->idOs; 
+        if($this->Produtos_os->deletar($id)){
+            $this->redirect("os/editar?id=$idOs", "1", "Deletado com sucesso"); 
         }else{
-            $this->redirect("os/editar?id=$id", "4", " POS Erro ao deletar Produto da os");  
+            $this->redirect("os/editar?id=$idOs", "4", " POS Erro ao deletar Produto da os");  
+        }        
+    }
+    public function osRemoverServico($request) {
+        
+        $id = $request->get->id;            
+        $idOs = $request->get->idOs;            
+        if($this->Servicos_os->deletar($id)){
+            $this->redirect("os/editar?id=$idOs", "1", "Deletado com sucesso"); 
+        }else{
+            $this->redirect("os/editar?id=$idOs", "4", " POS Erro ao deletar Produto da os");  
         }        
     }
     
@@ -417,6 +443,7 @@ class AdminController extends BaseController {
         $dataAtual = date("Y-d-m H:m:s");
         date_default_timezone_set('America/Sao_Paulo');
         $id = $request->post->idProduto;    
+        $osid = $request->post->os_id;    
         $dados = $request->post;
         
         
@@ -433,9 +460,9 @@ class AdminController extends BaseController {
         );
         
         if($this->Produtos_os->cadastrar($result)){
-             $this->redirect("os", "1", "Cadastrado com sucesso"); 
+             $this->redirect("os/editar?id=$osid", "1", "Cadastrado com sucesso"); 
         }else{
-             $this->redirect("os", "1", "Errro ao tentar cadastrar"); 
+             $this->redirect("os/editar?id=$osid", "1", "Errro ao tentar cadastrar"); 
         }
         
     }
