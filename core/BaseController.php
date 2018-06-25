@@ -26,7 +26,7 @@ class BaseController {
     private $tipo;
     private $extencao;
     private $mensagem;
-    protected $session;
+    //protected $session;
     
     # Enumerados
     const SUCCESS = 1;
@@ -36,7 +36,7 @@ class BaseController {
 
     public function __construct() {
         $this->view = new \stdClass();
-        $this->session = Session::getInstance();
+       // $this->session = Session::getInstance();
     }
 
     protected function Render($view, $layoutPath = null, $extencao = null) {
@@ -70,60 +70,16 @@ class BaseController {
                 unset($_SESSION['info']);
         }
         
-        if(isset($_SESSION['warning'])){
-            echo "<div class='row'> 
-                    <div class='col-xs-12 col-md-12'>
-                        <div class='alert alert-warning' role='alert'>{$_SESSION['warning']}</div>
-                    </div>
-                </div>";          
-                unset($_SESSION['warning']);
-        }
-        
-        if(isset($_SESSION['danger'])){
-            
-            
-//            echo '<script>
-//			$(document).ready(function(){
-//				swal("Ops...","Usuario Invalido","warning");
-//                                
-//			});
-//                        
-//			</script>';
-           echo '<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-$("#myModal").modal("show")
-</script>
-';
-            
-//            
-            unset($_SESSION['danger']);
-            
-//            echo "<div class='row'> 
-//                    <div class='col-xs-12 col-md-12'>
-//                    <div class='alert alert-danger' role='alert'>";
-//            foreach ($_SESSION['danger'] as $sessao ){
-//                   echo "{$sessao}<br>";
-//                }
-//                echo '</div></div>
-//                </div>';
-                      
-                
+         if(isset($_SESSION['danger'])){
+           echo "<div class='row'>
+               <div class='col-xs-12 col-md-12'>
+                   <div class='alert alert-danger' role='alert'>";
+            foreach ($_SESSION['danger'] as $sessao ){
+                   echo "{$sessao}<br>";
+                }
+                echo '</div></div>
+               </div>';          
+            unset($_SESSION['danger']);          
         }
     }
 
@@ -187,10 +143,7 @@ $("#myModal").modal("show")
           case 4: $this->session->danger = $this->mensagem;
               break;
       }
-    }
+    }    
     
-    protected function displayMessage(bool $isModal = false, bool $hasYesNoOptions = false) {
-      FlashMessage::show($isModal, $hasYesNoOptions);
-    }
 
 }

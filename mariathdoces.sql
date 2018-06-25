@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 25-Jun-2018 às 04:17
--- Versão do servidor: 10.1.32-MariaDB
--- PHP Version: 5.6.36
+-- Generation Time: 25-Jun-2018 às 18:04
+-- Versão do servidor: 10.1.19-MariaDB
+-- PHP Version: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -223,16 +221,18 @@ INSERT INTO `orcamento` (`idOrcamento`, `nome`, `telefone`, `descricao`, `cidade
 
 CREATE TABLE `os` (
   `idOs` int(11) NOT NULL,
-  `nome_pessoa` varchar(11) NOT NULL,
+  `nome_pessoa` varchar(50) NOT NULL,
   `usuarios_id` varchar(255) DEFAULT NULL,
   `status` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
   `dataInicial` date DEFAULT NULL,
   `dataFinal` date DEFAULT '0000-00-00',
   `telefone` varchar(255) NOT NULL,
+  `celular` varchar(255) NOT NULL,
   `quantidade` int(11) NOT NULL,
+  `estado` varchar(11) NOT NULL,
   `cidade` varchar(255) NOT NULL,
   `produtos` varchar(255) NOT NULL,
-  `descricaoServico` varchar(150) DEFAULT NULL,
+  `descricaoServico` text,
   `valorTotal` varchar(15) DEFAULT NULL,
   `lancamento` int(11) DEFAULT NULL,
   `faturado` tinyint(1) NOT NULL,
@@ -243,13 +243,24 @@ CREATE TABLE `os` (
 -- Extraindo dados da tabela `os`
 --
 
-INSERT INTO `os` (`idOs`, `nome_pessoa`, `usuarios_id`, `status`, `dataInicial`, `dataFinal`, `telefone`, `quantidade`, `cidade`, `produtos`, `descricaoServico`, `valorTotal`, `lancamento`, `faturado`, `dataCadastro`) VALUES
-(5, 'pessoa fisi', '', 'Em Andamento', '2018-06-17', '2018-06-25', '61981745695', 1, 'brasilia', 'bolo', 'servico', NULL, NULL, 0, '0000-00-00 00:00:00'),
-(6, 'pessoa fisi', '', 'Aberto', '2018-06-17', '2018-06-17', '61981745695', 1, 'brasilia', 'bolo', 'ws', NULL, NULL, 0, '0000-00-00 00:00:00'),
-(7, 'pessoa fisi', '', 'Aberto', '2018-06-17', '2018-06-17', '61981745695', 1, 'brasilia', 'bolo', 'ws', NULL, NULL, 0, '0000-00-00 00:00:00'),
-(8, 'pessoa fisi', '', 'OrÃ§amento', '2018-06-15', '2018-06-17', '61981745695', 1, 'brasilia', 'festa', 'festa', NULL, NULL, 0, '0000-00-00 00:00:00'),
-(9, 'pessoa fisi', '', 'OrÃ§amento', '2018-06-15', '2018-06-17', '61981745695', 1, 'brasilia', 'festa', 'festa', NULL, NULL, 0, '0000-00-00 00:00:00'),
-(10, 'pessoa fisi', '', 'OrÃ§amento', '2018-06-15', '2018-06-17', '61981745695', 1, 'brasilia', 'festa', 'festa', NULL, NULL, 0, '0000-00-00 00:00:00');
+INSERT INTO `os` (`idOs`, `nome_pessoa`, `usuarios_id`, `status`, `dataInicial`, `dataFinal`, `telefone`, `celular`, `quantidade`, `estado`, `cidade`, `produtos`, `descricaoServico`, `valorTotal`, `lancamento`, `faturado`, `dataCadastro`) VALUES
+(5, 'pessoa fisi', '', 'Em Andamento', '2018-06-17', '2018-06-25', '61981745695', '', 1, '', 'brasilia', 'bolo', 'servico', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(6, 'pessoa fisi', '', 'Aberto', '2018-06-17', '2018-06-17', '61981745695', '', 1, '', 'brasilia', 'bolo', 'ws', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(7, 'pessoa fisi', '', 'Aberto', '2018-06-17', '2018-06-17', '61981745695', '', 1, '', 'brasilia', 'bolo', 'ws', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(8, 'pessoa fisi', '', 'OrÃ§amento', '2018-06-15', '2018-06-17', '61981745695', '', 1, '', 'brasilia', 'festa', 'festa', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(9, 'pessoa fisi', '', 'OrÃ§amento', '2018-06-15', '2018-06-17', '61981745695', '', 1, '', 'brasilia', 'festa', 'festa', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(10, 'pessoa fisi', '', 'OrÃ§amento', '2018-06-15', '2018-06-17', '61981745695', '', 1, '', 'brasilia', 'festa', 'festa', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(11, 'wesllen alv', NULL, 'Aberto', '2018-06-18', '0000-00-00', '61981745695', '', 10, 'DF', 'Brasilia', 'bolo,nescal', 'festa                                        \r\n                                ', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(12, 'wesllen alv', NULL, 'Aberto', '2018-06-18', '0000-00-00', '61981745695', '', 10, 'DF', 'Brasilia', 'bolo,nescal', 'festa                                        \r\n                                ', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(13, 'wesllen alv', NULL, 'Aberto', '2018-06-22', '0000-00-00', '61981745695', '', 10, 'DF', 'Brasilia', 'bolo,nescal', 'teste                                        \r\n                                ', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(14, 'wesllen tes', NULL, 'Aberto', '2018-06-25', '0000-00-00', '61981745695', '', 10, 'DF', 'Brasilia', 'bolo,nescal,pao', 'teste de formulario para orÃ§amento                                        \r\n                                ', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(15, 'wesllen alves teste de cadastro', NULL, 'Aberto', '2018-06-30', '0000-00-00', '61981745695', '', 10, 'DF', 'Brasilia', 'bolo,nescal,pao', '                ooooooooooooooooooooooooooo                       \r\n                                ', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(16, 'wesllen alves teste de cadastro', NULL, 'Aberto', '2018-06-30', '0000-00-00', '61981745695', '', 10, 'DF', 'Brasilia', 'bolo,nescal,pao', '                ooooooooooooooooooooooooooo                       \r\n                                ', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(17, 'wesllen alves teste de cadastro', NULL, 'Aberto', '2018-06-30', '0000-00-00', '61981745695', '', 10, 'DF', 'Brasilia', 'bolo,nescal,pao', 'ooooooooooooooooooo                                        \r\n                                ', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(18, 'wesllen alves teste de cadastro', NULL, 'Aberto', '2018-06-06', '0000-00-00', '(61) 9817-4569', '', 10, 'DF', 'Brasilia', 'bolo,nescal', '                                        \r\n                        testo        ', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(19, 'wesllen alves teste de cadastro', NULL, 'Aberto', '2018-06-29', '0000-00-00', '(61) 9817-4569', '', 10, 'DF', 'Brasilia', 'bolo', 'wesss                                        \n                                ', NULL, NULL, 0, '0000-00-00 00:00:00'),
+(20, 'wesllen alves teste de cadastro', NULL, 'Aberto', '2018-06-16', '0000-00-00', '(61) 9817-4569', '', 1, 'DF', 'Brasilia', 'nescal', 'fabrica                                        \r\n                                ', NULL, NULL, 0, '2018-06-25 11:53:59'),
+(21, 'wesllen alves teste de cadastro', NULL, 'Aberto', '2018-06-29', '0000-00-00', '(61) 9817-4569', '(61) 9 8174-5695', 10, 'DF', 'Brasilia', 'bolo,nescal,pao', '                                        \r\ntestetetste                                ', NULL, NULL, 0, '2018-06-25 11:56:40');
 
 -- --------------------------------------------------------
 
@@ -360,6 +371,7 @@ CREATE TABLE `usuarios` (
   `user` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
+  `nivel` int(11) NOT NULL DEFAULT '1',
   `id_endereco` int(11) NOT NULL,
   `data_update` datetime DEFAULT NULL,
   `data_cadastro` datetime NOT NULL
@@ -369,8 +381,9 @@ CREATE TABLE `usuarios` (
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `user`, `password`, `status`, `id_endereco`, `data_update`, `data_cadastro`) VALUES
-(1, 'wesllenalves', 'e10adc3949ba59abbe56e057f20f883e', 0, 1, '0000-00-00 00:00:00', '2018-06-23 00:00:00');
+INSERT INTO `usuarios` (`id`, `user`, `password`, `status`, `nivel`, `id_endereco`, `data_update`, `data_cadastro`) VALUES
+(1, 'wesllenalves', 'e10adc3949ba59abbe56e057f20f883e', 0, 0, 1, '0000-00-00 00:00:00', '2018-06-23 00:00:00'),
+(2, 'admin', '21232f297a57a5a743894a0e4a801fc3', 0, 2, 1, NULL, '2018-06-25 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -513,97 +526,81 @@ ALTER TABLE `vendas`
 --
 ALTER TABLE `clientes`
   MODIFY `idClientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `endereco`
 --
 ALTER TABLE `endereco`
   MODIFY `idEndereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `evento`
 --
 ALTER TABLE `evento`
   MODIFY `codigoVenda` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `eventofuncionario`
 --
 ALTER TABLE `eventofuncionario`
   MODIFY `idEventoFuncionario` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `fluxoanual`
 --
 ALTER TABLE `fluxoanual`
   MODIFY `idFluxoAnual` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `fluxomensal`
 --
 ALTER TABLE `fluxomensal`
   MODIFY `idFluxoMensal` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `funcionario`
 --
 ALTER TABLE `funcionario`
   MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `lancamentos`
 --
 ALTER TABLE `lancamentos`
   MODIFY `idLancamentos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT for table `orcamento`
 --
 ALTER TABLE `orcamento`
   MODIFY `idOrcamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `os`
 --
 ALTER TABLE `os`
-  MODIFY `idOs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
+  MODIFY `idOs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
   MODIFY `idProduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `produtos_os`
 --
 ALTER TABLE `produtos_os`
   MODIFY `idProdutos_os` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT for table `servicos`
 --
 ALTER TABLE `servicos`
   MODIFY `idServicos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `servicos_os`
 --
 ALTER TABLE `servicos_os`
   MODIFY `idServicos_os` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `vendas`
 --
 ALTER TABLE `vendas`
   MODIFY `idVendas` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- Constraints for dumped tables
 --
@@ -632,7 +629,6 @@ ALTER TABLE `fluxomensal`
 --
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `fkEndereco_Usuario` FOREIGN KEY (`id_endereco`) REFERENCES `endereco` (`idEndereco`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

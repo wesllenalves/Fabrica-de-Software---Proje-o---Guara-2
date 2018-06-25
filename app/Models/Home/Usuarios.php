@@ -40,10 +40,9 @@ class Usuarios extends BaseModel{
         if (count($usuario) > 0) {
             
             $data = Session::getInstance();
-            $data->autenticado = TRUE;
-            $data->login = $usuario[0]->login;
-            $data->nivel = $usuario[0]->nivel;
-            $data->id = $usuario[0]->idusuario;         
+            $data->autenticado = TRUE;            
+            $data->nivel = $usuario[0]['nivel'];            
+            $data->id = $usuario[0]['id'];         
 
             return TRUE;
         }

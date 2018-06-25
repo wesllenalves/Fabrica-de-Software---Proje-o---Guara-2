@@ -76,24 +76,7 @@
 </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 
 
@@ -104,13 +87,13 @@
 <!------------------------------------------------------------------------------
 ALERTA de Cadastro.
 -------------------------------------------------------------------------------->
-<div class="mostrar" ></div>
+<div class="mostrar-login" ></div>
 <!-- Modal  Login-->
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="loginmodal-container">
             <h1>Faça login na sua conta</h1><br>
-            <form method="POST" class="form" action="<?= base_url('') ?>/login/verificar">
+            <form method="POST" class="form-login" action="<?= base_url('') ?>/login/verificar">
                 <span class="field">
                     <label for="cpf">Usuario:</label>
                     <input type="text" class="form-cadastro" ng-model="cpf" name="usuario" id="cpf"  placeholder="Usuario">
@@ -135,22 +118,22 @@ ALERTA de Cadastro.
 
 
 <script>
-	$(function(){
-		$('.form').submit(function(){
-//			$('.loading').html("<img src='loading.gif' width='45'>");
-			$.ajax({
-				url: '<?=base_url('') ?>/login/verificar',
-				type: 'POST',
-				data: $('.form').serialize(),
-				success: function(data){
-					$('.mostrar').html(data);
-//					$('.loading').hide();
-//					$('.form')[0].reset();
-				}
-			});
-			return true;
-		});
-	});
+//	$(function(){
+//		$('.form-login').submit(function(){
+////			$('.loading').html("<img src='loading.gif' width='45'>");
+//			$.ajax({
+//				url: '<?=base_url('') ?>/login/verificar',
+//				type: 'POST',
+//				data: $('.form-login').serialize(),
+//				success: function(data){
+//					$('.mostrar-login').html(data);
+////					$('.loading').hide();
+////					$('.form')[0].reset();
+//				}
+//			});
+//			return true;
+//		});
+//	});
 </script>	
 
 
@@ -226,11 +209,8 @@ ALERTA de login.
     </div>
 </div>
 
-<!--     Button trigger modal 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>-->
 
+<div class="mostrar-orcamento" ></div>
 <!-- Modal orçamento -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -249,19 +229,61 @@ ALERTA de login.
 
 
                     <div class="col-sm-5">
-                        <form method="POST" action="<?= base_url('') ?>/cadastro/orcamento" enctype="multipart/form-data">
+                        <form  class="form-orcamento" method="POST" action="<?= base_url('') ?>/cadastro/orcamento" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="nome">Nome Completo</label>
-                                <input type="text" class="form-control" name="nome" placeholder="José"  required/>
+                                <input type="text" id="nome" class="form-control" name="nome" placeholder="José"  required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="nome">Celular</label>
+                                <input type="text" id="celular" class="form-control" name="celular" required/>
                             </div>
                             <div class="form-group">
                                 <label for="nome">Telefone</label>
-                                <input type="text" class="form-control" name="telefone" required/>
+                                <input type="text" id="telefone" class="form-control" name="telefone" required/>
                             </div>
                             <div class="form-group">
                                 <label for="nome">Descrição</label>
                                 <textarea  class="form-control rounded-0" rows="4" cols="50" name="descricao">                                        
                                 </textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="nome">Estado</label>
+                                <div class="form-group">
+                                          <!--  <input id="estado" type="text" name="estado" value=""  />-->
+                                    <select class="form-control" id="estado"  name="estado">
+                                                <option value="">-</option>
+                                                <option value="AC">Acre</option>
+                                                <option value="AL">Alagoas</option>
+                                                <option value="AP">Amapá</option>
+                                                <option value="AM">Amazonas</option>
+                                                <option value="BA">Bahia</option>
+                                                <option value="CE">Ceará</option>
+                                                <option value="DF">Distrito Federal</option>
+                                                <option value="ES">Espírito Santo</option>
+                                                <option value="GO">Goiás</option>
+                                                <option value="MA">Maranhão</option>
+                                                <option value="MT">Mato Grosso</option>
+                                                <option value="MS">Mato Grosso do Sul</option>
+                                                <option value="MG">Minas Gerais</option>
+                                                <option value="PA">Pará</option>
+                                                <option value="PB">Paraíba</option>
+                                                <option value="PR">Paraná</option>
+                                                <option value="PE">Pernambuco</option>
+                                                <option value="PI">Piauí</option>
+                                                <option value="RJ">Rio de Janeiro</option>
+                                                <option value="RN">Rio Grande do Norte</option>
+                                                <option value="RS">Rio Grande do Sul</option>
+                                                <option value="RO">Rondônia</option>
+                                                <option value="RR">Roraima</option>
+                                                <option value="SC">Santa Catarina</option>
+                                                <option value="SP">São Paulo</option>
+                                                <option value="SE">Sergipe</option>
+                                                <option value="TO">Tocantins</option>
+
+                                            </select>                         
+
+                                        </div>
                             </div>
                             <div class="form-group">
                                 <label for="nome">Cidade Evento</label>
@@ -271,14 +293,14 @@ ALERTA de login.
                                 <label for="nome">Produto</label><br>
                                 <select data-placeholder="Choose a Country..." class="select" multiple tabindex="3" name="produto[]" id="sel">
                                     <?php foreach ($this->view->produtos as $produtos) { ?>
-                                        <?php echo '<option>' . $produtos['nome'] . '</option>'; ?>                                        
+                                        <?php echo '<option>' . $produtos['nome_produto'] . '</option>'; ?>                                        
                                     <?php } ?>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="nome">Quantidade</label>
-                                <input type="text" class="form-control" name="qtd" required/>
+                                <input type="text" class="form-control" name="quantidade" required/>
                             </div>
                             <div class="form-group">
                                 <label for="nome">Data Evento</label>
@@ -286,7 +308,7 @@ ALERTA de login.
                             </div>
                             <br><br>
                             <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cadastrar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary btn-lg"/>
-
+                            <div class="loading"></div>
                         </form>
                     </div>
 
@@ -299,6 +321,46 @@ ALERTA de login.
 
     </div>
 </div>
+<?php
+if($_GET['Erro'] === "Permissao"){
+    echo '<script>
+			$(document).ready(function(){
+				swal("Ops...","Voce não tem permissao para entrar nessa pagina","warning");
+			});
+			</script>';
+}
+?>
+<script>
+    //script ajax para trazer mensagem alert-box para orçamento
+	$(function(){
+		$('.form-orcamento').submit(function(){
+			$('.loading').html("<img src='<?=base_url('') ?>/public/img/loading.gif' width='45'>");
+			$.ajax({
+				url: '<?=base_url('') ?>/cadastro/orcamento',
+				type: 'POST',
+				data: $('.form-orcamento').serialize(),
+				success: function(data){
+					$('.mostrar-orcamento').html(data);
+					$('.loading').hide();
+					$('.form-orcamento')[0].reset();
+				}
+			});
+			return false;
+		});
+	});
+        
+        //Mascara para os inpust
+        $(document).ready(function(){
+        $("#celular").mask("(00) 0 0000-0000");
+        $("#telefone").mask("(00) 0000-0000");
+        });
+        
+        //mostra errro
+        if(isset)
+         $(document).ready(function(){
+				swal("Ops...","Preecha todos os dados","warning");
+	});
+</script>
 </div>
 
 

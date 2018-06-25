@@ -18,6 +18,7 @@ use App\Models\Admin\Lancamentos;
 use App\Models\Admin\Produtos_os;
 use App\Models\Admin\Servicos_os;
 use Core\Validator;
+use Core\Session;
 
 /**
  * Description of AdminController
@@ -34,6 +35,7 @@ class AdminController extends BaseController {
     private $lancamentos;
     private $Produtos_os;
     private $Servicos_os;
+    private $session;
 
     public function __construct() {
         $this->Clientes = new CadastroCliente();
@@ -43,12 +45,21 @@ class AdminController extends BaseController {
         $this->os =  new Os();
         $this->lancamentos =  new Lancamentos();
         $this->Produtos_os =  new Produtos_os();        
-        $this->Servicos_os =  new Servicos_os();        
+        $this->Servicos_os =  new Servicos_os();
+        $this->session = Session::getInstance();
     }
 
     public function index() {
-//        $this->setPageTitle("Admin");
-        $this->Render('admin/mapos/index', 'layoutadminMapos');
+        
+        if ($this->session->nivel !== "2"){
+            $this->redirect("?Erro=Permissao", self::WARNING, "Você não tem permissão para acessar a página!");
+        }else{
+            $this->Render('admin/mapos/index', 'layoutadminMapos');
+        }
+        
+        
+            
+        
     }
 
     public function clientes() {
@@ -93,7 +104,7 @@ class AdminController extends BaseController {
         } else {
 
             if ($this->Clientes->cadastrar($request)) {
-                $this->redirect("clientes", "1", "Cadstrado com sucesso");
+                $this->redirect("clientes", self::SUCCESS, "Cadstrado com sucesso");
                 exit();
             } else {
                 

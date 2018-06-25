@@ -22,23 +22,28 @@ class cadastroOrcamento extends BaseModel {
     protected $tabelaUse = 1;
 
     public function cadastrar($request) {
-        $values_array_0 = array_values($request->produto);
-        $insert_values_0 = implode(" , ", $values_array_0);
-        
+        date_default_timezone_set('America/Sao_Paulo');
+        $dataAtual = date("Y-m-d H:i:s");
+        if (!empty($request->post->produto) and is_array($request->post->produto)) {
+            $produtos = implode(',', $request->post->produto);
+
         $array = array(
             "0" => array(
-                "nome" => $request->nome, "status" => "Aberto", "dataInicial" => $request->data, "telefone" => $request->telefone,
-                "quantidade" => $request->qtd,"cidade" => $request->cidade, "produtos" => $insert_values_0, "descricaoServico" => $request->descricao
-                 
+                'nome_pessoa' => $request->post->nome, 'status' => "Aberto",
+                'dataInicial' => $request->post->data, 'telefone' => $request->post->telefone,
+                'celular' => $request->post->celular,
+                'quantidade' => $request->post->quantidade, 'estado' => $request->post->estado,
+                'cidade' => $request->post->cidade, 'produtos' => $produtos,
+                'descricaoServico' => $request->post->descricao, 'dataCadastro' => $dataAtual
+            ));       
                 
-            )
-        );        
-
+           
         if ($this->insert($array)) {
             return TRUE;
         } else {
             return False;
         }
+    }
     }
 
 }
