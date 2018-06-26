@@ -107,7 +107,7 @@ abstract class BaseModel {
                     $insert_values_0 = implode("','", $values_array_0);
 
                     $query1 = $this->con->conecta()->prepare("INSERT INTO $this->tabela ({$insert_campos_0}) VALUES('{$insert_values_0}');");
-
+                    
                     if ($query1->execute()) {
                         $id = $this->con->conecta()->lastInsertId();
 
@@ -118,8 +118,7 @@ abstract class BaseModel {
                         $insert_values_1 = implode("','", $values_array_1);
                         $query2 = $this->con->conecta()->prepare("INSERT INTO $this->tabela2 ({$insert_campos_1}, $this->chaveEstrangeira) VALUES('{$insert_values_1}','{$id}');");
 
-                        if ($query2->execute()) {
-
+                        if ($query2->execute()) {                            
                             return TRUE;
                         } else {
                             print_r($query2->errorInfo());

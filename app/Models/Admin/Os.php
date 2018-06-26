@@ -19,19 +19,19 @@ class Os extends BaseModel{
     
     public function cadastrar($request) {
         date_default_timezone_set('America/Sao_Paulo');
-        $dataAtual = date("Y-d-m H:m:s");
+        $dataAtual = date("Y-m-d H:m:s");
 
         $array = array(
             "0" => array(
-                'nome' => $request->post->nome, 'usuarios_id' => $request->post->usuarios_id,
-                'status' => $request->post->status, 'dataInicial' => $request->post->dataInicial,
-                'dataFinal' => $request->post->dataFinal, 'telefone' => $request->post->telefone, 
-                'quantidade' => $request->post->quantidade,'cidade' => $request->post->cidade,
-                'produtos' => $request->post->produtos,'descricaoServico' => $request->post->descricaoServico,
-                'dataCadastro' => $dataAtual
+                'clientes_id' => $request->post->idClientes, 'usuarios_id' => $request->post->idUsuario,
+            'status' => $request->post->status, 'dataInicial' => $request->post->dataInicial, 'dataFinal' => $request->post->dataFinal,
+            'telefone' => $request->post->telefone,'quantidade' => $request->post->quantidade,
+            'cidade' => $request->post->cidade,'produtos' => $request->post->produtos,
+            'descricaoServico' => $request->post->descricaoServico,
+            'dataCadastro' => $dataAtual
             )
         );
-
+        
         if ($dados = $this->insert($array)) {
             return $dados;
         } else {
@@ -52,6 +52,34 @@ class Os extends BaseModel{
         );
         if ($this->update($array, "idClientes = {$id}")) {
             return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    public function atualizarOs($request) {
+        $id = $request->post->idOs;
+        date_default_timezone_set('America/Sao_Paulo');
+        $dataAtual = date("Y-m-d H:m:s");
+        $arrayOs = array(
+            'status_pedido' => $request->post->status, 'dataInicial' => $request->post->dataInicial,
+            'dataFinal' => $request->post->dataFinal, 'quantidade' => $request->post->quantidade,
+            'descricaoServico' => $request->post->descricaoServico,  "dataUpdate" => $dataAtual,
+//            'usuarios_id' => $request->post->usuarios_id, 'clientes_id' => $request->post->clientes_id
+        );
+        
+        $arrayCliente = array(
+            'nomeCliente' => $request->post->nomeCliente, 
+            'telefone' => $request->post->telefone, 'cidade' => $request->post->cidade
+            
+                );
+        
+        if ($this->update($arrayOs, "idOs = {$id}")) {
+            $idClientes =$request->post->clientes_id;
+            $this->tabela = 'clientes';
+            if($this->update($arrayCliente, "idClientes = {$idClientes}")){
+                return TRUE;
+            }
         } else {
             return FALSE;
         }

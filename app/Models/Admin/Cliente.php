@@ -15,7 +15,7 @@ use Core\BaseModel;
  *
  * @author Wesllen
  */
-class CadastroCliente extends BaseModel {
+class Cliente extends BaseModel {
 
     protected $tabela = "clientes";
     //Definir a quantidade de tabelas que serao usadas maximo de 4
@@ -43,17 +43,18 @@ class CadastroCliente extends BaseModel {
         }
     }
 
-    public function atualizar($request) {
-        $id = $request->post->idClientes;
+    public function atualizar($data) {
+        $id = $data['idClientes'];
         date_default_timezone_set('America/Sao_Paulo');
-        $dataAtual = date("Y-d-m H:m:s");
+        $dataAtual = date("Y-m-d H:m:s");
         $array = array(
-            'nomeCliente' => $request->post->nomeCliente, 'documento' => $request->post->documento,
-            'pessoa' => $request->post->pessoa, 'telefone' => $request->post->telefone, 'ddd_celular' => $request->post->ddd_celular,
-            'celular' => $request->post->celular, 'email' => $request->post->email, 'rua' => $request->post->rua, 'numero' => $request->post->numero,
-            'bairro' => $request->post->bairro, 'cidade' => $request->post->cidade, 'estado' => $request->post->estado,
-            'cep' => $request->post->cep, "dataUpdate" => $dataAtual
+            'nomeCliente' => $data['nomeCliente'], 'documento' => $data['documento'], 'tipoPessoa' => $data['tipoPessoa'],
+            'telefone' => $data['telefone'], 'celular' => $data['celular'], 'email' => $data['email'],
+            'rua' => $data['rua'], 'numero' => $data['numero'],'bairro' => $data['bairro'], 
+            'cidade' => $data['cidade'], 'estado' => $data['estado'],  'cep' => $data['cep'],
+            'dataModificado' => $dataAtual
         );
+        
         if ($this->update($array, "idClientes = {$id}")) {
             return TRUE;
         } else {

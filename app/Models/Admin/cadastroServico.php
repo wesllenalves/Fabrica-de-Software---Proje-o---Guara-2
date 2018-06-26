@@ -42,11 +42,11 @@ class cadastroServico extends BaseModel{
     }
     
     public function atualizar($request) {
-        $id = $request->post->idServicos;
+        $id = $request->post->idServicos;        
         date_default_timezone_set('America/Sao_Paulo');
         $dataAtual = date("Y-d-m H:m:s");
         $array = array(
-            'nome' => $request->post->nome, 'descricao' => $request->post->descricao, 'preco' => $request->post->preco, 'dataModificado' => $dataAtual
+            'nome_servico' => $request->post->nome, 'descricao' => $request->post->descricao, 'preco' => $request->post->preco, 'dataModificado' => $dataAtual
         );
         if ($this->update($array, "idServicos = {$id}")) {
             return TRUE;

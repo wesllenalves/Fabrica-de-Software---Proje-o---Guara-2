@@ -11,12 +11,13 @@ namespace App\Controllers;
 use Core\BaseController;
 use App\Models\Admin\CadastroProduto;
 use App\Models\Admin\CadastroFuncionario;
-use App\Models\Admin\CadastroCliente;
+use App\Models\Admin\Cliente;
 use App\Models\Admin\cadastroServico;
 use App\Models\Admin\Os;
 use App\Models\Admin\Lancamentos;
 use App\Models\Admin\Produtos_os;
 use App\Models\Admin\Servicos_os;
+use App\Models\Admin\Usuario;
 use Core\Validator;
 use Core\Session;
 
@@ -35,10 +36,11 @@ class AdminController extends BaseController {
     private $lancamentos;
     private $Produtos_os;
     private $Servicos_os;
+    private $Usuario;
     protected $sessao;
 
     public function __construct() {
-        $this->Clientes = new CadastroCliente();
+        $this->Clientes = new Cliente();
         $this->Produto = new CadastroProduto();
         $this->Funcionario = new CadastroFuncionario();
         $this->Servico = new cadastroServico();
@@ -47,6 +49,7 @@ class AdminController extends BaseController {
         $this->Produtos_os =  new Produtos_os();        
         $this->Servicos_os =  new Servicos_os();
         $this->sessao = Session::getInstance();
+        $this->Usuario =  new Usuario();
     }
 
     public function index() {
@@ -122,24 +125,33 @@ class AdminController extends BaseController {
     
     public function clientesEditarSalvar($request) {
         $id = $request->post->idClientes; 
-        
+        //print_r($request->post->documentoCpnj); die();
+        $documento =  NULL;
+        $tipoPessoa = NULL;
+        if(!empty ($request->post->documentoCpf)){
+            $documento = $request->post->documentoCpf;
+            $tipoPessoa = "PF";
+        }elseif (!empty ($request->post->documentoCpnj)) {
+            $documento = $request->post->documentoCpnj;
+            $tipoPessoa = "PJ";
+        }        
         $data = [
-            'nomeCliente' => $request->post->nomeCliente, 'documento' => $request->post->documento,
-            'pessoa' => $request->post->pessoa, 'telefone' => $request->post->telefone,  'ddd_celular' => $request->post->ddd_celular,
-            'celular' => $request->post->celular, 'email' => $request->post->email, 'rua' => $request->post->rua, 'numero' => $request->post->numero,
-            'bairro' => $request->post->bairro, 'cidade' => $request->post->cidade, 'estado' => $request->post->estado,  'cep' => $request->post->cep, 
-        ];
-
+           'idClientes' =>$request->post->idClientes, 'nomeCliente' => $request->post->nomeCliente, 'documento' => $documento, 'tipoPessoa' => $tipoPessoa,
+            'telefone' => $request->post->telefone, 'celular' => $request->post->celular, 'email' => $request->post->email,
+            'rua' => $request->post->rua, 'numero' => $request->post->numero,'bairro' => $request->post->bairro, 
+            'cidade' => $request->post->cidade, 'estado' => $request->post->estado,  'cep' => $request->post->cep 
+        ];        
+        
         $rules = [
-            'nomeCliente' => 'required', 'documento' => 'required', 'pessoa' => 'required', 'telefone' => 'required',
-            'ddd_celular' => 'required', 'celular' => 'required', 'email' => 'required', 'rua' => 'required', 'numero' => 'required',
+            'nomeCliente' => 'required', 'documento' => 'required',  'telefone' => 'required',
+             'celular' => 'required', 'email' => 'required', 'rua' => 'required', 'numero' => 'required',
             'bairro' => 'required', 'cidade' => 'required', 'estado' => 'required', 'cep' => 'required'
         ];
 
         if (Validator::make($data, $rules)) {
             $this->redirect("clientes/editar?id={$id}");
         } else {
-            if($this->Clientes->atualizar($request)){
+            if($this->Clientes->atualizar($data)){
                $this->redirect("clientes", "1", "Editado com sucesso"); 
             }else{
                $this->redirect("clientes", "4", " POS Erro ao editar cliente");  
@@ -187,13 +199,13 @@ class AdminController extends BaseController {
     public function produtosEditarSalvar($request) {
         
          $data = [
-            'nome' => $request->post->descricao, 'unidade' => $request->post->unidade, 'precoCompra' => $request->post->precoCompra,
+            'nome_produto' => $request->post->nome_produto, 'unidade' => $request->post->unidade, 'precoCompra' => $request->post->precoCompra,
             'precoVenda' => $request->post->precoVenda, 'estoque' => $request->post->estoque,
             'estoqueMinimo' => $request->post->estoqueMinimo
         ];
 
         $rules = [
-            'descricao' => 'required', 'unidade' => 'required', 'precoCompra' => 'required', 'precoVenda' => 'required',
+            'nome_produto' => 'required', 'unidade' => 'required', 'precoCompra' => 'required', 'precoVenda' => 'required',
             'estoque' => 'required', 'estoqueMinimo' => 'required'
         ];
         
@@ -217,13 +229,13 @@ class AdminController extends BaseController {
     public function produtosSalvar($request) {
         //$this->setPageTitle("Admin");
         $data = [
-            'nome' => $request->post->descricao, 'unidade' => $request->post->unidade, 'precoCompra' => $request->post->precoCompra,
+            'nome_produto' => $request->post->descricao, 'unidade' => $request->post->unidade, 'precoCompra' => $request->post->precoCompra,
             'precoVenda' => $request->post->precoVenda, 'estoque' => $request->post->estoque,
             'estoqueMinimo' => $request->post->estoqueMinimo, 'validade' => $request->post->validade
         ];
 
         $rules = [
-            'descricao' => 'required', 'unidade' => 'required', 'precoCompra' => 'required', 'precoVenda' => 'required',
+            'nome_produto' => 'required', 'unidade' => 'required', 'precoCompra' => 'required', 'precoVenda' => 'required',
             'estoque' => 'required', 'estoqueMinimo' => 'required', 'validade' => 'required'
         ];
 
@@ -292,11 +304,11 @@ class AdminController extends BaseController {
 
     public function servicosUpdate($request) {
         $data = [
-            'nome' => $request->post->nome, 'descricao' => $request->post->descricao, 'preco' => $request->post->preco
+            'nome_servico' => $request->post->nome, 'descricao' => $request->post->descricao, 'preco' => $request->post->preco
         ];
 
         $rules = [
-            'nome' => 'required', 'descricao' => 'required', 'preco' => 'required'
+            'nome_servico' => 'required', 'descricao' => 'required', 'preco' => 'required'
         ];
 
         if (Validator::make($data, $rules)) {
@@ -323,20 +335,28 @@ class AdminController extends BaseController {
 
     public function os() {
 //        $this->setPageTitle("Admin");
-        $dados = $this->os->read("*");
+        $array = array(
+        "chave" => "s JOIN clientes c ON s.`clientes_id` = c.idClientes LEFT JOIN usuarios u ON s.`usuarios_id` = u.idUsuarios"
+            );
+        $dados = $this->os->readChave($array,"*");
         @$this->view->os = $dados;
+        //print_r($this->view->os); die();
         $this->Render('admin/mapos/os/os', 'layoutadminMapos');
     }
 
     public function osAdicionar() {
+        $clientes = $this->Clientes->read("*");
+        @$this->view->allClientes = $clientes;
+        
+        $usuario = $this->Usuario->read("*");
+        @$this->view->allUsuario = $usuario;
 //        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/os/addOs', 'layoutadminMapos');
     }
     public function osAdicionarSalvar($request) {
-        $dados = $request->post;
-        //print_r($dados); die();
+              
         $data = [
-            'nome' => $request->post->nome, 'usuarios_id' => $request->post->funcionario,
+            'clientes_id' => $request->post->idClientes, 'usuarios_id' => $request->post->idUsuario,
             'status' => $request->post->status, 'dataInicial' => $request->post->dataInicial,
             'telefone' => $request->post->telefone,'quantidade' => $request->post->quantidade,
             'cidade' => $request->post->cidade,'produtos' => $request->post->produtos,
@@ -353,7 +373,7 @@ class AdminController extends BaseController {
             $this->redirect("os/adicionar");
         } else {
             if ($id = $this->os->cadastrar($request)) {
-                $this->redirect("os/editar?id=$id", "1", "OS Cadastrado com Sucesso");
+                $this->redirect("os/editar?id={$id}", "1", "OS Cadastrado com Sucesso");
             } else {
                 $this->redirect("os", "4", "Ocorreu um erro ao tentar cadastar OS");
             }
@@ -361,15 +381,39 @@ class AdminController extends BaseController {
         }
     }
     
-    public function osVisualizar() {
-//        $this->setPageTitle("Admin");
+    public function osVisualizar($request) {
+        $id =  $request->get->id;
+        $array = array(
+        "chave" => "s JOIN clientes c ON s.`clientes_id` = c.idClientes LEFT JOIN usuarios u ON s.`usuarios_id` = u.idUsuarios where s.idOs = {$id}"
+            );
+        $dados = $this->os->readChave($array,"*");
+        @$this->view->os = $dados;
+        
+        $arrayproduto = array(
+            "chave" => " s INNER JOIN produto ps ON s.produtos_id = ps.idProduto LEFT JOIN os o ON s.os_id = o.idOs where s.os_id = $id"
+        );        
+        $dados2 = $this->Produtos_os->readChave($arrayproduto, "*");       
+        
+        @$this->view->oneProdutos = $dados2;
+        
+        $arrayServico = array(
+            "chave" => " s INNER JOIN servicos ps ON s.`servicos_id` = ps.idServicos LEFT JOIN os o ON s.os_id = o.idOs where s.os_id = $id"
+        );        
+        $dados3 = $this->Servicos_os->readChave($arrayServico, "*");       
+        
+        @$this->view->oneServico = $dados3;
+        
+//        print_r($dados2); die();
+////        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/os/visualizarOs', 'layoutadminMapos');
     }
     
     public function osEditar($request) {
           $id = $request->get->id;
-          
-          $dados = $this->os->read("*", "idOs = $id");
+        $arrayos = array(
+            "chave" => "s JOIN clientes c ON s.`clientes_id` = c.idClientes LEFT JOIN usuarios u ON s.`usuarios_id` = u.idUsuarios WHERE s.idOs = $id"
+        );
+          $dados = $this->os->readChave($arrayos, "*");
         @$this->view->oneOs = $dados;
         
         $produtos = $this->Produto->read("*");
@@ -380,8 +424,14 @@ class AdminController extends BaseController {
         $servicos = $this->Servico->read("*");
         @$this->view->allServicos = $servicos;
         
+        $clientes = $this->Clientes->read("*");
+        @$this->view->allClientes = $clientes;
+        
+        $usuario = $this->Usuario->read("*");
+        @$this->view->allUsuario = $usuario;
+        
         $arrayos = array(
-            "chave" => " s JOIN produtos_os ps ON s.idOs = ps.os_id LEFT JOIN produto p ON p.idProduto = ps.idProdutos_os where ps.os_id = $id"
+            "chave" => "s JOIN produtos_os ps ON s.idOs = ps.os_id LEFT JOIN produto p ON p.idProduto = ps.idProdutos_os where ps.os_id = $id"
         );
         $dados1 = $this->os->readChave($arrayos, "*");
         
@@ -408,23 +458,35 @@ class AdminController extends BaseController {
         $this->Render('admin/mapos/os/editOs', 'layoutadminMapos');
     }
     
+    public function updateSalvarOs($request){ 
+        $id = $request->post->idOs;
+        if($this->os->atualizarOs($request)){
+            
+            $this->redirect("os/editar?id={$id}", self::SUCCESS, "Deletado com sucesso"); 
+        }else{
+            
+            $this->redirect("os/editar?id={$id}", self::DANGER, "Deletado com sucesso"); 
+        }
+    }
+    
     public function osRemover($request) {
         $id = $request->get->id;    
         
         if($this->os->deletar($id)){
-            $this->redirect("os", "1", "Deletado com sucesso"); 
+            $this->redirect("os", self::SUCCESS, "Deletado com sucesso"); 
         }else{
-            $this->redirect("os", "4", " POS Erro ao deletar cliente");  
+            $this->redirect("os", self::DANGER, " POS Erro ao deletar cliente");  
         }        
     }
     
     public function osRemoverProduto($request) {
+        
         $id = $request->get->id;
-        $idOs = $request->get->idOs; 
+        $os_id = $request->get->idOs; 
         if($this->Produtos_os->deletar($id)){
-            $this->redirect("os/editar?id=$idOs", "1", "Deletado com sucesso"); 
+            $this->redirect("os/editar?id={$os_id}", self::SUCCESS, "Deletado com sucesso"); 
         }else{
-            $this->redirect("os/editar?id=$idOs", "4", " POS Erro ao deletar Produto da os");  
+            $this->redirect("os/editar?id={$os_id}", self::DANGER, " POS Erro ao deletar Produto da os");  
         }        
     }
     public function osRemoverServico($request) {
@@ -432,9 +494,9 @@ class AdminController extends BaseController {
         $id = $request->get->id;            
         $idOs = $request->get->idOs;            
         if($this->Servicos_os->deletar($id)){
-            $this->redirect("os/editar?id=$idOs", "1", "Deletado com sucesso"); 
+            $this->redirect("os/editar?id={$idOs}",  self::SUCCESS, "Deletado com sucesso"); 
         }else{
-            $this->redirect("os/editar?id=$idOs", "4", " POS Erro ao deletar Produto da os");  
+            $this->redirect("os/editar?id={$idOs}", self::DANGER, " POS Erro ao deletar Produto da os");  
         }        
     }
     
@@ -460,9 +522,9 @@ class AdminController extends BaseController {
         );
         
         if($this->Produtos_os->cadastrar($result)){
-             $this->redirect("os/editar?id=$osid", "1", "Cadastrado com sucesso"); 
+             $this->redirect("os/editar?id=$osid", self::SUCCESS, "Cadastrado com sucesso"); 
         }else{
-             $this->redirect("os/editar?id=$osid", "1", "Errro ao tentar cadastrar"); 
+             $this->redirect("os/editar?id=$osid", self::DANGER, "Erro ao tentar cadastrar"); 
         }
         
     }

@@ -52,7 +52,7 @@ class Produtos_os extends BaseModel {
 
     public function deletar($id) {
 
-        if ($this->delete("idOS = {$id}")) {
+        if ($this->delete("idProdutos_os = {$id}")) {
             return TRUE;
         } else {
             return FALSE;

@@ -27,13 +27,14 @@ class CadastroProduto extends BaseModel {
         
         $array = array(
                     "0" => array(
-            'nome' => $request->post->descricao, 'unidade' => $request->post->unidade, 'precoCompra' => $request->post->precoCompra, 
+            'nome_produto' => $request->post->descricao, 'unidade' => $request->post->unidade, 'precoCompra' => $request->post->precoCompra, 
             'precoVenda' => $request->post->precoVenda, 'estoque' => $request->post->estoque,
             'estoqueMinimo' => $request->post->estoqueMinimo, 'validade' => $request->post->validade
         )
             );
         
-        if ($this->insert($array)) {
+        if ($dados = $this->insert($array)) {
+            print_r($dados); die();
             return TRUE;
         } else {
             return FALSE;
@@ -50,7 +51,7 @@ class CadastroProduto extends BaseModel {
         date_default_timezone_set('America/Sao_Paulo');
         $dataAtual = date("Y-d-m H:m:s");
         $array = array(
-            'nome' => $request->post->descricao, 'unidade' => $request->post->unidade, 'precoCompra' => $request->post->precoCompra,
+            'nome_produto' => $request->post->nome_produto, 'unidade' => $request->post->unidade, 'precoCompra' => $request->post->precoCompra,
             'precoVenda' => $request->post->precoVenda, 'estoque' => $request->post->estoque,
             'estoqueMinimo' => $request->post->estoqueMinimo, 'validade' => $request->post->validade, "dataModificado" => $dataAtual
         );

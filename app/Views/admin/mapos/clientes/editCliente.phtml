@@ -44,7 +44,7 @@
 
 <div id="content">
     <div id="content-header">
-        <div id="breadcrumb"> <a href="https://www.ultramapos.online/" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="https://www.ultramapos.online/index.php/clientes" class="tip-bottom" title="Clientes">Clientes</a> <a href="https://www.ultramapos.online/index.php/clientes/editar/81" class="current tip-bottom" title="Editar">Editar</a> </div>
+        <div id="breadcrumb"> <a href="<?= base_url('')?>" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="<?= base_url('')?>/clientes" class="tip-bottom" title="Clientes">Clientes</a> <a href="<?= base_url('')?>/clientes/editar" class="current tip-bottom" title="Editar">Editar</a> </div>
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
@@ -67,26 +67,37 @@
                             <div class="widget-content nopadding">
                                 <form action="<?= base_url('')?>/clientes/editar/salvar" id="formCliente" method="post" class="form-horizontal" >
                                     <div class="control-group">
-                                        <?php foreach (@$this->view->oneClientes as $clientes){ ?>
+                                        <?php foreach ($this->view->oneClientes as $clientes){?>
                                         <input type="hidden" name="idClientes" value="<?=$clientes['idClientes']?>" />
                                         
                                         <label for="nomeCliente" class="control-label">Nome<span class="required">*</span></label>
                                         <div class="controls">
                                             <input id="nomeCliente" type="text" name="nomeCliente" value="<?=$clientes['nomeCliente']?>"  />
                                         </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label for="documento" class="control-label">CPF/CNPJ<span class="required">*</span></label>
-                                        <div class="controls">
-                                            <input id="documento" type="text" name="documento" value="<?=$clientes['documento']?>"  />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label for="pessoa" class="control-label">Tipo de Pessoa<span class="required">*</span></label>
-                                        <div class="controls">
-                                            <input id="telefone" type="text" name="pessoa" value="<?=$clientes['pessoa']?>"  />
-                                        </div>
-                                    </div>
+                                    </div>                                    
+                <div class="control-group">
+    			<label>&nbsp;</label>
+                        <div class="controls">
+    			<input type="radio" value="cpf" name="documento" checked="checked"> CPF
+    			<input type="radio" value="cnpj" name="documento"> CNPJ
+                        </div>
+    		</div>
+                <div class="control-group">                    
+               <div id="cpf">
+                   <label for="documentoCPF" class="control-label">CPF <span>*</span></label><br>
+                   <div class="controls">
+                       <input type="text" name="documentoCpf" id="documentoCPF" class="cpf required" value="<?php if(strlen($clientes['documento']) === 14){echo $clientes['documento'];}?>" maxlength="15">
+                   </div>
+    		</div>
+                </div>
+                <div class="control-group">                    
+                <div id="cnpj" style="display: none;">
+    			<label for="documentoCNPJ" class="control-label">CNPJ <span>*</span></label>
+                        <div class="controls">
+                            <input type="text" name="documentoCpnj" id="documentoCNPJ" class="cnpj" value="<?php if(strlen ($clientes['documento']) === 18){echo $clientes['documento'];}?>" maxlength="18">
+                        </div>
+    		</div>
+                </div>
                                     <div class="control-group">
                                         <label for="telefone" class="control-label">Telefone<span class="required">*</span></label>
                                         <div class="controls">
@@ -98,13 +109,12 @@
                                     <div class="control-group">
                                         <label for="celular" class="control-label">Celular</label>
                                         <div class="controls">
-                                            <input id="ddd" type="text" name="ddd_celular" value="<?=$clientes['ddd_celular']?>" style="max-width:30px" />
                                             <input id="celular" type="text" name="celular" value="<?=$clientes['celular']?>"  />
                                         </div>
                                     </div>
 
                                     <div class="control-group">
-                                        <label for="email" class="control-label">Email</span></label>
+                                        <label for="email" class="control-label">Email<span>*</span></span></label>
                                         <div class="controls">
                                             <input id="email" type="text" name="email" value="<?=$clientes['email']?>"  />
                                         </div>
@@ -171,8 +181,36 @@
 
 
                 <script src="https://www.ultramapos.online/js/jquery.validate.js"></script>
+                <script>
+    jQuery("input[name=documento]:radio").change(
+    	function(){
+    		if( jQuery("input[name=documento]:radio:checked").val() == 'cpf' )
+    		{
+    			jQuery("#cnpj").hide();
+    			jQuery("#documentoCNPJ").removeClass('required');
+    			jQuery("#cpf").show();
+    			jQuery("#documentoCPF").addClass('required');
+    		}
+    		else
+    		{
+    			jQuery("#cnpj").show();
+    			jQuery("#documentoCNPJ").addClass('required');
+    			jQuery("#cpf").hide();
+    			jQuery("#documentoCPF").removeClass('required');
+    		}
+    	}	
+    );
+    </script>
                 <script type="text/javascript">
                      $(document).ready(function () {
+                         //Mascara para os inpust70645-160
+        
+        $("#celular").mask("(00) 0 0000-0000");
+        $("#telefone").mask("(00) 0000-0000");
+        $("#documentoCNPJ").mask("99.999.999/9999-99");
+        $("#documentoCPF").mask("999.999.999-99");
+        $("#cep").mask("99999-999");
+                         
                          $('#formCliente').validate({
                              rules: {
                                  nomeCliente: {required: true},

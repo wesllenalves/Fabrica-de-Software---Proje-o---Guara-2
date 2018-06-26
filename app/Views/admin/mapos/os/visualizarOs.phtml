@@ -18,9 +18,7 @@
         <li class="submenu ">
             <a href="#"><i class="icon icon-money"></i> <span>Financeiro</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
             <ul>
-                <li><a href="index.php/financeiro/lancamentos">Lançamentos</a></li>
-                <li><a title="recibo.php" onClick="abrirnotificacao(this)" style="cursor:pointer">Recibo</a></li>
-                <li><a title="taxascartao.php?plano=1" onClick="abrirnotificacao(this)" style="cursor:pointer">Conf. Taxas cartão</a></li>       
+                <li><a href="<?= base_url('')?>/financeiro/lancamentos">Lançamentos</a></li>                
             </ul>
         </li>
 
@@ -46,7 +44,7 @@
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="https://www.ultramapos.online/index.php/os" class="tip-bottom" title="Os">Os</a> <a href="https://www.ultramapos.online/index.php/os/visualizar/103" class="current tip-bottom" title="Visualizar">Visualizar</a> </div>
+    <div id="breadcrumb"> <a href="<?= base_url('')?>" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="<?= base_url('')?>/os" class="tip-bottom" title="Os">Os</a> <a href="<?= base_url('')?>/os/visualizar" class="current tip-bottom" title="Visualizar">Visualizar</a> </div>
   </div>
   <div class="container-fluid">
     <div class="row-fluid">
@@ -62,8 +60,8 @@
                 </span>
                 <h5>Ordem de Serviço</h5>
                 <div class="buttons">
-                    <a title="Icon Title" class="btn btn-mini btn-info" href="https://www.ultramapos.online/index.php/os/editar/103"><i class="icon-pencil icon-white"></i> Editar</a>                    
-                    <a target="_blank" title="Imprimir" class="btn btn-mini btn-inverse" href="https://www.ultramapos.online/index.php/os/imprimir/103"><i class="icon-print icon-white"></i> Imprimir</a>
+                    <a title="Icon Title" class="btn btn-mini btn-info" href="https://www.ultramapos.online/index.php/os/editar/96"><i class="icon-pencil icon-white"></i> Editar</a>                    
+                    <a target="_blank" title="Imprimir" class="btn btn-mini btn-inverse" href="https://www.ultramapos.online/index.php/os/imprimir/96"><i class="icon-print icon-white"></i> Imprimir</a>
                 </div>
             </div>
             <div class="widget-content" id="printOs">
@@ -71,38 +69,33 @@
                     <div class="invoice-head" style="margin-bottom: 0">
 
                         <table class="table">
-                            <tbody>
-                                                                <tr>
-                                    <td style="width: 25%"><img src=" https://www.ultramapos.online/assets/uploads/b5502aef1fb4ae9096913b92a4626b61.jpg "></td>
-                                    <td> <span style="font-size: 20px; "> pessoa fisica</span> </br><span>1221111 </br> apartamento, 12 - cruzeiro - brasilia - DF </span> </br> <span> E-mail: wesllenalves@gmail.com - Fone: 61981745695</span></td>
-                                    <td style="width: 18%; text-align: center">#Protocolo: <span >103</span></br> </br> <span>Emissão: 16/06/2018</span></td>
-                                </tr>
-
-                                                            </tbody>
+                            
                         </table>
 
                 
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td style="width: 50%; padding-left: 0">
+                                    <td style="width: 50%; padding-left: 2%;">
                                         <ul>
                                             <li>
-                                                <span><h5>Cliente</h5>
-                                                <span>wesllen</span><br/>
-                                                <span>, </span><br/>
-                                                <span> - DF</span><br>Tel.:  | 981745695                                            </li>
+                                                <?php foreach ($this->view->os as $os){?>
+                                                <span><h5>Cliente</h5></span>
+                                                <span><?=$os['nomeCliente']?></span><br/>
+                                                <span><?=$os['rua']?>, <?=$os['bairro']?> </span><br/>
+                                                <span> <?=$os['cidade']?>- <?=$os['estado']?> CEP:<?=$os['cep']?></span><br>Tel.:  <?=$os['telefone'] ?> / <?=$os['celular']?> 
+                                                
+                                            </li>
                                         </ul>
                                     </td>
                                     <td style="width: 50%; padding-left: 0">
                                         <ul>
                                             <li>
                                                 <span><h5>Responsável</h5></span>
-                                                <span>wesllen alves teste de cadastro</span> <br/>
-                                                <span>Telefone: 61981745695</span><br/>
-                                                <span>Email: wesllenalves@gmail.com</span>
+                                                <span><?=$os['nome_usuario']?></span> <br/>                                                
                                             </li>
                                         </ul>
+                                        
                                     </td>
                                 </tr>
                             </tbody>
@@ -112,12 +105,69 @@
 
                     <div style="margin-top: 0; padding-top: 0">
 
+                                        <hr style="margin-top: 0">
+                    <h5>Descrição</h5>
+                    <p>
+                        <?=$os['descricaoServico']?>                         
+                    </p>
+                                        
+                        <table class="table table-bordered" id="tblProdutos">
+                                    <thead>
+                                        <tr>
+                                            <th>Produto</th>
+                                            <th>Quantidade</th>
+                                            <th>Sub-total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                        <?php
+                                         $totalProduto = 0;
+                                        foreach ($this->view->oneProdutos as $oneProduto) { 
+                                            $totalProduto = $totalProduto + $oneProduto['subTotal']?>
+                                        <tr>
+                                            <td><?=$oneProduto['nome_produto']?></td>
+                                            <td><?=$oneProduto['quantidade']?></td>
+                                            <td><?=$oneProduto['subTotal']?></td>
+                                        </tr>
+                                        <?php } ?>
+                                        
+                                        
+                                        <tr>
+                                            <td colspan="2" style="text-align: right"><strong>Total:</strong></td>
+                                            <td><strong>R$ <?=$totalProduto?></strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                                       
+                                                <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Serviço</th>
+                                                <th>Sub-total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                            $totalServic = 0;
+                                            foreach ($this->view->oneServico as $servico) {
+                                                $totalServic = $totalServic + $servico['preco'];
+                                                ?>
+                                            <tr>
+                                                <td><?=$servico['nome_servico']?></td>
+                                                <td>R$ <?=$servico['preco']?></td>
+                                            </tr>
+                                            <?php } ?>
+                                            
+                                        <tr>
+                                            <td colspan="1" style="text-align: right"><strong>Total:</strong></td>
+                                            <td><strong>R$ <?=$totalServic?></strong></td>
+                                        </tr>
+                                        </tbody>
+                                    </table><?php } ?>
+                                                <hr /><?php $total = $totalProduto + $totalServic; ?>
                     
-                                                            
-                                                
-                                                <hr />
-                    
-                        <h4 style="text-align: right">Valor Total: R$ 0,00</h4>
+                        <h4 style="text-align: right">Valor Total: R$ <?=$total?></h4>
 
                     </div>
             

@@ -9,7 +9,7 @@
 
 <div id="section2" class="container-fluid">
     <center>
-        
+
         <div class="sectionint">
             <h1>Sessão 2</h1>
             <p>Clique nos diferentes links da Seção na barra de navegação</p>
@@ -97,12 +97,12 @@ ALERTA de Cadastro.
                 <span class="field">
                     <label for="cpf">Usuario:</label>
                     <input type="text" class="form-cadastro" ng-model="cpf" name="usuario" id="cpf"  placeholder="Usuario">
-                    
+
                 </span>
                 <span class="field">
                     <label for="psw">Senha:</label>
-                    <input type="text" class="form-cadastro" ng-model="psw" name="password" id="psw"  placeholder="Senha">
-                    
+                    <input type="password" class="form-cadastro" ng-model="psw" name="password" id="psw"  placeholder="Senha">
+
                 </span>
                 <input type="submit" name="login" ng-click="Getverificaacesso(cpf, psw);" class="login loginmodal-submit" value="Entrar">
             </form>
@@ -118,22 +118,22 @@ ALERTA de Cadastro.
 
 
 <script>
-//	$(function(){
-//		$('.form-login').submit(function(){
-////			$('.loading').html("<img src='loading.gif' width='45'>");
-//			$.ajax({
-//				url: '<?=base_url('') ?>/login/verificar',
-//				type: 'POST',
-//				data: $('.form-login').serialize(),
-//				success: function(data){
-//					$('.mostrar-login').html(data);
-////					$('.loading').hide();
-////					$('.form')[0].reset();
-//				}
-//			});
-//			return true;
-//		});
-//	});
+    $(function () {
+        $('.form-login').submit(function () {
+//			$('.loading').html("<img src='loading.gif' width='45'>");
+            $.ajax({
+                url: '<?= base_url('') ?>/login/verificar',
+                type: 'POST',
+                data: $('.form-login').serialize(),
+                success: function (data) {
+                    $('.mostrar-login').html(data);
+//					$('.loading').hide();
+//					$('.form')[0].reset();
+                }
+            });
+            return true;
+        });
+    });
 </script>	
 
 
@@ -235,6 +235,29 @@ ALERTA de login.
                                 <input type="text" id="nome" class="form-control" name="nome" placeholder="José"  required/>
                             </div>
                             <div class="form-group">
+                                <label>&nbsp;</label>
+                                <div class="controls">
+                                    <input type="radio" value="cpf" name="documento" checked="checked"> CPF
+                                    <input type="radio" value="cnpj" name="documento"> CNPJ
+                                </div>
+                            </div>
+                            <div class="form-group">                    
+                                <div id="cpf1">
+                                    <label for="documentoCPF" class="control-label">CPF <span>*</span></label>
+                                   
+                                        <input type="text" name="documentoCpf" id="documentoCPF" class="cpf required form-control" value="" maxlength="15">
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group">                    
+                                <div id="cnpj" style="display: none;">
+                                    <label for="documentoCNPJ" class="control-label">CNPJ <span>*</span></label>
+                                    <div class="controls">
+                                        <input type="text" name="documentoCpnj" id="documentoCNPJ" class="cnpj form-control" value="" maxlength="18">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="nome">Celular</label>
                                 <input type="text" id="celular" class="form-control" name="celular" required/>
                             </div>
@@ -252,49 +275,53 @@ ALERTA de login.
                                 <div class="form-group">
                                           <!--  <input id="estado" type="text" name="estado" value=""  />-->
                                     <select class="form-control" id="estado"  name="estado">
-                                                <option value="">-</option>
-                                                <option value="AC">Acre</option>
-                                                <option value="AL">Alagoas</option>
-                                                <option value="AP">Amapá</option>
-                                                <option value="AM">Amazonas</option>
-                                                <option value="BA">Bahia</option>
-                                                <option value="CE">Ceará</option>
-                                                <option value="DF">Distrito Federal</option>
-                                                <option value="ES">Espírito Santo</option>
-                                                <option value="GO">Goiás</option>
-                                                <option value="MA">Maranhão</option>
-                                                <option value="MT">Mato Grosso</option>
-                                                <option value="MS">Mato Grosso do Sul</option>
-                                                <option value="MG">Minas Gerais</option>
-                                                <option value="PA">Pará</option>
-                                                <option value="PB">Paraíba</option>
-                                                <option value="PR">Paraná</option>
-                                                <option value="PE">Pernambuco</option>
-                                                <option value="PI">Piauí</option>
-                                                <option value="RJ">Rio de Janeiro</option>
-                                                <option value="RN">Rio Grande do Norte</option>
-                                                <option value="RS">Rio Grande do Sul</option>
-                                                <option value="RO">Rondônia</option>
-                                                <option value="RR">Roraima</option>
-                                                <option value="SC">Santa Catarina</option>
-                                                <option value="SP">São Paulo</option>
-                                                <option value="SE">Sergipe</option>
-                                                <option value="TO">Tocantins</option>
+                                        <option value="">-</option>
+                                        <option value="AC">Acre</option>
+                                        <option value="AL">Alagoas</option>
+                                        <option value="AP">Amapá</option>
+                                        <option value="AM">Amazonas</option>
+                                        <option value="BA">Bahia</option>
+                                        <option value="CE">Ceará</option>
+                                        <option value="DF">Distrito Federal</option>
+                                        <option value="ES">Espírito Santo</option>
+                                        <option value="GO">Goiás</option>
+                                        <option value="MA">Maranhão</option>
+                                        <option value="MT">Mato Grosso</option>
+                                        <option value="MS">Mato Grosso do Sul</option>
+                                        <option value="MG">Minas Gerais</option>
+                                        <option value="PA">Pará</option>
+                                        <option value="PB">Paraíba</option>
+                                        <option value="PR">Paraná</option>
+                                        <option value="PE">Pernambuco</option>
+                                        <option value="PI">Piauí</option>
+                                        <option value="RJ">Rio de Janeiro</option>
+                                        <option value="RN">Rio Grande do Norte</option>
+                                        <option value="RS">Rio Grande do Sul</option>
+                                        <option value="RO">Rondônia</option>
+                                        <option value="RR">Roraima</option>
+                                        <option value="SC">Santa Catarina</option>
+                                        <option value="SP">São Paulo</option>
+                                        <option value="SE">Sergipe</option>
+                                        <option value="TO">Tocantins</option>
 
-                                            </select>                         
+                                    </select>                         
 
-                                        </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="nome">Cidade Evento</label>
                                 <input type="text" class="form-control" name="cidade"  required/>
                             </div>
+                            <div class="form-group">
+                                <label for="nome">CEP</label>
+                                <input type="text" id="cep" class="form-control" name="cep"  required/>
+                            </div>
                             <div class="form-group" >
                                 <label for="nome">Produto</label><br>
                                 <select data-placeholder="Choose a Country..." class="select" multiple tabindex="3" name="produto[]" id="sel">
-                                    <?php foreach ($this->view->produtos as $produtos) { ?>
-                                        <?php echo '<option>' . $produtos['nome_produto'] . '</option>'; ?>                                        
-                                    <?php } ?>
+<?php foreach ($this->view->produtos as $produtos) { ?>
+    <?php echo '<option>' . $produtos['nome_produto'] . '</option>'; ?>                                        
+<?php } ?>
                                 </select>
                             </div>
 
@@ -321,8 +348,28 @@ ALERTA de login.
 
     </div>
 </div>
+<script>
+    jQuery("input[name=documento]:radio").change(
+    	function(){
+    		if( jQuery("input[name=documento]:radio:checked").val() == 'cpf' )
+    		{
+    			jQuery("#cnpj").hide();
+    			jQuery("#documentoCNPJ").removeClass('required');
+    			jQuery("#cpf1").show();
+    			jQuery("#documentoCPF").addClass('required');
+    		}
+    		else
+    		{       
+    			jQuery("#cnpj").show();
+    			jQuery("#documentoCNPJ").addClass('required');
+    			jQuery("#cpf1").hide();
+    			jQuery("#documentoCPF").removeClass('required');
+    		}
+    	}	
+    );
+    </script>
 <?php
-if($_GET['Erro'] === "Permissao"){
+if ($_GET['Erro'] === "Permissao") {
     echo '<script>
 			$(document).ready(function(){
 				swal("Ops...","Voce não tem permissao para entrar nessa pagina","warning");
@@ -332,35 +379,39 @@ if($_GET['Erro'] === "Permissao"){
 ?>
 <script>
     //script ajax para trazer mensagem alert-box para orçamento
-	$(function(){
-		$('.form-orcamento').submit(function(){
-			$('.loading').html("<img src='<?=base_url('') ?>/public/img/loading.gif' width='45'>");
-			$.ajax({
-				url: '<?=base_url('') ?>/cadastro/orcamento',
-				type: 'POST',
-				data: $('.form-orcamento').serialize(),
-				success: function(data){
-					$('.mostrar-orcamento').html(data);
-					$('.loading').hide();
-					$('.form-orcamento')[0].reset();
-				}
-			});
-			return false;
-		});
-	});
-        
-        //Mascara para os inpust
-        $(document).ready(function(){
+    $(function () {
+        $('.form-orcamento').submit(function () {
+            $('.loading').html("<img src='<?= base_url('') ?>/public/img/loading.gif' width='45'>");
+            $.ajax({
+                url: '<?= base_url('') ?>/cadastro/orcamento',
+                type: 'POST',
+                data: $('.form-orcamento').serialize(),
+                success: function (data) {
+                    $('.mostrar-orcamento').html(data);
+                    $('.loading').hide();
+                    $('.form-orcamento')[0].reset();
+                }
+            });
+            return false;
+        });
+    });
+
+    //Mascara para os inpust
+    $(document).ready(function () {
         $("#celular").mask("(00) 0 0000-0000");
         $("#telefone").mask("(00) 0000-0000");
+        $("#documentoCNPJ").mask("99.999.999/9999-99");
+        $("#documentoCPF").mask("999.999.999-99");
+        $("#cep").mask("99999-999");
+    });
+
+    //mostra errro
+    if (isset)
+        $(document).ready(function () {
+            swal("Ops...", "Preecha todos os dados", "warning");
         });
-        
-        //mostra errro
-        if(isset)
-         $(document).ready(function(){
-				swal("Ops...","Preecha todos os dados","warning");
-	});
 </script>
+
 </div>
 
 

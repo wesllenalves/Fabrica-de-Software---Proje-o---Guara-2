@@ -16,26 +16,44 @@ use Core\BaseModel;
  * @author Wesllen
  */
 class cadastroOrcamento extends BaseModel {
-
-    protected $tabela = "os";
+    
+    protected $tabela = "clientes";
+    protected $tabela2 = "os";
+    
     //Definir a quantidade de tabelas que serao usadas maximo de 4
-    protected $tabelaUse = 1;
+    protected $tabelaUse = 2;
+    protected $chaveEstrangeira = "clientes_id";
 
     public function cadastrar($request) {
         date_default_timezone_set('America/Sao_Paulo');
         $dataAtual = date("Y-m-d H:i:s");
         if (!empty($request->post->produto) and is_array($request->post->produto)) {
             $produtos = implode(',', $request->post->produto);
-
+        
+        $documento =  NULL;
+        $tipoPessoa = NULL;
+        if(!empty ($request->post->documentoCpf)){
+            $documento = $request->post->documentoCpf;
+            $tipoPessoa = "PF";
+        }elseif (!empty ($request->post->documentoCpnj)) {
+            $documento = $request->post->documentoCpnj;
+            $tipoPessoa = "PJ";
+        }        
+            
+            
+            
         $array = array(
             "0" => array(
-                'nome_pessoa' => $request->post->nome, 'status' => "Aberto",
-                'dataInicial' => $request->post->data, 'telefone' => $request->post->telefone,
-                'celular' => $request->post->celular,
-                'quantidade' => $request->post->quantidade, 'estado' => $request->post->estado,
-                'cidade' => $request->post->cidade, 'produtos' => $produtos,
-                'descricaoServico' => $request->post->descricao, 'dataCadastro' => $dataAtual
-            ));       
+                'nomeCliente' => $request->post->nome, 'documento' => $documento,
+                'tipoPessoa' => $tipoPessoa, 'telefone' => $request->post->telefone,
+                'celular' => $request->post->celular, 'cidade' => $request->post->cidade,
+                'estado' => $request->post->estado, 'cep' => $request->post->cep, 'dataCadastro' => $dataAtual
+            ),
+            "1" => array(
+                'status_pedido' => "Aberto", 'dataInicial' => $request->post->data,  'quantidade' => $request->post->quantidade, 'produtos' => $produtos,
+                'descricaoServico' => $request->post->descricao . "<br>Produtos pedido<br>", 'dataCadastro' => $dataAtual
+            )
+            );       
                 
            
         if ($this->insert($array)) {

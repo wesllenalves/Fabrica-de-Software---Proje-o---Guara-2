@@ -19,14 +19,14 @@
         <li class="submenu ">
             <a href="#"><i class="icon icon-money"></i> <span>Financeiro</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
             <ul>
-                <li><a href="index.php/financeiro/lancamentos">Lançamentos</a></li>
+                <li><a href="<?= base_url('')?>/financeiro/lancamentos">Lançamentos</a></li>
                 <li><a title="recibo.php" onClick="abrirnotificacao(this)" style="cursor:pointer">Recibo</a></li>
                 <li><a title="taxascartao.php?plano=1" onClick="abrirnotificacao(this)" style="cursor:pointer">Conf. Taxas cartão</a></li>       
             </ul>
         </li>
 
 
-        
+
 
 
         <li class="submenu ">
@@ -49,7 +49,7 @@
 
 <div id="content">
     <div id="content-header">
-        <div id="breadcrumb"> <a href="" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="https://www.ultramapos.online/index.php/os" class="tip-bottom" title="Os">Os</a> <a href="https://www.ultramapos.online/index.php/os/editar/104" class="current tip-bottom" title="Editar">Editar</a> </div>
+        <div id="breadcrumb"> <a href="<?= base_url('')?>" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="<?= base_url('')?>/os" class="tip-bottom" title="Os">Os</a> <a href="<?= base_url('')?>/os/editar" class="current tip-bottom" title="Editar">Editar</a> </div>
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
@@ -92,6 +92,9 @@
                                     <i class="icon-tags"></i>
                                 </span>
                                 <h5>Editar OS</h5>
+                                <?php
+                                $this->alerta();
+                                ?>
                             </div>
                             <div class="widget-content nopadding">
 
@@ -107,32 +110,37 @@
 
                                             <div class="span12" id="divCadastrarOs">
 
-                                                <form action="" method="post" id="formOs">
+                                                <form action="<?= base_url('')?>/os/update/salvar" method="post" id="formOs">
                                                     <h3>Protocolo #1210</h3>
-                                                    <?php foreach ($this->view->oneOs as $os) { ?>
+                                                    <?php foreach ($this->view->oneOs as $os) {
+                                                        ?>
                                                         <div class="span12" style="padding: 1%; margin-left: 1%; ">
                                                             <div class="span6">
-                                                                <label for="cliente">Cliente*</label>
-                                                                <input id="cliente" class="span12" type="text" name="cliente" value="<?= $os['nome_pessoa'] ?>"   required  onKeyDown="if (event.keyCode == '13') {
-                                                                            document.getElementById('tecnico').focus();
-                                                                            return false;
-                                                                        }
-                                                                        "/>
-                                                                <input id="clientes_id" class="span12" type="hidden" name="clientes_id" value=""  />
+                                                                <label for="cliente">Cliente*</label>                                                                                                                          
+
+                                                                <input type="text" name="nomeCliente" value="<?= $os['nomeCliente'] ?>">
+                                                                <input id="clientes_id" class="span12" type="hidden" name="idOs" value="<?=$os['idOs']?>"  />
+                                                                <input id="clientes_id" class="span12" type="hidden" name="clientes_id" value="<?=$os['idClientes']?>"  />
                                                             </div>
                                                             <div class="span6">
                                                                 <label for="tecnico">Técnico / Responsável*</label>
-                                                                <input id="tecnico" class="span12" type="text" name="tecnico" value="wesllen alves teste de cadastro"  onKeyDown="if (event.keyCode == '13') {
-                                                                            document.getElementById('status').focus(); return false };" readonly />
-                                                                <input id="usuarios_id" class="span12" type="hidden" name="usuarios_id" value=""  required />
+
+
+                                                                <select class="span12" name="usuarios_id" id="usuarios_id" value="">                                                            
+                                                                    <?php foreach ($this->view->allUsuario as $allUsuario) { ?>
+                                                                    
+                                                                        <option value="<?=$allUsuario['idUsuarios'] ?>">
+                                                                            <?php echo $allUsuario['nome_usuario']; ?>
+                                                                        </option>                                                            
+                                                                    <?php } ?>
+
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="span12" style="padding: 1%; margin-left: 1%;">
                                                             <div class="span2">
                                                                 <label for="status">Status<span class="required">*</span></label>
-                                                                <select class="span12" name="status" id="status" value="" onKeyDown="if (event.keyCode == '13') {
-                                                                            document.getElementById('dataInicial').focus();
-                                                                            return false };">
+                                                                <select class="span12" name="status" id="status" value="" >
                                                                     <option value="Orçamento">Orçamento</option>
                                                                     <option value="Aberto">Aberto</option>
                                                                     <option value="Em Andamento">Em Andamento</option>
@@ -142,51 +150,38 @@
                                                             </div>
                                                             <div class="span2">
                                                                 <label for="dataInicial">Data Inicial<span class="required">*</span></label>
-                                                                <input id="dataInicial" class="span12 datepicker" type="text" name="dataInicial" value="12/06/2018"  onKeyDown="if (event.keyCode == '13') {
-                                                                            document.getElementById('dataFinal').focus();
-                                                                            return false
-                                                                        }
-                                                                        ;
-                                                                        "/>
+                                                                <input type="date" id="dataInicial" class="span12 datepicker"  name="dataInicial" value="<?= $os['dataInicial'] ?>" />
                                                             </div>
                                                             <div class="span2">
                                                                 <label for="dataFinal">Data Final</label>
-                                                                <input id="dataFinal" class="span12 datepicker" type="text" name="dataFinal" value=""  onKeyDown="if (event.keyCode == '13') {
-                                                                            document.getElementById('garantia').focus();
-                                                                            return false
-                                                                        }
-                                                                        ;
-                                                                        "/>
+                                                                <input id="dataFinal" class="span12 datepicker" type="date" name="dataFinal" value="<?= $os['dataFinal'] ?>" />
                                                             </div>
                                                             <div class="span2">
                                                                 <label for="telefone">Telefone</label>
-                                                                <input id="telefone" class="span12" type="tel" name="telefone" value="">
+                                                                <input id="telefone" class="span12" type="tel" name="telefone" value="<?= $os['telefone'] ?>">
                                                             </div>
                                                             <div class="span1">
                                                                 <label for="quantidade">Quantidade</label>
-                                                                <input id="quantidade" class="span12" type="number" name="quantidade" value="">
+                                                                <input id="quantidade" class="span12" type="number" name="quantidade" value="<?= $os['quantidade'] ?>">
                                                             </div>
                                                             <div class="span3">
                                                                 <label for="cidade">Cidade</label>
-                                                                <input id="cidade" class="span8" type="text" name="cidade" value="">
+                                                                <input id="cidade" class="span8" type="text" name="cidade" value="<?= $os['cidade'] ?>">
                                                             </div>
 
 
                                                         </div>
 
                                                         <div class="span12" style="padding: 1%; margin-left: 0">
-
-
-
                                                             <div class="span12" style="padding: 1%; margin-left: 0">
                                                                 <div class="span6">
                                                                     <label for="descricaoServico">Descrição Serviço</label>
-                                                                    <textarea class="span12" name="descricaoServico" id="descricaoServico" cols="30" rows="5"></textarea>
+                                                                    <textarea class="span12" name="descricaoServico" id="descricaoServico" cols="30" rows="5"><?= $os['descricaoServico'] ?></textarea>
                                                                 </div>                                                                
                                                             </div>
 
                                                         </div>
-<?php } ?>
+                                                    <?php } ?>
                                                     <div class="span12" style="padding: 1%; margin-left: 0">
                                                         <div class="span6 offset3" style="text-align: center">
                                                             <a href="#modal-faturar" id="btn-faturar" role="button" data-toggle="modal" class="btn btn-success" onClick="redefinir2();"><i class="icon-file"></i> Faturar</a>
@@ -204,27 +199,27 @@
                                         <!--Produtos-->
                                         <div class="tab-pane" id="tab2">
                                             <div class="span12 well" style="padding: 1%; margin-left: 0">
-                                                <form  action="<?= base_url("")?>/os/salvarOsProduto" method="post">
+                                                <form  action="<?= base_url("") ?>/os/salvarOsProduto" method="post">
                                                     <div class="span8"> 
-                                                        <input type="hidden" name="os_id" id="idOsProduto" value="<?=$os['idOs']?>" />                                                        
+                                                        <input type="hidden" name="os_id" id="idOsProduto" value="<?= $os['idOs'] ?>" />                                                        
                                                         <label for="">Produto</label>
                                                         <select class="span12" name="idProduto">
-                                                            
-                                                        <?php foreach ($this->view->allProdutos as $allproduto){?>
-                                                            <option value="<?=$allproduto['idProduto']?>">
-                                                        <?php echo $allproduto['nome_produto']; ?>
-                                                            </option>                                                            
-                                                        <?php } ?>
-                                                            
+
+                                                            <?php foreach ($this->view->allProdutos as $allproduto) { ?>
+                                                                <option value="<?= $allproduto['idProduto'] ?>">
+                                                                    <?php echo $allproduto['nome_produto']; ?>
+                                                                </option>                                                            
+                                                            <?php } ?>
+
                                                         </select>
-                                                        
+
                                                     </div>
                                                     <div class="span2">
                                                         <label for="">Quantidade</label>
                                                         <input type="text" placeholder="Quantidade" id="quantidade" name="quantidade" class="span12" required />
                                                     </div>
                                                     <div class="span2">
-                                                        <label for="">.</label>
+                                                        <label for="">,</label>
                                                         <button class="btn btn-success span12" id="btnAdicionarProduto"><i class="icon-white icon-plus"></i> Adicionar</button>
 
                                                     </div>
@@ -241,24 +236,24 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php 
+                                                        <?php
                                                         $total = 0;
-                                                        foreach ($this->view->oneProdutos as $oneProduto){                                                            
-                                                                 $subTotal = $oneProduto['subTotal'];
-                                                                 $total = $total + $subTotal;
+                                                        foreach ($this->view->oneProdutos as $oneProduto) {
+                                                            $subTotal = $oneProduto['subTotal'];
+                                                            $total = $total + $subTotal;
                                                             ?>
-                                                        <tr>
-                                                            <td><?=$oneProduto['nome_produto']?></td>
-                                                            <td><?=$oneProduto['quantidade']?></td>
-                                                            <td><a href="<?= base_url('')?>/os/oRemoverProduto?id=<?=$oneProduto['idProdutos_os']?>&idOs=<?=$os['idOs']?>"   title="Remover"  class="btn btn-danger"><i class="icon-remove icon-white"></i></a></td>
-                                                            <td><?=$oneProduto['subTotal']?></td>
-                                                        </tr>                                       
-                                                        <tr>
+                                                            <tr>
+                                                                <td><?= $oneProduto['nome_produto'] ?></td>
+                                                                <td><?= $oneProduto['quantidade'] ?></td>
+                                                                <td><a href="<?= base_url('') ?>/os/oRemoverProduto?id=<?= $oneProduto['idProdutos_os'] ?>&idOs=<?= $os['idOs'] ?>"   title="Remover"  class="btn btn-danger"><i class="icon-remove icon-white"></i></a></td>
+                                                                <td><?= $oneProduto['subTotal'] ?></td>
+                                                            </tr>                                       
+                                                            <tr>
                                                             <?php } ?>
                                                             <td colspan="3" style="text-align: right"><strong>Total:</strong></td>
-                                                            <td><strong><div id="totalprodutos"><?=$total?></div><input type="hidden" id="total-venda" value="100.00"></strong></td>
+                                                            <td><strong><div id="totalprodutos"><?= $total ?></div><input type="hidden" id="total-venda" value="100.00"></strong></td>
                                                         </tr>
-                                                        
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -270,20 +265,20 @@
                                             <div class="span12" style="padding: 1%; margin-left: 0">
                                                 <div class="span12 well" style="padding: 1%; margin-left: 0">
 
-                                                    <form id="formServicoss" action="<?= base_url('')?>/os/salvarOsServico" method="post">
+                                                    <form id="formServicoss" action="<?= base_url('') ?>/os/salvarOsServico" method="post">
                                                         <div class="span10">
-                                                         <input type="hidden" name="os_id" id="idOsServico" value="<?=$os['idOs']?>" />                                                        
-                                                        <label for="">Produto</label>
-                                                        <select class="span12" name="idServicos">
-                                                            
-                                                        <?php foreach ($this->view->allServicos as $allservico){                                                         
-                                                            ?>
-                                                            <option value="<?=$allservico['idServicos']?>">
-                                                        <?php echo $allservico['nome_servico']; ?>
-                                                            </option>                                                            
-                                                        <?php } ?>
-                                                            
-                                                        </select>
+                                                            <input type="hidden" name="os_id" id="idOsServico" value="<?= $os['idOs'] ?>" />                                                        
+                                                            <label for="">Produto</label>
+                                                            <select class="span12" name="idServicos">
+
+                                                                <?php foreach ($this->view->allServicos as $allservico) {
+                                                                    ?>
+                                                                    <option value="<?= $allservico['idServicos'] ?>">
+                                                                        <?php echo $allservico['nome_servico']; ?>
+                                                                    </option>                                                            
+                                                                <?php } ?>
+
+                                                            </select>
                                                         </div>
                                                         <div class="span2">
                                                             <label for="">.</label>
@@ -303,20 +298,20 @@
                                                         <tbody>
                                                             <?php
                                                             $total = 0;
-                                                            foreach ($this->view->oneServicos as $oneservicos) {                                                               
+                                                            foreach ($this->view->oneServicos as $oneservicos) {
                                                                 $total = $total + $oneservicos['subTotal'];
-                                                            ?>
+                                                                ?>
 
-                                                            <tr>
-                                                            <td><?=$oneservicos['nome_servico']?></td>
-                                                            
-                                                            <td><a href="<?= base_url('')?>/os/oRemoverServico?id=<?=$oneservicos['idServicos_os']?>&idOs=<?=$os['idOs']?>"   title="Remover"  class="btn btn-danger"><i class="icon-remove icon-white"></i></a></td>
-                                                            <td><?=$oneservicos['subTotal']?></td>
-                                                        </tr>
+                                                                <tr>
+                                                                    <td><?= $oneservicos['nome_servico'] ?></td>
+
+                                                                    <td><a href="<?= base_url('') ?>/os/oRemoverServico?id=<?= $oneservicos['idServicos_os'] ?>&idOs=<?= $os['idOs'] ?>"   title="Remover"  class="btn btn-danger"><i class="icon-remove icon-white"></i></a></td>
+                                                                    <td><?= $oneservicos['subTotal'] ?></td>
+                                                                </tr>
                                                             <?php } ?>
                                                             <tr>
                                                                 <td colspan="2" style="text-align: right"><strong>Total:</strong></td>
-                                                                <td><strong><?=$total?><input type="hidden" id="total-servico" value="0.00"></strong></td>
+                                                                <td><strong><?= $total ?><input type="hidden" id="total-servico" value="0.00"></strong></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -367,7 +362,8 @@
                                                             <label for="valor">Valor*</label>
                                                             <input type="hidden" id="tipo" name="tipo" value="receita" /> 
                                                             <input class="span12" id="valor" type="number" step="0.01" name="valor" value="0.00"  onChange="document.getElementById('desconto').value = '0';
-                                                                    valortotal = document.getElementById('valor').value; parcelasF();" onFocus="recuperarvalortotal()"/>
+                                                                    valortotal = document.getElementById('valor').value;
+                                                                    parcelasF();" onFocus="recuperarvalortotal()"/>
                                                         </div>
 
                                                         <div class="span4" style="margin-left: 0">  
@@ -475,7 +471,7 @@
                                         <script type="text/javascript" src="https://www.ultramapos.online/js/jquery.validate.js"></script>
                                         <script src="https://www.ultramapos.online/js/maskmoney.js"></script>
                                         <script src="https://www.ultramapos.online/cookie.js"></script>
-                                        
+
 
 
 
@@ -483,7 +479,14 @@
                                 </div>
                             </div>
                         </div>
+                        <script>
+                                                                    $(document).ready(function () {
+                                                                        //Mascara para os inpust70645-160
 
+                                                                        $("#celular").mask("(00) 0 0000-0000");
+                                                                        $("#telefone").mask("(00) 0000-0000");
+                                                                    });
+                        </script>
 
 
 
