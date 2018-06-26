@@ -4,6 +4,11 @@ if(!isset($_SESSION))
         session_start(); 
         
     }
+if(isset($_GET["sair"])){
+    echo 'sair';
+    session_destroy();
+    header('Location:'.base_url('').'/index');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +32,7 @@ if(!isset($_SESSION))
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 <script type="text/javascript"  src="<?= base_url('')?>/public/admin/mapes/assets/js/jquery-1.10.2.min.js"></script>
 <script src="<?= base_url('')?>/public/js/jquery.mask.min.js"></script>
+<script src="<?= base_url('')?>/public/js/jquery.maskMoney.min.js"></script>
 
 <style>
  .container {
@@ -75,19 +81,20 @@ if(!isset($_SESSION))
    
        
     
-    <li class="" style="height: 2px;"><a title="" href="index.php/mapos/sair"><i class="icon icon-share-alt"></i> <span class="text">Sair do Sistema</span></a></li>
+    <li class="" style="height: 2px;"><a title="" href="?sair=Sim"><i class="icon icon-share-alt"></i> <span class="text">Sair do Sistema</span></a></li>
  
   </ul>
 </div>
 
 <!--start-top-serch-->
 <div id="search">
-  <form action="index.php/mapos/pesquisar">
+  <form action="pesquisar">
     <input type="text" name="termo" placeholder="Pesquisar..."/>
     <button type="submit"  class="tip-bottom" title="Pesquisar"><i class="icon-search icon-white"></i></button>
     
   </form>
 </div>
+
 
 <!--Conteudo-->
         <?php $this->content()?>
@@ -95,12 +102,12 @@ if(!isset($_SESSION))
 
 <!--Footer-part-->
 <div class="row-fluid">
-  <div id="footer" class="span12"> 2018 &copy; ULTRAmap OS</div>
+  <div id="footer" class="span12"> 2018 &copy; Fabrica de Software - Projeção / Guara 2</div>
 </div>
 <!--end-Footer-part-->
 
 
-<script src="<?= base_url('')?>/public/admin/mapes/assets/js/bootstrap.min.js"></script> 
+<script src="<?= base_url('')?>/public/admin/mapes/assets/js/bootstrap.min.js"></script>
 <script src="<?= base_url('')?>/public/admin/mapes/assets/js/matrix.js"></script> 
 
 

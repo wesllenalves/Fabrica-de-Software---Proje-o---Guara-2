@@ -6,32 +6,7 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitb010f24c6a7d8586e7dea7592837ad0b
 {
-    public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '65fec9ebcfbb3cbb4fd0d519687aea01' => __DIR__ . '/..' . '/danielstjules/stringy/src/Create.php',
-        '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
-        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
-        'S' => 
-        array (
-            'Symfony\\Polyfill\\Mbstring\\' => 26,
-            'Symfony\\Component\\VarDumper\\' => 28,
-            'Symfony\\Component\\Translation\\' => 30,
-            'Stringy\\' => 8,
-        ),
-        'I' => 
-        array (
-            'Illuminate\\Support\\' => 19,
-            'Illuminate\\Database\\' => 20,
-            'Illuminate\\Contracts\\' => 21,
-            'Illuminate\\Container\\' => 21,
-        ),
-        'D' => 
-        array (
-            'Doctrine\\Common\\Inflector\\' => 26,
-        ),
         'C' => 
         array (
             'Core\\' => 5,
@@ -43,42 +18,6 @@ class ComposerStaticInitb010f24c6a7d8586e7dea7592837ad0b
     );
 
     public static $prefixDirsPsr4 = array (
-        'Symfony\\Polyfill\\Mbstring\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
-        ),
-        'Symfony\\Component\\VarDumper\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/var-dumper',
-        ),
-        'Symfony\\Component\\Translation\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/translation',
-        ),
-        'Stringy\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/danielstjules/stringy/src',
-        ),
-        'Illuminate\\Support\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/illuminate/support',
-        ),
-        'Illuminate\\Database\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/illuminate/database',
-        ),
-        'Illuminate\\Contracts\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/illuminate/contracts',
-        ),
-        'Illuminate\\Container\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/illuminate/container',
-        ),
-        'Doctrine\\Common\\Inflector\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
-        ),
         'Core\\' => 
         array (
             0 => __DIR__ . '/../..' . '/core',
@@ -89,8 +28,34 @@ class ComposerStaticInitb010f24c6a7d8586e7dea7592837ad0b
         ),
     );
 
-    public static $fallbackDirsPsr4 = array (
-        0 => __DIR__ . '/..' . '/nesbot/carbon/src',
+    public static $classMap = array (
+        'App\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Controllers/AdminController.php',
+        'App\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Controllers/HomeController.php',
+        'App\\Models\\Admin\\CadastroFuncionario' => __DIR__ . '/../..' . '/app/Models/Admin/CadastroFuncionario.php',
+        'App\\Models\\Admin\\CadastroProduto' => __DIR__ . '/../..' . '/app/Models/Admin/CadastroProduto.php',
+        'App\\Models\\Admin\\Cliente' => __DIR__ . '/../..' . '/app/Models/Admin/Cliente.php',
+        'App\\Models\\Admin\\Lancamentos' => __DIR__ . '/../..' . '/app/Models/Admin/Lancamentos.php',
+        'App\\Models\\Admin\\Os' => __DIR__ . '/../..' . '/app/Models/Admin/Os.php',
+        'App\\Models\\Admin\\Produtos_os' => __DIR__ . '/../..' . '/app/Models/Admin/Produtos_os.php',
+        'App\\Models\\Admin\\Servicos_os' => __DIR__ . '/../..' . '/app/Models/Admin/Servicos_os.php',
+        'App\\Models\\Admin\\Usuario' => __DIR__ . '/../..' . '/app/Models/Admin/Usuario.php',
+        'App\\Models\\Admin\\cadastroServico' => __DIR__ . '/../..' . '/app/Models/Admin/cadastroServico.php',
+        'App\\Models\\Cliente' => __DIR__ . '/../..' . '/app/Models/Cliente.php',
+        'App\\Models\\Home\\Login' => __DIR__ . '/../..' . '/app/Models/Home/Login.php',
+        'App\\Models\\Home\\Produtos' => __DIR__ . '/../..' . '/app/Models/Home/Produtos.php',
+        'App\\Models\\Home\\Usuarios' => __DIR__ . '/../..' . '/app/Models/Home/Usuarios.php',
+        'App\\Models\\Home\\cadastroOrcamento' => __DIR__ . '/../..' . '/app/Models/Home/cadastroOrcamento.php',
+        'Core\\BaseController' => __DIR__ . '/../..' . '/core/BaseController.php',
+        'Core\\BaseModel' => __DIR__ . '/../..' . '/core/BaseModel.php',
+        'Core\\Container' => __DIR__ . '/../..' . '/core/Container.php',
+        'Core\\DataBase' => __DIR__ . '/../..' . '/core/DataBase.php',
+        'Core\\EloquentModel' => __DIR__ . '/../..' . '/core/EloquentModel.php',
+        'Core\\FlashMessage' => __DIR__ . '/../..' . '/core/FlashMessage.php',
+        'Core\\Redirect' => __DIR__ . '/../..' . '/core/Redirect.php',
+        'Core\\Route' => __DIR__ . '/../..' . '/core/Route.php',
+        'Core\\Session' => __DIR__ . '/../..' . '/core/Session.php',
+        'Core\\Session1' => __DIR__ . '/../..' . '/core/Session_.php',
+        'Core\\Validator' => __DIR__ . '/../..' . '/core/Validator.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -98,7 +63,7 @@ class ComposerStaticInitb010f24c6a7d8586e7dea7592837ad0b
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitb010f24c6a7d8586e7dea7592837ad0b::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitb010f24c6a7d8586e7dea7592837ad0b::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInitb010f24c6a7d8586e7dea7592837ad0b::$fallbackDirsPsr4;
+            $loader->classMap = ComposerStaticInitb010f24c6a7d8586e7dea7592837ad0b::$classMap;
 
         }, null, ClassLoader::class);
     }

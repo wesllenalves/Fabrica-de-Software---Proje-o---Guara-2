@@ -612,8 +612,10 @@ class AdminController extends BaseController {
     
     public function financeiroLancamentosEditar($request) {
         $id = $request->get->id;
+        print_r($id);
         $dados = $this->lancamentos->read("*", "idLancamentos = $id");
         @$this->view->oneLancamentEdit = $dados;
+        $this->Render('admin/mapos/financeiro/lancamentosEditar', 'layoutadminMapos');
     }
     public function lacamentosRemover($request) {
         $id = $request->get->id;

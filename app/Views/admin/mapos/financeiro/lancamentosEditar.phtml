@@ -1,0 +1,199 @@
+
+<div id="sidebar"> <a href="#" class="visible-phone"><i class="icon icon-list"></i> Menu</a>
+    <ul>
+
+
+        <li class=""><a href=""><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
+
+        <li class=""><a href="<?= base_url('') ?>/clientes"><i class="icon icon-group"></i> <span>Clientes</span></a></li>
+
+        <li class=""><a href="<?= base_url('') ?>/produtos"><i class="icon icon-barcode"></i> <span>Produtos</span></a></li>
+
+        <li class=""><a href="<?= base_url('') ?>/servicos"><i class="icon icon-wrench"></i> <span>Serviços</span></a></li>
+
+        <li class=""><a href="<?= base_url('') ?>/os"><i class="icon icon-tags"></i> <span>Ordens de Serviço</span></a></li>
+
+        <li class="submenu active">
+            <a href="#"><i class="icon icon-money"></i> <span>Financeiro</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+            <ul>
+                <li><a href="<?= base_url('')?>/financeiro/lancamentos">Lançamentos</a></li>                
+            </ul>
+        </li>
+        
+
+
+        <li class="submenu ">
+            <a href="#"><i class="icon icon-cog"></i> <span>Configurações</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+            <ul>
+                <li><a href="index.php/usuarios">Usuários</a></li>
+                <li><a href="index.php/mapos/emitente">Emitente</a></li>
+                <!--<li><a href="index.php/permissoes">Permissões</a></li>-->
+                <!--<li><a href="index.php/mapos/backup">Backup</a></li>-->
+                
+            </ul>
+        </li>
+
+
+    </ul>
+</div>
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb"> <a href="<?= base_url('')?>" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="<?= base_url('')?>/financeiro" class="tip-bottom" title="Financeiro">Financeiro</a> <a href="<?= base_url('')?>/financeiro/lancamentos" class="current tip-bottom" title="Lancamentos">Lancamentos</a> </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <link rel="stylesheet" href="https://www.ultramapos.online/js/jquery-ui/css/smoothness/jquery-ui-1.9.2.custom.css" />
+                <script type="text/javascript" src="https://www.ultramapos.online/js/jquery-ui/js/jquery-ui-1.9.2.custom.js"></script>
+                
+                <div class="container-fluid col-sm-5  nopadding" style="margin-left: 3%;">
+                <?php
+                $this->alerta();
+                ?>
+                </div>
+
+                <div class="row-fluid" style="margin-top:0">
+                    <div class="span12">
+                        <div class="widget-box">
+                            <div class="widget-title">
+                                <span class="icon">
+                                    <i class="icon-user"></i>
+                                </span>
+                                <h5>Editar Lançamentos</h5>
+                            </div>
+                            <div class="widget-content nopadding">
+                                <form id="formEditar" action="<?= base_url('') ?>/financeiro/lancamentos/editar" method="post">
+                            
+                                <?php foreach ($this->view->oneLancamentEdit as $lancamentos){
+                                    
+                                    ?> 
+                                <div class="form-control container-fluid ">
+                                    <div class="span12 alert alert-info" style="margin-left: 0"> Obrigatório o preenchimento dos campos com asterisco.</div>
+                                    <div class="span12" style="margin-left: 0"> 
+                                        <label for="descricao">Descrição</label>
+                                        <input class="span12" id="descricaoEditar" type="text" name="descricao" value="<?=$lancamentos['descricao']?>"  />
+                                        <input id="idLancamentos" type="hidden" name="idLancamentos" value=""  />
+                                    </div>  
+                                    <div class="span12" style="margin-left: 0"> 
+                                        <div class="span12" style="margin-left: 0"> 
+                                            <label for="fornecedor">Fornecedor / Empresa*</label>
+                                            <input class="span12" id="fornecedorEditar" type="text" name="fornecedor" value="<?=$lancamentos['cliente_fornecedor']?>" />
+                                        </div>
+
+
+                                    </div>
+                                    <div class="span12" style="margin-left: 0"> 
+                                        <div class="span4" style="margin-left: 0">  
+                                            <label for="valor">Valor*</label>
+                                            <input type="hidden"  name="tipo" value="despesa" />  
+                                            <input type="hidden"  id="idEditar" name="id" value="" /> 
+                                            <input class="span12 money"  type="text" name="valor" id="valorEditar" value="<?=$lancamentos['valor']?>"/>
+                                        </div>
+                                        <div class="span4" >
+                                            <label for="vencimento">Data Vencimento*</label>
+                                            <input class="span12 datepicker"  type="date" name="vencimento" id="vencimentoEditar" value="<?=$lancamentos['data_vencimento']?>" />
+                                        </div>
+                                        <div class="span4">
+                                            <label for="vencimento">Tipo*</label>
+                                            <select class="span12" name="tipo" id="tipoEditar" >
+                                                <option value="receita">Receita</option>
+                                                <option value="despesa">Despesa</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="span12" style="margin-left: 0"> 
+                                        <div class="span4" style="margin-left: 0">
+                                            <label for="pago">Foi Pago?</label>
+                                            &nbsp &nbsp &nbsp &nbsp
+                                            <input  id="pagoEditar" type="checkbox" name="pago" value="Sim" /> 
+                                        </div>
+                                        <div id="divPagamentoEditar" class="span8">
+                                            <div class="span6">
+                                                <label for="pagamento">Data Pagamento</label>
+                                                <input class="span12 datepicker"  id="pagamentoEditar" type="text"  name="pagamento" />  
+                                            </div>
+
+                                            <div class="span6">
+                                                <label for="formaPgto">Forma Pgto</label>
+                                                <select name="formaPgto" id="formaPgtoEditar"  class="span12">
+                                                    <option value="Dinheiro">Dinheiro</option>
+                                                    <option value="Cartão de Crédito">Cartão de Crédito</option>
+                                                    <option value="Cheque">Cheque</option>
+                                                    <option value="Boleto">Boleto</option>
+                                                    <option value="Depósito">Depósito</option>
+                                                    <option value="Débito">Débito</option>        
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <?php                                    
+                                    }
+                                ?>
+                                <div class="modal-footer">
+                                    <button class="btn" data-dismiss="modal" aria-hidden="true" id="btnCancelarEditar">Cancelar</button>
+                                    <button class="btn btn-primary">Salvar Alterações</button>
+                                </div>
+                        </form>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                
+
+
+
+<script type="text/javascript">
+	jQuery(document).ready(function($) {	
+
+		$('#pago').click(function(event) {
+			var flag = $(this).is(':checked');
+			if(flag == true){
+				$('#divPagamento').show();
+			}
+			else{
+				$('#divPagamento').hide();
+			}
+		});
+
+
+		$('#recebido').click(function(event) {
+			var flag = $(this).is(':checked');
+			if(flag == true){
+				$('#divRecebimento').show();
+			}
+			else{
+				$('#divRecebimento').hide();
+			}
+		});
+    
+
+    $(".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
+
+	});
+
+
+   
+
+</script>
+<script>
+//$(document).ready(function(){
+//    //$("#valor").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+//});
+</script>

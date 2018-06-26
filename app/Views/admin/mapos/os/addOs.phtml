@@ -20,19 +20,11 @@
             
     
             
-        <li class="submenu " >
-          <a href="#"><i class="icon icon-list-alt"></i> <span>Relatórios</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
-          <ul>
-
-                            <li><a href="index.php/relatorios/clientes">Clientes</a></li>
-                                        <li><a href="/./LayoutFabrica/relatorios/produtos.php">Produtos</a></li>
-                                        <li><a href="/./LayoutFabrica/relatorios/servicos.php">Serviços</a></li>
-                                         <li><a href="/./LayoutFabrica/relatorios/os.php">Ordens de Serviço</a></li>
-                                        <li><a href="/./LayoutFabrica/relatorios/vendas.php">Vendas(Clientes)</a></li>
-                         <li><a title="consultarVendas.php?cache=1" onClick="abrirnotificacao(this)" style="cursor:pointer">vendas(itens)</a></li> 
-                            <li><a href="index.php/relatorios/financeiro">Financeiro</a></li>
-                        
-          </ul>
+        <li class="submenu ">
+            <a href="#"><i class="icon icon-money"></i> <span>Financeiro</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+            <ul>
+                <li><a href="<?= base_url('')?>/financeiro/lancamentos">Lançamentos</a></li>                
+            </ul>
         </li>
 
     
@@ -125,7 +117,7 @@ margin-right:10px;
 
                                                                 <select class="span12" name="idUsuario">                                                            
                                                                     <?php foreach ($this->view->allUsuario as $allUsuario) { ?>
-                                                                        <option value="<?= $allUsuario['idUsuarios'] ?>">
+                                                                        <option value="<?= $allUsuario['idUsuarios']; ?>">
                                                                             <?php echo $allUsuario['nome_usuario']; ?>
                                                                         </option>                                                            
                                                                     <?php } ?>

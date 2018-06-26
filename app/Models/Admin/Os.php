@@ -65,7 +65,7 @@ class Os extends BaseModel{
             'status_pedido' => $request->post->status, 'dataInicial' => $request->post->dataInicial,
             'dataFinal' => $request->post->dataFinal, 'quantidade' => $request->post->quantidade,
             'descricaoServico' => $request->post->descricaoServico,  "dataUpdate" => $dataAtual,
-//            'usuarios_id' => $request->post->usuarios_id, 'clientes_id' => $request->post->clientes_id
+            'usuarios_id' => $request->post->usuarios_id, 'clientes_id' => $request->post->clientes_id
         );
         
         $arrayCliente = array(
