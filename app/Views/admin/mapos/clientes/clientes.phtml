@@ -13,18 +13,18 @@
 
         <li class=""><a href="<?= base_url('') ?>/os"><i class="icon icon-tags"></i> <span>Ordens de Serviço</span></a></li>
 
-        
 
-        
+
+
         <li class="submenu ">
             <a href="#"><i class="icon icon-money"></i> <span>Financeiro</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
             <ul>
-                <li><a href="<?= base_url('')?>/financeiro/lancamentos"">Lançamentos</a></li>                
+                <li><a href="<?= base_url('') ?>/financeiro/lancamentos"">Lançamentos</a></li>                
             </ul>
         </li>
 
 
-        
+
 
 
         <li class="submenu ">
@@ -44,18 +44,15 @@
 </div>
 <div id="content">
     <div id="content-header">
-        <div id="breadcrumb"> <a href="" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="<?= base_url('')?>/clientes" class="tip-bottom" title="Clientes">Clientes</a> </a> </div>
+        <div id="breadcrumb"> <a href="" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="<?= base_url('') ?>/clientes" class="tip-bottom" title="Clientes">Clientes</a> </a> </div>
     </div>
 
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">
+
                 <div class="span12">
-                    <div class="container-fluid col-sm-5  nopadding" style="margin-left: 3%;">
-                        <?php
-                        $this->alerta();
-                        ?>
-                    </div>
+                    <?php echo $this->alerta(); ?>
 
                     <a href="<?= base_url('') ?>/clientes/adicionar" class="btn btn-success"><i class="icon-plus icon-white"></i> Adicionar Cliente</a>    
 
@@ -93,8 +90,7 @@
                                                 <td><?php echo $linha['nomeCliente'] ?></td>
                                                 <td><?php echo $linha['documento'] ?></td>
                                                 <td><?php echo $linha['celular'] ?></td>
-                                            </tr>
-                                            <tr>
+
                                                 <td colspan="4">
                                                     <a href="<?= base_url('') ?>/clientes/visualizar?id=<?= $linha['idClientes'] ?>" style="margin-right: 1%" class="btn tip-top" title="Ver mais detalhes"><i class="icon-eye-open"></i></a>
                                                     <a href="<?= base_url('') ?>/clientes/editar?id=<?= $linha['idClientes'] ?>" style="margin-right: 1%" class="btn btn-info tip-top" title="Editar Cliente"><i class="icon-pencil icon-white"></i></a>
@@ -104,7 +100,35 @@
                                             <tr>
 
                                                 <!-- Modal  Excluir Cliente-->
-                                        <div id="modal-excluir" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:76%; max-width:400px;">
+
+<!--                                                 Modal 
+-->                                    <div class="modal fade" id="modal-excluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="height: 40%;">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="exampleModalCenterTitle" style="">Excluir clientes</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                       <form action="<?= base_url('') ?>/clientes/remover?id=<?= $linha['idClientes'] ?>" method="post" >
+                                                
+                                                           <h3 style="text-align: center">Deseja realmente excluir este cliente ?</h3>       
+                                            
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                        <button type="button" class="btn btn-primary">Excluir</button>
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div> 
+
+
+
+
+
+
+<!--                                        <div id="modal-excluir" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
                                             <form action="<?= base_url('') ?>/clientes/remover?id=<?= $linha['idClientes'] ?>" method="post" >
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -118,7 +142,7 @@
                                                     <button class="btn btn-danger">Excluir</button>
                                                 </div>
                                             </form>
-                                        </div>
+                                        </div>-->
                                     <?php } ?>
 
                                     </tr>

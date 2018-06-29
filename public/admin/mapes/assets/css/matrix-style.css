@@ -96,14 +96,16 @@ hr{ border-top-color:#dadada;}
 /* Top user navigation */
 #user-nav {
 	position: absolute;
-	left: 220px;
+	left: 90%;
 	top:0px;
 	z-index: 20;
-	margin: 0;
+	margin: 2;
+        min-height: 30px;
+        margin-top: 5px;
 }
 #user-nav > ul {
 	margin: 0;
-	padding: 0;
+	padding: 2;
 	list-style: none; border-right: 1px solid #2e363f;border-left: 1px solid #000;
 }
 #user-nav > ul > li {
@@ -114,9 +116,10 @@ hr{ border-top-color:#dadada;}
 	padding: 0; border-left: 1px solid #2e363f; border-right: 1px solid #000;
 }
 #user-nav > ul > li > a {
-	padding:9px 10px;
+	padding:4px 7px;
 	display: block;
 	font-size: 11px;
+        border-radius: 5px;
 }
 #user-nav > ul > li > a:hover, #user-nav > ul > li.open > a {
 	color: #ffffff;  background:#000;
@@ -536,7 +539,7 @@ hr{ border-top-color:#dadada;}
 	margin-top: 0;
 	margin-bottom: 0;
 }
-.widget-title, .modal-header, .table th, div.dataTables_wrapper .ui-widget-header {
+.widget-title,  .table th, div.dataTables_wrapper .ui-widget-header {
 	 background:#efefef;
 	border-bottom: 1px solid #CDCDCD;
 	height: 36px;  
@@ -1092,20 +1095,7 @@ div.dataTables_wrapper .ui-widget-header {
 	display: block;
 	height: 8px;
 }
-.modal {
-	z-index: 99999 !important;
-}
-.modal-backdrop {
-	z-index: 999 !important;
-}
-.modal-header {
-	height: auto;
-	padding: 8px 15px 5px;
-}
-.modal-header h3 {
-	font-size: 12px;
-	text-shadow: 0 1px 0 #ffffff;
-}
+
 .notify-ui ul {
 	list-style: none;
 	margin: 0;

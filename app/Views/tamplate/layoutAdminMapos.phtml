@@ -21,8 +21,11 @@ if(isset($_GET["sair"])){
     <link href="<?= base_url('')?>/public/home/css/chosen.css" rel="stylesheet" />-->
     
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/css/bootstrap.min.css" />
+
+<!--<link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/css/bootstrap.min.css" />-->-->
 <link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/css/bootstrap-responsive.min.css" />
 <link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/css/matrix-style.css" />
 <link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/css/matrix-media.css" />
@@ -55,6 +58,20 @@ if(isset($_GET["sair"])){
 		border-radius:20px;
         background: #fff;
     }
+    #header{
+        width: 5%;
+    }
+    #sidebar{
+        margin-top: 50px;
+    }
+    #content {
+        margin-top: 70px;
+    }
+    .sair{
+        right: 0;
+        /*margin-left:  100px;*/
+        /*//float: right;*/
+    }
 </style>
 
 
@@ -68,12 +85,7 @@ if(isset($_GET["sair"])){
        </div>
    </div>
 
-<!--Header-part-->
-<div id="header">
-    <!--<img src="<?= base_url('')?>/public/admin/mapes/assets/lobo.png" alt="" width="89" height="62"/>-->
-<h1><a href=""></a></h1>
-</div>
-<!--close-Header-part--> 
+ 
 
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse" style="height: 2px;">
@@ -81,21 +93,10 @@ if(isset($_GET["sair"])){
    
        
     
-    <li class="" style="height: 2px;"><a title="" href="?sair=Sim"><i class="icon icon-share-alt"></i> <span class="text">Sair do Sistema</span></a></li>
+    <li class="sair" style="height: 2px;"><a title="" href="?sair=Sim"><i class="icon icon-share-alt"></i> <span class="text">Sair do Sistema</span></a></li>
  
   </ul>
 </div>
-
-<!--start-top-serch-->
-<div id="search">
-  <form action="pesquisar">
-    <input type="text" name="termo" placeholder="Pesquisar..."/>
-    <button type="submit"  class="tip-bottom" title="Pesquisar"><i class="icon-search icon-white"></i></button>
-    
-  </form>
-</div>
-
-
 <!--Conteudo-->
         <?php $this->content()?>
         <!--Fim Conteudo-->  
@@ -106,8 +107,9 @@ if(isset($_GET["sair"])){
 </div>
 <!--end-Footer-part-->
 
-
-<script src="<?= base_url('')?>/public/admin/mapes/assets/js/bootstrap.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!--<script src="<?= base_url('')?>/public/admin/mapes/assets/js/bootstrap.min.js"></script>-->
 <script src="<?= base_url('')?>/public/admin/mapes/assets/js/matrix.js"></script> 
 
 
