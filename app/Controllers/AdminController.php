@@ -160,8 +160,7 @@ class AdminController extends BaseController {
     }
 
     public function clientesRemover($request) {
-        $id = $request->get->id;    
-        
+        $id = $request->post->id; 
         if($this->Clientes->deletar($id)){
             $this->redirect("clientes", "1", "Deletado com sucesso"); 
         }else{
