@@ -1,152 +1,148 @@
 
 <div id="sidebar"> <a href="#" class="visible-phone"><i class="icon icon-list"></i> Menu</a>
-  <ul>
+    <ul>
 
 
-    <li class=""><a href=""><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
-    
-            <li class=""><a href="<?= base_url('')?>/clientes"><i class="icon icon-group"></i> <span>Clientes</span></a></li>
-        
-            <li class=""><a href="<?= base_url('')?>/produtos"><i class="icon icon-barcode"></i> <span>Produtos</span></a></li>
-        
-            <li class="active"><a href="<?= base_url('')?>/servicos"><i class="icon icon-wrench"></i> <span>Serviços</span></a></li>
-    
-            <li class=""><a href="<?= base_url('')?>/os"><i class="icon icon-tags"></i> <span>Ordens de Serviço</span></a></li>
-    
-            <li class="submenu ">
-          <a href="#"><i class="icon icon-money"></i> <span>Financeiro</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
-          <ul>
-            <li><a href="<?= base_url('')?>/financeiro/lancamentos">Lançamentos</a></li>            
-          </ul>
+        <li class=""><a href=""><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
+
+        <li class=""><a href="<?= base_url('') ?>/clientes"><i class="icon icon-group"></i> <span>Clientes</span></a></li>
+
+        <li class=""><a href="<?= base_url('') ?>/produtos"><i class="icon icon-barcode"></i> <span>Produtos</span></a></li>
+
+        <li class="active"><a href="<?= base_url('') ?>/servicos"><i class="icon icon-wrench"></i> <span>Serviços</span></a></li>
+
+        <li class=""><a href="<?= base_url('') ?>/os"><i class="icon icon-tags"></i> <span>Ordens de Serviço</span></a></li>
+
+        <li class="submenu ">
+            <a href="#"><i class="icon icon-money"></i> <span>Financeiro</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+            <ul>
+                <li><a href="<?= base_url('') ?>/financeiro/lancamentos">Lançamentos</a></li>            
+            </ul>
         </li>
-    
-            
-        
 
-    
-            <li class="submenu ">
-          <a href="#"><i class="icon icon-cog"></i> <span>Configurações</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
-          <ul>
-                            <li><a href="index.php/usuarios">Usuários</a></li>
-                                        <li><a href="index.php/mapos/emitente">Emitente</a></li>
-                                        <!--<li><a href="index.php/permissoes">Permissões</a></li>-->
-                                        <!--<li><a href="index.php/mapos/backup">Backup</a></li>-->
-            <!-- <li><a  href="#" title="configuraremail" onClick="abrirnotificacao(this)">Email(imap)</a></li>-->
- <li><a  href="#" title="configurarpagseguro.php" onClick="abrirnotificacao(this)">PagSeguro</a></li>
-          </ul>
+
+
+
+
+        <li class="submenu ">
+            <a href="#"><i class="icon icon-cog"></i> <span>Configurações</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
+            <ul>
+                <li><a href="index.php/usuarios">Usuários</a></li>
+                <li><a href="index.php/mapos/emitente">Emitente</a></li>
+                <!--<li><a href="index.php/permissoes">Permissões</a></li>-->
+                <!--<li><a href="index.php/mapos/backup">Backup</a></li>-->
+                <!-- <li><a  href="#" title="configuraremail" onClick="abrirnotificacao(this)">Email(imap)</a></li>-->
+                <li><a  href="#" title="configurarpagseguro.php" onClick="abrirnotificacao(this)">PagSeguro</a></li>
+            </ul>
         </li>
-        
-    
-  </ul>
+
+
+    </ul>
 </div>
 
 <div id="content">
-  <div id="content-header">
-    <div id="breadcrumb"> <a href="" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="index.php/servicos" class="tip-bottom" title="Servicos">Servicos</a> </a> </div>
-  </div>
-  <div class="container-fluid">
-    <div class="row-fluid">
-      <div class="span12">
-          
+    <div id="content-header">
+        <div id="breadcrumb"> <a href="" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="index.php/servicos" class="tip-bottom" title="Servicos">Servicos</a> </a> </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+
                 <?php
                 $this->alerta();
                 ?>
-              
-                                                
-          <a href="<?= base_url('')?>/servicos/adicionar" class="btn btn-success"><i class="icon-plus icon-white"></i> Adicionar Serviço</a>
 
 
-    <div class="widget-box">
-     <div class="widget-title">
-        <span class="icon">
-            <i class="icon-wrench"></i>
-         </span>
-        <h5>Serviços</h5>
-
-     </div>
-
-<div class="widget-content nopadding">
+                <a href="<?= base_url('') ?>/servicos/adicionar" class="btn btn-success"><i class="icon-plus icon-white"></i> Adicionar Serviço</a>
 
 
-<table class="table table-bordered ">
-    <thead>
-        <tr style="backgroud-color: #2D335B">
-            <th>#</th>
-            <th>Nome</th>
-            <th>Preço</th>
-            <th>Descrição</th>
-            <th></th>
-        </tr>
-    </thead><?php
-        $total = 0;
-        foreach ($this->view->servicos as $linha) {
-            $id = count($linha['idServicos']);
-            $total = $total + $id;
-        }
-        if ($total > 0) {
-            ?>
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <span class="icon">
+                            <i class="icon-wrench"></i>
+                        </span>
+                        <h5>Serviços</h5>
+
+                    </div>
+
+                    <div class="widget-content nopadding">
+
+
+                        <table class="table table-bordered ">
+                            <thead>
+                                <tr style="backgroud-color: #2D335B">
+                                    <th>#</th>
+                                    <th>Nome</th>            
+                                    <th>Descrição</th>
+                                    <th>Preço</th>
+                                    <th></th>
+                                </tr>
+                            </thead><?php
+                            $total = 0;
+                            foreach ($this->view->servicos as $linha) {
+                                $id = count($linha['idServicos']);
+                                $total = $total + $id;
+                            }
+                            if ($total > 0) {
+                                ?>
                                 <tbody>
-        <?php foreach ($this->view->servicos as $linha) { ?>
+                                    <?php foreach ($this->view->servicos as $linha) { ?>
                                         <tr>
-                                            <td><?php echo $linha['idServicos'] ?></td>
-                                            <td><?php echo $linha['nome_servico'] ?></td>
-                                            <td><?php echo $linha['descricao'] ?></td>
-                                            <td><?php echo $linha['preco'] ?></td>
-                                        
+                                            <td><?= $linha['idServicos'] ?></td>
+                                            <td><?= $linha['nome_servico'] ?></td>
+                                            <td><?= $linha['descricao'] ?></td>
+                                            <td><?= 'R$: ' . number_format($linha['preco'], 2, ',', '.'); ?></td>
+
                                             <td colspan="4">                                                
                                                 <a href="<?= base_url('') ?>/servicos/adicionar/editar?id=<?= $linha['idServicos'] ?>" style="margin-right: 1%" class="btn btn-info tip-top" title="Editar Cliente"><i class="icon-pencil icon-white"></i></a>                                                
                                                 <a style="margin-right: 1%" class="btn btn-danger tip-top" title="Excluir Servico" data-toggle="modal" data-target="#exampleModal" data-whatever="<?= $linha['idServicos'] ?>"><i class="icon-remove icon-white"></i></a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                           
-
-                                
-                                
-        <?php
-            } 
-        ?>
-                                        </tr>
+                                        <tr>                   
+                                            <?php
+                                        }
+                                        ?>
+                                    </tr>
                                 </tbody>
-        <?php
-        }else{
-        ?>
+                                <?php
+                            } else {
+                                ?>
                                 <tbody>
-                                        <tr>
-                                            <td colspan = "5">Nenhum Cliente Cadastrado</td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan = "5">Nenhum Cliente Cadastrado</td>
+                                    </tr>
                                 </tbody>
-        <?php
-            }
-        ?>
-                                <!-- Modal  Excluir Servico--> 
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Excluir servico</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="<?= base_url('')?>/servicos/Remover" method="POST">
-                                                    <h3 style="text-align: center">Deseja realmente excluir este servico ?</h3>
-                                                    <div class="form-group">            
-                                                        <input type="hidden" class="form-control" id="recipient-name" name="id" value="">
-                                                    </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn btn-danger">Excluir</button>
-                                                </form>
-                                            </div>
+                                <?php
+                            }
+                            ?>
+                            <!-- Modal  Excluir Servico--> 
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Excluir servico</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="<?= base_url('') ?>/servicos/Remover" method="POST">
+                                                <h3 style="text-align: center">Deseja realmente excluir este servico ?</h3>
+                                                <div class="form-group">            
+                                                    <input type="hidden" class="form-control" id="recipient-name" name="id" value="">
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-danger">Excluir</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-</table>
-</div>
-</div>
+                            </div>
+                        </table>
+                    </div>
+                </div>
 
 
 
@@ -159,36 +155,36 @@
 
 
 
-<script type="text/javascript">
-//script para passar o id para modal de excluir
-$('#exampleModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var recipient = button.data('whatever') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var modal = $(this)
+                <script type="text/javascript">
+                //script para passar o id para modal de excluir
+                    $('#exampleModal').on('show.bs.modal', function (event) {
+                        var button = $(event.relatedTarget) // Button that triggered the modal
+                        var recipient = button.data('whatever') // Extract info from data-* attributes
+                        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                        var modal = $(this)
 
-    modal.find('.modal-body input').val(recipient)
-});    
-    
-    
-$(document).ready(function(){
+                        modal.find('.modal-body input').val(recipient)
+                    });
 
 
-   $(document).on('click', 'a', function(event) {
-        
-        var servico = $(this).attr('servico');
-        $('#idServico').val(servico);
+                    $(document).ready(function () {
 
-    });
 
-});
+                        $(document).on('click', 'a', function (event) {
 
-</script>
+                            var servico = $(this).attr('servico');
+                            $('#idServico').val(servico);
 
-      </div>
+                        });
+
+                    });
+
+                </script>
+
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 

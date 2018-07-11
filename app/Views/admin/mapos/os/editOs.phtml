@@ -225,7 +225,7 @@
 
                                                     </div>
                                                 </form>
-                                            </div>
+                                            </div>                                            
                                             <div class="span12" id="divProdutos" style="margin-left: 0">
                                                 <table class="table table-bordered" id="tblProdutos">
                                                     <thead>
@@ -247,12 +247,12 @@
                                                                 <td><?= $oneProduto['nome_produto'] ?></td>
                                                                 <td><?= $oneProduto['quantidade'] ?></td>
                                                                 <td><a href="<?= base_url('') ?>/os/oRemoverProduto?id=<?= $oneProduto['idProdutos_os'] ?>&idOs=<?= $os['idOs'] ?>"   title="Remover"  class="btn btn-danger"><i class="icon-remove icon-white"></i></a></td>
-                                                                <td><?= $oneProduto['subTotal'] ?></td>
+                                                                <td><?= 'R$: '. number_format($oneProduto['subTotal'], 2, ',', '.'); ?></td>
                                                             </tr>                                       
                                                             <tr>
                                                             <?php } ?>
                                                             <td colspan="3" style="text-align: right"><strong>Total:</strong></td>
-                                                            <td><strong><div id="totalprodutos"><?= $total ?></div><input type="hidden" id="total-venda" value="100.00"></strong></td>
+                                                            <td><strong><div id="totalprodutos"><?= 'R$: '. number_format($total, 2, ',', '.'); ?></div><input type="hidden" id="total-venda" value="100.00"></strong></td>
                                                         </tr>
 
                                                     </tbody>
@@ -307,12 +307,12 @@
                                                                     <td><?= $oneservicos['nome_servico'] ?></td>
 
                                                                     <td><a href="<?= base_url('') ?>/os/oRemoverServico?id=<?= $oneservicos['idServicos_os'] ?>&idOs=<?= $os['idOs'] ?>"   title="Remover"  class="btn btn-danger"><i class="icon-remove icon-white"></i></a></td>
-                                                                    <td><?= $oneservicos['subTotal'] ?></td>
+                                                                    <td><?= 'R$: '. number_format($oneservicos['subTotal'], 2, ',', '.'); ?></td>
                                                                 </tr>
                                                             <?php } ?>
                                                             <tr>
                                                                 <td colspan="2" style="text-align: right"><strong>Total:</strong></td>
-                                                                <td><strong><?= $total ?><input type="hidden" id="total-servico" value="0.00"></strong></td>
+                                                                <td><strong><?= 'R$: '. number_format($total, 2, ',', '.'); ?><input type="hidden" id="total-servico" value="0.00"></strong></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>

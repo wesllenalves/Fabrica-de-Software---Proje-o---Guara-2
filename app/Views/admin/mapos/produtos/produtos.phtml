@@ -69,7 +69,7 @@
                                     <th>#</th>
                                     <th>Nome</th>
                                     <th>Estoque</th>
-                                    <th>Preço</th>
+                                    <th>Preço de Compra</th>
                                     <th>Preço de Venda</th>
                                     <th></th>
                                 </tr>
@@ -87,8 +87,8 @@
                                             <td><?php echo $linha['idProduto'] ?></td>
                                             <td><?php echo $linha['nome_produto'] ?></td>
                                             <td><?php echo $linha['estoque'] ?></td>
-                                            <td><?php echo $linha['precoCompra'] ?></td>
-                                            <td><?php echo $linha['precoVenda'] ?></td>
+                                            <td><?= 'R$: ' . number_format($linha['precoCompra'], 2, ',', '.'); ?></td>
+                                            <td><?= 'R$: ' . number_format($linha['precoVenda'], 2, ',', '.'); ?></td>
                                         
                                             <td colspan="5">
                                                 <a href="<?= base_url('') ?>/produtos/visualizar?id=<?= $linha['idProduto'] ?>" style="margin-right: 1%" class="btn tip-top" title="Ver mais detalhes"><i class="icon-eye-open"></i></a>

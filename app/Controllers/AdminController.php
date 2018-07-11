@@ -523,7 +523,8 @@ class AdminController extends BaseController {
         
         $dataAtual = date("Y-d-m H:m:s");
         date_default_timezone_set('America/Sao_Paulo');
-        $id = $request->post->idServicos;    
+        $id = $request->post->idServicos;
+        $osid = $request->post->os_id;
         $dados = $request->post;
         
         
@@ -542,9 +543,9 @@ class AdminController extends BaseController {
         
         
         if($this->Servicos_os->cadastrar($result)){
-             $this->redirect("os", "1", "Cadastrado com sucesso"); 
+             $this->redirect("os/editar?id=$osid", "1", "Cadastrado com sucesso"); 
         }else{
-             $this->redirect("os", "1", "Errro ao tentar cadastrar"); 
+             $this->redirect("os/editar?id=$osid", "1", "Errro ao tentar cadastrar"); 
         }
         
     }
