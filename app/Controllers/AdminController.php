@@ -250,8 +250,7 @@ class AdminController extends BaseController {
         }
     }
     public function produtosRemover($request) {
-        $id = $request->get->id; 
-                
+        $id = $request->post->id; 
         if($this->Produto->deletar($id)){
             $this->redirect("produtos", "1", "Deletado com sucesso"); 
         }else{
@@ -322,8 +321,7 @@ class AdminController extends BaseController {
         
     }
     public function servicosRemover($request) {
-        $id = $request->get->id; 
-                
+        $id = $request->post->id;
         if($this->Servico->deletar($id)){
             $this->redirect("servicos", "1", "Deletado com sucesso"); 
         }else{
@@ -469,8 +467,7 @@ class AdminController extends BaseController {
     }
     
     public function osRemover($request) {
-        $id = $request->get->id;    
-        
+        $id = $request->post->id; 
         if($this->os->deletar($id)){
             $this->redirect("os", self::SUCCESS, "Deletado com sucesso"); 
         }else{

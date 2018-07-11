@@ -204,7 +204,9 @@
                                                         <label for="">Produto</label>
                                                         <select class="span12" name="idProduto">
 
-                                                            <?php foreach ($this->view->allProdutos as $allproduto) { ?>
+                                                            <?php foreach ($this->view->allProdutos as $allproduto) {
+     
+                                                                ?>
                                                                 <option value="<?= $allproduto['idProduto'] ?>">
                                                                     <?php echo $allproduto['nome_produto']; ?>
                                                                 </option>                                                            
@@ -238,6 +240,7 @@
                                                         <?php
                                                         $total = 0;
                                                         foreach ($this->view->oneProdutos as $oneProduto) {
+                                                            print_r($oneProduto);
                                                             $subTotal = $oneProduto['subTotal'];
                                                             $total = $total + $subTotal;
                                                             ?>

@@ -146,26 +146,10 @@
                                     <a style = "margin-right: 1%" href = "<?= base_url('') ?>/os/visualizar?id=<?= $linha['idOs'] ?>" class = "btn tip-top" title = "Ver mais detalhes"><i class = "icon-eye-open"></i></a>
                                     <a style = "margin-right: 1%" href = "" target = "_blank" class = "btn btn-inverse tip-top" title = "Imprimir"><i class = "icon-print"></i></a>
                                     <a style = "margin-right: 1%" href = "<?= base_url('')?>/os/editar?id=<?= $linha['idOs'] ?>" class = "btn btn-info tip-top" title = "Editar OS"><i class = "icon-pencil icon-white"></i></a>
-                                    <a href = "#modal-excluir" role = "button" data-toggle = "modal" os = "103" class = "btn btn-danger tip-top" title = "Excluir OS"><i class = "icon-remove icon-white"></i></a>
+                                    <a style="margin-right: 1%" class="btn btn-danger tip-top" title="Excluir Cliente" data-toggle="modal" data-target="#exampleModal" data-whatever="<?= $linha['idOs'] ?>"><i class="icon-remove icon-white"></i></a>
                                 </td>
                             </tr> 
-                            <!--Modal -->
-                            <div id = "modal-excluir" class = "modal hide fade" tabindex = "-1" role = "dialog" aria-labelledby = "myModalLabel" aria-hidden = "true" style = "width:76%; max-width:400px;">
-                            <form action = "<?= base_url('')?>/os/remover?id=<?= $linha['idOs'] ?>" method = "post" >
-                            <div class = "modal-header">
-                            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">×</button>
-                            <h5 id = "myModalLabel">Excluir OS</h5>
-                            </div>
-                            <div class = "modal-body">
-                            <input type = "hidden" id = "idOs" name = "id" value = "" />
-                            <h5 style = "text-align: center">Deseja realmente excluir esta OS?</h5>
-                            </div>
-                            <div class = "modal-footer">
-                            <button class = "btn" data-dismiss = "modal" aria-hidden = "true">Cancelar</button>
-                            <button class = "btn btn-danger">Excluir</button>
-                            </div>
-                            </form>
-                            </div>
+                            
                             <?php
                             
                                 } 
@@ -183,6 +167,31 @@
                                     <?php
                                 }
                                 ?>
+                                    <!-- Modal  Excluir Cliente--> 
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Excluir clientes</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="<?= base_url('') ?>/os/remover" method="POST">
+                                                    <h3 style="text-align: center">Deseja realmente excluir este cliente ?</h3>
+                                                    <div class="form-group">            
+                                                        <input type="hidden" class="form-control" id="recipient-name" name="id" value="">
+                                                    </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-danger">Excluir</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </table>
                             </div>
                             </div>
@@ -197,6 +206,17 @@
 
 
                             <script type = "text/javascript">
+                            //script para passar o id para modal de excluir
+                        $('#exampleModal').on('show.bs.modal', function (event) {
+                            var button = $(event.relatedTarget) // Button that triggered the modal
+                            var recipient = button.data('whatever') // Extract info from data-* attributes
+                            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                            var modal = $(this)
+
+                            modal.find('.modal-body input').val(recipient)
+                        });    
+                                
                             $(document).ready(function(){
 
 
