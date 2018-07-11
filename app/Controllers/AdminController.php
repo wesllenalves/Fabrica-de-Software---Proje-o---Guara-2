@@ -426,22 +426,16 @@ class AdminController extends BaseController {
         
         $usuario = $this->Usuario->read("*");
         @$this->view->allUsuario = $usuario;
-        
-        $arrayos = array(
-            "chave" => "s JOIN produtos_os ps ON s.idOs = ps.os_id LEFT JOIN produto p ON p.idProduto = ps.idProdutos_os where ps.os_id = $id"
+
+        $arrayOsProduto = array(
+            "chave" => "p JOIN produtos_os po ON p.idProduto = po.produtos_id where os_id = $id"
         );
-        $dados1 = $this->os->readChave($arrayos, "*");
         
+        $OsProduto = $this->Produto->readChave($arrayOsProduto, "*");
         
-        $arrayproduto = array(
-            "chave" => "s JOIN produtos_os ps ON s.idOs = ps.os_id LEFT JOIN produto p ON p.idProduto = ps.idProdutos_os where ps.os_id = $id"
-        );        
-        $dados2 = $this->os->readChave($arrayproduto, "*");       
+        @$this->view->OsProduto = $OsProduto;
         
-        @$this->view->oneProdutos = $dados2;
-        
-        
-        
+
         $arraysevico = array(
             "chave" => "s JOIN servicos_os ps ON s.idOs = ps.os_id LEFT JOIN servicos p ON p.idServicos = ps.servicos_id where ps.os_id = $id"
         );

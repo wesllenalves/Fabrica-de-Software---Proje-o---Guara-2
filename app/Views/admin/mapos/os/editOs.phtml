@@ -239,8 +239,7 @@
                                                     <tbody>
                                                         <?php
                                                         $total = 0;
-                                                        foreach ($this->view->oneProdutos as $oneProduto) {
-                                                            print_r($oneProduto);
+                                                        foreach ($this->view->OsProduto as $oneProduto) {                                                           
                                                             $subTotal = $oneProduto['subTotal'];
                                                             $total = $total + $subTotal;
                                                             ?>
