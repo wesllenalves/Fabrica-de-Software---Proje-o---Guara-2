@@ -525,9 +525,7 @@ class AdminController extends BaseController {
         date_default_timezone_set('America/Sao_Paulo');
         $id = $request->post->idServicos;
         $osid = $request->post->os_id;
-        $dados = $request->post;
-        
-        
+       
         $dados1 = $this->Servico->read("*", "idServicos = $id"); 
         
         $preco = $dados1[0]['preco'];
@@ -555,7 +553,7 @@ class AdminController extends BaseController {
     public function financeiroLancamentos() {
 //        $this->setPageTitle("Admin");
         $dados = $this->lancamentos->read("*");
-        @$this->view->Lancamentos = $dados;
+        $this->view->Lancamentos = $dados;
         $this->Render('admin/mapos/financeiro/lancamentos', 'layoutadminMapos');
     }
     
