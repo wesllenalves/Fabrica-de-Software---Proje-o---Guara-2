@@ -18,14 +18,25 @@ class Lancamentos extends BaseModel{
    protected $tabelaUse = 1;
    
    public function cadastrar($request) {      
-        
+        if(!empty($request->post->recebido) === 'sim'){
         $array = array(
-                    "0" => array(
-            'descricao' => $request->post->descricao, 'valor' => $request->post->valor, 'data_vencimento' => $request->post->vencimento,
-            'data_pagamento' => $request->post->recebimento, 'cliente_fornecedor' => $request->post->cliente, 'forma_pgto' => $request->post->formaPgto, 'tipo' => $request->post->tipo
+            "0" => array(
+            'descricao' => $request->post->descricao, 'valor' => $request->post->valor, 
+            'data_vencimento' => $request->post->vencimento, 'data_pagamento' => $request->post->recebimento,            
+            'status' => 'Recebido', 'cliente_fornecedor' => $request->post->cliente,
+            'forma_pgto' => $request->post->formaPgto, 'tipo' => $request->post->tipo
         )
             );
-        
+        }else{
+            $array = array(
+            "0" => array(
+            'descricao' => $request->post->descricao, 'valor' => $request->post->valor, 
+            'data_vencimento' => $request->post->vencimento, 'data_pagamento' => $request->post->recebimento,            
+            'status' => 'Devendo', 'cliente_fornecedor' => $request->post->cliente,
+            'forma_pgto' => $request->post->formaPgto, 'tipo' => $request->post->tipo
+        )
+            );
+        }
         if ($this->insert($array)) {
             return TRUE;
         } else {

@@ -39,309 +39,498 @@
 </div>
 <div id="content">
     <div id="content-header">
-        <div id="breadcrumb"> <a href="<?= base_url('') ?>" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="<?= base_url('') ?>/financeiro" class="tip-bottom" title="Financeiro">Financeiro</a> <a href="<?= base_url('') ?>/financeiro/lancamentos" class="current tip-bottom" title="Lancamentos">Lancamentos</a> </div>
+        <div id="breadcrumb"> <a href="<?= base_url('') ?>" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="<?= base_url('') ?>/financeiro/lancamentos" class="tip-bottom" title="Financeiro">Financeiro</a> <a  class="current " title="Lancamentos">Lancamentos</a> </div>
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">
-
-
-                <link rel="stylesheet" href="https://www.ultramapos.online/js/jquery-ui/css/smoothness/jquery-ui-1.9.2.custom.css" />
-                <script type="text/javascript" src="https://www.ultramapos.online/js/jquery-ui/js/jquery-ui-1.9.2.custom.js"></script>
-
-
-
-
-
+                <?php
+                
+                $this->alerta();
+                ?>
 
                 <div class="span5" style="margin-left: 0">
-                    <a href="#modalReceita" lass="btn btn-primary" data-toggle="modal" data-target="#modalReceita" role="button" class="btn btn-success tip-bottom" title="Cadastrar nova receita"><i class="icon-plus icon-white"></i> Nova Receita</a>  
+                    <a href="#modalReceita" class="btn btn-primary" data-toggle="modal" data-target="#modalReceita" role="button" class="btn btn-success tip-bottom" title="Cadastrar nova receita"><i class="icon-plus icon-white"></i> Nova Receita</a>  
                     <a href="#modalDespesa" data-toggle="modal" role="button" class="btn btn-danger tip-bottom" title="Cadastrar nova despesa"><i class="icon-plus icon-white"></i> Nova Despesa</a>
+                
                 </div>
 
-                <!-- Modal nova receita -->
-                <div id="modalReceita" class="modal hide fade" id="modalReceita" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:75%;  max-width:600px;">
-                    <form id="formReceita" action="<?= base_url('') ?>/financeiro/lancamentos/adicionarReceita" method="post">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h3 id="myModalLabel">MapOS - Adicionar Receita</h3>
-                        </div>
-                        <div class="modal-body">
-
-                            <div class="span12 alert alert-info" style="margin-left: 0"> Obrigatório o preenchimento dos campos com asterisco.</div>
-                            <div class="span12" style="margin-left: 0"> 
-                                <label for="descricao">Descrição</label>
-                                <input class="span12" id="descricao" type="text" name="descricao"  />                                    
-                            </div>	
-                            <div class="span12" style="margin-left: 0"> 
-                                <div class="span12" style="margin-left: 0"> 
-                                    <label for="cliente">Cliente*</label>
-                                    <input class="span12" id="cliente" type="text" name="cliente"  />
-                                </div>
-
-
+                <!-- Modal -->
+                <div class="modal fade" id="modalReceita" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Adicionar Receita</h4>
                             </div>
-                            <div class="span12" style="margin-left: 0"> 
-                                <div class="span4" style="margin-left: 0">  
-                                    <label for="valor">Valor*</label>
-                                    <input type="hidden" id="tipo" name="tipo" value="receita" />	
-                                    <input class="span12 money" id="valor" type="text" name="valor"  />
-                                </div>
-                                <div class="span4" >
-                                    <label for="vencimento">Data Vencimento*</label>
-                                    <input class="span12 datepicker" id="vencimento" type="date" name="vencimento"  />
-                                </div>
+                            <div class="modal-body">
+                                <form id="formReceita" action="<?= base_url('') ?>/financeiro/lancamentos/adicionarReceita" method="post">
 
-                            </div>
-                            <div class="span12" style="margin-left: 0"> 
-                                <div class="span4" style="margin-left: 0">
-                                    <label for="recebido">Recebido?</label>
-                                    &nbsp &nbsp &nbsp &nbsp
-                                    <input  id="recebido" type="checkbox" name="recebido" value="4" />	
-                                </div>
-                                <div id="divRecebimento" class="span8" style=" display: none">
-                                    <div class="span6">
-                                        <label for="recebimento">Data Recebimento</label>
-                                        <input class="span12 datepicker" id="recebimento" type="text" name="recebimento" />	
+                                    <div class="modal-body">
+
+                                        <div class="span12 alert alert-info" style="margin-left: 0"> Obrigatório o preenchimento dos campos com asterisco.</div>
+
+                                        <div class="form-group" style="margin-left: 0"> 
+                                            <label for="descricao">Descrição</label>
+                                            <input class="form-control" id="descricao" type="text" name="descricao"  />                                    
+                                        </div>	
+                                        <div class="form-group" style="margin-left: 0"> 
+
+                                            <label for="cliente">Cliente*</label>
+                                            <input class="form-control" id="cliente" type="text" name="cliente"  />
+                                        </div>
+
+                                        <div class="form-group" style="margin-left: 0"> 
+
+                                            <label for="valor">Valor*</label>
+                                            <input type="hidden" id="tipo" name="tipo" value="Receita" />	
+                                            <input class="form-control" id="valor" type="text" name="valor"  />
+
+                                        </div>
+                                        <div class="form-group" style="margin-left: 0">                                
+                                            <label for="vencimento">Data Vencimento*</label>
+                                            <input class="form-control" id="vencimento" type="date" name="vencimento"  />                              
+                                        </div>
+                                        <div class="span12" style="margin-left: 0"> 
+                                            <div class="span4" style="margin-left: 0">
+                                                <label for="recebido">Recebido?</label>
+                                                &nbsp &nbsp &nbsp &nbsp
+                                                <input  id="recebido" type="checkbox" name="recebido" value="sim" />	
+                                            </div>
+                                            <div id="divRecebimento" name="formulario-oculto" class="span8" style=" display: none">
+                                                <div class="form-group">
+                                                    <label for="recebimento">Data Recebimento</label>
+                                                    <input class="form-control" id="recebimento" type="date" name="recebimento" />	
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="formaPgto">Forma Pgto</label>
+                                                    <select name="formaPgto" id="formaPgto" class="form-control">
+                                                        <option value="Dinheiro">-</option>
+                                                        <option value="Dinheiro">Dinheiro</option>
+                                                        <option value="Cartão de Crédito">Cartão de Crédito</option>
+                                                        <option value="Cheque">Cheque</option>
+                                                        <option value="Boleto">Boleto</option>
+                                                        <option value="Depósito">Depósito</option>
+                                                        <option value="Débito">Débito</option>  			
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div> 
                                     </div>
-                                    <div class="span6">
-                                        <label for="formaPgto">Forma Pgto</label>
-                                        <select name="formaPgto" id="formaPgto" class="span12">
-                                            <option value="Dinheiro">-</option>
-                                            <option value="Dinheiro">Dinheiro</option>
-                                            <option value="Cartão de Crédito">Cartão de Crédito</option>
-                                            <option value="Cheque">Cheque</option>
-                                            <option value="Boleto">Boleto</option>
-                                            <option value="Depósito">Depósito</option>
-                                            <option value="Débito">Débito</option>  			
-                                        </select>
-                                    </div>
-                                </div>
-
                             </div>
-
-                            <!--<div class="modal-footer">--><div><br>
+                            <div class="modal-footer">
                                 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
                                 <button class="btn btn-success">Adicionar Receita</button>
-                            </div><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                        </div>
-
-                    </form>
-                </div>
-
-                <!-- Modal nova despesa -->
-                <div id="modalDespesa" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:76%; max-width:500px;">
-                    <form id="formDespesa" action="<?= base_url('') ?>/financeiro/lancamentos/adicionarDespesa" method="post">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h3 id="myModalLabel">MapOS - Adicionar Despesa</h3>
-                        </div>
-                        <div class="modal-body">
-                            <div class="span12 alert alert-info" style="margin-left: 0"> Obrigatório o preenchimento dos campos com asterisco.</div>
-                            <div class="span12" style="margin-left: 0"> 
-                                <label for="descricao">Descrição</label>
-                                <input class="span12" id="descricao" type="text" name="descricao"  />
-                                <input id="urlAtual" type="hidden" name="urlAtual" value="https://www.ultramapos.online/index.php/financeiro/lancamentos"  />
-                            </div>	
-                            <div class="span12" style="margin-left: 0"> 
-                                <div class="span12" style="margin-left: 0"> 
-                                    <label for="fornecedor">Fornecedor / Empresa*</label>
-                                    <input class="span12" id="fornecedor" type="text" name="fornecedor"  />
-                                </div>
-
-
                             </div>
-                            <div class="span12" style="margin-left: 0"> 
-                                <div class="span4" style="margin-left: 0">  
-                                    <label for="valor">Valor*</label>
-                                    <input type="hidden"  name="tipo" value="despesa" />	
-                                    <input class="span12 money"  type="text" id="valor" name="valor"  />
-                                </div>
-                                <div class="span4" >
-                                    <label for="vencimento">Data Vencimento*</label>
-                                    <input class="span12 datepicker"  type="text" name="vencimento"  />
-                                </div>
-
-                            </div>
-                            <div class="span12" style="margin-left: 0"> 
-                                <div class="span4" style="margin-left: 0">
-                                    <label for="pago">Foi Pago?</label>
-                                    &nbsp &nbsp &nbsp &nbsp
-                                    <input  id="pago" type="checkbox" name="pago" value="3" />	
-                                </div>
-                                <div id="divPagamento" class="span8" style=" display: none">
-                                    <div class="span6">
-                                        <label for="pagamento">Data Pagamento</label>
-                                        <input class="span12 datepicker" id="pagamento" type="text" name="pagamento" />	
-                                    </div>
-
-                                    <div class="span6">
-                                        <label for="formaPgto">Forma Pgto</label>
-                                        <select name="formaPgto"  class="span12">
-                                            <option value="Dinheiro">Dinheiro</option>
-                                            <option value="Cartão de Crédito">Cartão de Crédito</option>
-                                            <option value="Cheque">Cheque</option>
-                                            <option value="Boleto">Boleto</option>
-                                            <option value="Depósito">Depósito</option>
-                                            <option value="Débito">Débito</option>  			
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div><br>
-                            <!--<div class="modal-footer">--><div>
-                                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                                <button class="btn btn-danger">Adicionar Despesa</button>
-                            </div><br><br><br><br><br><br><br><br><br><br><br><br>
-
-                        </div>
-
-                    </form>
-                </div>
-
-
-
-
-
-                <div class="span7" style="margin-left: 0">
-                    <form action="financeiro/lancamentos" method="get" >
-                        <div class="span4" style="margin-left: 0">
-                            <label>Período <i class="icon-info-sign tip-top" title="Lançamentos com vencimento no período."></i></label>
-                            <select name="periodo" class="span12">
-                                <option value="dia">Dia</option>
-                                <option value="semana" >Semana</option>
-                                <option value="mes" >Mês</option>
-                                <option value="ano" >Ano</option>
-                                <option value="todos" selected>Todos</option>
-                            </select>
-                        </div>
-                        <div class="span4">
-                            <label>Situação <i class="icon-info-sign tip-top" title="Lançamentos com situação específica ou todos."></i></label>
-                            <select name="situacao" class="span12">
-                                <option value="todos">Todos</option>
-                                <option value="previsto" >Previsto</option>
-                                <option value="atrasado" >Atrasado</option>
-
-
-
-                                <option value="realizado" >Realizado</option>
-                                <option value="pendente" >Pendente</option>
-                                <option value="aguardando" >Aguardando pgto boleto</option>
-                                <option value="canceladas" >canceladas/revogadas</option>
-                            </select>
-                        </div>
-                        <div class="span4" >
-                            &nbsp
-                            <button type="submit" class="span12 btn btn-primary">Filtrar</button>
-                        </div>
-
-                    </form>
-                </div>
-
-                <div class="span12" style="margin-left: 0;">
-
-
-
-                    <div class="widget-box">
-                        <div class="widget-title">
-                            <span class="icon">
-                                <i class="icon-tags"></i>
-                            </span>
-                            <h5>Lançamentos Financeiros</h5>
-
-                        </div>
-
-                        <div class="widget-content nopadding">
-
-
-                            <table class="table table-bordered " id="divLancamentos">
-                                <thead>
-                                    <tr style="backgroud-color: #2D335B">
-                                        <th>#</th>
-                                        <th>Tipo</th>
-                                        <th>Cliente / Fornecedor</th>
-                                        <th>Vencimento</th>
-                                        <th>Status</th>
-                                        <th>Valor</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <?php
-                                    $receita = 0;
-                                    $despesa = 0;
-                                    foreach ($this->view->Lancamentos as $lancamentos) {
-                                        ?>
-
-
-                                        </form>
-                                        </div>
-                                        <tr>
-                                        <tr
-                                            <td></td>
-                                            <td><?= $lancamentos['descricao'] ?></td>
-                                            <td><?php if ($lancamentos['tipo'] === "receita") { ?>
-                                                    <span class='label label-success'><?= $lancamentos['tipo'] ?></span>
-                                                    <?php $receita = $receita + $lancamentos['valor']; ?>
-
-                                                <?php } else { ?>
-
-                                                    <?php $despesa = $despesa + $lancamentos['valor']; ?>
-                                                    <span class='label label-important'><?= $lancamentos['tipo'] ?></span>
-                                                <?php } ?></td>
-                                            <td><?= $lancamentos['cliente_fornecedor'] ?></td>
-                                            <td><?= $lancamentos['data_vencimento'] ?></td>
-                                            <td><?= $lancamentos['baixado'] ?></td>
-                                            <td><?= $lancamentos['valor'] ?></td>
-                                            <td>
-                                                <a href="<?= base_url("") ?>/financeiro/lancamentos/editar?id=<?= $lancamentos['idLancamentos'] ?>" style="margin-right: 1%" data-toggle="modal" role="button" data-whatever="@mdo"   class="btn btn-info tip-top editar" title="Editar Lançamento" id="<?= $lancamentos['cliente_fornecedor'] ?>"><i class="icon-pencil icon-white"></i></a>
-                                                <a href="<?= base_url("") ?>/financeiro/lancamentos/remover?id=<?= $lancamentos['idLancamentos'] ?>" data-toggle="modal" role="button" idLancamento="242" class="btn btn-danger tip-top excluir" title="Excluir Lançamento"><i class="icon-remove icon-white"></i></a></td>
-                                        </tr>    
-
-
-                                    </tbody>                    
-
-                                    <?php
-                                }
-                                ?>
-
-
-
-
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="2" style="text-align: right; color: green"> <strong>Total Receitas:</strong></td>
-                                        <td colspan="2" style="text-align: left; color: green"><strong>R$: <?= number_format($receita, 2, ',', '.') ?></strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" style="text-align: right; color: red"> <strong>Total Despesas:</strong></td>
-                                        <td colspan="2" style="text-align: left; color: red"><strong>R$: <?= number_format($despesa, 2, ',', '.') ?></strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" style="text-align: right"> <strong>Saldo:</strong></td>
-                                        <td colspan="2" style="text-align: left;"><strong id="TotalDepesa">R$: <?= number_format($receita - $despesa, 2, ',', '.') ?></strong></td>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
+            <script>
+
+            </script>
+            <!-- Modal nova receita -->
+            <!--                <div class="modal fade" id="modalReceita" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+                                <form id="formReceita" action="<?= base_url('') ?>/financeiro/lancamentos/adicionarReceita" method="post">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h3 id="myModalLabel">MapOS - Adicionar Receita</h3>
+                                    </div>
+                                    <div class="modal-body">
+            
+                                        <div class="span12 alert alert-info" style="margin-left: 0"> Obrigatório o preenchimento dos campos com asterisco.</div>
+                                        <div class="span12" style="margin-left: 0"> 
+                                            <label for="descricao">Descrição</label>
+                                            <input class="span12" id="descricao" type="text" name="descricao"  />                                    
+                                        </div>	
+                                        <div class="span12" style="margin-left: 0"> 
+                                            <div class="span12" style="margin-left: 0"> 
+                                                <label for="cliente">Cliente*</label>
+                                                <input class="span12" id="cliente" type="text" name="cliente"  />
+                                            </div>
+            
+            
+                                        </div>
+                                        <div class="span12" style="margin-left: 0"> 
+                                            <div class="span4" style="margin-left: 0">  
+                                                <label for="valor">Valor*</label>
+                                                <input type="hidden" id="tipo" name="tipo" value="receita" />	
+                                                <input class="span12 money" id="valor" type="text" name="valor"  />
+                                            </div>
+                                            <div class="span4" >
+                                                <label for="vencimento">Data Vencimento*</label>
+                                                <input class="span12 datepicker" id="vencimento" type="date" name="vencimento"  />
+                                            </div>
+            
+                                        </div>
+                                        <div class="span12" style="margin-left: 0"> 
+                                            <div class="span4" style="margin-left: 0">
+                                                <label for="recebido">Recebido?</label>
+                                                &nbsp &nbsp &nbsp &nbsp
+                                                <input  id="recebido" type="checkbox" name="recebido" value="4" />	
+                                            </div>
+                                            <div id="divRecebimento" class="span8" style=" display: none">
+                                                <div class="span6">
+                                                    <label for="recebimento">Data Recebimento</label>
+                                                    <input class="span12 datepicker" id="recebimento" type="text" name="recebimento" />	
+                                                </div>
+                                                <div class="span6">
+                                                    <label for="formaPgto">Forma Pgto</label>
+                                                    <select name="formaPgto" id="formaPgto" class="span12">
+                                                        <option value="Dinheiro">-</option>
+                                                        <option value="Dinheiro">Dinheiro</option>
+                                                        <option value="Cartão de Crédito">Cartão de Crédito</option>
+                                                        <option value="Cheque">Cheque</option>
+                                                        <option value="Boleto">Boleto</option>
+                                                        <option value="Depósito">Depósito</option>
+                                                        <option value="Débito">Débito</option>  			
+                                                    </select>
+                                                </div>
+                                            </div>
+            
+                                        </div>
+            
+                                        <div class="modal-footer"><div><br>
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                                            <button class="btn btn-success">Adicionar Receita</button>
+                                        </div><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                                    </div>
+            
+                                </form>
+                            </div>-->
 
 
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="modalDespesa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Adicionar Despesa</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formReceita" action="<?= base_url('') ?>/financeiro/lancamentos/adicionarDespesa" method="post">
+                                <div class="span12 alert alert-info" style="margin-left: 0"> Obrigatório o preenchimento dos campos com asterisco.</div>
+                                <div class="modal-body">
+
+
+                                    <div class="form-group" style="margin-left: 0"> 
+                                        <label for="descricao">Descrição*</label>
+                                        <input class="form-control" id="descricao" type="text" name="descricao"  />                                    
+                                    </div>	
+                                    <div class="form-group" style="margin-left: 0">
+
+                                        <label for="fornecedor">Cliente / Fornecedor / Empresa*</label>
+                                        <input class="form-control" id="fornecedor" type="text" name="cliente"  />
+
+                                    </div>
+                                    <div class="form-group" style="margin-left: 0"> 
+
+                                        <label for="valor">Valor*</label>
+                                        <input type="hidden" id="tipo" name="tipo" value="Despesa" />	
+                                        <input class="form-control money" id="valor" type="text" name="valor"  />
+                                    </div>
+
+                                    <div class="form-group" >
+                                        <label for="vencimento">Data Vencimento*</label>
+                                        <input class="form-control datepicker" id="vencimento" type="date" name="vencimento"  />
+                                    </div>
+
+                                </div>
+                                <div class="span12" style="margin-left: 0"> 
+                                    <div class="form-group" style="margin-left: 0">
+                                        <label for="recebido">Foi Pago?</label>
+                                        &nbsp &nbsp &nbsp &nbsp
+                                        <input  id="recebido" type="checkbox" name="recebido" value="sim" />	
+                                    </div>
+                                    <div id="divRecebimento" name="formulario-oculto" class="span8" style=" display: none">
+
+                                        <div class="form-group col-md-6">
+                                            <label for="recebimento">Data de Pagamento</label>
+                                            <input class="form-control datepicker" id="recebimento" type="date" name="recebimento" />	
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="formaPgto">Forma Pgto</label>
+                                            <select name="formaPgto" id="formaPgto" class="form-control">
+                                                <option value="Dinheiro">-</option>
+                                                <option value="Dinheiro">Dinheiro</option>
+                                                <option value="Cartão de Crédito">Cartão de Crédito</option>
+                                                <option value="Cheque">Cheque</option>
+                                                <option value="Boleto">Boleto</option>
+                                                <option value="Depósito">Depósito</option>
+                                                <option value="Débito">Débito</option>  			
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="modal-footer">
+                                    <br>
+                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                                    <button class="btn btn-danger">Adicionar Despesa</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--                 Modal nova despesa 
+                            <div id="modalDespesa" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:76%; max-width:500px;">
+                                <form id="formDespesa" action="<?= base_url('') ?>/financeiro/lancamentos/adicionarDespesa" method="post">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h3 id="myModalLabel">MapOS - Adicionar Despesa</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="span12 alert alert-info" style="margin-left: 0"> Obrigatório o preenchimento dos campos com asterisco.</div>
+                                        <div class="span12" style="margin-left: 0"> 
+                                            <label for="descricao">Descrição</label>
+                                            <input class="span12" id="descricao" type="text" name="descricao"  />
+                                            <input id="urlAtual" type="hidden" name="urlAtual" value="https://www.ultramapos.online/index.php/financeiro/lancamentos"  />
+                                        </div>	
+                                        <div class="span12" style="margin-left: 0"> 
+                                            <div class="span12" style="margin-left: 0"> 
+                                                <label for="fornecedor">Fornecedor / Empresa*</label>
+                                                <input class="span12" id="fornecedor" type="text" name="fornecedor"  />
+                                            </div>
+            
+            
+                                        </div>
+                                        <div class="span12" style="margin-left: 0"> 
+                                            <div class="span4" style="margin-left: 0">  
+                                                <label for="valor">Valor*</label>
+                                                <input type="hidden"  name="tipo" value="despesa" />	
+                                                <input class="span12 money"  type="text" id="valor" name="valor"  />
+                                            </div>
+                                            <div class="span4" >
+                                                <label for="vencimento">Data Vencimento*</label>
+                                                <input class="span12 datepicker"  type="text" name="vencimento"  />
+                                            </div>
+            
+                                        </div>
+                                        <div class="span12" style="margin-left: 0"> 
+                                            <div class="span4" style="margin-left: 0">
+                                                <label for="pago">Foi Pago?</label>
+                                                &nbsp &nbsp &nbsp &nbsp
+                                                <input  id="pago" type="checkbox" name="pago" value="3" />	
+                                            </div>
+                                            <div id="divPagamento" class="span8" style=" display: none">
+                                                <div class="span6">
+                                                    <label for="pagamento">Data Pagamento</label>
+                                                    <input class="span12 datepicker" id="pagamento" type="text" name="pagamento" />	
+                                                </div>
+            
+                                                <div class="span6">
+                                                    <label for="formaPgto">Forma Pgto</label>
+                                                    <select name="formaPgto"  class="span12">
+                                                        <option value="Dinheiro">Dinheiro</option>
+                                                        <option value="Cartão de Crédito">Cartão de Crédito</option>
+                                                        <option value="Cheque">Cheque</option>
+                                                        <option value="Boleto">Boleto</option>
+                                                        <option value="Depósito">Depósito</option>
+                                                        <option value="Débito">Débito</option>  			
+                                                    </select>
+                                                </div>
+                                            </div>
+            
+                                        </div><br>
+                                        <div class="modal-footer"><div>
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                                            <button class="btn btn-danger">Adicionar Despesa</button>
+                                        </div><br><br><br><br><br><br><br><br><br><br><br><br>
+            
+                                    </div>
+            
+                                </form>
+                            </div>-->
+
+
+
+
+
+            <div class="span7" style="margin-left: 0">
+                <form action="financeiro/lancamentos" method="get" >
+                    <div class="span4" style="margin-left: 0">
+                        <label>Período <i class="icon-info-sign tip-top" title="Lançamentos com vencimento no período."></i></label>
+                        <select name="periodo" class="span12">
+                            <option value="dia">Dia</option>
+                            <option value="semana" >Semana</option>
+                            <option value="mes" >Mês</option>
+                            <option value="ano" >Ano</option>
+                            <option value="todos" selected>Todos</option>
+                        </select>
+                    </div>
+                    <div class="span4">
+                        <label>Situação <i class="icon-info-sign tip-top" title="Lançamentos com situação específica ou todos."></i></label>
+                        <select name="situacao" class="span12">
+                            <option value="todos">Todos</option>
+                            <option value="previsto" >Previsto</option>
+                            <option value="atrasado" >Atrasado</option>
+
+
+
+                            <option value="realizado" >Realizado</option>
+                            <option value="pendente" >Pendente</option>
+                            <option value="aguardando" >Aguardando pgto boleto</option>
+                            <option value="canceladas" >canceladas/revogadas</option>
+                        </select>
+                    </div>
+                    <div class="span4" >
+                        &nbsp
+                        <button type="submit" class="span12 btn btn-primary">Filtrar</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="span12" style="margin-left: 0;">
+
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <span class="icon">
+                            <i class="icon-tags"></i>
+                        </span>
+                        <h5>Lançamentos Financeiros</h5>
+                        <!-- Button trigger modal -->
+
+
+
+                    </div>
+
+                    <div class="widget-content nopadding">
+                        <table class="table table-bordered " id="divLancamentos">
+                            <thead>
+                                <tr style="backgroud-color: #2D335B">
+                                    <th>Descrição</th>
+                                    <th>Tipo</th>
+                                    <th>Cliente / Fornecedor / Produto</th>
+                                    <th>Vencimento</th>
+                                    <th>Status</th>
+                                    <th>Valor</th>
+                                    <th>Forma de Pagamento</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <?php
+                                $receita = 0;
+                                $despesa = 0;
+                                foreach ($this->view->Lancamentos as $lancamentos) {
+                                    ?>
+                                    </form>
+                                    </div>
+                                    <tr>
+                                    <tr
+                                        <td></td>
+                                        <td><?= $lancamentos['descricao'] ?></td>
+                                        <td><?php if ($lancamentos['tipo'] === "Receita") { ?>
+                                                <span class='label label-success'><?= $lancamentos['tipo'] ?></span>
+                                                <?php $receita = $receita + $lancamentos['valor']; ?>
+
+                                            <?php } else { ?>
+
+                                                <?php $despesa = $despesa + $lancamentos['valor']; ?>
+                                                <span class='label label-important'><?= $lancamentos['tipo'] ?></span>
+                                            <?php } ?></td>
+                                        <td><?= $lancamentos['cliente_fornecedor'] ?></td>
+                                        <td><?= $lancamentos['data_vencimento'] ?></td>
+                                        <td><?= $lancamentos['status'] ?></td>                                            
+                                        <td><?= $lancamentos['valor'] ?></td>
+                                        <td><?= $lancamentos['forma_pgto'] ?></td>
+                                        <td>
+                                            <a href="<?= base_url("") ?>/financeiro/lancamentos/editar?id=<?= $lancamentos['idLancamentos'] ?>" style="margin-right: 1%" data-toggle="modal" role="button" data-whatever="@mdo"   class="btn btn-info tip-top editar" title="Editar Lançamento" id="<?= $lancamentos['cliente_fornecedor'] ?>"><i class="icon-pencil icon-white"></i></a>
+                                            <!--<a href="<?= base_url("") ?>/financeiro/lancamentos/remover?id=" data-toggle="modal" role="button" idLancamento="242" class="btn btn-danger tip-top excluir" title="Excluir Lançamento"><i class="icon-remove icon-white"></i></a></td>-->
+                                            <a style="margin-right: 1%" class="btn btn-danger tip-top" title="Excluir Cliente" data-toggle="modal" data-target="#exampleModal" data-whatever="<?= $lancamentos['idLancamentos'] ?>"><i class="icon-remove icon-white"></i></a>
+                                    </tr> 
+                                </tbody>                    
+
+                                <?php
+                            }
+                            ?>
+
+
+
+
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2" style="text-align: right; color: green"> <strong>Total Receitas:</strong></td>
+                                    <td colspan="2" style="text-align: left; color: green"><strong>R$: <?= number_format($receita, 2, ',', '.') ?></strong></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align: right; color: red"> <strong>Total Despesas:</strong></td>
+                                    <td colspan="2" style="text-align: left; color: red"><strong>R$: <?= number_format($despesa, 2, ',', '.') ?></strong></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align: right"> <strong>Saldo:</strong></td>
+                                    <td colspan="2" style="text-align: left;"><strong id="TotalDepesa">R$: <?= number_format($receita - $despesa, 2, ',', '.') ?></strong></td>
+                                </tr>
+                            </tfoot>
+                            
+                            <!-- Modal  Excluir Lançamento--> 
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Excluir Lançamento</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="<?= base_url('') ?>/financeiro/lancamentos/remover" method="POST">
+                                                    <h3 style="text-align: center">Deseja realmente excluir este lançamento ?</h3>
+                                                    <div class="form-group">            
+                                                        <input type="hidden" class="form-control" id="recipient-name" name="id" value="">
+                                                    </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-danger">Excluir</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
 </div>
-</div>
-</div>
+
+
+
 
 
 
 
 <script>
-                    $(document).ready(function () {
-                        $("#TotalDepesa").maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
-                    });
+
+    $('[name="recebido"]').change(function () {
+        $('[name="formulario-oculto"]').toggle(200);
+    });
+    //script para passar o id para modal de excluir
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+
+        modal.find('.modal-body input').val(recipient)
+    });
+    $(document).ready(function () {
+        $("#TotalDepesa").maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
+    });
 </script>
