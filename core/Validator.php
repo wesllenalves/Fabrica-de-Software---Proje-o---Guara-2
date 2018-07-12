@@ -130,8 +130,7 @@ class Validator
             
             //Session::set('inputs', $data);
             return true;
-        } else {
-            session_start();
+        } else {            
             session_destroy();
             //Session::destroy();
            // Session::destroy(['danger', 'inputs']);

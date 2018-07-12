@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 26-Jun-2018 às 11:32
+-- Generation Time: 12-Jul-2018 às 03:18
 -- Versão do servidor: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -183,7 +183,7 @@ CREATE TABLE `lancamentos` (
   `valor` varchar(15) NOT NULL,
   `data_vencimento` date NOT NULL,
   `data_pagamento` date DEFAULT NULL,
-  `baixado` tinyint(1) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
   `cliente_fornecedor` varchar(255) DEFAULT NULL,
   `forma_pgto` varchar(100) DEFAULT NULL,
   `tipo` varchar(45) DEFAULT NULL,
@@ -196,12 +196,31 @@ CREATE TABLE `lancamentos` (
 -- Extraindo dados da tabela `lancamentos`
 --
 
-INSERT INTO `lancamentos` (`idLancamentos`, `descricao`, `valor`, `data_vencimento`, `data_pagamento`, `baixado`, `cliente_fornecedor`, `forma_pgto`, `tipo`, `anexo`, `clientes_id`, `dataModificado`) VALUES
-(1, 'bolo', '2.00', '0000-00-00', '0000-00-00', NULL, NULL, 'Dinheiro', 'receita', NULL, NULL, '0000-00-00 00:00:00'),
-(2, 'bolo', '1.11', '0000-00-00', '0000-00-00', NULL, NULL, 'Dinheiro', 'despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(4, 'Mantega teste', '20.00', '0000-00-00', '0000-00-00', NULL, NULL, 'Dinheiro', 'receita', NULL, NULL, '0000-00-00 00:00:00'),
-(5, 'bolo', '2.00', '0000-00-00', '0000-00-00', NULL, 'wes', 'Dinheiro', 'receita', NULL, NULL, '0000-00-00 00:00:00'),
-(6, 'bolo', '200.00', '2018-06-19', '0000-00-00', NULL, 'wes', 'Dinheiro', 'receita', NULL, NULL, '0000-00-00 00:00:00');
+INSERT INTO `lancamentos` (`idLancamentos`, `descricao`, `valor`, `data_vencimento`, `data_pagamento`, `status`, `cliente_fornecedor`, `forma_pgto`, `tipo`, `anexo`, `clientes_id`, `dataModificado`) VALUES
+(26, 'Festa Nova', '200', '2018-07-13', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(25, 'Festa Nova', '200', '2018-07-05', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(20, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
+(8, 'Festa Nova', '200', '2018-07-12', '2018-07-11', 'Devendo', 'Luluzinha', 'Dinheiro', 'receita', NULL, NULL, '0000-00-00 00:00:00'),
+(17, 'Festa Nova', '200', '2018-07-12', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
+(18, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
+(19, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(21, 'Festa Nova', '200', '2018-07-05', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
+(22, 'Festa Nova', '200', '2018-07-04', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
+(23, 'Festa Nova', '200', '2018-07-13', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(24, 'Festa Nova', '200', '2018-07-05', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(27, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(28, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(29, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(30, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(31, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(32, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(33, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(34, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(35, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(36, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(37, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(38, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
+(39, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -333,7 +352,10 @@ INSERT INTO `produtos_os` (`idProdutos_os`, `quantidade`, `os_id`, `produtos_id`
 (8, 10, 5, 3, '100', '0000-00-00 00:00:00'),
 (9, 2, 5, 3, '20', '0000-00-00 00:00:00'),
 (15, 2, 23, 3, '20', '0000-00-00 00:00:00'),
-(16, 2, 23, 3, '20', '0000-00-00 00:00:00');
+(16, 2, 23, 3, '20', '0000-00-00 00:00:00'),
+(17, 2, 24, 3, '20', '2018-11-07 02:07:36'),
+(18, 1, 24, 3, '10', '2018-11-07 02:07:37'),
+(19, 2, 24, 2, '60', '2018-11-07 02:07:31');
 
 -- --------------------------------------------------------
 
@@ -383,7 +405,8 @@ INSERT INTO `servicos_os` (`idServicos_os`, `os_id`, `servicos_id`, `subTotal`, 
 (10, 22, 10, '200.00', '0000-00-00 00:00:00'),
 (16, 23, 8, '51.00', '0000-00-00 00:00:00'),
 (13, 24, 10, '200.00', '0000-00-00 00:00:00'),
-(17, 23, 10, '200.00', '0000-00-00 00:00:00');
+(17, 23, 10, '200.00', '0000-00-00 00:00:00'),
+(18, 24, 8, '51.00', '2018-11-07 03:07:48');
 
 -- --------------------------------------------------------
 
@@ -593,7 +616,7 @@ ALTER TABLE `funcionario`
 -- AUTO_INCREMENT for table `lancamentos`
 --
 ALTER TABLE `lancamentos`
-  MODIFY `idLancamentos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idLancamentos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `orcamento`
@@ -617,7 +640,7 @@ ALTER TABLE `produto`
 -- AUTO_INCREMENT for table `produtos_os`
 --
 ALTER TABLE `produtos_os`
-  MODIFY `idProdutos_os` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idProdutos_os` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `servicos`
@@ -629,7 +652,7 @@ ALTER TABLE `servicos`
 -- AUTO_INCREMENT for table `servicos_os`
 --
 ALTER TABLE `servicos_os`
-  MODIFY `idServicos_os` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idServicos_os` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `usuarios`

@@ -553,11 +553,13 @@ class AdminController extends BaseController {
     public function financeiroLancamentos() {
 //        $this->setPageTitle("Admin");
         $dados = $this->lancamentos->read("*");
-        $this->view->Lancamentos = $dados;
+        @$this->view->Lancamentos = $dados;
         $this->Render('admin/mapos/financeiro/lancamentos', 'layoutadminMapos');
     }
     
     public function adicionarReceita($request) {
+       
+        
         $data = [
             'descricao' => $request->post->descricao, 'valor' => $request->post->valor, 'data_vencimento' => $request->post->vencimento
         ];
@@ -569,15 +571,16 @@ class AdminController extends BaseController {
         if (Validator::make($data, $rules)) {
             $this->redirect("financeiro/lancamentos");
         } else {
-            if ($id = $this->lancamentos->cadastrar($request)) {
-                $this->redirect("financeiro/lancamentos", "1", "OS Cadastrado com Sucesso");
+            if ($this->lancamentos->cadastrar($request)) {
+                 session_start();
+                $this->redirect("financeiro/lancamentos", self::SUCCESS, "Lançamento adicionado com sucesso");
             } else {
-                $this->redirect("financeiro/lancamentos", "4", "Ocorreu um erro ao tentar cadastar OS");
+                $this->redirect("financeiro/lancamentos", self::WARNING, "Ocorreu um erro ao tentar cadastar lançamento");
             }
             
         }
     }
-    public function adicionarDespesa($request) {
+    public function adicionarDespesa($request) {      
         $data = [
             'descricao' => $request->post->descricao, 'valor' => $request->post->valor, 'data_vencimento' => $request->post->vencimento
         ];
@@ -589,10 +592,11 @@ class AdminController extends BaseController {
         if (Validator::make($data, $rules)) {
             $this->redirect("financeiro/lancamentos");
         } else {
-            if ($id = $this->lancamentos->cadastrar($request)) {
-                $this->redirect("financeiro/lancamentos", "1", "OS Cadastrado com Sucesso");
+            if ($this->lancamentos->cadastrar($request)) {
+                session_start();                
+               $this->redirect("financeiro/lancamentos", self::SUCCESS, "Lançamento adicionado com sucesso");
             } else {
-                $this->redirect("financeiro/lancamentos", "4", "Ocorreu um erro ao tentar cadastar OS");
+                $this->redirect("financeiro/lancamentos", self::WARNING, "Ocorreu um erro ao tentar cadastar lançamento");
             }
             
         }
@@ -607,11 +611,12 @@ class AdminController extends BaseController {
         $this->Render('admin/mapos/financeiro/lancamentosEditar', 'layoutadminMapos');
     }
     public function lacamentosRemover($request) {
-        $id = $request->get->id;
+        $id = $request->post->id;
+        
         if($this->lancamentos->deletar($id)){
-            $this->redirect("financeiro/lancamentos", "1", "Deletado com sucesso"); 
+            $this->redirect("financeiro/lancamentos", self::SUCCESS, "Deletado com sucesso"); 
         }else{
-            $this->redirect("financeiro/lancamentos", "4", " POS Erro ao deletar cliente");  
+            $this->redirect("financeiro/lancamentos", self::WARNING, " POS Erro ao deletar cliente");  
         }
     }
     
