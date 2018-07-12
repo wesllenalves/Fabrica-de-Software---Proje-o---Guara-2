@@ -31,6 +31,116 @@
         <div class="sectionint">
             <h1>Sessão 4</h1>
             <p>Clique nos diferentes links da Seção na barra de navegação</p>
+            <div class="row">
+            <form  class="form-orcamento" method="POST" action="<?= base_url('') ?>/cadastro/orcamento" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="nome">Nome Completo</label>
+                                <input type="text" id="nome_completo" class="form-control" name="nome" placeholder="José"  required/>
+                            </div>
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <div class="controls">
+                                    <input type="radio" value="cpf" name="documento" checked="checked"> CPF
+                                    <input type="radio" value="cnpj" name="documento"> CNPJ
+                                </div>
+                            </div>
+                            <div class="form-group">                    
+                                <div id="cpf1">
+                                    <label for="documentoCPF" class="control-label">CPF <span>*</span></label>
+                                   
+                                        <input type="text" name="documentoCpf" id="documentoCPF" class="cpf required form-control" value="" maxlength="15">
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group">                    
+                                <div id="cnpj" style="display: none;">
+                                    <label for="documentoCNPJ" class="control-label">CNPJ <span>*</span></label>
+                                    <div class="controls">
+                                        <input type="text" name="documentoCpnj" id="documentoCNPJ" class="cnpj form-control" value="" maxlength="18">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nome">Celular</label>
+                                <input type="text" id="celular" class="form-control" name="celular" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="nome">Telefone</label>
+                                <input type="text" id="telefone" class="form-control" name="telefone" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="nome">Descrição</label>
+                                <textarea  class="form-control rounded-0" rows="4" cols="50" name="descricao">                                        
+                                </textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="nome">Estado</label>
+                                <div class="form-group">
+                                          <!--  <input id="estado" type="text" name="estado" value=""  />-->
+                                    <select class="form-control" id="estado"  name="estado">
+                                        <option value="">-</option>
+                                        <option value="AC">Acre</option>
+                                        <option value="AL">Alagoas</option>
+                                        <option value="AP">Amapá</option>
+                                        <option value="AM">Amazonas</option>
+                                        <option value="BA">Bahia</option>
+                                        <option value="CE">Ceará</option>
+                                        <option value="DF">Distrito Federal</option>
+                                        <option value="ES">Espírito Santo</option>
+                                        <option value="GO">Goiás</option>
+                                        <option value="MA">Maranhão</option>
+                                        <option value="MT">Mato Grosso</option>
+                                        <option value="MS">Mato Grosso do Sul</option>
+                                        <option value="MG">Minas Gerais</option>
+                                        <option value="PA">Pará</option>
+                                        <option value="PB">Paraíba</option>
+                                        <option value="PR">Paraná</option>
+                                        <option value="PE">Pernambuco</option>
+                                        <option value="PI">Piauí</option>
+                                        <option value="RJ">Rio de Janeiro</option>
+                                        <option value="RN">Rio Grande do Norte</option>
+                                        <option value="RS">Rio Grande do Sul</option>
+                                        <option value="RO">Rondônia</option>
+                                        <option value="RR">Roraima</option>
+                                        <option value="SC">Santa Catarina</option>
+                                        <option value="SP">São Paulo</option>
+                                        <option value="SE">Sergipe</option>
+                                        <option value="TO">Tocantins</option>
+
+                                    </select>                         
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nome">Cidade Evento</label>
+                                <input type="text" class="form-control" name="cidade"  required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="nome">CEP</label>
+                                <input type="text" id="cep" class="form-control" name="cep"  required/>
+                            </div>
+                            <div class="form-group" >
+                                <label for="nome">Produto</label><br>
+                                <select style="margin-left: 0px; position: relative;float: left; " data-placeholder="Choose a Country..." class="select form-control" multiple tabindex="1" name="produto[]" id="sel">
+<?php foreach ($this->view->produtos as $produtos) { ?>
+    <?php echo '<option>' . $produtos['nome_produto'] . '</option>'; ?>                                        
+<?php } ?>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nome">Quantidade</label>
+                                <input type="text" class="form-control" name="quantidade" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="nome">Data Evento</label>
+                                <input type="date" class="form-control" name="data" required/>
+                            </div>
+                            <br><br>
+                            <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cadastrar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary btn-lg"/>
+                            <div class="loading"></div>
+                        </form>
+            </div>
         </div>
     </center>
 </div>
@@ -45,8 +155,11 @@
 <div id="section6" class="container-fluid">
     <center>
         <div class="sectionint">
-            <h1>Sessão 6</h1>
-            <p>Clique nos diferentes links da Seção na barra de navegação</p>
+            <h1>Contato</h1>
+            <p>Estamos a dispozição para tirar suas duvidas:</p>
+            <p>(61) 0000-0000</p>
+            <p>ou</p>
+            <p>(61) 0000-0000</p>
         </div>
     </center>
 </div>
@@ -96,15 +209,15 @@ ALERTA de Cadastro.
             <form method="POST" class="form-login" action="<?= base_url('') ?>/login/verificar">
                 <span class="field">
                     <label for="cpf">Usuario:</label>
-                    <input type="text" class="form-cadastro" ng-model="cpf" name="usuario" id="cpf"  placeholder="Usuario">
+                    <input type="text" class="form-cadastro" ng-model="cpf" name="usuario" id="usuario"  placeholder="Usuario">
 
                 </span>
                 <span class="field">
                     <label for="psw">Senha:</label>
-                    <input type="password" class="form-cadastro" ng-model="psw" name="password" id="psw"  placeholder="Senha">
+                    <input type="password" class="form-cadastro" ng-model="psw" name="password" id="senha"  placeholder="Senha">
 
                 </span>
-                <input type="submit" name="login" ng-click="Getverificaacesso(cpf, psw);" class="login loginmodal-submit" value="Entrar">
+                <input type="submit" name="login"  class="login loginmodal-submit" value="Entrar">
             </form>
 
             <h1 ng-repeat="x in verifica">{{x.psw}}</h1>
@@ -212,7 +325,7 @@ ALERTA de login.
 
 <div class="mostrar-orcamento" ></div>
 <!-- Modal orçamento -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -224,7 +337,7 @@ ALERTA de login.
             <div class="modal-body">
                 <div class="container">
 
-                    <!-- janela modal Cadastrar Orçamento -->     
+                     janela modal Cadastrar Orçamento      
 
 
 
@@ -273,7 +386,7 @@ ALERTA de login.
                             <div class="form-group">
                                 <label for="nome">Estado</label>
                                 <div class="form-group">
-                                          <!--  <input id="estado" type="text" name="estado" value=""  />-->
+                                            <input id="estado" type="text" name="estado" value=""  />
                                     <select class="form-control" id="estado"  name="estado">
                                         <option value="">-</option>
                                         <option value="AC">Acre</option>
@@ -347,7 +460,7 @@ ALERTA de login.
         </div>
 
     </div>
-</div>
+</div>-->
 <script>
     jQuery("input[name=documento]:radio").change(
     	function(){
