@@ -1,83 +1,89 @@
 
 
-<?php 
+<?php
 session_start();
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-    <title><?php echo $this->getPageTitle(" | MariaThDoces") ?></title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Style -- CSS -- LINK -->
-    <link rel="stylesheet" href="public/css/bootstrap.min.css">
-    <link href="public/css/Script.css" rel="stylesheet" />
-    <link href="public/css/bootstrap.css" rel="stylesheet" />
-    <!-- Script -- JS -- LINK -->
-    <script src="public/js/jquery.js"></script>
-    <script src="public/js/tether.js"></script>
-    <script src="public/js/angular.js"></script>
-    <script src="public/js/script.js"></script>
-    <script src="public/js/bootstrap.min.js"></script>
-    <script src="public/js/jquery.mask.min.js"></script>
-    
-    <link rel="shortcut icon" href="<?= base_url('')?>/public/img/Maria_Doces-icones-01.png" type="image/text" >
-    <link rel="stylesheet" href="<?= base_url('')?>/public/home/css/bootstrap.min.css">
-    <link href="<?= base_url('')?>/public/home/css/chosen.css" rel="stylesheet" />
-    <link href="<?= base_url('')?>/public/home/css/all.css" rel="stylesheet" />    
-    <script src="<?= base_url('')?>/public/js/sweetalert2.js"></script>
-    <script src="<?= base_url('')?>/public/home/js/chosen.jquery.js"></script>
-    <script src="<?= base_url('')?>/public/home/js/all.js"></script>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
-   
-</head >
-<body ng-app="sistema" ng-controller="SistemaCtrl" ng-init="FnInit();" >
+    <head>
+        <title><?php echo $this->getPageTitle(" | MariaThDoces") ?></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Style -- CSS -- LINK -->
+        <link rel="stylesheet" href="public/css/bootstrap.min.css">
+        <link href="public/css/Script.css" rel="stylesheet" />
+        <link href="public/css/bootstrap.css" rel="stylesheet" />
+        
+        <!-- Galeria CSS -->
+        <link rel="stylesheet" href="<?= base_url('') ?>/public/home/css/galeria.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="<?= base_url('') ?>/public/home/css/flexslider.css" type="text/css" media="screen" />
+        <!-- Galeria Modernizr -->
+        <script src="<?= base_url('') ?>/public/home/js/modernizr.js"></script>
+        <!-- Script -- JS -- LINK -->
+        <script src="public/js/jquery.js"></script>
+        <script src="public/js/tether.js"></script>
+        <script src="public/js/angular.js"></script>
+        <script src="public/js/script.js"></script>
+        <script src="public/js/bootstrap.min.js"></script>
+        <script src="public/js/jquery.mask.min.js"></script>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top bg-dark">
-       
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <img id="logo-home" src="<?= base_url('')?>/public/img/Maria_Doces_4.png" onclick="rolar_para('#section1')">
-            </div>
+        <link rel="shortcut icon" href="<?= base_url('') ?>/public/img/Maria_Doces-icones-01.png" type="image/text" >
+        <link rel="stylesheet" href="<?= base_url('') ?>/public/home/css/bootstrap.min.css">
+        <link href="<?= base_url('') ?>/public/home/css/chosen.css" rel="stylesheet" />
+        <link href="<?= base_url('') ?>/public/home/css/all.css" rel="stylesheet" />    
+        <script src="<?= base_url('') ?>/public/js/sweetalert2.js"></script>
+        <script src="<?= base_url('') ?>/public/home/js/chosen.jquery.js"></script>
+        <script src="<?= base_url('') ?>/public/home/js/all.js"></script>
+        <script src="<?= base_url('') ?>/public/home/js/jquery.min.js"></script>
 
-            <div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav" style="float:right;">
-                        <li class="nav-item active"><a href="#" onclick="rolar_para('#section1')">Menu</a></li>                        
-                        <li><a href="#" onclick="rolar_para('#section2')">Sobre Nós</a></li>
-                        <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section3')">Serviços</a></li>
-                        <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section4')">Orçamento</a></li>
-                        <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section5')">Galeria</a></li>
-                        <li><a href="#" ng-click="Getmodalcadastro();">Login | Cadastro</a></li>
-                        <li><a href="#section4" onclick="rolar_para('#section6')">Contato</a></li>
-                    </ul>
+    </head >
+    <body ng-app="sistema" ng-controller="SistemaCtrl" ng-init="FnInit();" >
+
+        <nav class="navbar navbar-inverse navbar-fixed-top bg-dark">
+
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <img id="logo-home" src="<?= base_url('') ?>/public/img/Maria_Doces_4.png" onclick="rolar_para('#section1')">
+                </div>
+
+                <div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav" style="float:right;">
+                            <li class="nav-item active"><a href="#" onclick="rolar_para('#section1')">Menu</a></li>                        
+                            <li><a href="#" onclick="rolar_para('#section2')">Sobre Nós</a></li>
+                            <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section3')">Serviços</a></li>
+                            <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section4')">Orçamento</a></li>
+                            <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section5')">Galeria</a></li>
+                            <li><a href="#" ng-click="Getmodalcadastro();">Login | Cadastro</a></li>
+                            <li><a href="#section4" onclick="rolar_para('#section6')">Contato</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
-    <ul class="cb-slideshow">
-        <li class="li"><span></span><div><h3>Slide1</h3>Texto1</div></li>
-        <li class="li"><span></span><div><h3>Slide2</h3>Texto2</div></li>
-        <li class="li"><span></span><div><h3>Slide3</h3>Texto3</div></li>
-        <li class="li"><span></span><div><h3>Slide4</h3>Texto4</div></li>
-        <li class="li"><span></span><div><h3>Slide5</h3>Texto5</div></li>
-        <li class="li"><span></span><div><h3>Slide6</h3>Texto6</div></li>
-    </ul>
+        </nav>
+        <ul class="cb-slideshow">
+            <li class="li"><span></span><div><h3>Slide1</h3>Texto1</div></li>
+            <li class="li"><span></span><div><h3>Slide2</h3>Texto2</div></li>
+            <li class="li"><span></span><div><h3>Slide3</h3>Texto3</div></li>
+            <li class="li"><span></span><div><h3>Slide4</h3>Texto4</div></li>
+            <li class="li"><span></span><div><h3>Slide5</h3>Texto5</div></li>
+            <li class="li"><span></span><div><h3>Slide6</h3>Texto6</div></li>
+        </ul>
         <!--Conteudo-->
-        <?php $this->content()?>
+        <?php $this->content() ?>
         <!--Fim Conteudo--> 
-        
+
         <script>
-    $(document).ready(function () {
-        $('#sel').chosen();
+                    $(document).ready(function () {
+                        $('#sel').chosen();
 
 
-    });
-</script>
+                    });
+        </script>
     </body>
 </html>

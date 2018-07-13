@@ -144,12 +144,66 @@
         </div>
     </center>
 </div>
-<div id="section5" class="container-fluid">
+<div id="section5" class="">
     <center>
         <div class="sectionint">
             <h1>Sessão 5</h1>
             <p>Clique nos diferentes links da Seção na barra de navegação</p>
+            
+            <div id="main" role="main">
+                <section class="slider" style="">
+        <div class="flexslider">
+          <ul class="slides">
+            <li data-thumb="<?= base_url('')?>/public/img/Galeria/kitchen_adventurer_cheesecake_brownie.jpg">
+                <img style="width: 800px; height: 400px" src="<?= base_url('')?>/public/img/Galeria/kitchen_adventurer_cheesecake_brownie.jpg" />
+  	    		</li>
+  	    		<li data-thumb="<?= base_url('')?>/public/img/Galeria/kitchen_adventurer_lemon.jpg">
+  	    	    <img style="width: 800px; height: 400px" src="<?= base_url('')?>/public/img/Galeria/kitchen_adventurer_lemon.jpg" />
+  	    		</li>
+  	    		<li data-thumb="<?= base_url('')?>/public/img/Galeria/kitchen_adventurer_donut.jpg">
+  	    	    <img style="width: 800px; height: 400px " src="<?= base_url('')?>/public/img/Galeria/kitchen_adventurer_donut.jpg" />
+  	    		</li>
+  	    		<li data-thumb="<?= base_url('')?>/public/img/Galeria/kitchen_adventurer_caramel.jpg">
+  	    	    <img style="width: 800px; height: 400px" src="<?= base_url('')?>/public/img/Galeria/kitchen_adventurer_caramel.jpg" />
+  	    		</li>
+          </ul>
         </div>
+      </section>
+      
+    </div>            
+        </div>
+        
+        
+        <!-- FlexSlider -->
+  <script defer src="<?= base_url('')?>/public/home/js/jquery.flexslider.js"></script>
+
+  <script type="text/javascript">
+    $(function(){
+      SyntaxHighlighter.all();
+    });
+    $(window).load(function(){
+      $('.flexslider').flexslider({
+        animation: "slide",
+        controlNav: "thumbnails",
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+    });
+  </script>
+
+
+  <!-- Syntax Highlighter -->
+  <script type="text/javascript" src="<?= base_url('')?>/public/home/js/shCore.js"></script>
+  <script type="text/javascript" src="<?= base_url('')?>/public/home/js/shBrushXml.js"></script>
+  <script type="text/javascript" src="<?= base_url('')?>/public/home/js/shBrushJScript.js"></script>
+
+  <!-- Optional FlexSlider Additions -->
+  <script src="<?= base_url('')?>/public/home/js/jquery.easing.js"></script>
+  <script src="<?= base_url('')?>/public/home/js/jquery.mousewheel.js"></script>
+  <script defer src="<?= base_url('')?>/public/home/js/demo.js"></script>
+        
+        
     </center>
 </div>
 <div id="section6" class="container-fluid">
@@ -505,7 +559,7 @@ if (!empty($_GET['Erro']) === "Permissao") {
 
     //Mascara para os inpust
     $(document).ready(function () {
-        $("#celular").mask("(00) 0 0000-0000");
+        $("#celular").mask("(99) 99999-9999");
         $("#telefone").mask("(00) 0000-0000");
         $("#documentoCNPJ").mask("99.999.999/9999-99");
         $("#documentoCPF").mask("999.999.999-99");
@@ -513,7 +567,7 @@ if (!empty($_GET['Erro']) === "Permissao") {
     });
 
     //mostra errro
-    if (isset)
+    
         $(document).ready(function () {
             swal("Ops...", "Preecha todos os dados", "warning");
         });
