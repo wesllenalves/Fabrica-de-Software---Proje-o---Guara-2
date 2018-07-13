@@ -157,9 +157,12 @@
         <div class="sectionint">
             <h1>Contato</h1>
             <p>Estamos a dispozição para tirar suas duvidas:</p>
-            <p>(61) 0000-0000</p>
+            <p>(61) 3022-2293</p>
             <p>ou</p>
-            <p>(61) 0000-0000</p>
+            <p>(61) 99663-7866</p>
+            <h2>Redes Sociais</h2>
+            <a href="https://www.facebook.com/MariathDoces/" title="Facebook MariathDoces"><i class="fab fa-facebook fa-3x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="https://www.instagram.com/mariathdoces/" title="Instagran MariathDoces"><i class="fab fa-instagram fa-3x"></i></a>
         </div>
     </center>
 </div>
@@ -168,21 +171,12 @@
         <div class="container-fluid">
             <nav class="pull-left">
                 <ul>
-                    <li>
-                        <a href="#">
-                            FabricadeSoftware - Projeção
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Licenças
-                        </a>
-                    </li>
+                    
                 </ul>
             </nav>
-            <div class="copyright pull-right">
+            <div class="copyright pull-center">
                 &copy;
-                <script>document.write(new Date().getFullYear());</script>, desenvolvido pela <i class="fa fa-heart heart"></i> <a href="#">FabricadeSoftware - Projeção</a>
+                <script>document.write(new Date().getFullYear());</script>, desenvolvido pela <i class="fa fa-heart heart"></i> <a href="#">FabricadeSoftware - Projeção Guara 2</a>
             </div>
         </div>
     </footer>
@@ -482,7 +476,7 @@ ALERTA de login.
     );
     </script>
 <?php
-if ($_GET['Erro'] === "Permissao") {
+if (!empty($_GET['Erro']) === "Permissao") {
     echo '<script>
 			$(document).ready(function(){
 				swal("Ops...","Voce não tem permissao para entrar nessa pagina","warning");
