@@ -13,7 +13,7 @@ if(isset($_GET["sair"])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>ultra MapOS | ordem de serviços</title>
+<title>Dashbord | MariathDoces</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -61,14 +61,19 @@ if(isset($_GET["sair"])){
         width: 5%;
     }
     #sidebar{
-        margin-top: 50px;
+        margin-top: 63px;
     }
     #content {
-        margin-top: 70px;
+        margin-top: 40px;
     }
     .sair{
-        right: 0;
-        /*margin-left:  100px;*/
+        font-family: sans-serif,fantasy;
+        position: relative;
+        margin-top: 1.5%;
+          margin-bottom:  0.5%;
+        /*float: right;*/
+        margin-left:  1100px;
+        border-radius: 5%;
         /*//float: right;*/
     }
 </style>
@@ -87,15 +92,12 @@ if(isset($_GET["sair"])){
  
 
 <!--top-Header-menu-->
-<div id="user-nav" class="navbar navbar-inverse" style="height: 2px;">
-  <ul class="nav">
-   
+ 
        
     
-    <li class="sair" style="height: 2px;"><a title="" href="?sair=Sim"><i class="icon icon-share-alt"></i> <span class="text">Sair do Sistema</span></a></li>
+      <a title="" href="?sair=Sim"><button type="button" class="btn btn-info sair" ><span class="text">Sair</span></button></a>
  
-  </ul>
-</div>
+  
 <!--Conteudo-->
         <?php $this->content()?>
 <!--Fim Conteudo-->  
