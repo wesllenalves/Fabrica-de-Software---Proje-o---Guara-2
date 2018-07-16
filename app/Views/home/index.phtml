@@ -32,179 +32,160 @@
             <h1>Orçamento</h1>
             <p>Clique nos diferentes links da Seção na barra de navegação</p>
             <div class="row">
-            <form  class="form-orcamento" method="POST" action="<?= base_url('') ?>/cadastro/orcamento" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="nome">Nome Completo</label>
-                                <input type="text" id="nome_completo" class="form-control" name="nome" placeholder="José"  required/>
-                            </div>
-                            <div class="form-group">
-                                <label>&nbsp;</label>
-                                <div class="controls">
-                                    <input type="radio" value="cpf" name="documento" checked="checked"> CPF
-                                    <input type="radio" value="cnpj" name="documento"> CNPJ
-                                </div>
-                            </div>
-                            <div class="form-group">                    
-                                <div id="cpf1">
-                                    <label for="documentoCPF" class="control-label">CPF <span>*</span></label>
-                                   
-                                        <input type="text" name="documentoCpf" id="documentoCPF" class="cpf required form-control" value="" maxlength="15">
-                                    
-                                </div>
-                            </div>
-                            <div class="form-group">                    
-                                <div id="cnpj" style="display: none;">
-                                    <label for="documentoCNPJ" class="control-label">CNPJ <span>*</span></label>
-                                    <div class="controls">
-                                        <input type="text" name="documentoCpnj" id="documentoCNPJ" class="cnpj form-control" value="" maxlength="18">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="nome">Celular</label>
-                                <input type="text" id="celular" class="form-control" name="celular" required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="nome">Telefone</label>
-                                <input type="text" id="telefone" class="form-control" name="telefone" required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="nome">Descrição</label>
-                                <textarea  class="form-control rounded-0" rows="4" cols="50" name="descricao">                                        
-                                </textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="nome">Estado</label>
-                                <div class="form-group">
-                                          <!--  <input id="estado" type="text" name="estado" value=""  />-->
-                                    <select class="form-control" id="estado"  name="estado">
-                                        <option value="">-</option>
-                                        <option value="AC">Acre</option>
-                                        <option value="AL">Alagoas</option>
-                                        <option value="AP">Amapá</option>
-                                        <option value="AM">Amazonas</option>
-                                        <option value="BA">Bahia</option>
-                                        <option value="CE">Ceará</option>
-                                        <option value="DF">Distrito Federal</option>
-                                        <option value="ES">Espírito Santo</option>
-                                        <option value="GO">Goiás</option>
-                                        <option value="MA">Maranhão</option>
-                                        <option value="MT">Mato Grosso</option>
-                                        <option value="MS">Mato Grosso do Sul</option>
-                                        <option value="MG">Minas Gerais</option>
-                                        <option value="PA">Pará</option>
-                                        <option value="PB">Paraíba</option>
-                                        <option value="PR">Paraná</option>
-                                        <option value="PE">Pernambuco</option>
-                                        <option value="PI">Piauí</option>
-                                        <option value="RJ">Rio de Janeiro</option>
-                                        <option value="RN">Rio Grande do Norte</option>
-                                        <option value="RS">Rio Grande do Sul</option>
-                                        <option value="RO">Rondônia</option>
-                                        <option value="RR">Roraima</option>
-                                        <option value="SC">Santa Catarina</option>
-                                        <option value="SP">São Paulo</option>
-                                        <option value="SE">Sergipe</option>
-                                        <option value="TO">Tocantins</option>
+                <form  class="form-orcamento" method="POST" action="<?= base_url('') ?>/cadastro/orcamento" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome_completo" class="form-control" name="nome" placeholder="José"  required/>
+                    </div>
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <div class="controls">
+                            <input type="radio" value="cpf" name="documento" checked="checked"> CPF
+                            <input type="radio" value="cnpj" name="documento"> CNPJ
+                        </div>
+                    </div>
+                    <div class="form-group">                    
+                        <div id="cpf1">
+                            <label for="documentoCPF" class="control-label">CPF <span>*</span></label>
 
-                                    </select>                         
+                            <input type="text" name="documentoCpf" id="documentoCPF" class="cpf required form-control" value="" maxlength="15">
 
-                                </div>
+                        </div>
+                    </div>
+                    <div class="form-group">                    
+                        <div id="cnpj" style="display: none;">
+                            <label for="documentoCNPJ" class="control-label">CNPJ <span>*</span></label>
+                            <div class="controls">
+                                <input type="text" name="documentoCpnj" id="documentoCNPJ" class="cnpj form-control" value="" maxlength="18">
                             </div>
-                            <div class="form-group">
-                                <label for="nome">Cidade Evento</label>
-                                <input type="text" class="form-control" name="cidade"  required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="nome">CEP</label>
-                                <input type="text" id="cep" class="form-control" name="cep"  required/>
-                            </div>
-                            <div class="form-group" >
-                                <label for="nome">Produto</label><br>
-                                <select style="margin-left: 0px; position: relative;float: left; " data-placeholder="Choose a Country..." class="select form-control" multiple tabindex="1" name="produto[]" id="sel">
-<?php foreach ($this->view->produtos as $produtos) { ?>
-    <?php echo '<option>' . $produtos['nome_produto'] . '</option>'; ?>                                        
-<?php } ?>
-                                </select>
-                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="nome">Celular</label>
+                        <input type="text" id="celular" class="form-control" name="celular" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="nome">Telefone</label>
+                        <input type="text" id="telefone" class="form-control" name="telefone" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="nome">Descrição</label>
+                        <textarea  class="form-control rounded-0" rows="4" cols="50" name="descricao">                                        
+                        </textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="nome">Estado</label>
+                        <div class="form-group">
+                                  <!--  <input id="estado" type="text" name="estado" value=""  />-->
+                            <select class="form-control" id="estado"  name="estado">
+                                <option value="">-</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
 
-                            <div class="form-group">
-                                <label for="nome">Quantidade</label>
-                                <input type="text" class="form-control" name="quantidade" required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="nome">Data Evento</label>
-                                <input type="date" class="form-control" name="data" required/>
-                            </div>
-                            <br><br>
-                            <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cadastrar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary btn-lg"/>
-                            <div class="loading"></div>
-                        </form>
+                            </select>                         
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="nome">Cidade Evento</label>
+                        <input type="text" class="form-control" name="cidade"  required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="nome">CEP</label>
+                        <input type="text" id="cep" class="form-control" name="cep"  required/>
+                    </div>
+                    <div class="form-group" >
+                        <label for="nome">Produto</label><br>
+                        <select style="margin-left: 0px; position: relative;float: left; " data-placeholder="Choose a Country..." class="select form-control" multiple tabindex="1" name="produto[]" id="sel">
+                            <?php foreach ($this->view->produtos as $produtos) { ?>
+                                <?php echo '<option>' . $produtos['nome_produto'] . '</option>'; ?>                                        
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nome">Quantidade</label>
+                        <input type="text" class="form-control" name="quantidade" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="nome">Data Evento</label>
+                        <input type="date" class="form-control" name="data" required/>
+                    </div>
+                    <br><br>
+                    <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cadastrar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary btn-lg"/>
+
+                </form>
             </div>
         </div>
     </center>
 </div>
 <div id="section5" class="">
     <center>
-        <div class="sectionint">
-            <h1>Sessão 5</h1>
-            <p>Clique nos diferentes links da Seção na barra de navegação</p>
+        <div class="">
+            <h1>Veja Alguns de nossos trabalhos</h1><br><br>
+
+<!--            <div class="mfp-bg mfp-img-mobile mfp-ready"></div>
+            <div class="mfp-wrap  mfp-gallery mfp-close-btn-in mfp-auto-cursor mfp-img-mobile mfp-ready" tabindex="-1" style="overflow-x: hidden; overflow-y: auto;">
+                <div class="mfp-container mfp-image-holder mfp-s-ready">
+                    <div class="mfp-content">
+                        <div class="mfp-figure">
+                            <button title="Fechar (Esc)" type="button" class="mfp-close">
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">×</font></font></button>
+                            <figure><img class="mfp-img" alt="" src="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" style="max-height: 380px;"><figcaption>
+                                    <div class="mfp-bottom-bar">
+                                        <div class="mfp-title">
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">O limpador </font></font><small><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">por Marsel Van Oosten</font></font></small></div>
+                                        <div class="mfp-counter">
+                                            <font style="vertical-align: inherit;">
+                                            <font style="vertical-align: inherit;">1 de 7</font></font></div></div></figcaption></figure></div></div>
+                    <div class="mfp-preloader"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Carregando a imagem # 1 ...</font></font></div>
+                    <button title="Anterior (tecla de seta para a esquerda)" type="button" class="mfp-arrow mfp-arrow-left mfp-prevent-close"></button><button title="Próximo (tecla de seta para a direita)" type="button" class="mfp-arrow mfp-arrow-right mfp-prevent-close"></button></div></div>-->
             
-            <div id="main" role="main">
-                <section class="slider" style="">
-        <div class="flexslider">
-          <ul class="slides">
-            <li data-thumb="<?= base_url('')?>/public/img/Galeria/kitchen_adventurer_cheesecake_brownie.jpg">
-                <img style="width: 800px; height: 400px" src="<?= base_url('')?>/public/img/Galeria/kitchen_adventurer_cheesecake_brownie.jpg" />
-  	    		</li>
-  	    		<li data-thumb="<?= base_url('')?>/public/img/Galeria/kitchen_adventurer_lemon.jpg">
-  	    	    <img style="width: 800px; height: 400px" src="<?= base_url('')?>/public/img/Galeria/kitchen_adventurer_lemon.jpg" />
-  	    		</li>
-  	    		<li data-thumb="<?= base_url('')?>/public/img/Galeria/kitchen_adventurer_donut.jpg">
-  	    	    <img style="width: 800px; height: 400px " src="<?= base_url('')?>/public/img/Galeria/kitchen_adventurer_donut.jpg" />
-  	    		</li>
-  	    		<li data-thumb="<?= base_url('')?>/public/img/Galeria/kitchen_adventurer_caramel.jpg">
-  	    	    <img style="width: 800px; height: 400px" src="<?= base_url('')?>/public/img/Galeria/kitchen_adventurer_caramel.jpg" />
-  	    		</li>
-          </ul>
-        </div>
-      </section>
-      
-    </div>            
-        </div>
-        
-        
-        <!-- FlexSlider -->
-  <script defer src="<?= base_url('')?>/public/home/js/jquery.flexslider.js"></script>
 
-  <script type="text/javascript">
-    $(function(){
-      SyntaxHighlighter.all();
-    });
-    $(window).load(function(){
-      $('.flexslider').flexslider({
-        animation: "slide",
-        controlNav: "thumbnails",
-        start: function(slider){
-          $('body').removeClass('loading');
-        }
-      });
-    });
-  </script>
+            <button id="open-popup">Clique Aqui e <br>Veja Nossa Galeria de Imagens</button>
 
+<div id="my-popup" class="mfp-hide white-popup">
+  Inline popup
+</div>
 
-  <!-- Syntax Highlighter -->
-  <script type="text/javascript" src="<?= base_url('')?>/public/home/js/shCore.js"></script>
-  <script type="text/javascript" src="<?= base_url('')?>/public/home/js/shBrushXml.js"></script>
-  <script type="text/javascript" src="<?= base_url('')?>/public/home/js/shBrushJScript.js"></script>
-
-  <!-- Optional FlexSlider Additions -->
-  <script src="<?= base_url('')?>/public/home/js/jquery.easing.js"></script>
-  <script src="<?= base_url('')?>/public/home/js/jquery.mousewheel.js"></script>
-  <script defer src="<?= base_url('')?>/public/home/js/demo.js"></script>
-        
-        
     </center>
+    
+</div>
+
+
+
+
+
+</div><!--fim div imagens-->
+
+
+</div>
+
 </div>
 <div id="section6" class="container-fluid">
     <center>
@@ -225,7 +206,7 @@
         <div class="container-fluid">
             <nav class="pull-left">
                 <ul>
-                    
+
                 </ul>
             </nav>
             <div class="copyright pull-center">
@@ -511,24 +492,23 @@ ALERTA de login.
 </div>-->
 <script>
     jQuery("input[name=documento]:radio").change(
-    	function(){
-    		if( jQuery("input[name=documento]:radio:checked").val() == 'cpf' )
-    		{
-    			jQuery("#cnpj").hide();
-    			jQuery("#documentoCNPJ").removeClass('required');
-    			jQuery("#cpf1").show();
-    			jQuery("#documentoCPF").addClass('required');
-    		}
-    		else
-    		{       
-    			jQuery("#cnpj").show();
-    			jQuery("#documentoCNPJ").addClass('required');
-    			jQuery("#cpf1").hide();
-    			jQuery("#documentoCPF").removeClass('required');
-    		}
-    	}	
+            function () {
+                if (jQuery("input[name=documento]:radio:checked").val() == 'cpf')
+                {
+                    jQuery("#cnpj").hide();
+                    jQuery("#documentoCNPJ").removeClass('required');
+                    jQuery("#cpf1").show();
+                    jQuery("#documentoCPF").addClass('required');
+                } else
+                {
+                    jQuery("#cnpj").show();
+                    jQuery("#documentoCNPJ").addClass('required');
+                    jQuery("#cpf1").hide();
+                    jQuery("#documentoCPF").removeClass('required');
+                }
+            }
     );
-    </script>
+</script>
 <?php
 if (!empty($_GET['Erro']) === "Permissao") {
     echo '<script>
@@ -567,10 +547,10 @@ if (!empty($_GET['Erro']) === "Permissao") {
     });
 
     //mostra errro
-    
-        $(document).ready(function () {
-            swal("Ops...", "Preecha todos os dados", "warning");
-        });
+
+    $(document).ready(function () {
+        swal("Ops...", "Preecha todos os dados", "warning");
+    });
 </script>
 
 </div>

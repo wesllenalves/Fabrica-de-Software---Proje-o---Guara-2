@@ -12,13 +12,19 @@ session_start();
         <!-- Style -- CSS -- LINK -->
         <link rel="stylesheet" href="public/css/bootstrap.min.css">
         <link href="public/css/Script.css" rel="stylesheet" />
-        <link href="public/css/bootstrap.css" rel="stylesheet" />
-        
-        <!-- Galeria CSS -->
-        <link rel="stylesheet" href="<?= base_url('') ?>/public/home/css/galeria.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="<?= base_url('') ?>/public/home/css/flexslider.css" type="text/css" media="screen" />
-        <!-- Galeria Modernizr -->
-        <script src="<?= base_url('') ?>/public/home/js/modernizr.js"></script>
+        <link href="public/css/bootstrap.css" rel="stylesheet" />      
+
+
+        <!-- Magnific Popup core CSS file -->
+        <link rel="stylesheet" href="<?= base_url('') ?>/public/home/css/magnific-popup.css">
+
+
+
+        <!-- Magnific Popup core JS file -->
+        <script src="<?= base_url('') ?>/public/home/js/jquery.magnific-popup.js"></script>
+
+
+
         <!-- Script -- JS -- LINK -->
         <script src="public/js/jquery.js"></script>
         <script src="public/js/tether.js"></script>
@@ -30,11 +36,114 @@ session_start();
         <link rel="shortcut icon" href="<?= base_url('') ?>/public/img/Maria_Doces-icones-01.png" type="image/text" >
         <link rel="stylesheet" href="<?= base_url('') ?>/public/home/css/bootstrap.min.css">
         <link href="<?= base_url('') ?>/public/home/css/chosen.css" rel="stylesheet" />
-        <link href="<?= base_url('') ?>/public/home/css/all.css" rel="stylesheet" />    
+        <link href="<?= base_url('') ?>/public/home/css/all.css" rel="stylesheet" />  
+      
+
         <script src="<?= base_url('') ?>/public/js/sweetalert2.js"></script>
+        
+
         <script src="<?= base_url('') ?>/public/home/js/chosen.jquery.js"></script>
         <script src="<?= base_url('') ?>/public/home/js/all.js"></script>
         <script src="<?= base_url('') ?>/public/home/js/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
+
+        <script type="text/javascript">
+$(document).ready(function() {
+$('#open-popup').magnificPopup({
+    items: [
+      {
+        src: '<?= base_url('') ?>/public/img/galeria/img1.jpg',
+        title: 'Peter & Paul fortress in SPB'
+      },
+      {
+        src: 'https://vimeo.com/123123',
+        type: 'iframe' // this overrides default type
+      },
+      {
+        src: $('<div class="white-popup">Dynamically created element</div>'), // Dynamically created element
+        type: 'inline'
+      },
+      {
+        src: '<div class="white-popup">Popup from HTML string</div>', // HTML string
+        type: 'inline'
+      },
+      {
+        src: '#my-popup', // CSS selector of an element on page that should be used as a popup
+        type: 'inline'
+      }
+    ],
+    gallery: {
+      enabled: true
+    },
+    type: 'image' // this is a default type
+});
+
+});
+</script>
+
+<style>
+  #open-popup {padding:20px}
+.white-popup {
+  position: relative;
+  background: #FFF;
+  padding: 40px;
+  width: auto;
+  max-width: 200px;
+  margin: 20px auto;
+  text-align: center;
+}  
+    
+/* padding-bottom and top for image 
+.mfp-no-margins img.mfp-img {
+padding: 0;
+}
+ position of shadow behind the image 
+.mfp-no-margins .mfp-figure:after {
+top: 0;
+bottom: 0;
+}
+ padding for main container 
+.mfp-no-margins .mfp-container {
+padding: 0;
+}
+
+
+ 
+
+for zoom animation 
+uncomment this part if you haven't added this code anywhere else
+
+
+
+
+.mfp-with-zoom .mfp-container,
+.mfp-with-zoom.mfp-bg {
+opacity: 0;
+-webkit-backface-visibility: hidden;
+-webkit-transition: all 0.3s ease-out; 
+-moz-transition: all 0.3s ease-out; 
+-o-transition: all 0.3s ease-out; 
+transition: all 0.3s ease-out;
+}
+
+.mfp-with-zoom.mfp-ready .mfp-container {
+	opacity: 1;
+}
+.mfp-with-zoom.mfp-ready.mfp-bg {
+	opacity: 0.8;
+}
+
+.mfp-with-zoom.mfp-removing .mfp-container, 
+.mfp-with-zoom.mfp-removing.mfp-bg {
+opacity: 0;
+}*/
+
+</style>
+
+
 
     </head >
     <body ng-app="sistema" ng-controller="SistemaCtrl" ng-init="FnInit();" >
@@ -76,7 +185,8 @@ session_start();
         </ul>
         <!--Conteudo-->
         <?php $this->content() ?>
-        <!--Fim Conteudo--> 
+        <!--Fim Conteudo-->
+
 
         <script>
                     $(document).ready(function () {

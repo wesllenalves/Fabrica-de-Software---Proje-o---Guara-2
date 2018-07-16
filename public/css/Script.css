@@ -62,7 +62,7 @@ html, body {
     height: 1000px;
     color: #fff;
     background-color: #009688;
-    background-image: url("../img/Festa_eventos2.jpg");
+    /*background-image: url("../img/Festa_eventos2.jpg");*/
     /* Efeito parallax*/
     background-attachment: fixed;
     background-position: center;
