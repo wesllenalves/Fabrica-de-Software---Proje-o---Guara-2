@@ -2,7 +2,9 @@
 
 <?php
 session_start();
+//var_dump($_SESSION);
 ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -45,6 +47,7 @@ session_start();
         <script src="<?= base_url('') ?>/public/home/js/chosen.jquery.js"></script>
         <script src="<?= base_url('') ?>/public/home/js/all.js"></script>
         <script src="<?= base_url('') ?>/public/home/js/jquery.min.js"></script>
+        <script src="<?= base_url('') ?>/public/home/js/jquery.bootstrap-growl.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
@@ -55,7 +58,7 @@ session_start();
 
 
         <style>
-            #open-popup {padding:20px}
+            #open-popup {padding:15px}
             .white-popup {
                 position: relative;
                 background: #FFF;
@@ -66,54 +69,12 @@ session_start();
                 text-align: center;
             }  
 
-            /* padding-bottom and top for image 
-            .mfp-no-margins img.mfp-img {
-            padding: 0;
-            }
-             position of shadow behind the image 
-            .mfp-no-margins .mfp-figure:after {
-            top: 0;
-            bottom: 0;
-            }
-             padding for main container 
-            .mfp-no-margins .mfp-container {
-            padding: 0;
-            }
-            
-            
-             
-            
-            for zoom animation 
-            uncomment this part if you haven't added this code anywhere else
-            
-            
-            
-            
-            .mfp-with-zoom .mfp-container,
-            .mfp-with-zoom.mfp-bg {
-            opacity: 0;
-            -webkit-backface-visibility: hidden;
-            -webkit-transition: all 0.3s ease-out; 
-            -moz-transition: all 0.3s ease-out; 
-            -o-transition: all 0.3s ease-out; 
-            transition: all 0.3s ease-out;
-            }
-            
-            .mfp-with-zoom.mfp-ready .mfp-container {
-                    opacity: 1;
-            }
-            .mfp-with-zoom.mfp-ready.mfp-bg {
-                    opacity: 0.8;
-            }
-            
-            .mfp-with-zoom.mfp-removing .mfp-container, 
-            .mfp-with-zoom.mfp-removing.mfp-bg {
-            opacity: 0;
-            }*/
+
 
         </style>
 
 
+        ?>
 
     </head >
     <body ng-app="sistema" ng-controller="SistemaCtrl" ng-init="FnInit();" >
@@ -137,14 +98,16 @@ session_start();
                             <li><a href="#" onclick="rolar_para('#section2')">Sobre Nós</a></li>
                             <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section3')">Serviços</a></li>
                             <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section4')">Orçamento</a></li>
-                            <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section5')">Galeria</a></li>
-                            <li><a href="#" ng-click="Getmodalcadastro();">Login | Cadastro</a></li>
+                            <li><a class="dropdown-toggle" href="#" id="open-popup">Galeria</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#cadastro-modal">Cadastro</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>                            
                             <li><a href="#section4" onclick="rolar_para('#section6')">Contato</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </nav>
+
         <ul class="cb-slideshow">
             <li class="li"><span></span><div><h3>Slide1</h3>Texto1</div></li>
             <li class="li"><span></span><div><h3>Slide2</h3>Texto2</div></li>
@@ -153,17 +116,34 @@ session_start();
             <li class="li"><span></span><div><h3>Slide5</h3>Texto5</div></li>
             <li class="li"><span></span><div><h3>Slide6</h3>Texto6</div></li>
         </ul>
+        <?php if(!empty($_SESSION['danger'])){?>
+        <div class="alert alert-danger fade in" style=" display: inline; float: right; position: relative;  margin-top: 40px; margin-right: 20px;">
+            <strong>ERROR!</strong> <?=$_SESSION['danger']?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <?php 
+            unset($_SESSION['danger']);
+        } ?>
+        
         <!--Conteudo-->
         <?php $this->content() ?>
         <!--Fim Conteudo-->
 
 
         <script>
-                    $(document).ready(function () {
-                        $('#sel').chosen();
+
+                    $(function () {
+                        $.bootstrapGrowl("This is a test.");
+
+                        setTimeout(function () {
+                            $.bootstrapGrowl("This is another test.", {type: 'success'});
+                        }, 1000);
 
 
                     });
+
         </script>
     </body>
 </html>

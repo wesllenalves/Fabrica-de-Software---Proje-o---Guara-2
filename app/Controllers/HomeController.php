@@ -43,12 +43,9 @@ class HomeController extends BaseController {
         $usuario = new Usuarios();
 
         if ($dados = $usuario->validar($request)) {
-
-            echo '<script>
-			$(document).ready(function(){
-				swal("Ops...","Preecha todos os dados","warning");
-			});
-			</script>';
+            session_start();
+            $this->redirect("index", self::DANGER ,'Preencha Todos os Dados');
+            
         } else {
             //verifica se existe o usuario digitado, se sim retorna TRUE
             if ($usuario->verificarlogin($request->post)) {
