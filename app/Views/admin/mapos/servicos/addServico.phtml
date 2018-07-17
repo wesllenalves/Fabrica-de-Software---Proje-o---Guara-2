@@ -25,17 +25,17 @@
         
 
     
-            <li class="submenu ">
+<!--            <li class="submenu ">
           <a href="#"><i class="icon icon-cog"></i> <span>Configurações</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
           <ul>
                             <li><a href="index.php/usuarios">Usuários</a></li>
                                         <li><a href="index.php/mapos/emitente">Emitente</a></li>
-                                        <!--<li><a href="index.php/permissoes">Permissões</a></li>-->
-                                        <!--<li><a href="index.php/mapos/backup">Backup</a></li>-->
-            <!-- <li><a  href="#" title="configuraremail" onClick="abrirnotificacao(this)">Email(imap)</a></li>-->
+                                        <li><a href="index.php/permissoes">Permissões</a></li>
+                                        <li><a href="index.php/mapos/backup">Backup</a></li>
+             <li><a  href="#" title="configuraremail" onClick="abrirnotificacao(this)">Email(imap)</a></li>
  <li><a  href="#" title="configurarpagseguro.php" onClick="abrirnotificacao(this)">PagSeguro</a></li>
           </ul>
-        </li>
+        </li>-->
         
     
   </ul>
@@ -43,6 +43,7 @@
 
 <div id="content">
   <div id="content-header">
+      <?= $this->AlertaHome();?> 
     <div id="breadcrumb"> <a href="" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="https://www.ultramapos.online/index.php/servicos" class="tip-bottom" title="Servicos">Servicos</a> <a href="https://www.ultramapos.online/index.php/servicos/adicionar/" class="current tip-bottom" title="Adicionar">Adicionar</a> </div>
   </div>
   <div class="container-fluid">
@@ -83,7 +84,7 @@
                     <div class="form-actions">
                         <div class="span12">
                             <div class="span6 offset3">
-                              <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> Adicionar</button>                                <a href="https://www.ultramapos.online/index.php/servicos" id="btnAdicionar" class="btn"><i class="icon-arrow-left"></i> Voltar</a>
+                              <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> Adicionar</button>                                <a href="<?= base_url('')?>/servicos" id="btnAdicionar" class="btn"><i class="icon-arrow-left"></i> Voltar</a>
                             </div>
                         </div>
                     </div>
