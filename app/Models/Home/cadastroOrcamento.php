@@ -27,11 +27,7 @@ class cadastroOrcamento extends BaseModel {
     public function cadastrar($request) {
         date_default_timezone_set('America/Sao_Paulo');
         $dataAtual = date("Y-m-d H:i:s");
-        if (!empty($request->post->produto) and is_array($request->post->produto)) {
-            $produtos = implode(',', $request->post->produto);
         
-        $documento =  NULL;
-        $tipoPessoa = NULL;
         if(!empty ($request->post->documentoCpf)){
             $documento = $request->post->documentoCpf;
             $tipoPessoa = "PF";
@@ -50,8 +46,8 @@ class cadastroOrcamento extends BaseModel {
                 'estado' => $request->post->estado, 'cep' => $request->post->cep, 'dataCadastro' => $dataAtual
             ),
             "1" => array(
-                'status_pedido' => "Aberto", 'dataInicial' => $request->post->data,  'quantidade' => $request->post->quantidade, 'produtos' => $produtos,
-                'descricaoServico' => $request->post->descricao . "<br>Produtos pedido<br>", 'dataCadastro' => $dataAtual
+                'status_pedido' => "Aberto", 'dataInicial' => $request->post->data,
+                'descricaoServico' => $request->post->descricao, 'dataCadastro' => $dataAtual
             )
             );       
                 
@@ -62,6 +58,6 @@ class cadastroOrcamento extends BaseModel {
             return False;
         }
     }
-    }
+    
 
 }

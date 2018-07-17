@@ -42,7 +42,7 @@
     </ul>
 </div>
 
-<div id="content">
+<div id="content" style="font-size: 15px;">
     <div id="content-header">
         <div id="breadcrumb"> <a href="<?= base_url('') ?>" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="<?= base_url('') ?>/os" class="tip-bottom" title="Os">Os</a> <a href="<?= base_url('') ?>/os/visualizar" class="current tip-bottom" title="Visualizar">Visualizar</a> </div>
     </div>
@@ -61,8 +61,8 @@
                                 <h5>Ordem de Serviço</h5>
                                 <div class="buttons">
                                     <?php foreach ($this->view->os as $os) { ?>
-                                        <a title="Icon Title" class="btn btn-mini btn-info" href="<?= base_url('') ?>/os/editar?id=<?= $os['idOs'] ?>"><i class="icon-pencil icon-white"></i> Editar</a>                    
-                                        <a target="_blank" title="Imprimir" class="btn btn-mini btn-inverse" href="/os/imprimir/96"><i class="icon-print icon-white"></i> Imprimir</a>
+                                    <a style="position: relative; margin-top: -7.6px;" title="Icon Title" class="btn btn-mini btn-info" href="<?= base_url('') ?>/os/editar?id=<?= $os['idOs'] ?>"><i class="icon-pencil icon-white"></i> Editar</a>                    
+                                        
                                     <?php } ?>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                                                 <?php foreach ($this->view->os as $os) { ?>
                                                                     <span><h5>Cliente</h5></span>
                                                                     <span><?= $os['nomeCliente'] ?></span><br/>
-                                                                    <span><?= $os['rua'] ?>, <?= $os['bairro'] ?> </span><br/>
+                                                                    <span><?= $os['rua'] ?> <?= $os['bairro'] ?> </span><br/>
                                                                     <span> <?= $os['cidade'] ?>- <?= $os['estado'] ?> CEP:<?= $os['cep'] ?></span><br>Tel.:  <?= $os['telefone'] ?> / <?= $os['celular'] ?> 
 
                                                                 </li>
@@ -106,13 +106,14 @@
                                         </div>
 
                                         <div style="margin-top: 0; padding-top: 0">
-
+                                            
                                             <hr style="margin-top: 0">
+                                            <hr>
                                             <h5>Descrição</h5>
                                             <p>
                                                 <?= $os['descricaoServico'] ?>                         
-                                            </p>
-
+                                            </p>                                            
+                                            <hr>
                                             <table class="table table-bordered" id="tblProdutos">
                                                 <thead>
                                                     <tr>

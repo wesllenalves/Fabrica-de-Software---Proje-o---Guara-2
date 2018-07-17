@@ -13,32 +13,49 @@
 <div id="section2" class="container-fluid">
     <center>
 
-        <div class="sectionint">
-            <h1>Sessão 2</h1>
-            <p>Clique nos diferentes links da Seção na barra de navegação</p>
-            <input type="text" class="form-control" ng-model="nome">
+        <div class="sectionint" style=" font-size: 20px; text-align: justify;">
+            <h1 style="text-align: center">Um pouquinho de nós</h1>
+            <p>A MariathDoces elabora deliciosos produtos para 
+                adoçar a sua festa, todos os produtos possuem um sabor especial. 
+                Para tal, a equipe está atenta na produção dos doces, sempre com 
+                muito cuidado, amor e competência para deixar o seu evento do jeito
+                que você sempre sonhou.</p>
+            <p>A empresa conta com umas equipe que utiliza na elaboração dos produtos,
+                ingredientes de qualidade e sempre os mais frescos do mercado. 
+                A MariathDoces está à disposição para elaborar serviços requintados 
+                deixando o seu evento com muito mais charme e sofisticação.
+                Confira alguns produtos:</p>
+
+    
+            <p>&bull;&nbsp;&nbsp;Bolos artísticos</p>
+            <p>&bull;&nbsp;&nbsp;Doces finos</p>
+            <p>&bull;&nbsp;&nbsp;Doces tradicionais</p>
+            <p>&bull;&nbsp;&nbsp;Buffet completo</p>
+            <p>&bull;&nbsp;&nbsp;Lembranças</p>
+            <p>&bull;&nbsp;&nbsp;Salgados</p>
+            
             
         </div>
     </center>
 </div>
-<div id="section3" class="container-fluid">
+<!--<div id="section3" class="container-fluid">
     <center>
         <div class="sectionint">
             <h1>Sessão 3</h1>
-            <p>Clique nos diferentes links da Seção na barra de navegação</p>
+            
         </div>
     </center>
-</div>
+</div>-->
 <div id="section4" class="container-fluid">
     <center>
         <div class="sectionint">
             <h1>Orçamento</h1>
-            <p>Clique nos diferentes links da Seção na barra de navegação</p>
+            
             <div class="row">
                 <form  class="form-orcamento" method="POST" action="<?= base_url('') ?>/cadastro/orcamento" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="nome">Nome Completo</label>
-                        <input type="text" id="nome_completo" class="form-control" name="nome" placeholder="José"  required/>
+                        <label for="nome">Nome Completo<span>*</span></label>
+                        <input type="text" id="nome_completo" class="form-control" name="nome" placeholder=""  required/>
                     </div>
                     <div class="form-group">
                         <label>&nbsp;</label>
@@ -64,20 +81,20 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="nome">Celular</label>
+                        <label for="nome">Celular<span>*</span></label>
                         <input type="text" id="celular" class="form-control" name="celular" required/>
                     </div>
                     <div class="form-group">
-                        <label for="nome">Telefone</label>
+                        <label for="nome">Telefone<span>*</span></label>
                         <input type="text" id="telefone" class="form-control" name="telefone" required/>
                     </div>
                     <div class="form-group">
-                        <label for="nome">Descrição</label>
+                        <label for="nome">Descrição<span>*</span></label>
                         <textarea  class="form-control rounded-0" rows="4" cols="50" name="descricao">                                        
                         </textarea>
                     </div>
                     <div class="form-group">
-                        <label for="nome">Estado</label>
+                        <label for="nome">Estado<span>*</span></label>
                         <div class="form-group">
                                   <!--  <input id="estado" type="text" name="estado" value=""  />-->
                             <select class="form-control" id="estado"  name="estado">
@@ -115,17 +132,17 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="nome">Cidade Evento</label>
+                        <label for="nome">Cidade do Evento<span>*</span></label>
                         <input type="text" class="form-control" name="cidade"  required/>
                     </div>
                     <div class="form-group">
-                        <label for="nome">CEP</label>
+                        <label for="nome">CEP<span>*</span></label>
                         <input type="text" id="cep" class="form-control" name="cep"  required/>
                     </div>                    
 
                     
                     <div class="form-group">
-                        <label for="nome">Data Evento</label>
+                        <label for="nome">Data Evento<span>*</span></label>
                         <input type="date" class="form-control" name="data" required/>
                     </div>
                     <br><br>
@@ -136,7 +153,7 @@
         </div>
     </center>
 </div>
-<div id="section5" class="">
+<!--<div id="section5" class="">
     <center>
         <div class="">
             <h1>Veja Alguns de nossos trabalhos</h1><br><br>
@@ -152,7 +169,7 @@
 
     </center>
     
-</div>
+</div>-->
 
 
 
@@ -166,7 +183,7 @@
 </div>
 <div id="section6" class="container-fluid">
     <center>
-        <div class="sectionint">
+        <div class="sectionint" style="font-size: 20px;">
             <h1>Contato</h1>
             <p>Estamos a dispozição para tirar suas duvidas:</p>
             <p>(61) 3022-2293</p>
@@ -256,221 +273,8 @@ ALERTA de Cadastro.
                 <input type="submit" name="login" class="login loginmodal-submit" ng-click="GetLogin(cpf, nome, email, psw);" value="Cadastrar">
             </form>
             <span id='labelrecuperar'>Desejo recuperar minha senha <a href="#">Clique aqui</a></span>
-            <h1 ng-repeat="x in dados"><?php
-                $str = '{{x.psw}}';
-                echo md5($str)
-                ?></h1>
+            <h1 ng-repeat="x in dados"></h1>
         </div>
     </div>
 </div>
-
-
-
-
-
-<div class="mostrar-orcamento" ></div>
-<!-- Modal orçamento -->
-<!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Cadastro Orçamento</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-
-                     janela modal Cadastrar Orçamento      
-
-
-
-                    <div class="col-sm-5">
-                        <form  class="form-orcamento" method="POST" action="<?= base_url('') ?>/cadastro/orcamento" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="nome">Nome Completo</label>
-                                <input type="text" id="nome" class="form-control" name="nome" placeholder="José"  required/>
-                            </div>
-                            <div class="form-group">
-                                <label>&nbsp;</label>
-                                <div class="controls">
-                                    <input type="radio" value="cpf" name="documento" checked="checked"> CPF
-                                    <input type="radio" value="cnpj" name="documento"> CNPJ
-                                </div>
-                            </div>
-                            <div class="form-group">                    
-                                <div id="cpf1">
-                                    <label for="documentoCPF" class="control-label">CPF <span>*</span></label>
-                                   
-                                        <input type="text" name="documentoCpf" id="documentoCPF" class="cpf required form-control" value="" maxlength="15">
-                                    
-                                </div>
-                            </div>
-                            <div class="form-group">                    
-                                <div id="cnpj" style="display: none;">
-                                    <label for="documentoCNPJ" class="control-label">CNPJ <span>*</span></label>
-                                    <div class="controls">
-                                        <input type="text" name="documentoCpnj" id="documentoCNPJ" class="cnpj form-control" value="" maxlength="18">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="nome">Celular</label>
-                                <input type="text" id="celular" class="form-control" name="celular" required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="nome">Telefone</label>
-                                <input type="text" id="telefone" class="form-control" name="telefone" required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="nome">Descrição</label>
-                                <textarea  class="form-control rounded-0" rows="4" cols="50" name="descricao">                                        
-                                </textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="nome">Estado</label>
-                                <div class="form-group">
-                                            <input id="estado" type="text" name="estado" value=""  />
-                                    <select class="form-control" id="estado"  name="estado">
-                                        <option value="">-</option>
-                                        <option value="AC">Acre</option>
-                                        <option value="AL">Alagoas</option>
-                                        <option value="AP">Amapá</option>
-                                        <option value="AM">Amazonas</option>
-                                        <option value="BA">Bahia</option>
-                                        <option value="CE">Ceará</option>
-                                        <option value="DF">Distrito Federal</option>
-                                        <option value="ES">Espírito Santo</option>
-                                        <option value="GO">Goiás</option>
-                                        <option value="MA">Maranhão</option>
-                                        <option value="MT">Mato Grosso</option>
-                                        <option value="MS">Mato Grosso do Sul</option>
-                                        <option value="MG">Minas Gerais</option>
-                                        <option value="PA">Pará</option>
-                                        <option value="PB">Paraíba</option>
-                                        <option value="PR">Paraná</option>
-                                        <option value="PE">Pernambuco</option>
-                                        <option value="PI">Piauí</option>
-                                        <option value="RJ">Rio de Janeiro</option>
-                                        <option value="RN">Rio Grande do Norte</option>
-                                        <option value="RS">Rio Grande do Sul</option>
-                                        <option value="RO">Rondônia</option>
-                                        <option value="RR">Roraima</option>
-                                        <option value="SC">Santa Catarina</option>
-                                        <option value="SP">São Paulo</option>
-                                        <option value="SE">Sergipe</option>
-                                        <option value="TO">Tocantins</option>
-
-                                    </select>                         
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="nome">Cidade Evento</label>
-                                <input type="text" class="form-control" name="cidade"  required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="nome">CEP</label>
-                                <input type="text" id="cep" class="form-control" name="cep"  required/>
-                            </div>
-                            <div class="form-group" >
-                                <label for="nome">Produto</label><br>
-                                <select data-placeholder="Choose a Country..." class="select" multiple tabindex="3" name="produto[]" id="sel">
-<?php foreach ($this->view->produtos as $produtos) { ?>
-    <?php echo '<option>' . $produtos['nome_produto'] . '</option>'; ?>                                        
-<?php } ?>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="nome">Quantidade</label>
-                                <input type="text" class="form-control" name="quantidade" required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="nome">Data Evento</label>
-                                <input type="date" class="form-control" name="data" required/>
-                            </div>
-                            <br><br>
-                            <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cadastrar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary btn-lg"/>
-                            <div class="loading"></div>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>        
-            </div>
-        </div>
-
-    </div>
-</div>-->
-<script>
-    jQuery("input[name=documento]:radio").change(
-            function () {
-                if (jQuery("input[name=documento]:radio:checked").val() == 'cpf')
-                {
-                    jQuery("#cnpj").hide();
-                    jQuery("#documentoCNPJ").removeClass('required');
-                    jQuery("#cpf1").show();
-                    jQuery("#documentoCPF").addClass('required');
-                } else
-                {
-                    jQuery("#cnpj").show();
-                    jQuery("#documentoCNPJ").addClass('required');
-                    jQuery("#cpf1").hide();
-                    jQuery("#documentoCPF").removeClass('required');
-                }
-            }
-    );
-</script>
-<?php
-if (!empty($_GET['Erro']) === "Permissao") {
-    echo '<script>
-			$(document).ready(function(){
-				swal("Ops...","Voce não tem permissao para entrar nessa pagina","warning");
-			});
-			</script>';
-}
-?>
-<script>
-    //script ajax para trazer mensagem alert-box para orçamento
-    $(function () {
-        $('.form-orcamento').submit(function () {
-            $('.loading').html("<img src='<?= base_url('') ?>/public/img/loading.gif' width='45'>");
-            $.ajax({
-                url: '<?= base_url('') ?>/cadastro/orcamento',
-                type: 'POST',
-                data: $('.form-orcamento').serialize(),
-                success: function (data) {
-                    $('.mostrar-orcamento').html(data);
-                    $('.loading').hide();
-                    $('.form-orcamento')[0].reset();
-                }
-            });
-            return false;
-        });
-    });
-
-    //Mascara para os inpust
-    $(document).ready(function () {
-        $("#celular").mask("(99) 99999-9999");
-        $("#telefone").mask("(00) 0000-0000");
-        $("#documentoCNPJ").mask("99.999.999/9999-99");
-        $("#documentoCPF").mask("999.999.999-99");
-        $("#cep").mask("99999-999");
-    });
-
-    //mostra errro
-
-    $(document).ready(function () {
-        swal("Ops...", "Preecha todos os dados", "warning");
-    });
-</script>
-
 </div>
-
-
-
-

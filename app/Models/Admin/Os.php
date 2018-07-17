@@ -77,9 +77,9 @@ class Os extends BaseModel{
         if ($this->update($arrayOs, "idOs = {$id}")) {
             $idClientes =$request->post->clientes_id;
             $this->tabela = 'clientes';
-            if($this->update($arrayCliente, "idClientes = {$idClientes}")){
-                return TRUE;
+            if($this->update($arrayCliente, "idClientes = {$idClientes}")){                
             }
+            return TRUE;
         } else {
             return FALSE;
         }

@@ -12,58 +12,39 @@ session_start();
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Style -- CSS -- LINK -->
+        <link rel="shortcut icon" href="<?= base_url('') ?>/public/img/Maria_Doces-icones-01.png" type="image/text" >
         <link rel="stylesheet" href="public/css/bootstrap.min.css">
         <link href="public/css/Script.css" rel="stylesheet" />
-        <link href="public/css/bootstrap.css" rel="stylesheet" />      
-
-
+        <link href="public/css/bootstrap.css" rel="stylesheet" />        
+        <link rel="stylesheet" href="<?= base_url('') ?>/public/home/css/bootstrap.min.css">        
+        <link ref="<?= base_url('') ?>/public/home/css/all.css" rel="stylesheet" />
         <!-- Magnific Popup core CSS file -->
         <link rel="stylesheet" href="<?= base_url('') ?>/public/home/css/magnific-popup.css">
 
 
-
-        <!-- Magnific Popup core JS file -->
-        <script src="<?= base_url('') ?>/public/home/js/jquery.magnific-popup.js"></script>
-
-
-
         <!-- Script -- JS -- LINK -->
-        <script src="public/js/jquery.js"></script>
+        <script src="<?= base_url('') ?>/public/js/jquery.js"></script>
         <script src="public/js/tether.js"></script>
         <script src="public/js/angular.js"></script>
         <script src="public/js/script.js"></script>
         <script src="public/js/bootstrap.min.js"></script>
-        <script src="public/js/jquery.mask.min.js"></script>
-
-        <link rel="shortcut icon" href="<?= base_url('') ?>/public/img/Maria_Doces-icones-01.png" type="image/text" >
-        <link rel="stylesheet" href="<?= base_url('') ?>/public/home/css/bootstrap.min.css">
-        <link href="<?= base_url('') ?>/public/home/css/chosen.css" rel="stylesheet" />
-        <link href="<?= base_url('') ?>/public/home/css/all.css" rel="stylesheet" />  
-
-
-        <script src="<?= base_url('') ?>/public/js/sweetalert2.js"></script>
-
-
-        <script src="<?= base_url('') ?>/public/home/js/chosen.jquery.js"></script>
+        <script src="<?= base_url('') ?>/public/js/jquery.mask.min.js"></script>
         <script src="<?= base_url('') ?>/public/home/js/all.js"></script>
-        <script src="<?= base_url('') ?>/public/home/js/jquery.min.js"></script>
-        <script src="<?= base_url('') ?>/public/home/js/jquery.bootstrap-growl.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <!-- Magnific Popup core JS file -->
+        <script src="<?= base_url('') ?>/public/home/js/jquery.magnific-popup.js"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
         <?php
         //script da galeria de fotos
         require __DIR__ . "/../../../public/home/js/scriptGaleria.php";
         ?>
 
-
         <style>
             #alerta{
-               display: inline;
-               float: right; 
-               position: relative;
-               margin-top: 40px; 
-               margin-right: 20px;
+                display: inline;
+                float: right; 
+                position: relative;
+                margin-top: 6%; 
+                margin-right: 20px;
             }
             #open-popup {padding:15px}
             .white-popup {
@@ -76,18 +57,12 @@ session_start();
                 text-align: center;
             }  
 
-
-
         </style>
-
-
-        ?>
 
     </head >
     <body ng-app="sistema" ng-controller="SistemaCtrl" ng-init="FnInit();" >
 
         <nav class="navbar navbar-inverse navbar-fixed-top bg-dark">
-
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -97,16 +72,15 @@ session_start();
                     </button>
                     <img id="logo-home" src="<?= base_url('') ?>/public/img/Maria_Doces_4.png" onclick="rolar_para('#section1')">
                 </div>
-
                 <div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav" style="float:right;">
-                            <li class="nav-item active"><a href="#" onclick="rolar_para('#section1')">Menu</a></li>                        
+                            <li class="nav-item active"><a href="#" onclick="rolar_para('#section1')">Inicio</a></li>                        
                             <li><a href="#" onclick="rolar_para('#section2')">Sobre Nós</a></li>
-                            <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section3')">Serviços</a></li>
+                            <!--<li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section3')">Serviços</a></li>-->
                             <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section4')">Orçamento</a></li>
                             <li><a class="dropdown-toggle" href="#" id="open-popup">Galeria</a></li>
-<!--                        <li><a href="#" data-toggle="modal" data-target="#cadastro-modal">Cadastro</a></li>-->
+                            <!--                        <li><a href="#" data-toggle="modal" data-target="#cadastro-modal">Cadastro</a></li>-->
                             <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>                            
                             <li><a href="#section4" onclick="rolar_para('#section6')">Contato</a></li>
                         </ul>
@@ -114,7 +88,7 @@ session_start();
                 </div>
             </div>
         </nav>
-        
+
         <ul class="cb-slideshow">
             <li class="li"><span></span></li>
             <li class="li"><span></span></li>
@@ -123,26 +97,44 @@ session_start();
             <li class="li"><span></span></li>
             <li class="li"><span></span></li>
         </ul>
-        <?= $this->AlertaHome();?>
-        
-        
-        
+        <!--Menssagens de Alerta -->
+        <?= $this->AlertaHome(); ?>
+        <!--Fim Menssagens de Alerta -->
+
+
         <!--Conteudo-->
         <?php $this->content() ?>
         <!--Fim Conteudo-->
 
-
         <script>
-
-                    $(function () {
-                        $.bootstrapGrowl("This is a test.");
-
-                        setTimeout(function () {
-                            $.bootstrapGrowl("This is another test.", {type: 'success'});
-                        }, 1000);
-
-
+                    jQuery("input[name=documento]:radio").change(
+                            function () {
+                                if (jQuery("input[name=documento]:radio:checked").val() == 'cpf')
+                                {
+                                    jQuery("#cnpj").hide();
+                                    jQuery("#documentoCNPJ").removeClass('required');
+                                    jQuery("#cpf1").show();
+                                    jQuery("#documentoCPF").addClass('required');
+                                } else
+                                {
+                                    jQuery("#cnpj").show();
+                                    jQuery("#documentoCNPJ").addClass('required');
+                                    jQuery("#cpf1").hide();
+                                    jQuery("#documentoCPF").removeClass('required');
+                                }
+                            }
+                    );
+        </script>
+        <script>
+                    //Mascara para os inpust
+                    $(document).ready(function () {
+                        $("#celular").mask("(99) 00000-0000");
+                        $("#telefone").mask("(00) 0000-0000");
+                        $("#documentoCNPJ").mask("99.999.999/9999-99");
+                        $("#documentoCPF").mask("999.999.999-99");
+                        $("#cep").mask("99999-999");
                     });
+
 
         </script>
     </body>

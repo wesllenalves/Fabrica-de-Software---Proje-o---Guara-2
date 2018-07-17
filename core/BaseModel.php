@@ -117,7 +117,7 @@ abstract class BaseModel {
                         $insert_campos_1 = implode(",", $campos_array_1);
                         $insert_values_1 = implode("','", $values_array_1);
                         $query2 = $this->con->conecta()->prepare("INSERT INTO $this->tabela2 ({$insert_campos_1}, $this->chaveEstrangeira) VALUES('{$insert_values_1}','{$id}');");
-
+//print_r($query2); die();
                         if ($query2->execute()) {                            
                             return TRUE;
                         } else {
@@ -255,11 +255,11 @@ abstract class BaseModel {
         }
     }
 
-    public function read($campos = "*", $where = null) {
+    public function read($campos = "*", $where = null, $ordenar = null) {
         try {
 
             $where_sql = empty($where) ? "" : "WHERE " . $where;
-            $r = $this->con->conecta()->prepare("SELECT {$campos} FROM $this->tabela {$where_sql};");
+            $r = $this->con->conecta()->prepare("SELECT {$campos} FROM $this->tabela {$where_sql} {$ordenar};");
 //            print_r($r); die();
             if ($r->execute()) {
                 //print_r($r->fetchAll()); die();
@@ -303,7 +303,9 @@ abstract class BaseModel {
             $sql_text = implode(",", $sql_text_array);
 
             $r = $this->con->conecta()->prepare("UPDATE {$this->tabela} SET {$sql_text} {$where_sql}");
+            
             $r->execute();
+//            print_r($r);            die();
             if ($r->rowCount()) {
                 return TRUE;
             } else {
