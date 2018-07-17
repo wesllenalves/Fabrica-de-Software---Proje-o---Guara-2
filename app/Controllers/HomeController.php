@@ -44,30 +44,17 @@ class HomeController extends BaseController {
 
         if ($dados = $usuario->validar($request)) {
             session_start();
-            $this->redirect("index", self::DANGER ,'Preencha Todos os Dados');
-            
+            $this->redirect("index", self::DANGER ,'Preencha Todos os Dados');            
         } else {
             //verifica se existe o usuario digitado, se sim retorna TRUE
             if ($usuario->verificarlogin($request->post)) {
                 //se existe usuario chama o metodo que redireciona para a pagina especificada
-                $base = base_url('');                
-                echo  "<script>window.location = '{$base}/dashboard';</script>";
-                
+                $this->redirect("dashboard", self::SUCCESS ,'Logado com sucesso');
+//                $base = base_url('');                
+//                echo  "<script>window.location = '{$base}/dashboard';</script>";                
             } else {
-
-                echo '<script>
-			$(document).ready(function(){
-				swal("Ops...","Usuario Invalido","warning");
-			});
-			</script>';
+                $this->redirect("index", self::WARNING ,'Usuario Invalido');                
             }
-//        } else {
-//                echo json_encode([
-//                "success" => false,
-//                "message" => "Por favor, preencha todos os campos!"
-//            ]);
-//            //Seto a pagina que vai ser redirecionada e se eu quizer passo uma menssagem via session
-////            $this->redirect("login", "Por favor preencha todos os campos", "/login");
         }
     }
 
@@ -106,17 +93,11 @@ class HomeController extends BaseController {
 
     public function cadastroOrcamento($request) {        
             if ($this->orcamento->cadastrar($request)) {
-               echo '<script>
-			$(document).ready(function(){
-				swal("Parabéns","Cadastro efetuado com sucesso","success");
-			});
-			</script>';
+                 session_start();
+            $this->redirect("index", self::SUCCESS ,'Cadastro efetuado com sucesso');
+               
             }else{
-                echo '<script>
-			$(document).ready(function(){
-				swal("Ops...","Algo deu errado ao tentar cadastar seu orçamento","warning");
-			});
-			</script>';
+                $this->redirect("index", self::DANGER ,'Algo deu errado ao tentar cadastar seu orçamento');                
             }
         
     }

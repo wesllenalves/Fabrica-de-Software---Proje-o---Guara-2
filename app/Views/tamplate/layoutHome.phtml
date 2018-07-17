@@ -2,7 +2,7 @@
 
 <?php
 session_start();
-//var_dump($_SESSION);
+//print_r($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -58,6 +58,13 @@ session_start();
 
 
         <style>
+            #alerta{
+               display: inline;
+               float: right; 
+               position: relative;
+               margin-top: 40px; 
+               margin-right: 20px;
+            }
             #open-popup {padding:15px}
             .white-popup {
                 position: relative;
@@ -99,7 +106,7 @@ session_start();
                             <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section3')">Serviços</a></li>
                             <li><a class="dropdown-toggle" href="#" onclick="rolar_para('#section4')">Orçamento</a></li>
                             <li><a class="dropdown-toggle" href="#" id="open-popup">Galeria</a></li>
-                            <li><a href="#" data-toggle="modal" data-target="#cadastro-modal">Cadastro</a></li>
+<!--                        <li><a href="#" data-toggle="modal" data-target="#cadastro-modal">Cadastro</a></li>-->
                             <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>                            
                             <li><a href="#section4" onclick="rolar_para('#section6')">Contato</a></li>
                         </ul>
@@ -107,25 +114,18 @@ session_start();
                 </div>
             </div>
         </nav>
-
+        
         <ul class="cb-slideshow">
-            <li class="li"><span></span><div><h3>Slide1</h3>Texto1</div></li>
-            <li class="li"><span></span><div><h3>Slide2</h3>Texto2</div></li>
-            <li class="li"><span></span><div><h3>Slide3</h3>Texto3</div></li>
-            <li class="li"><span></span><div><h3>Slide4</h3>Texto4</div></li>
-            <li class="li"><span></span><div><h3>Slide5</h3>Texto5</div></li>
-            <li class="li"><span></span><div><h3>Slide6</h3>Texto6</div></li>
+            <li class="li"><span></span></li>
+            <li class="li"><span></span></li>
+            <li class="li"><span></span></li>
+            <li class="li"><span></span></li>
+            <li class="li"><span></span></li>
+            <li class="li"><span></span></li>
         </ul>
-        <?php if(!empty($_SESSION['danger'])){?>
-        <div class="alert alert-danger fade in" style=" display: inline; float: right; position: relative;  margin-top: 40px; margin-right: 20px;">
-            <strong>ERROR!</strong> <?=$_SESSION['danger']?>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <?php 
-            unset($_SESSION['danger']);
-        } ?>
+        <?= $this->AlertaHome();?>
+        
+        
         
         <!--Conteudo-->
         <?php $this->content() ?>

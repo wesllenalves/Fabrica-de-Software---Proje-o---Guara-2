@@ -3,7 +3,7 @@
     <ul>
 
 
-        <li class=""><a href=""><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
+        <li class=""><a href="<?= base_url('') ?>/dashboard"><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
 
         <li class=""><a href="<?= base_url('') ?>/clientes"><i class="icon icon-group"></i> <span>Clientes</span></a></li>
 
@@ -47,12 +47,13 @@
 
 <div id="content">
     <div id="content-header">
-        <div id="breadcrumb"> <a href="" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="index.php/produtos" class="tip-bottom" title="Produtos">Produtos</a> </a> </div>
+        <?= $this->AlertaHome();?> 
+        <div id="breadcrumb"> <a href="" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="index.php/produtos" class="tip-bottom" title="Produtos">Produtos</a></div>
     </div>    
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">
-                        <?php echo $this->alerta();?>
+                        
                 <a href="<?= base_url('') ?>/produtos/adicionar" class="btn btn-success"><i class="icon-plus icon-white"></i> Adicionar Produto</a>
 
                 <div class="widget-box">
