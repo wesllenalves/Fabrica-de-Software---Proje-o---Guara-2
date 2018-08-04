@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 12-Jul-2018 às 03:18
--- Versão do servidor: 10.1.32-MariaDB
--- PHP Version: 5.6.36
+-- Generation Time: 03-Ago-2018 às 17:52
+-- Versão do servidor: 10.1.19-MariaDB
+-- PHP Version: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -197,30 +195,18 @@ CREATE TABLE `lancamentos` (
 --
 
 INSERT INTO `lancamentos` (`idLancamentos`, `descricao`, `valor`, `data_vencimento`, `data_pagamento`, `status`, `cliente_fornecedor`, `forma_pgto`, `tipo`, `anexo`, `clientes_id`, `dataModificado`) VALUES
-(26, 'Festa Nova', '200', '2018-07-13', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(25, 'Festa Nova', '200', '2018-07-05', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(20, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
-(8, 'Festa Nova', '200', '2018-07-12', '2018-07-11', 'Devendo', 'Luluzinha', 'Dinheiro', 'receita', NULL, NULL, '0000-00-00 00:00:00'),
-(17, 'Festa Nova', '200', '2018-07-12', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
-(18, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
-(19, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(21, 'Festa Nova', '200', '2018-07-05', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
-(22, 'Festa Nova', '200', '2018-07-04', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
-(23, 'Festa Nova', '200', '2018-07-13', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(24, 'Festa Nova', '200', '2018-07-05', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(27, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(28, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(29, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(30, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(31, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(32, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(33, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(34, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(35, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(36, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(37, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
-(38, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
-(39, 'Festa Nova', '200', '2018-07-11', '0000-00-00', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00');
+(18, 'Festa Nova', '200', '2018-07-11', '2018-01-01', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
+(19, 'Festa Nova', '200', '2018-07-11', '2018-08-02', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(21, 'Festa Nova', '200', '2018-07-05', '2018-10-09', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
+(22, 'Festa Nova', '200', '2018-07-04', '2018-04-08', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
+(40, 'teste', '20,00', '2018-07-23', '2018-07-10', 'Pago', 'teste', 'Boleto', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
+(32, 'Festa Nova', '200', '2018-07-11', '2018-06-10', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(33, 'Festa Nova', '200', '2018-07-11', '2018-05-08', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(34, 'Festa Nova', '200', '2018-07-11', '2018-11-08', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(36, 'Festa Nova', '200', '2018-07-11', '2018-03-12', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(37, 'Festa Nova', '200', '2018-07-11', '2018-06-03', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
+(38, 'Festa Nova', ' 200', '2018-07-11', '2018-07-23', 'Pago', 'Luluzinha', 'Cartão de Crédito', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
+(39, 'Festa Nova', 'R$: 200,00', '2018-07-11', '2018-07-23', 'Pago', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -378,7 +364,7 @@ CREATE TABLE `servicos` (
 
 INSERT INTO `servicos` (`idServicos`, `id_os`, `nome_servico`, `descricao`, `preco`, `dataModificado`) VALUES
 (8, 0, 'Conjunto de mesa unidade', 'Conjuntos de mesas decoradas com o tema da fe', '51.00', '0000-00-00 00:00:00'),
-(10, 0, 'decoraÃ§Ã£o', 'decora toda sua casa', '200.00', '2018-06-19 00:00:00');
+(10, 0, 'decoração', 'decora toda sua casa', '200.00', '2018-06-19 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -407,6 +393,41 @@ INSERT INTO `servicos_os` (`idServicos_os`, `os_id`, `servicos_id`, `subTotal`, 
 (13, 24, 10, '200.00', '0000-00-00 00:00:00'),
 (17, 23, 10, '200.00', '0000-00-00 00:00:00'),
 (18, 24, 8, '51.00', '2018-11-07 03:07:48');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `trafego`
+--
+
+CREATE TABLE `trafego` (
+  `id` int(11) NOT NULL,
+  `data` datetime DEFAULT NULL,
+  `pagina` varchar(255) DEFAULT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `cidade` varchar(255) DEFAULT NULL,
+  `regiao` varchar(255) DEFAULT NULL,
+  `pais` varchar(255) DEFAULT NULL,
+  `navegador` varchar(255) DEFAULT NULL,
+  `referencia` varchar(255) DEFAULT NULL,
+  `plataforma` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `trafego`
+--
+
+INSERT INTO `trafego` (`id`, `data`, `pagina`, `ip`, `cidade`, `regiao`, `pais`, `navegador`, `referencia`, `plataforma`) VALUES
+(1, '2015-10-11 10:07:25', 'home', '::1', 'Osasco', 'São Paulo', 'Brasil', 'Chrome', 'Acesso direto ou não identificado', 'Windows 10'),
+(2, '2015-11-08 13:07:25', 'services', '::1', 'Carapicuiba', 'São Paulo', 'Brasil', 'Chrome', 'Facebook', 'Android'),
+(3, '2015-12-08 17:07:25', 'home', '::1', 'Osasco', 'São Paulo', 'Brasil', 'Chrome', 'Google', 'IOS'),
+(4, '2016-01-23 14:07:25', 'home', '::1', 'Desconhecida', 'Desconhecida', 'Desconhecido', 'Chrome', 'Acesso direto ou não identificado', 'Windows 7'),
+(5, '2016-02-04 13:07:25', 'home', '::1', 'Desconhecida', 'Desconhecida', 'Desconhecido', 'Chrome', 'Acesso direto ou não identificado', 'Windows 10'),
+(6, '2016-02-06 02:07:25', 'home', '::1', 'Carapicuiba', 'São Paulo', 'Brasil', 'Chrome', 'Acesso direto ou não identificado', 'Windows 7'),
+(7, '2016-02-07 14:07:25', 'home', '::1', 'Barueri', 'São Paulo', 'Brasil', 'Chrome', 'Acesso direto ou não identificado', 'Windows 10'),
+(8, '2016-02-08 17:07:25', 'home', '::1', 'Desconhecida', 'Desconhecida', 'Desconhecido', 'Chrome', 'Acesso direto ou não identificado', 'Windows Phone'),
+(9, '2016-02-08 14:07:25', 'home', '::1', 'Desconhecida', 'Desconhecida', 'Desconhecido', 'Chrome', 'Acesso direto ou não identificado', 'Windows Phone'),
+(10, '2016-02-09 10:47:09', 'home', '::1', 'Desconhecida', 'Desconhecida', 'Desconhecido', 'Chrome', 'Acesso direto ou não identificado', 'Windows 10');
 
 -- --------------------------------------------------------
 
@@ -554,6 +575,12 @@ ALTER TABLE `servicos_os`
   ADD KEY `fk_servicos_os_servicos1` (`servicos_id`);
 
 --
+-- Indexes for table `trafego`
+--
+ALTER TABLE `trafego`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -575,97 +602,86 @@ ALTER TABLE `vendas`
 --
 ALTER TABLE `clientes`
   MODIFY `idClientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
 --
 -- AUTO_INCREMENT for table `endereco`
 --
 ALTER TABLE `endereco`
   MODIFY `idEndereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `evento`
 --
 ALTER TABLE `evento`
   MODIFY `codigoVenda` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `eventofuncionario`
 --
 ALTER TABLE `eventofuncionario`
   MODIFY `idEventoFuncionario` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `fluxoanual`
 --
 ALTER TABLE `fluxoanual`
   MODIFY `idFluxoAnual` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `fluxomensal`
 --
 ALTER TABLE `fluxomensal`
   MODIFY `idFluxoMensal` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `funcionario`
 --
 ALTER TABLE `funcionario`
   MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `lancamentos`
 --
 ALTER TABLE `lancamentos`
-  MODIFY `idLancamentos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
-
+  MODIFY `idLancamentos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `orcamento`
 --
 ALTER TABLE `orcamento`
   MODIFY `idOrcamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `os`
 --
 ALTER TABLE `os`
   MODIFY `idOs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
 --
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
   MODIFY `idProduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `produtos_os`
 --
 ALTER TABLE `produtos_os`
   MODIFY `idProdutos_os` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
 --
 -- AUTO_INCREMENT for table `servicos`
 --
 ALTER TABLE `servicos`
   MODIFY `idServicos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `servicos_os`
 --
 ALTER TABLE `servicos_os`
   MODIFY `idServicos_os` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
+--
+-- AUTO_INCREMENT for table `trafego`
+--
+ALTER TABLE `trafego`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `idUsuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `vendas`
 --
 ALTER TABLE `vendas`
   MODIFY `idVendas` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- Constraints for dumped tables
 --
@@ -694,7 +710,6 @@ ALTER TABLE `fluxomensal`
 --
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `fkEndereco_Usuario` FOREIGN KEY (`id_endereco`) REFERENCES `endereco` (`idEndereco`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -23,24 +23,6 @@
 
             </ul>
         </li>
-
-
-
-
-
-<!--        <li class="submenu ">
-            <a href="#"><i class="icon icon-cog"></i> <span>Configurações</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
-            <ul>
-                <li><a href="index.php/usuarios">Usuários</a></li>
-                <li><a href="index.php/mapos/emitente">Emitente</a></li>
-                <li><a href="index.php/permissoes">Permissões</a></li>
-                <li><a href="index.php/mapos/backup">Backup</a></li>
-                 <li><a  href="#" title="configuraremail" onClick="abrirnotificacao(this)">Email(imap)</a></li>
-                <li><a  href="#" title="configurarpagseguro.php" onClick="abrirnotificacao(this)">PagSeguro</a></li>
-            </ul>
-        </li>-->
-
-
     </ul>
 </div>
 
@@ -48,7 +30,7 @@
 
 <div id="content">
     <div id="content-header">
-        <div id="breadcrumb"> <a href="<?= base_url('') ?>" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="<?= base_url('') ?>/os" class="tip-bottom" title="Os">Os</a> <a href="<?= base_url('') ?>/os/editar?id=<?=$_GET['id']?>" class="current tip-bottom" title="Editar">Editar</a> </div>
+        <div id="breadcrumb"> <a href="<?= base_url('') ?>/dashboard" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="<?= base_url('') ?>/os" class="tip-bottom" title="Os">Os</a> <a href="<?= base_url('') ?>/os/editar?id=<?=$_GET['id']?>" class="current tip-bottom" title="Editar">Editar</a> </div>
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
@@ -69,16 +51,9 @@
                     O firefox 35+ e o edge 16+ já suportam sem precisar usar prefixo.*/
                 </style>
                 <div id="desabilitarbody" style="width:100%; height:100%; position:fixed; background-color:rgba(0,0,0,0.50); z-index:5; display:none; "><p style="font-size:20px; color:rgba(255,253,253,1.00); padding:10px;">AGUARDE...</p></div>
-
-                <link rel="stylesheet" href="https://www.ultramapos.online/js/jquery-ui/css/smoothness/jquery-ui-1.9.2.custom.css" />
-                <script type="text/javascript" src="https://www.ultramapos.online/js/jquery-ui/js/jquery-ui-1.9.2.custom.js"></script>
-                <script type="text/javascript" src="https://www.ultramapos.online/js/jquery.validate.js"></script>
                 <div id="divnotificacoes2" style="width:50%; margin-top:0%; margin-left:10%; border-radius:20px; position:fixed; background-color:#FFFD00; padding:20px; display:none; z-index:10"><p onClick="fecharnotif()">X</p><div id="divnotificacoes"> </div>
 
                 </div>
-
-
-
                 <div>
                         <?= $this->AlertaHome();?>
                 </div>

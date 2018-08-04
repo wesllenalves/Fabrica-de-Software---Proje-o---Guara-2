@@ -7,7 +7,7 @@ class Route{
     
     public function __construct(array $routes) {
         $this->setRoutes($routes);
-        $this->run();
+        @$this->run();
     }
     
     private function setRoutes($routes){

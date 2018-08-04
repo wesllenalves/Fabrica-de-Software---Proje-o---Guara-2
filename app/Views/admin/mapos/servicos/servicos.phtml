@@ -19,31 +19,13 @@
                 <li><a href="<?= base_url('') ?>/financeiro/lancamentos">Lançamentos</a></li>            
             </ul>
         </li>
-
-
-
-
-
-<!--        <li class="submenu ">
-            <a href="#"><i class="icon icon-cog"></i> <span>Configurações</span> <span class="label"><i class="icon-chevron-down"></i></span></a>
-            <ul>
-                <li><a href="index.php/usuarios">Usuários</a></li>
-                <li><a href="index.php/mapos/emitente">Emitente</a></li>
-                <li><a href="index.php/permissoes">Permissões</a></li>
-                <li><a href="index.php/mapos/backup">Backup</a></li>
-                 <li><a  href="#" title="configuraremail" onClick="abrirnotificacao(this)">Email(imap)</a></li>
-                <li><a  href="#" title="configurarpagseguro.php" onClick="abrirnotificacao(this)">PagSeguro</a></li>
-            </ul>
-        </li>-->
-
-
     </ul>
 </div>
 
 <div id="content">
     <div id="content-header">
-        <?= $this->AlertaHome();?> 
-        <div id="breadcrumb"> <a href="" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="index.php/servicos" class="tip-bottom" title="Servicos">Servicos</a> </a> </div>
+        <?= $this->AlertaHome(); ?> 
+        <div id="breadcrumb"> <a href="<?= base_url('') ?>/dashboard" title="Dashboard" class="tip-bottom"><i class="icon-home"></i> Dashboard</a> <a href="index.php/servicos" class="tip-bottom" title="Servicos">Servicos</a> </a> </div>
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
@@ -141,20 +123,8 @@
                         </table>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
                 <script type="text/javascript">
-                //script para passar o id para modal de excluir
+                    //script para passar o id para modal de excluir
                     $('#exampleModal').on('show.bs.modal', function (event) {
                         var button = $(event.relatedTarget) // Button that triggered the modal
                         var recipient = button.data('whatever') // Extract info from data-* attributes
@@ -179,7 +149,6 @@
                     });
 
                 </script>
-
             </div>
         </div>
     </div>

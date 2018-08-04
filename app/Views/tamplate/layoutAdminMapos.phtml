@@ -14,31 +14,29 @@ if(isset($_GET["sair"])){
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <title>Dashbord | MariathDoces</title>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
-    
-
 <!-- Latest compiled and minified CSS -->
-
-<link href="<?= base_url('')?>/public/home/css/chosen.css" rel="stylesheet" />
+<link rel="stylesheet" href="<?= base_url('')?>/public/home/css/chosen.css"  />
 <link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/css/bootstrap.min.css" />
 <link rel="stylesheet" href="<?= base_url('')?>/public/admin/css/toastr.css" />
 <link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/css/bootstrap-responsive.min.css" />
 <link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/css/matrix-style.css" />
 <link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/css/matrix-media.css" />
-<link href="<?= base_url('')?>/public/admin/mapes/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-<link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/css/fullcalendar.css" /> 
+<link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/font-awesome/css/font-awesome.css"  />
+<link rel="stylesheet" href="<?= base_url('')?>/public/admin/mapes/assets/css/fullcalendar.css" />
+<link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,800' >
+<!-- Scripts -->
+<script src="<?= base_url('')?>/public/admin/mapes/assets/js/jquery-3.3.1.js"></script>
+<!--<script type="text/javascript" src="<?= base_url('')?>/public/admin/js/jquery-1.10.2.js"></script>-->
 
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
-<script type="text/javascript"  src="<?= base_url('')?>/public/admin/mapes/assets/js/jquery-1.10.2.min.js"></script>
-<script src="<?= base_url('')?>/public/js/jquery.mask.min.js"></script>
-<script src="<?= base_url('')?>/public/js/jquery.maskMoney.min.js"></script>
-
+<!--<script type="text/javascript" src="<?= base_url('')?>/public/admin/mapes/assets/js/Chart.min.js"></script>-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+<script type="text/javascript" src="<?= base_url('')?>/public/admin/js/jquery.mask.min.js"></script>
+<script type="text/javascript" src="<?= base_url('')?>/public/admin/js/jquery.maskMoney.min.js"></script>
 <style>
     #alerta{
                margin-left: 75%; 
@@ -75,7 +73,7 @@ if(isset($_GET["sair"])){
         width: 5%;
     }
     #sidebar{
-        margin-top: 63px;
+        margin-top: 2px;
     }
     #content {
         margin-top: 40px;
@@ -91,7 +89,15 @@ if(isset($_GET["sair"])){
         /*//float: right;*/
     }
 </style>
+<script  type="text/javascript">
 
+        function pagamento() {
+            if (document.getElementById("divPagamentoEditar").style.display == "none")      {
+                        document.getElementById("divPagamentoEditar").style.display = "block";      
+            }else { 
+                        document.getElementById("divPagamentoEditar").style.display = "none";       } 
+                    }
+    </script>
 
 
 </head>
@@ -123,6 +129,7 @@ if(isset($_GET["sair"])){
 <!--end-Footer-part-->
 
 <!-- Latest compiled and minified JavaScript -->
+<script src="<?= base_url('')?>/public/admin/mapes/assets/js/jquery.validate.js"></script>
 <script src="<?= base_url('')?>/public/admin/mapes/assets/js/bootstrap.min.js"></script>
 <script src="<?= base_url('')?>/public/admin/js/toastr.js"></script>
 <script src="<?= base_url('')?>/public/admin/mapes/assets/js/matrix.js"></script> 

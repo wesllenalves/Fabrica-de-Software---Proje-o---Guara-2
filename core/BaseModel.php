@@ -10,6 +10,9 @@ namespace Core;
 
 use Core\DataBase;
 use Core\Session;
+use PDOException;
+use PDO;
+
 
 /**
  * Description of Model
@@ -257,13 +260,27 @@ abstract class BaseModel {
 
     public function read($campos = "*", $where = null, $ordenar = null) {
         try {
-
             $where_sql = empty($where) ? "" : "WHERE " . $where;
             $r = $this->con->conecta()->prepare("SELECT {$campos} FROM $this->tabela {$where_sql} {$ordenar};");
 //            print_r($r); die();
             if ($r->execute()) {
                 //print_r($r->fetchAll()); die();
                 return $r->fetchAll();
+            } else {
+                print_r($r->errorInfo());
+            }
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+        }
+    }
+    public function estatistica($campos = "*", $where = null, $ordenar = null) {
+        try {
+            $where_sql = empty($where) ? "" : "WHERE " . $where;
+            $r = $this->con->conecta()->prepare("SELECT  {$campos} FROM $this->tabela {$where_sql} {$ordenar} ;");
+//            var_dump($r); die();
+            if ($r->execute()) {
+//                print_r($r->fetchAll()); die();
+                return $r->fetchAll(PDO::FETCH_OBJ);
             } else {
                 print_r($r->errorInfo());
             }
@@ -303,7 +320,7 @@ abstract class BaseModel {
             $sql_text = implode(",", $sql_text_array);
 
             $r = $this->con->conecta()->prepare("UPDATE {$this->tabela} SET {$sql_text} {$where_sql}");
-            
+//            print_r($r); die();
             $r->execute();
 //            print_r($r);            die();
             if ($r->rowCount()) {

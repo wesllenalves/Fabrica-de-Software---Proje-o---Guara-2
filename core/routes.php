@@ -10,6 +10,8 @@ $routes[] = ['/cadastro/orcamento', 'HomeController@cadastroOrcamento'];
 
 //mapes
 $routes[] = ['/dashboard', 'AdminController@index'];
+$routes[] = ['/estatistica/JSON/receita', 'AdminController@JsonReceita'];
+$routes[] = ['/estatistica/JSON/despesa', 'AdminController@JsonDespesa'];
 /*Clientes*/
 $routes[] = ['/clientes', 'AdminController@clientes'];
 $routes[] = ['/clientes/visualizar', 'AdminController@clientesVisualizar'];
@@ -54,6 +56,7 @@ $routes[] = ['/financeiro/lancamentos/adicionarReceita', 'AdminController@adicio
 $routes[] = ['/financeiro/lancamentos/adicionarDespesa', 'AdminController@adicionarDespesa'];
 $routes[] = ['/financeiro/lancamentos/remover', 'AdminController@lacamentosRemover'];
 $routes[] = ['/financeiro/lancamentos/editar', 'AdminController@financeiroLancamentosEditar'];
+$routes[] = ['/financeiro/lancamentos/editar/salvar', 'AdminController@financeiroLancamentosEditarSalvar'];
 
 
 

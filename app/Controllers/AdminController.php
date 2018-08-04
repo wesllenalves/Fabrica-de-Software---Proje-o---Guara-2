@@ -18,8 +18,10 @@ use App\Models\Admin\Lancamentos;
 use App\Models\Admin\Produtos_os;
 use App\Models\Admin\Servicos_os;
 use App\Models\Admin\Usuario;
+use App\Models\Admin\Estatisticas;
 use Core\Validator;
 use Core\Session;
+
 
 /**
  * Description of AdminController
@@ -37,6 +39,7 @@ class AdminController extends BaseController {
     private $Produtos_os;
     private $Servicos_os;
     private $Usuario;
+    private $Estatistica;
     protected $sessao;
 
     public function __construct() {
@@ -50,15 +53,27 @@ class AdminController extends BaseController {
         $this->Servicos_os = new Servicos_os();
         $this->sessao = Session::getInstance();
         $this->Usuario = new Usuario();
+        $this->Estatistica =  new Estatisticas();
     }
 
     public function index() {
-
-        if ($this->sessao->nivel !== "2") {
-            $this->redirect("?Erro=Permissao", self::WARNING, "Você não tem permissão para acessar a página!");
-        } else {
-            $this->Render('admin/mapos/index', 'layoutadminMapos');
-        }
+        $this->Trafego();
+//        if ($this->sessao->nivel !== "2") {
+//            $this->redirect("?Erro=Permissao", self::WARNING, "Você não tem permissão para acessar a página!");
+//        } else {
+            $this->Render('admin/mapos/index', 'layoutAdminMapos');
+//        }
+    }
+    
+    public function JsonReceita(){
+        header("Access-Control-Allow-Origin : *");
+        $this->Estatistica->Receita();
+        
+    }
+    public function JsonDespesa(){
+        
+        $this->Estatistica->Despesa();
+        
     }
 
     public function clientes() {
@@ -66,7 +81,7 @@ class AdminController extends BaseController {
         $dados = $this->Clientes->read("*", "", "ORDER BY idClientes");
         @$this->view->clientes = $dados;
 
-        $this->Render('admin/mapos/clientes/clientes', 'layoutadminMapos');
+        $this->Render('admin/mapos/clientes/clientes', 'layoutAdminMapos');
     }
 
     public function clientesVisualizar($request) {
@@ -75,13 +90,13 @@ class AdminController extends BaseController {
         $dados = $this->Clientes->read("*", "idClientes = $id");
         @$this->view->oneClientes = $dados;
 
-        $this->Render('admin/mapos/clientes/vizualizarCliente', 'layoutadminMapos');
+        $this->Render('admin/mapos/clientes/vizualizarCliente', 'layoutAdminMapos');
     }
 
     public function clientesAdicionar() {
 //        $this->setPageTitle("Admin");
 
-        $this->Render('admin/mapos/clientes/addCliente', 'layoutadminMapos');
+        $this->Render('admin/mapos/clientes/addCliente', 'layoutAdminMapos');
     }
 
     public function clientesAdicionarSalvar($request) {
@@ -116,7 +131,7 @@ class AdminController extends BaseController {
         $id = $request->get->id;
         $dados = $this->Clientes->read("*", "idClientes = $id");
         @$this->view->oneClientes = $dados;
-        $this->Render('admin/mapos/clientes/editCliente', 'layoutadminMapos');
+        $this->Render('admin/mapos/clientes/editCliente', 'layoutAdminMapos');
     }
 
     public function clientesEditarSalvar($request) {
@@ -169,7 +184,7 @@ class AdminController extends BaseController {
         $produtos = new CadastroProduto();
         $dados = $produtos->read();
         @$this->view->produtos = $dados;
-        $this->Render('admin/mapos/produtos/produtos', 'layoutadminMapos');
+        $this->Render('admin/mapos/produtos/produtos', 'layoutAdminMapos');
     }
 
     public function produtosVisualizar($request) {
@@ -180,14 +195,14 @@ class AdminController extends BaseController {
         $dados = $produtos->read("*", "idProduto = $id");
 
         @$this->view->produtos1 = $dados;
-        $this->Render('admin/mapos/produtos/visualizarProdutos', 'layoutadminMapos');
+        $this->Render('admin/mapos/produtos/visualizarProdutos', 'layoutAdminMapos');
     }
 
     public function produtosEditar($request) {
         $id = $request->get->id;
         $dados = $this->Produto->read("*", "idProduto = $id");
         @$this->view->oneProdutos = $dados;
-        $this->Render('admin/mapos/produtos/editProdutos', 'layoutadminMapos');
+        $this->Render('admin/mapos/produtos/editProdutos', 'layoutAdminMapos');
     }
 
     public function produtosEditarSalvar($request) {
@@ -216,7 +231,7 @@ class AdminController extends BaseController {
 
     public function produtosAdicionar() {
 //        $this->setPageTitle("Admin");
-        $this->Render('admin/mapos/produtos/addProdutos', 'layoutadminMapos');
+        $this->Render('admin/mapos/produtos/addProdutos', 'layoutAdminMapos');
     }
 
     public function produtosSalvar($request) {
@@ -258,12 +273,12 @@ class AdminController extends BaseController {
         $dados = $servico->read("*");
         @$this->view->servicos = $dados;
 
-        $this->Render('admin/mapos/servicos/servicos', 'layoutadminMapos');
+        $this->Render('admin/mapos/servicos/servicos', 'layoutAdminMapos');
     }
 
     public function servicosAdicionar() {
 //        $this->setPageTitle("Admin");
-        $this->Render('admin/mapos/servicos/addServico', 'layoutadminMapos');
+        $this->Render('admin/mapos/servicos/addServico', 'layoutAdminMapos');
     }
 
     public function servicosSalvar($request) {
@@ -291,7 +306,7 @@ class AdminController extends BaseController {
         $id = $request->get->id;
         $dados = $this->Servico->read("*", "idServicos = $id");
         @$this->view->oneServico = $dados;
-        $this->Render('admin/mapos/servicos/editServicos', 'layoutadminMapos');
+        $this->Render('admin/mapos/servicos/editServicos', 'layoutAdminMapos');
     }
 
     public function servicosUpdate($request) {
@@ -331,7 +346,7 @@ class AdminController extends BaseController {
         $dados = $this->os->readChave($array, "*");
         @$this->view->os = $dados;
         //print_r($this->view->os); die();
-        $this->Render('admin/mapos/os/os', 'layoutadminMapos');
+        $this->Render('admin/mapos/os/os', 'layoutAdminMapos');
     }
 
     public function osAdicionar() {
@@ -341,7 +356,7 @@ class AdminController extends BaseController {
         $usuario = $this->Usuario->read("*");
         @$this->view->allUsuario = $usuario;
 //        $this->setPageTitle("Admin");
-        $this->Render('admin/mapos/os/addOs', 'layoutadminMapos');
+        $this->Render('admin/mapos/os/addOs', 'layoutAdminMapos');
     }
 
     public function osAdicionarSalvar($request) {
@@ -394,7 +409,7 @@ class AdminController extends BaseController {
 
 //        print_r($dados2); die();
 ////        $this->setPageTitle("Admin");
-        $this->Render('admin/mapos/os/visualizarOs', 'layoutadminMapos');
+        $this->Render('admin/mapos/os/visualizarOs', 'layoutAdminMapos');
     }
 
     public function osEditar($request) {
@@ -438,7 +453,7 @@ class AdminController extends BaseController {
 
 
         $this->setPageTitle("Admin");
-        $this->Render('admin/mapos/os/editOs', 'layoutadminMapos');
+        $this->Render('admin/mapos/os/editOs', 'layoutAdminMapos');
     }
 
     public function updateSalvarOs($request) {
@@ -539,9 +554,9 @@ class AdminController extends BaseController {
 
     public function financeiroLancamentos() {
 //        $this->setPageTitle("Admin");
-        $dados = $this->lancamentos->read("*");
+        $dados = $this->lancamentos->read("*", "", "ORDER BY idLancamentos DESC");
         @$this->view->Lancamentos = $dados;
-        $this->Render('admin/mapos/financeiro/lancamentos', 'layoutadminMapos');
+        $this->Render('admin/mapos/financeiro/lancamentos', 'layoutAdminMapos');
     }
 
     public function adicionarReceita($request) {
@@ -588,10 +603,20 @@ class AdminController extends BaseController {
 
     public function financeiroLancamentosEditar($request) {
         $id = $request->get->id;
-        print_r($id);
+       
         $dados = $this->lancamentos->read("*", "idLancamentos = $id");
         @$this->view->oneLancamentEdit = $dados;
-        $this->Render('admin/mapos/financeiro/lancamentosEditar', 'layoutadminMapos');
+        $this->Render('admin/mapos/financeiro/lancamentosEditar', 'layoutAdminMapos');
+    }
+    
+    public function financeiroLancamentosEditarSalvar($request) {
+        $request = $request->post;
+        
+        if($this->lancamentos->atualizar($request)){
+                $this->redirect("financeiro/lancamentos", self::SUCCESS, "Lançamento atualizado com sucesso");    
+        }else{
+                $this->redirect("financeiro/lancamentos", self::WARNING, "Ocorreu um erro ao tentar atualizar lançamento");
+        }
     }
 
     public function lacamentosRemover($request) {
@@ -606,12 +631,12 @@ class AdminController extends BaseController {
 
     public function Relatorios() {
 //        $this->setPageTitle("Admin");
-        $this->Render('admin/mapos/index', 'layoutadminMapos');
+        $this->Render('admin/mapos/index', 'layoutAdminMapos');
     }
 
     public function configuracoes() {
 //        $this->setPageTitle("Admin");
-        $this->Render('admin/mapos/index', 'layoutadminMapos');
+        $this->Render('admin/mapos/index', 'layoutAdminMapos');
     }
 
 

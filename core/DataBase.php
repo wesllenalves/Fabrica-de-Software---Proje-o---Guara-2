@@ -7,54 +7,49 @@
  */
 
 namespace Core;
+
 use PDO;
 use PDOException;
+
 /**
  * Description of DataBase
  *
  * @author Wesllen
  */
 class DataBase {
+
     private $usuario;
     private $senha;
     private $servidor;
-    private $dbName;
+    private $dbName;    
     private static $pdo;
-    
-   public function __construct() {
 
-       
-        $this->usuario = "root";
-        $this->servidor = "localhost";
-        $this->dbName = "mariathdoces";
-        $this->senha = "";
-        $this->charset = "utf8";
-    }
-    
-    
-    
-//    public function __construct() {
-//        $conf = require_once __DIR__.'/../app/Config/config.php';
-//        
-//        $dbname = $conf['database']['dbname'];
-//        $host = $conf['database']['host'];
-//        $username = $conf['database']['username'];
-//        $password = $conf['database']['password'];
-//        $charset = $conf['database']['charset'];
-//        $collation = $conf['database']['collation'];
-//        
-//        $this->usuario = $username;
-//        $this->servidor = $host;
-//        $this->dbName = $dbname;
-//        $this->senha = $password;
-//        $this->charset = $charset;
-//    }
-    
-     public function conecta() {
+    //'HTTP_CLIENT_IP'
+    //'REMOTE_ADOR'
+
+//    
+
+    public function conecta() {
+
+        $conf = require_once __DIR__ . '/../app/Config/config.php';
+        $dbname = $conf['database'];
+        $host = $conf['host'];
+        $username = $conf['username'];
+        $password = $conf['password'];
+        $charset = $conf['charset'];
+
+        $this->usuario = $username;
+        $this->servidor = $host;
+        $this->dbName = $dbname;
+        $this->senha = $password;
+        $this->charset = $charset;
+
+
+
         try {
             if (is_null(self::$pdo)) {
-                self::$pdo = new PDO("mysql:host=".$this->servidor."; dbname=$this->dbName;, charset=".$this->charset, $this->usuario, $this->senha,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-                self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);               
+                self::$pdo = new PDO("mysql:host=$this->servidor;dbname=$this->dbName", "$this->usuario", "$this->senha", array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+                self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 self::$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             }
             return self::$pdo;
@@ -62,4 +57,5 @@ class DataBase {
             die("Erro: <code>" . $ex->getMessage() . "</code>");
         }
     }
+
 }

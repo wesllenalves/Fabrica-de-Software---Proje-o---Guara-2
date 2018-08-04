@@ -9,6 +9,7 @@
 namespace Core;
 
 use Core\Session;
+use Core\Traffic;
 
 /**
  * Description of BaseController
@@ -16,7 +17,7 @@ use Core\Session;
  * @author Wesllen
  */
 class BaseController {
-
+    protected $trafego;
     protected $view;
     private $viewPath;
     private $layoutPath;
@@ -38,6 +39,15 @@ class BaseController {
         if (!isset($this->view)) {
             $this->view = new stdClass();
         }
+        
+    }
+    
+    protected function Trafego(){
+        $this->trafego = NULL;
+        if(!isset($this->trafego)){
+            $this->trafego = new Traffic();
+        }
+        return $this->trafego;
     }
 
     protected function Render($view, $layoutPath = null, $extencao = null) {

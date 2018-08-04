@@ -1,11 +1,8 @@
 <?php
-   return [  
-    'driver'    => "mysql",
+   return $conf = [ 
     'host'      => "localhost",
-    'database'  => "einstein",
+    'database'  => "mariathdoces",
     'username'  => "root",
     'password'  => "",
-    'charset'   => "utf8",
-    'collation' => "utf8_unicode_ci",
-    
+    'charset'   => "utf8"
         ];
