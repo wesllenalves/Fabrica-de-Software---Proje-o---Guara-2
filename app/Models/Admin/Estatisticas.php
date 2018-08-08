@@ -1,8 +1,7 @@
 <?php
 
-
-
 namespace App\Models\Admin;
+
 use Core\BaseModel;
 
 /**
@@ -11,31 +10,20 @@ use Core\BaseModel;
  * @author laboratorio
  */
 class Estatisticas extends BaseModel {
-    protected  $tabela = "lancamentos";
+
+    protected $tabela = "lancamentos";
     private $data_atual;
-    
-    
-    
-    public function Receita($periodo = NULL){
+
+    public function Receita($periodo = Null) {
 //        SET GLOBAL lc_time_names=pt_BR;
-        
 //        date_default_timezone_set('America/Sao_Paulo');
 //        $this->data_atual = date("Y-m-d H:i:s");
 //        ($periodo == null) ? '' : $intervalo = date('Y-m-d H:i:s', strtotime($periodo, strtotime($this->data_atual)));
 //        ($intervalo == '') ? '' : $intervaloResult = "AND dataCreate >= '{$intervalo}'";
-        
-        if($periodo == NULL){
-            $resultado = $this->estatistica("MONTHNAME(data_pagamento) as mes, extract(month from data_pagamento) as mes_num, sum(valor) as num_valor_tot", NULL, "GROUP BY extract(month from data_pagamento)");
-            
-        }else{
-            $resultado = $this->estatistica("sum(valor), MONTHNAME(data_pagamento) as mes", "MONTHNAME(data_pagamento) = '{$periodo}'");
-                         
-        } 
-        
-            
-            //select extract(month from data_pagamento) as mes, sum(valor) as num_valor_tot from `lancamentos` GROUP BY extract(month from data_pagamento)
-        //SELECT sum(valor), MONTHNAME(data_pagamento) FROM `lancamentos` where MONTHNAME(data_pagamento) = 'july'
-        
+//        
+//        
+//        
+//        
 //        $resultados = $this->estatistica('valor, tipo, 	MONTHNAME(dataCreate) as mes', "tipo = 'Receita' AND status = 'pago' {$intervaloResult}" );
 //
 //        foreach ($resultados as $result){            
@@ -44,13 +32,37 @@ class Estatisticas extends BaseModel {
 //
 //            
 //        }
-//
-        echo json_encode($resultado);
-    }
-    public function Despesa(){       
+        if ($periodo == NULL) {
+            $resultado = $this->estatistica("tipo, MONTHNAME(data_pagamento) as mes, extract(month from data_pagamento) as mes_num, sum(valor) as valor_total", "tipo='Receita'", "GROUP BY extract(month from data_pagamento)"); 
+        }
         
-        $r = $this->read('tipo');
+        $dados = [];
+        foreach ($resultado as $result ){
+            
+            $dados[$result->mes] = $result->valor_total;
+            
+        }
         
+        
+        echo json_encode($dados);
     }
     
+    
+
+    public function Despesa($periodo = Null) {
+
+        if ($periodo == NULL) {
+            $resultado = $this->estatistica("tipo, MONTHNAME(data_pagamento) as mes, extract(month from data_pagamento) as mes_num, sum(valor) as valor_total", "tipo='Despesa'", "GROUP BY extract(month from data_pagamento)"); 
+        }
+        
+        session_start();
+        $user = ["tipo" => "erro", "mensagem" => "Erro no login"];
+        $_SESSION['user'] = $user;
+        
+        //print_r($_SESSION['user']);
+        echo json_encode($_SESSION['user']);
+       //echo json_encode($resultado);
+        
+    }
+
 }

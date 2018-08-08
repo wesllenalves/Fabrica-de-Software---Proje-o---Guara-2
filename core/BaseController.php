@@ -26,6 +26,7 @@ class BaseController {
     private $tipo;
     private $extenção;
     private $mensagem;
+    private $titulo;
 
     # Enumerados
 
@@ -38,6 +39,7 @@ class BaseController {
         $this->view = NULL;
         if (!isset($this->view)) {
             $this->view = new stdClass();
+            
         }
         
     }
@@ -176,9 +178,10 @@ class BaseController {
         }
     }
 
-    protected function redirect($redirect, $tipo = null, $mensagem = null) {
+    protected function redirect($redirect, $tipo = null, $titulo = null, $mensagem = null) {
         $this->redirect = $redirect;
         $this->tipo = $tipo;
+        $this->titulo = $titulo;
         $this->mensagem = $mensagem;
         $this->getRedirect() === TRUE ?: Container::pageNotFoundLayout();
         $this->setSession();
@@ -190,19 +193,52 @@ class BaseController {
     }
 
     protected function setSession() {
-        $data = Session::getInstance();
-        //fornece qual sera o nome da sessao e sua mensagem
+        session_start();
+        
+                $_SESSION['json_session'] = $json_session;
+
+        //fornece qual sera o nome da sessao e sua mensagem com seu titulo
+        //usando Puglin Toastr
         switch ($this->tipo) {
 
-            case 1: $data->success = $this->mensagem;
+            case 1: $json_session =
+            [
+               "tipo"       => "success",
+               "titulo"     => $this->titulo,            
+               "mensagem"   => $this->mensagem
+            ];
+            $_SESSION['json_session'] = $json_session;
                 break;
-            case 2: $data->info = $this->mensagem;
+            case 2: $json_session =
+            [
+               "tipo"       => "info",
+               "titulo"     => $this->titulo,            
+               "mensagem"   => $this->mensagem
+            ];
+            $_SESSION['json_session'] = $json_session;
                 break;
-            case 3: $data->warning = $this->mensagem;
+            case 3: $json_session =
+            [
+               "tipo"       => "warning",
+               "titulo"     => $this->titulo,            
+               "mensagem"   => $this->mensagem
+            ];
+            $_SESSION['json_session'] = $json_session;
                 break;
-            case 4: $data->danger = $this->mensagem;
+            case 4:$json_session =
+            [
+               "tipo"       => "error",
+               "titulo"     => $this->titulo,            
+               "mensagem"   => $this->mensagem
+            ];
+            $_SESSION['json_session'] = $json_session;
                 break;
         }
+    }
+	
+	public function forbiden()
+    {
+        return $this->redirect('index', self::DANGER, 'OPS ERROR', 'faça login para ter acesso');
     }
 
 }

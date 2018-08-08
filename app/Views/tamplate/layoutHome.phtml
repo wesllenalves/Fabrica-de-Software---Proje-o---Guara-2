@@ -1,8 +1,10 @@
 <?php
-session_start();
-//print_r($_SESSION);
+if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+        
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,6 +17,9 @@ session_start();
         <link rel="stylesheet" href="<?= base_url('') ?>/public/home/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?= base_url('') ?>/public/home/css/style.css">
         <link rel="stylesheet" href="<?= base_url('') ?>/public/home/css/all.css"  />
+        <link rel="stylesheet" href="<?= base_url('') ?>/node_modules/toastr/build/toastr.css"  />
+        <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+        
         <!-- Magnific Popup core CSS file -->
         <link rel="stylesheet" href="<?= base_url('') ?>/public/home/css/magnific-popup.css">
         <!-- Script -- JS -- LINK -->
@@ -25,6 +30,7 @@ session_start();
         <script src="<?= base_url('') ?>/public/home/js/bootstrap.min.js"></script>
         <script src="<?= base_url('') ?>/public/home/js/jquery.mask.min.js"></script>
         <script src="<?= base_url('') ?>/public/home/js/all.js"></script>
+        <script src="<?= base_url('') ?>/node_modules/toastr/build/toastr.min.js"></script>
         <!-- Magnific Popup core JS file -->
         <script src="<?= base_url('') ?>/public/home/js/jquery.magnific-popup.js"></script>
 
@@ -93,14 +99,14 @@ session_start();
             <li class="li"><span></span></li>
         </ul>
         <!--Menssagens de Alerta -->
-        <?= $this->AlertaHome(); ?>
+         <!--$this->AlertaHome();-->
         <!--Fim Menssagens de Alerta -->
 
 
         <!--Conteudo-->
         <?php $this->content() ?>
         <!--Fim Conteudo-->
-
+        <script src="<?= base_url('') ?>/public/home/js/menssagen.js"></script>
         <script>
                     jQuery("input[name=documento]:radio").change(
                             function () {

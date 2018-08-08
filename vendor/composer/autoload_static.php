@@ -31,9 +31,11 @@ class ComposerStaticInitb010f24c6a7d8586e7dea7592837ad0b
     public static $classMap = array (
         'App\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Controllers/AdminController.php',
         'App\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Controllers/HomeController.php',
+        'App\\Controllers\\SessionController' => __DIR__ . '/../..' . '/app/Controllers/SessionController.php',
         'App\\Models\\Admin\\CadastroFuncionario' => __DIR__ . '/../..' . '/app/Models/Admin/CadastroFuncionario.php',
         'App\\Models\\Admin\\CadastroProduto' => __DIR__ . '/../..' . '/app/Models/Admin/CadastroProduto.php',
         'App\\Models\\Admin\\Cliente' => __DIR__ . '/../..' . '/app/Models/Admin/Cliente.php',
+        'App\\Models\\Admin\\Estatisticas' => __DIR__ . '/../..' . '/app/Models/Admin/Estatisticas.php',
         'App\\Models\\Admin\\Lancamentos' => __DIR__ . '/../..' . '/app/Models/Admin/Lancamentos.php',
         'App\\Models\\Admin\\Os' => __DIR__ . '/../..' . '/app/Models/Admin/Os.php',
         'App\\Models\\Admin\\Produtos_os' => __DIR__ . '/../..' . '/app/Models/Admin/Produtos_os.php',
@@ -55,6 +57,7 @@ class ComposerStaticInitb010f24c6a7d8586e7dea7592837ad0b
         'Core\\Route' => __DIR__ . '/../..' . '/core/Route.php',
         'Core\\Session' => __DIR__ . '/../..' . '/core/Session.php',
         'Core\\Session1' => __DIR__ . '/../..' . '/core/Session_.php',
+        'Core\\Traffic' => __DIR__ . '/../..' . '/core/Traffic.php',
         'Core\\Validator' => __DIR__ . '/../..' . '/core/Validator.php',
     );
 

@@ -8,9 +8,11 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Controllers\\AdminController' => $baseDir . '/app/Controllers/AdminController.php',
     'App\\Controllers\\HomeController' => $baseDir . '/app/Controllers/HomeController.php',
+    'App\\Controllers\\SessionController' => $baseDir . '/app/Controllers/SessionController.php',
     'App\\Models\\Admin\\CadastroFuncionario' => $baseDir . '/app/Models/Admin/CadastroFuncionario.php',
     'App\\Models\\Admin\\CadastroProduto' => $baseDir . '/app/Models/Admin/CadastroProduto.php',
     'App\\Models\\Admin\\Cliente' => $baseDir . '/app/Models/Admin/Cliente.php',
+    'App\\Models\\Admin\\Estatisticas' => $baseDir . '/app/Models/Admin/Estatisticas.php',
     'App\\Models\\Admin\\Lancamentos' => $baseDir . '/app/Models/Admin/Lancamentos.php',
     'App\\Models\\Admin\\Os' => $baseDir . '/app/Models/Admin/Os.php',
     'App\\Models\\Admin\\Produtos_os' => $baseDir . '/app/Models/Admin/Produtos_os.php',
@@ -32,5 +34,6 @@ return array(
     'Core\\Route' => $baseDir . '/core/Route.php',
     'Core\\Session' => $baseDir . '/core/Session.php',
     'Core\\Session1' => $baseDir . '/core/Session_.php',
+    'Core\\Traffic' => $baseDir . '/core/Traffic.php',
     'Core\\Validator' => $baseDir . '/core/Validator.php',
 );

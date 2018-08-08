@@ -22,7 +22,6 @@ use App\Models\Admin\Estatisticas;
 use Core\Validator;
 use Core\Session;
 
-
 /**
  * Description of AdminController
  *
@@ -53,27 +52,27 @@ class AdminController extends BaseController {
         $this->Servicos_os = new Servicos_os();
         $this->sessao = Session::getInstance();
         $this->Usuario = new Usuario();
-        $this->Estatistica =  new Estatisticas();
+        $this->Estatistica = new Estatisticas();
     }
 
     public function index() {
         $this->Trafego();
-//        if ($this->sessao->nivel !== "2") {
-//            $this->redirect("?Erro=Permissao", self::WARNING, "Você não tem permissão para acessar a página!");
-//        } else {
-            $this->Render('admin/mapos/index', 'layoutAdminMapos');
-//        }
+        $this->Render('admin/mapos/index', 'layoutAdminMapos');
     }
-    
-    public function JsonReceita(){
+
+    public function JsonReceita() {
         header("Access-Control-Allow-Origin : *");
         $this->Estatistica->Receita();
-        
     }
-    public function JsonDespesa(){
-        
+
+    public function JsonDespesa() {
+
         $this->Estatistica->Despesa();
-        
+    }
+
+    public function JsonMeses() {
+
+        $this->Estatistica->Meses();
     }
 
     public function clientes() {
@@ -603,19 +602,19 @@ class AdminController extends BaseController {
 
     public function financeiroLancamentosEditar($request) {
         $id = $request->get->id;
-       
+
         $dados = $this->lancamentos->read("*", "idLancamentos = $id");
         @$this->view->oneLancamentEdit = $dados;
         $this->Render('admin/mapos/financeiro/lancamentosEditar', 'layoutAdminMapos');
     }
-    
+
     public function financeiroLancamentosEditarSalvar($request) {
         $request = $request->post;
-        
-        if($this->lancamentos->atualizar($request)){
-                $this->redirect("financeiro/lancamentos", self::SUCCESS, "Lançamento atualizado com sucesso");    
-        }else{
-                $this->redirect("financeiro/lancamentos", self::WARNING, "Ocorreu um erro ao tentar atualizar lançamento");
+
+        if ($this->lancamentos->atualizar($request)) {
+            $this->redirect("financeiro/lancamentos", self::SUCCESS, "Lançamento atualizado com sucesso");
+        } else {
+            $this->redirect("financeiro/lancamentos", self::WARNING, "Ocorreu um erro ao tentar atualizar lançamento");
         }
     }
 
@@ -638,6 +637,5 @@ class AdminController extends BaseController {
 //        $this->setPageTitle("Admin");
         $this->Render('admin/mapos/index', 'layoutAdminMapos');
     }
-
 
 }

@@ -7,69 +7,57 @@ $routes[] = ['/cadastro/create', 'HomeController@cadastroCreat'];
 $routes[] = ['/cadastro', 'HomeController@cadastro'];
 $routes[] = ['/cadastro/cliente', 'HomeController@cadastroCliente'];
 $routes[] = ['/cadastro/orcamento', 'HomeController@cadastroOrcamento'];
+$routes[] = ['/JSON/session', 'HomeController@sessao'];
 
 //mapes
-$routes[] = ['/dashboard', 'AdminController@index'];
-$routes[] = ['/estatistica/JSON/receita', 'AdminController@JsonReceita'];
-$routes[] = ['/estatistica/JSON/despesa', 'AdminController@JsonDespesa'];
+$routes[] = ['/dashboard', 'AdminController@index', 'auth'];
 /*Clientes*/
-$routes[] = ['/clientes', 'AdminController@clientes'];
-$routes[] = ['/clientes/visualizar', 'AdminController@clientesVisualizar'];
-$routes[] = ['/clientes/editar', 'AdminController@clientesEditar'];
-$routes[] = ['/clientes/editar/salvar', 'AdminController@clientesEditarSalvar'];
-$routes[] = ['/clientes/adicionar', 'AdminController@clientesAdicionar'];
-$routes[] = ['/clientes/remover', 'AdminController@clientesRemover'];
-$routes[] = ['/clientes/adicionar/salvar', 'AdminController@clientesAdicionarSalvar'];
+$routes[] = ['/clientes', 'AdminController@clientes', 'auth'];
+$routes[] = ['/clientes/visualizar', 'AdminController@clientesVisualizar', 'auth'];
+$routes[] = ['/clientes/editar', 'AdminController@clientesEditar', 'auth'];
+$routes[] = ['/clientes/editar/salvar', 'AdminController@clientesEditarSalvar', 'auth'];
+$routes[] = ['/clientes/adicionar', 'AdminController@clientesAdicionar', 'auth'];
+$routes[] = ['/clientes/remover', 'AdminController@clientesRemover', 'auth'];
+$routes[] = ['/clientes/adicionar/salvar', 'AdminController@clientesAdicionarSalvar', 'auth'];
 /*Produtos*/
-$routes[] = ['/produtos', 'AdminController@produtos'];
-$routes[] = ['/produtos/adicionar', 'AdminController@produtosAdicionar'];
-$routes[] = ['/produtos/adicionar/salvar', 'AdminController@produtosSalvar'];
-$routes[] = ['/produtos/visualizar', 'AdminController@produtosVisualizar'];
-$routes[] = ['/produtos/editar', 'AdminController@produtosEditar'];
-$routes[] = ['/produtos/editar/salvar', 'AdminController@produtosEditarSalvar'];
-$routes[] = ['/produtos/remover', 'AdminController@produtosRemover'];
+$routes[] = ['/produtos', 'AdminController@produtos', 'auth'];
+$routes[] = ['/produtos/adicionar', 'AdminController@produtosAdicionar', 'auth'];
+$routes[] = ['/produtos/adicionar/salvar', 'AdminController@produtosSalvar', 'auth'];
+$routes[] = ['/produtos/visualizar', 'AdminController@produtosVisualizar', 'auth'];
+$routes[] = ['/produtos/editar', 'AdminController@produtosEditar', 'auth'];
+$routes[] = ['/produtos/editar/salvar', 'AdminController@produtosEditarSalvar', 'auth'];
+$routes[] = ['/produtos/remover', 'AdminController@produtosRemover', 'auth'];
 /*Serviços*/
-$routes[] = ['/servicos', 'AdminController@servicos'];
-$routes[] = ['/servicos/adicionar', 'AdminController@servicosAdicionar'];
-$routes[] = ['/servicos/Remover', 'AdminController@servicosRemover'];
-$routes[] = ['/servicos/adicionar/salvar', 'AdminController@servicosSalvar'];
-$routes[] = ['/servicos/adicionar/editar', 'AdminController@servicosEditar'];
-$routes[] = ['/servicos/adicionar/update', 'AdminController@servicosUpdate'];
+$routes[] = ['/servicos', 'AdminController@servicos', 'auth'];
+$routes[] = ['/servicos/adicionar', 'AdminController@servicosAdicionar', 'auth'];
+$routes[] = ['/servicos/Remover', 'AdminController@servicosRemover', 'auth'];
+$routes[] = ['/servicos/adicionar/salvar', 'AdminController@servicosSalvar', 'auth'];
+$routes[] = ['/servicos/adicionar/editar', 'AdminController@servicosEditar', 'auth'];
+$routes[] = ['/servicos/adicionar/update', 'AdminController@servicosUpdate', 'auth'];
 /*OS*/
-$routes[] = ['/os', 'AdminController@os'];
-$routes[] = ['/os/adicionar', 'AdminController@osAdicionar'];
-$routes[] = ['/os/adicionar/salvar', 'AdminController@osAdicionarSalvar'];
-$routes[] = ['/os/visualizar', 'AdminController@osVisualizar'];
-$routes[] = ['/os/editar', 'AdminController@osEditar'];
-$routes[] = ['/os/remover', 'AdminController@osRemover'];
-$routes[] = ['/os/oRemoverProduto', 'AdminController@osRemoverProduto'];
-$routes[] = ['/os/oRemoverServico', 'AdminController@osRemoverServico'];
-$routes[] = ['/os/salvarOsProduto', 'AdminController@salvarOsProduto'];
-$routes[] = ['/os/salvarOsServico', 'AdminController@salvarOsServico'];
-$routes[] = ['/os/update/salvar', 'AdminController@updateSalvarOs'];
+$routes[] = ['/os', 'AdminController@os', 'auth'];
+$routes[] = ['/os/adicionar', 'AdminController@osAdicionar', 'auth'];
+$routes[] = ['/os/adicionar/salvar', 'AdminController@osAdicionarSalvar', 'auth'];
+$routes[] = ['/os/visualizar', 'AdminController@osVisualizar', 'auth'];
+$routes[] = ['/os/editar', 'AdminController@osEditar', 'auth'];
+$routes[] = ['/os/remover', 'AdminController@osRemover', 'auth'];
+$routes[] = ['/os/oRemoverProduto', 'AdminController@osRemoverProduto', 'auth'];
+$routes[] = ['/os/oRemoverServico', 'AdminController@osRemoverServico', 'auth'];
+$routes[] = ['/os/salvarOsProduto', 'AdminController@salvarOsProduto', 'auth'];
+$routes[] = ['/os/salvarOsServico', 'AdminController@salvarOsServico', 'auth'];
+$routes[] = ['/os/update/salvar', 'AdminController@updateSalvarOs', 'auth'];
 /*Vendas*/
-$routes[] = ['/vendas', 'AdminController@vendas'];
-$routes[] = ['/vendas/adicionar', 'AdminController@vendasAdicionar'];
+$routes[] = ['/vendas', 'AdminController@vendas', 'auth'];
+$routes[] = ['/vendas/adicionar', 'AdminController@vendasAdicionar', 'auth'];
 /*Finaceiro*/
-$routes[] = ['/financeiro/lancamentos', 'AdminController@financeiroLancamentos'];
-$routes[] = ['/financeiro/lancamentos/adicionarReceita', 'AdminController@adicionarReceita'];
-$routes[] = ['/financeiro/lancamentos/adicionarDespesa', 'AdminController@adicionarDespesa'];
-$routes[] = ['/financeiro/lancamentos/remover', 'AdminController@lacamentosRemover'];
-$routes[] = ['/financeiro/lancamentos/editar', 'AdminController@financeiroLancamentosEditar'];
-$routes[] = ['/financeiro/lancamentos/editar/salvar', 'AdminController@financeiroLancamentosEditarSalvar'];
+$routes[] = ['/financeiro/lancamentos', 'AdminController@financeiroLancamentos', 'auth'];
+$routes[] = ['/financeiro/lancamentos/adicionarReceita', 'AdminController@adicionarReceita', 'auth'];
+$routes[] = ['/financeiro/lancamentos/adicionarDespesa', 'AdminController@adicionarDespesa', 'auth'];
+$routes[] = ['/financeiro/lancamentos/remover', 'AdminController@lacamentosRemover', 'auth'];
+$routes[] = ['/financeiro/lancamentos/editar', 'AdminController@financeiroLancamentosEditar', 'auth'];
+$routes[] = ['/financeiro/lancamentos/editar/salvar', 'AdminController@financeiroLancamentosEditarSalvar', 'auth'];
 
 
-
-
-//Admin normal
-//$routes[] = ['/dashboard', 'AdminController@index'];
-//$routes[] = ['/dashboard/cadastro-produto', 'AdminController@cadastroProduto'];
-//$routes[] = ['/dashboard/funcionario', 'AdminController@funcionario'];
-//$routes[] = ['/dashboard/cadastro/funcionario', 'AdminController@cadastroFuncionario'];
-//$routes[] = ['/dashboard/listar/clientes', 'AdminController@listarCliente'];
-//$routes[] = ['/dashboard/alterar/cliente/{id}', 'AdminController@editarCliente'];
-//$routes[] = ['/dashboard/update/cliente', 'AdminController@updateCliente'];
-//$routes[] = ['/dashboard/delete/cliente/{id}', 'AdminController@deleteCliente'];
 
 return $routes;
 

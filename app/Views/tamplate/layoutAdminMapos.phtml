@@ -88,6 +88,31 @@ if(isset($_GET["sair"])){
         border-radius: 5%;
         /*//float: right;*/
     }
+    
+    
+    canvas{
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+		.chart-container {
+			width: 500px;
+			margin-left: 40px;
+			margin-right: 40px;
+			margin-bottom: 40px;
+		}
+		.grafico {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+		.despesa {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
 </style>
 <script  type="text/javascript">
 
@@ -129,6 +154,7 @@ if(isset($_GET["sair"])){
 <!--end-Footer-part-->
 
 <!-- Latest compiled and minified JavaScript -->
+<script src="<?= base_url('') ?>/public/home/js/menssagen.js"></script>
 <script src="<?= base_url('')?>/public/admin/mapes/assets/js/jquery.validate.js"></script>
 <script src="<?= base_url('')?>/public/admin/mapes/assets/js/bootstrap.min.js"></script>
 <script src="<?= base_url('')?>/public/admin/js/toastr.js"></script>

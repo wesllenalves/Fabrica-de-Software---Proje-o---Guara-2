@@ -1,20 +1,26 @@
 <?php
 
 namespace Core;
+use Core\Auth;
 
 class Route{
-    private $routes;
-    
+    private $routes; 
+
+
     public function __construct(array $routes) {
         $this->setRoutes($routes);
-        @$this->run();
+        $this->run();                     
     }
     
     private function setRoutes($routes){
         foreach ($routes as $route){
             $explode = explode('@', $route[1]);
-            $r = [$route[0], $explode[0], $explode[1]];
-            $newRoutes[] = $r; 
+            if(isset($route[2])){
+              $r = [$route[0], $explode[0], $explode[1], $route[2]];
+            }else{
+              $r = [$route[0], $explode[0], $explode[1]];
+            }
+             $newRoutes[] = $r;
         }
         $this->routes = $newRoutes;
     }
@@ -39,7 +45,8 @@ class Route{
     private function run(){
         $found = false;
         $url = $this->getUrl();
-        $urlArray = explode('/', $url);
+        $urlArray = explode('/', $url);        
+        
         
         foreach ($this->routes as $route){
             $routeArray = explode('/', $route[0]);
@@ -55,6 +62,13 @@ class Route{
                 $found = TRUE;
                 $controller = $route[1];
                 $action = $route[2];
+                $auth = new Auth();
+                
+
+                
+        if(isset($route[3]) && $route[3] == 'auth' && !$auth->check()){
+                    $action = 'forbiden';
+                }
                 break;                
             } 
         }

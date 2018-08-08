@@ -3,12 +3,11 @@
 namespace App\Controllers;
 
 use Core\BaseController;
-use App\Models\Home\Login;
 use App\Models\Home\cadastroOrcamento;
 use App\Models\Cliente;
 use App\Models\Home\Produtos;
 use App\Models\Home\Usuarios;
-use Core\Session;
+
 
 class HomeController extends BaseController {
 
@@ -32,6 +31,10 @@ class HomeController extends BaseController {
         $this->Render('home/index', 'layoutHome');
     }
 
+    public function sessao(){
+        $this->Render('JSON_Sessao/index');
+    }
+
     public function login() {
         //seta o titulo da pagina
         echo $this->setPageTitle("Login");
@@ -41,19 +44,20 @@ class HomeController extends BaseController {
 
     public function validarLogin($request) {
         $usuario = new Usuarios();
-
-        if ($dados = $usuario->validar($request)) {
-            session_start();
-            $this->redirect("index", self::DANGER ,'Preencha Todos os Dados');            
+        $dados = $usuario->validar($request);
+        if ($dados) {
+            $this->redirect("index", self::WARNING, 'ATENÇÂO', 'Preencha Todos os Dados');            
         } else {
             //verifica se existe o usuario digitado, se sim retorna TRUE
             if ($usuario->verificarlogin($request->post)) {
                 //se existe usuario chama o metodo que redireciona para a pagina especificada
-                $this->redirect("dashboard", self::SUCCESS ,'Logado com sucesso');
+                $this->redirect("dashboard", self::SUCCESS , 'SUCESSO:', 'Logado com sucesso');
 //                $base = base_url('');                
 //                echo  "<script>window.location = '{$base}/dashboard';</script>";                
             } else {
-                $this->redirect("index", self::WARNING ,'Usuario Invalido');                
+                //session_start();
+                
+            $this->redirect("index", self::DANGER, 'OPS Error', 'Usuario Invalido');                
             }
         }
     }
@@ -72,7 +76,7 @@ class HomeController extends BaseController {
         if ($this->cliente->cadastrar($request)) {
             
         } else {
-            $this->redirect('cadastro', '4', 'OPS algo deu errado no seu cadastro');
+            $this->redirect('cadastro', self::DANGER, 'OPS Error', 'OPS algo deu errado no seu cadastro');
         }
         //instacia o objeto da model Cadastro
 //        if ($dados->password <= 5) {
@@ -94,10 +98,10 @@ class HomeController extends BaseController {
     public function cadastroOrcamento($request) {        
             if ($this->orcamento->cadastrar($request)) {
                  session_start();
-            $this->redirect("index", self::SUCCESS ,'Cadastro efetuado com sucesso');
+            $this->redirect("index", self::SUCCESS , 'SUCESSO', 'Cadastro efetuado com sucesso');
                
             }else{
-                $this->redirect("index", self::DANGER ,'Algo deu errado ao tentar cadastar seu orçamento');                
+                $this->redirect("index", self::DANGER , 'OPS Error', 'Algo deu errado ao tentar cadastar seu orçamento');                
             }
         
     }

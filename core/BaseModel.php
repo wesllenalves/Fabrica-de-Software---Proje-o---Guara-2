@@ -280,7 +280,7 @@ abstract class BaseModel {
 //            var_dump($r); die();
             if ($r->execute()) {
 //                print_r($r->fetchAll()); die();
-                return $r->fetchAll(PDO::FETCH_OBJ);
+                return $r->fetchAll(\PDO::FETCH_OBJ);
             } else {
                 print_r($r->errorInfo());
             }
