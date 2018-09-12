@@ -28,9 +28,10 @@ class Auth {
     } 
         if(Session_low::get('user')){
             $user = Session_low::get('user');
-            self::$id = $user['id'];
-            self::$name = $user['name'];
             
+            
+            self::$id = $user['id'];
+            self::$name = $user['name'];            
         }
     }
     public static function id()

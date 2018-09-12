@@ -8,7 +8,7 @@
 
 namespace App\Models\Home;
 use Core\BaseModel;
-use Core\Session;
+use Core\Session_low;
 use Core\Validator;
 /**
  * Description of Usuarios
@@ -39,11 +39,21 @@ class Usuarios extends BaseModel{
         $usuario = $this->read("*", "BINARY user = '{$dados->usuario}' and password = '{$dados->password}'");
         if (count($usuario) > 0) {
             
-            $data = Session::getInstance();
-            $data->autenticado = TRUE;            
-            $data->nivel = $usuario[0]['nivel'];            
-            $data->id = $usuario[0]['id'];         
-
+            
+            $user = [
+            'autenticado' =>  TRUE,            
+            'nivel' =>  $usuario[0]['nivel'],            
+            'name' =>  $usuario[0]['user'],            
+            'id' =>  $usuario[0]['idUsuarios']         
+            ];
+            
+            //Session_low::set('user', $user);
+            
+            session_start();
+            $_SESSION['user'] = $user;
+            
+            
+            
             return TRUE;
         }
 

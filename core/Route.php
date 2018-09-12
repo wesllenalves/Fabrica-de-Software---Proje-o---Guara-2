@@ -2,6 +2,8 @@
 
 namespace Core;
 use Core\Auth;
+use Core\Session_low;
+
 
 class Route{
     private $routes; 
@@ -63,9 +65,7 @@ class Route{
                 $controller = $route[1];
                 $action = $route[2];
                 $auth = new Auth();
-                
-
-                
+           
         if(isset($route[3]) && $route[3] == 'auth' && !$auth->check()){
                     $action = 'forbiden';
                 }

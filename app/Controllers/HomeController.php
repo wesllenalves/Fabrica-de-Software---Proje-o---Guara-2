@@ -50,10 +50,9 @@ class HomeController extends BaseController {
         } else {
             //verifica se existe o usuario digitado, se sim retorna TRUE
             if ($usuario->verificarlogin($request->post)) {
+                
                 //se existe usuario chama o metodo que redireciona para a pagina especificada
-                $this->redirect("dashboard", self::SUCCESS , 'SUCESSO:', 'Logado com sucesso');
-//                $base = base_url('');                
-//                echo  "<script>window.location = '{$base}/dashboard';</script>";                
+                $this->redirect("dashboard", self::SUCCESS , 'SUCESSO:', 'Logado com sucesso');               
             } else {
                 //session_start();
                 
