@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 03-Ago-2018 às 17:52
+-- Generation Time: 12-Set-2018 às 15:46
 -- Versão do servidor: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -19,6 +19,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `mariathdoces`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `certificadosemitidos`
+--
+
+CREATE TABLE `certificadosemitidos` (
+  `idCertificado` int(11) NOT NULL,
+  `dataInicio` date NOT NULL,
+  `dataFim` date NOT NULL,
+  `cargaHoraria` int(11) NOT NULL,
+  `responsavel` varchar(255) NOT NULL,
+  `fkPessoa_aluno` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -199,14 +214,14 @@ INSERT INTO `lancamentos` (`idLancamentos`, `descricao`, `valor`, `data_vencimen
 (19, 'Festa Nova', '200', '2018-07-11', '2018-08-02', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
 (21, 'Festa Nova', '200', '2018-07-05', '2018-10-09', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
 (22, 'Festa Nova', '200', '2018-07-04', '2018-04-08', 'Devendo', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
-(40, 'teste', '20,00', '2018-07-23', '2018-07-10', 'Pago', 'teste', 'Boleto', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
+(40, 'teste', '20', '2018-07-23', '2018-07-10', 'Pago', 'teste', 'Boleto', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
 (32, 'Festa Nova', '200', '2018-07-11', '2018-06-10', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
 (33, 'Festa Nova', '200', '2018-07-11', '2018-05-08', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
 (34, 'Festa Nova', '200', '2018-07-11', '2018-11-08', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
 (36, 'Festa Nova', '200', '2018-07-11', '2018-03-12', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
 (37, 'Festa Nova', '200', '2018-07-11', '2018-06-03', 'Devendo', 'Luluzinha', 'Dinheiro', 'Despesa', NULL, NULL, '0000-00-00 00:00:00'),
 (38, 'Festa Nova', ' 200', '2018-07-11', '2018-07-23', 'Pago', 'Luluzinha', 'Cartão de Crédito', 'Receita', NULL, NULL, '0000-00-00 00:00:00'),
-(39, 'Festa Nova', 'R$: 200,00', '2018-07-11', '2018-07-23', 'Pago', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00');
+(39, 'Festa Nova', '200', '2018-07-11', '2018-07-23', 'Pago', 'Luluzinha', 'Dinheiro', 'Receita', NULL, NULL, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -281,6 +296,22 @@ INSERT INTO `os` (`idOs`, `status_pedido`, `dataInicial`, `dataFinal`, `quantida
 (23, 'Finalizado', '2018-06-02', '2018-06-05', 2, 'bolo,nescal,pao', '                                        \r\n teste mais teste                               <br>Produtos pedido<br>', NULL, NULL, 0, '2018-06-26 03:22:26', '2018-06-26 05:06:46', 1, 6),
 (24, 'Aberto', '2018-06-02', '0000-00-00', 2, 'bolo,nescal,pao', '                                        \r\n teste mais teste                               <br>Produtos pedido<br>', NULL, NULL, 0, '2018-06-26 03:23:11', '0000-00-00 00:00:00', NULL, 7),
 (25, 'Aberto', '2018-06-02', '0000-00-00', 2, 'bolo,nescal,pao', '                                        \r\n teste mais teste                               <br>Produtos pedido<br>', NULL, NULL, 0, '2018-06-26 03:24:09', '0000-00-00 00:00:00', NULL, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `pessoa`
+--
+
+CREATE TABLE `pessoa` (
+  `idPessoa` int(11) NOT NULL,
+  `nome` varchar(255) NOT NULL,
+  `cpf` varchar(15) NOT NULL,
+  `rg` varchar(15) NOT NULL,
+  `telefoneContato` varchar(20) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `fkEndereco` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -427,7 +458,13 @@ INSERT INTO `trafego` (`id`, `data`, `pagina`, `ip`, `cidade`, `regiao`, `pais`,
 (7, '2016-02-07 14:07:25', 'home', '::1', 'Barueri', 'São Paulo', 'Brasil', 'Chrome', 'Acesso direto ou não identificado', 'Windows 10'),
 (8, '2016-02-08 17:07:25', 'home', '::1', 'Desconhecida', 'Desconhecida', 'Desconhecido', 'Chrome', 'Acesso direto ou não identificado', 'Windows Phone'),
 (9, '2016-02-08 14:07:25', 'home', '::1', 'Desconhecida', 'Desconhecida', 'Desconhecido', 'Chrome', 'Acesso direto ou não identificado', 'Windows Phone'),
-(10, '2016-02-09 10:47:09', 'home', '::1', 'Desconhecida', 'Desconhecida', 'Desconhecido', 'Chrome', 'Acesso direto ou não identificado', 'Windows 10');
+(10, '2016-02-09 10:47:09', 'home', '::1', 'Desconhecida', 'Desconhecida', 'Desconhecido', 'Chrome', 'Acesso direto ou não identificado', 'Windows 10'),
+(11, '2018-08-04 08:39:54', '/dashboard', '179.185.107.244', 'Brasília', 'DF', 'Brazil', 'Chrome', 'http://localhost:8080/index', 'Windows 10'),
+(12, '2018-08-04 08:42:43', '/dashboard?sair=Sim', '179.185.107.244', 'Brasília', 'DF', 'Brazil', 'Chrome', 'http://localhost:8080/dashboard', 'Windows 10'),
+(13, '2018-08-10 08:01:19', '/dashboard', '179.185.107.244', 'Brasília', 'DF', 'Brazil', 'Chrome', 'http://localhost:8080/', 'Windows 10'),
+(14, '2018-08-10 08:01:35', '/dashboard?sair=Sim', '179.185.107.244', 'Brasília', 'DF', 'Brazil', 'Chrome', 'http://localhost:8080/dashboard', 'Windows 10'),
+(15, '2018-09-12 09:50:21', '/dashboard', '179.185.107.244', 'Brasília', 'DF', 'Brazil', 'Chrome', 'http://localhost:8080/index', 'Windows 10'),
+(16, '2018-09-12 10:13:46', '/dashboard?sair=Sim', '179.185.107.244', 'Brasília', 'DF', 'Brazil', 'Chrome', 'http://localhost:8080/dashboard', 'Windows 10');
 
 -- --------------------------------------------------------
 
@@ -475,6 +512,13 @@ CREATE TABLE `vendas` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `certificadosemitidos`
+--
+ALTER TABLE `certificadosemitidos`
+  ADD PRIMARY KEY (`idCertificado`),
+  ADD KEY `fk_certificadosEmitidos_pessoa1_idx` (`fkPessoa_aluno`);
 
 --
 -- Indexes for table `clientes`
@@ -547,6 +591,13 @@ ALTER TABLE `os`
   ADD KEY `fk_os_lancamentos1` (`lancamento`);
 
 --
+-- Indexes for table `pessoa`
+--
+ALTER TABLE `pessoa`
+  ADD PRIMARY KEY (`idPessoa`),
+  ADD KEY `fk_pessoa_endereco1_idx` (`fkEndereco`);
+
+--
 -- Indexes for table `produto`
 --
 ALTER TABLE `produto`
@@ -598,6 +649,11 @@ ALTER TABLE `vendas`
 --
 
 --
+-- AUTO_INCREMENT for table `certificadosemitidos`
+--
+ALTER TABLE `certificadosemitidos`
+  MODIFY `idCertificado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `clientes`
 --
 ALTER TABLE `clientes`
@@ -648,6 +704,11 @@ ALTER TABLE `orcamento`
 ALTER TABLE `os`
   MODIFY `idOs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
+-- AUTO_INCREMENT for table `pessoa`
+--
+ALTER TABLE `pessoa`
+  MODIFY `idPessoa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+--
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
@@ -671,7 +732,7 @@ ALTER TABLE `servicos_os`
 -- AUTO_INCREMENT for table `trafego`
 --
 ALTER TABLE `trafego`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
@@ -685,6 +746,12 @@ ALTER TABLE `vendas`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Limitadores para a tabela `certificadosemitidos`
+--
+ALTER TABLE `certificadosemitidos`
+  ADD CONSTRAINT `fk_certificadosEmitidos_pessoa1` FOREIGN KEY (`fkPessoa_aluno`) REFERENCES `pessoa` (`idPessoa`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `eventofuncionario`

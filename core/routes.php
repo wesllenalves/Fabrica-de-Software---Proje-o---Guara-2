@@ -56,8 +56,13 @@ $routes[] = ['/financeiro/lancamentos/adicionarDespesa', 'AdminController@adicio
 $routes[] = ['/financeiro/lancamentos/remover', 'AdminController@lacamentosRemover', 'auth'];
 $routes[] = ['/financeiro/lancamentos/editar', 'AdminController@financeiroLancamentosEditar', 'auth'];
 $routes[] = ['/financeiro/lancamentos/editar/salvar', 'AdminController@financeiroLancamentosEditarSalvar', 'auth'];
-
-
+/*Certificado*/
+$routes[] = ['/certificados', 'CertificadoController@index'];
+$routes[] = ['/certificado/cadastro', 'CertificadoController@cadastro'];
+$routes[] = ['/certificado/gerar/{id}', 'CertificadoController@gerarPDF'];
+$routes[] = ['/certificado/editar/{id}', 'CertificadoController@editar'];
+$routes[] = ['/certificado/atualizar', 'CertificadoController@atualizar'];
+$routes[] = ['/certificado/cadastrar', 'CertificadoController@cadastrar'];
 
 return $routes;
 

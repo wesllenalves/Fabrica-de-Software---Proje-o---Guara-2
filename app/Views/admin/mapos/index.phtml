@@ -46,22 +46,22 @@
                         </ul>
                     </div>
                     <div class="col-md-12">
-                        
-<!--                            <div class="col-md-5">
-                                <div style="width:100%;">
-                                    <canvas id="despesa"></canvas>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-5">
-                                <div style="width:100%;">
-                                    <canvas id="receita"></canvas>
-                                </div>
-                            </div>-->
-<div class="grafico"></div><br>
-<div class="despesa" style=" margin-top: 200px; margin-left: 500px;"></div>
+
+                        <!--                            <div class="col-md-5">
+                                                        <div style="width:100%;">
+                                                            <canvas id="despesa"></canvas>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-5">
+                                                        <div style="width:100%;">
+                                                            <canvas id="receita"></canvas>
+                                                        </div>
+                                                    </div>-->
+                        <!--<div class="grafico"></div><br>-->
+                        <!--<div class="despesa" style=" margin-top: 200px; margin-left: 500px;"></div>-->
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -82,7 +82,7 @@
         purple: 'rgb(153, 102, 255)',
         grey: 'rgb(201, 203, 207)'
     };
-    
+
 //    function Mes(param){
 //      var valor = [];
 //        $.each(param, function(key,val){
@@ -107,123 +107,123 @@
 //Valor(data)
 
 
-       
-
-
-function createConfig(gridlines, title) {
-			return {
-				type: 'line',
-				data: {
-					labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-					datasets: [{
-						label: 'My First dataset',
-						backgroundColor: window.chartColors.red,
-						borderColor: window.chartColors.red,
-						data: [10, 30, 39, 20, 25, 34, 0],
-						fill: false,
-					}]
-				},
-				options: {
-					responsive: true,
-					
-					scales: {
-						xAxes: [{
-							gridLines: gridlines
-						}],
-						yAxes: [{
-							gridLines: gridlines,
-							ticks: {
-								min: 0,
-								max: 100,
-								stepSize: 10
-							}
-						}]
-					}
-				}
-			};
-		}
-
-		window.onload = function() {
-			var container = document.querySelector('.grafico');
-
-			[{
-				title: 'Display: false',
-				gridLines: {
-					display: false
-				}
-			}].forEach(function(details) {
-				var div = document.createElement('div');
-				div.classList.add('chart-container');
-
-				var canvas = document.createElement('canvas');
-				div.appendChild(canvas);
-				container.appendChild(div);
-
-				var ctx = canvas.getContext('2d');
-				var config = createConfig(details.gridLines, details.title);
-				new Chart(ctx, config);
-			});
-		};
 
 
 
+    function createConfig(gridlines, title) {
+        return {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                        label: 'My First dataset',
+                        backgroundColor: window.chartColors.red,
+                        borderColor: window.chartColors.red,
+                        data: [10, 30, 39, 20, 25, 34, 0],
+                        fill: false,
+                    }]
+            },
+            options: {
+                responsive: true,
 
-       
+                scales: {
+                    xAxes: [{
+                            gridLines: gridlines
+                        }],
+                    yAxes: [{
+                            gridLines: gridlines,
+                            ticks: {
+                                min: 0,
+                                max: 100,
+                                stepSize: 10
+                            }
+                        }]
+                }
+            }
+        };
+    }
 
-function createConfig(gridlines, title) {
-			return {
-				type: 'line',
-				data: {
-					labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-					datasets: [{
-						label: 'My First dataset',
-						backgroundColor: window.chartColors.red,
-						borderColor: window.chartColors.red,
-						data: [10, 30, 39, 20, 25, 34, 0],
-						fill: false,
-					}]
-				},
-				options: {
-					responsive: true,
-					
-					scales: {
-						xAxes: [{
-							gridLines: gridlines
-						}],
-						yAxes: [{
-							gridLines: gridlines,
-							ticks: {
-								min: 0,
-								max: 100,
-								stepSize: 10
-							}
-						}]
-					}
-				}
-			};
-		}
+    window.onload = function () {
+        var container = document.querySelector('.grafico');
 
-		window.onload = function() {
-			var container = document.querySelector('.despesa');
+        [{
+                title: 'Display: false',
+                gridLines: {
+                    display: false
+                }
+            }].forEach(function (details) {
+            var div = document.createElement('div');
+            div.classList.add('chart-container');
 
-			[{
-				title: 'Display: false',
-				gridLines: {
-					display: false
-				}
-			}].forEach(function(details) {
-				var div = document.createElement('div');
-				div.classList.add('chart-container');
+            var canvas = document.createElement('canvas');
+            div.appendChild(canvas);
+            container.appendChild(div);
 
-				var canvas = document.createElement('canvas');
-				div.appendChild(canvas);
-				container.appendChild(div);
+            var ctx = canvas.getContext('2d');
+            var config = createConfig(details.gridLines, details.title);
+            new Chart(ctx, config);
+        });
+    };
 
-				var ctx = canvas.getContext('2d');
-				var config = createConfig(details.gridLines, details.title);
-				new Chart(ctx, config);
-			});
-		};
+
+
+
+
+
+    function createConfig(gridlines, title) {
+        return {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                        label: 'My First dataset',
+                        backgroundColor: window.chartColors.red,
+                        borderColor: window.chartColors.red,
+                        data: [10, 30, 39, 20, 25, 34, 0],
+                        fill: false,
+                    }]
+            },
+            options: {
+                responsive: true,
+
+                scales: {
+                    xAxes: [{
+                            gridLines: gridlines
+                        }],
+                    yAxes: [{
+                            gridLines: gridlines,
+                            ticks: {
+                                min: 0,
+                                max: 100,
+                                stepSize: 10
+                            }
+                        }]
+                }
+            }
+        };
+    }
+
+    window.onload = function () {
+        var container = document.querySelector('.despesa');
+
+        [{
+                title: 'Display: false',
+                gridLines: {
+                    display: false
+                }
+            }].forEach(function (details) {
+            var div = document.createElement('div');
+            div.classList.add('chart-container');
+
+            var canvas = document.createElement('canvas');
+            div.appendChild(canvas);
+            container.appendChild(div);
+
+            var ctx = canvas.getContext('2d');
+            var config = createConfig(details.gridLines, details.title);
+            new Chart(ctx, config);
+        });
+    };
 
 
 
