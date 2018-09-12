@@ -55,7 +55,7 @@
                             </thead><?php
                             $total = 0;
                             foreach ($this->view->produtos as $linha) {
-                                $id = count($linha['idProduto']);
+                                @$id = count($linha['idProduto']);
                                 $total = $total + $id;
                             }
                             if ($total > 0) {

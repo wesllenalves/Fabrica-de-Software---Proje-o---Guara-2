@@ -3,22 +3,22 @@
 namespace App\Controllers;
 
 use Core\BaseController;
-use App\Models\Certificado;
+use App\Models\Admin\Certificado;
 
 class CertificadoController extends BaseController {
 
    protected $tabela = "certificadosEmitidos";
 
    public function index() {
-      if ($this->session->nivel !== "2")
-      $this->redirect("", self::WARNING, "Você não tem permissão para acessar a página!");
+//      if ($this->session->nivel !== "2")
+//      $this->redirect("", self::WARNING, "Você não tem permissão para acessar a página!");
 
-      $certificado = new Certificado;
+      $certificado = new Certificado();
+      var_dump($certificado->listar());
+//      $this->view->certificados = $certificado->listar();
 
-      $this->view->certificados = $certificado->listar();
-
-      $this->setPageTitle("Admin - Certificados");
-      $this->Render("certificado/index", "layoutAdmin");
+      //$this->setPageTitle("Admin - Certificados");
+      $this->Render('admin/mapos/certificado/index', 'layoutAdminMapos');
    }
 
    public function gerarPDF($id) {

@@ -21,6 +21,7 @@ use App\Models\Admin\Usuario;
 use App\Models\Admin\Estatisticas;
 use Core\Validator;
 use Core\Session;
+use App\Models\Admin\Certificado;
 
 /**
  * Description of AdminController
@@ -53,6 +54,17 @@ class AdminController extends BaseController {
         $this->sessao = Session::getInstance();
         $this->Usuario = new Usuario();
         $this->Estatistica = new Estatisticas();
+    }
+    
+    public function certificado(){
+         $certificado = new Certificado();
+         
+         var_dump($certificado->listar());
+//
+//      $this->view->certificados = $certificado->listar();
+
+//    $this->setPageTitle("Admin - Certificados");
+      $this->Render('admin/mapos/certificado/index', 'layoutAdminMapos');
     }
 
     public function index() {

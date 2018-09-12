@@ -60,7 +60,7 @@
                                 <?php
                                     $total = 0;
                                     foreach ($this->view->clientes as $linha) {
-                                        $id = count($linha['idClientes']);
+                                        @$id = count($linha['idClientes']);
                                         $total = $total + $id;
                                     }
                                     if ($total > 0) {

@@ -41,7 +41,9 @@ class Certificado extends BaseModel {
 
     public function listar() {
         $where = "e JOIN pessoa p ON p.fkEndereco = e.idEndereco JOIN certificadosemitidos c ON c.fkPessoa_aluno = p.idPessoa where c.idCertificado";
-        return ($certificados = $this->readKey("*", $where)) ? $certificados : FALSE;
+        $result = $this->readKey("*", $where);
+        print_r($result); die();
+//        return ($certificados = $this->readKey("*", $where)) ? $certificados : FALSE;
     }
 
     public function getCertificadoById($id) {
