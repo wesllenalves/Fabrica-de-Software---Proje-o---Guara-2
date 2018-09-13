@@ -14,7 +14,7 @@ class CertificadoController extends BaseController {
 //      $this->redirect("", self::WARNING, "Você não tem permissão para acessar a página!");
 
       $certificado = new Certificado();
-      var_dump($certificado->listar());
+//      var_dump($certificado->listar());
 //      $this->view->certificados = $certificado->listar();
 
       //$this->setPageTitle("Admin - Certificados");

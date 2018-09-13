@@ -58,11 +58,9 @@ class AdminController extends BaseController {
     
     public function certificado(){
          $certificado = new Certificado();
+        $dados = $certificado->listar(); 
          
-         var_dump($certificado->listar());
-//
-//      $this->view->certificados = $certificado->listar();
-
+      @$this->view->certificados = $dados;      
 //    $this->setPageTitle("Admin - Certificados");
       $this->Render('admin/mapos/certificado/index', 'layoutAdminMapos');
     }
