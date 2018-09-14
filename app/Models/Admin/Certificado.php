@@ -52,16 +52,22 @@ class Certificado extends BaseModel {
     }
 
     public function gerarCertificado($idCertificado) {
+        
+//        $certificado = $this->getCertificadoById($idCertificado)[0];
+//        
+//        print_r($certificado['nome'][0]);        die();
+        
+        
+        
         try {
             if ($certificado = $this->getCertificadoById($idCertificado)[0]) {
-                $file = file_get_contents(__DIR__ . '/../Views/template/template-certificado.html', FILE_USE_INCLUDE_PATH);
-
-                $firstName = trim(explode(" ", $certificado->nome)[0]);
-                $certificado->dataInicio = date("d/m/Y", strtotime($certificado->dataInicio));
-                $certificado->dataFim = date("d/m/Y", strtotime($certificado->dataFim));
+                $file = file_get_contents(__DIR__ . '/../../Views/tamplate/template-certificado.html', FILE_USE_INCLUDE_PATH);                
+                $firstName = trim(explode(" ", $certificado['nome'])[0]);
+                $certificado['dataInicio'] = date("d/m/Y", strtotime($certificado['dataInicio']));
+                $certificado['dataFim'] = date("d/m/Y", strtotime($certificado['dataFim']));
 
                 $search = ["{{nome}}", "{{cargaHoraria}}", "{{dataInicio}}", "{{dataFim}}"];
-                $replace = [$certificado->nome, $certificado->cargaHoraria, $certificado->dataInicio, $certificado->dataFim];
+                $replace = [$certificado['nome'], $certificado['cargaHoraria'], $certificado['dataInicio'], $certificado['dataFim']];
                 $file = str_replace($search, $replace, $file);
                 
                 $mpdf = new Mpdf([

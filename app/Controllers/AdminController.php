@@ -64,6 +64,15 @@ class AdminController extends BaseController {
 //    $this->setPageTitle("Admin - Certificados");
       $this->Render('admin/mapos/certificado/index', 'layoutAdminMapos');
     }
+    
+    
+    public function gerarPDF($request) {      
+      $id = $request->get->id;      
+      $certificado = new Certificado;
+      
+      if (!$certificado->gerarCertificado($id)) 
+         $this->redirect("admin/certificados", self::DANGER, "Erro ao gerar PDF!");
+   }
 
     public function index() {
         $this->Trafego();
