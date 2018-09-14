@@ -58,11 +58,11 @@ $routes[] = ['/financeiro/lancamentos/editar', 'AdminController@financeiroLancam
 $routes[] = ['/financeiro/lancamentos/editar/salvar', 'AdminController@financeiroLancamentosEditarSalvar', 'auth'];
 /*Certificado*/
 $routes[] = ['/certificados', 'AdminController@certificado'];
-$routes[] = ['/certificado/cadastro', 'AdminController@cadastro'];
+$routes[] = ['/certificado/cadastro', 'AdminController@cadastroView'];
 $routes[] = ['/certificado/gerar', 'AdminController@gerarPDF'];
-$routes[] = ['/certificado/editar/{id}', 'AdminController@editar'];
-$routes[] = ['/certificado/atualizar', 'AdminController@atualizar'];
-$routes[] = ['/certificado/cadastrar', 'AdminController@cadastrar'];
+$routes[] = ['/certificado/editar', 'AdminController@editarCertificado'];
+$routes[] = ['/certificado/atualizar', 'AdminController@atualizarCertificado'];
+$routes[] = ['/certificado/cadastrar', 'AdminController@cadastrarCertificado'];
 
 return $routes;
 

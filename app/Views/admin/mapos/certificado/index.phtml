@@ -12,7 +12,7 @@
         <li class=""><a href="<?= base_url('') ?>/servicos"><i class="icon icon-wrench"></i> <span>Serviços</span></a></li>
 
         <li class=""><a href="<?= base_url('') ?>/os"><i class="icon icon-tags"></i> <span>Ordens de Serviço</span></a></li>
-        
+
         <li class=""><a href="<?= base_url('') ?>/certificados"><i class="icon icon-tags"></i> <span>certificado</span></a></li>
 
 
@@ -39,55 +39,52 @@
 
 
 
-<section class="admin-content">
-   <table class="table">
-      <thead>
-         <tr>
-            <th>Aluno</th>
-            <th>Responsavel</th>
-            <th>Carga Horária</th>
-            <th>Data Início</th>
-            <th>Data Fim</th>
-         </tr>
-      </thead>
-      <tbody>
-		<?php 
-                
-                          
-			if ($this->view->certificados) :
-				foreach ($this->view->certificados as $certificado): 
-					$id = $certificado['idCertificado'];
-                                        
-		?>
-			<tr>
-				<td><?=$certificado['nome']?></td>
-				<td><?=$certificado['responsavel']?></td>
-				<td><?=$certificado['cargaHoraria']?> Hora(s)</td>
-				<td><?=date("d/m/Y", strtotime($certificado['dataInicio']))?></td>
-				<td><?=date("d/m/Y", strtotime($certificado['dataFim']))?></td>
-				<td class="table__toggler">
-					<i class="fa fa-ellipsis-h"></i>
-					<ul class="table__options-group">
-                  <li class="table__option"><a href="/certificado/gerar?id=<?=$id?>"><i class="fa fa-eye"></i> Ver PDF</a></li>
-						<li class="table__option"><a href="/admin/certificado/editar/<?=$id?>"><i class="fa fa-pencil"></i> &nbsp;&nbsp;Editar</a></li>
-						<li class="table__option"><a href="/admin/certificado/excluir/<?=$id?>"><i class="fa fa-close"></i> &nbsp;Excluir</a></li>
-					</ul>
-				</td>
-			</tr>
-		<?php 
-				endforeach; 
-			endif;
-		?>
-		</tbody>
-   </table>
-    
-   <a href="/admin/certificado/cadastro" class="admin-content__plus-button u-margin-top-med">
-      <i class="fa fa-plus"></i>
-   </a>
-    
-</section>
+                    <section class="admin-content">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Aluno</th>
+                                    <th>Responsavel</th>
+                                    <th>Carga Horária</th>
+                                    <th>Data Início</th>
+                                    <th>Data Fim</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if ($this->view->certificados) :
+                                    foreach ($this->view->certificados as $certificado):
+                                        $id = $certificado['idCertificado'];
+                                        ?>
+                                        <tr>
+                                            <td><?= $certificado['nome'] ?></td>
+                                            <td><?= $certificado['responsavel'] ?></td>
+                                            <td><?= $certificado['cargaHoraria'] ?> Hora(s)</td>
+                                            <td><?= date("d/m/Y", strtotime($certificado['dataInicio'])) ?></td>
+                                            <td><?= date("d/m/Y", strtotime($certificado['dataFim'])) ?></td>
+                                            <td class="table__toggler">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                                <ul class="table__options-group">
+                                                    <li class="table__option"><a href="/certificado/gerar?id=<?= $id ?>"><i class="fa fa-eye"></i> Ver PDF</a></li>
+                                                    <li class="table__option"><a href="/certificado/editar?id=<?= $id ?>"><i class="fa fa-pencil"></i> &nbsp;&nbsp;Editar</a></li>
+                                                    <li class="table__option"><a href="/certificado/excluir?id=<?= $id ?>"><i class="fa fa-close"></i> &nbsp;Excluir</a></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+        <?php
+    endforeach;
+endif;
+?>
+                            </tbody>
+                        </table>
 
-</div>
+                        <a href="/certificado/cadastro" class="admin-content__plus-button u-margin-top-med">
+                            <i class="fa fa-plus"></i>
+                        </a>    
+                    </section>
+
+
+                </div>
             </div>
         </div>
     </div>

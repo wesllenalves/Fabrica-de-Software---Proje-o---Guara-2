@@ -360,8 +360,42 @@ abstract class BaseModel {
         } catch (\PDOException $ex) {
              echo $ex->getMessage();
         }
-        
-        
+    }
+    
+    public function updateWithChildRows(array $campos_values, $foreign_keys) {
+        try {
+
+            $sql_text_array = array();
+            $sql_texts = array();
+
+            foreach($campos_values as $campo_values) {
+                foreach ($campo_values as $campo => $valor) {
+                    array_push($sql_text_array, "{$campo}='{$valor}'");
+                }
+                $sql_texts[] = implode(", ", $sql_text_array);
+                $sql_text_array = array();
+            }
+
+            $tables = [];
+
+            for ($i = 1; $i <= count($foreign_keys); $i++) {
+                if($i > 1) $tables[] = "tabela$i";
+                else $tables[] = "tabela";
+            }
+            $foreign_keys_names = array_keys($foreign_keys);
+            $foreign_keys_values = array_values($foreign_keys);
+
+            for ($i = 0; $i < count($foreign_keys); $i++) {
+                $r = $this->con->conecta()->prepare("UPDATE {$this->{$tables[$i]}} SET {$sql_texts[$i]} WHERE {$foreign_keys_names[$i]} = {$foreign_keys_values[$i]}");
+                $r->execute();
+                if (!($r->rowCount() >= 0)) return FALSE;
+            }
+            return TRUE;
+            
+        } catch (\PDOException $ex) {
+            echo $ex->getMessage();
+            echo 'teste'; exit;
+        }
     }
 
 }

@@ -73,6 +73,33 @@ class AdminController extends BaseController {
       if (!$certificado->gerarCertificado($id)) 
          $this->redirect("admin/certificados", self::DANGER, "Erro ao gerar PDF!");
    }
+   
+   public function cadastroView() { 
+      $this->Render("admin/mapos/certificado/cadastro", "layoutAdminMapos");
+   }
+
+   public function cadastrarCertificado($request) { 
+      $dados = $request->post;
+      $certificado = new Certificado;
+      
+      if ($certificado->cadastrar($dados)) $this->redirect("certificados", self::SUCCESS, "Certificado registrado com sucesso!");
+      else $this->redirect("certificados", self::DANGER, "Erro ao registrar dados do certificado!");
+   }
+
+   public function editarCertificado($request) {
+       $id = $request->get->id;
+      $certificado = new Certificado();      
+      @$this->view->certificado = $certificado->getCertificadoById($id)[0];
+
+      $this->Render("admin/mapos/certificado/editar", "layoutAdminMapos");
+   }
+
+   public function atualizarCertificado($request) {
+      $dados = $request->post;
+      $certificado = new Certificado();
+      if ($certificado->atualizar($dados)) $this->redirect("certificados", self::SUCCESS, "Editado com sucesso!");
+      else $this->redirect("certificados", self::DANGER, "OPS, algo deu errado!");
+   }
 
     public function index() {
         $this->Trafego();
