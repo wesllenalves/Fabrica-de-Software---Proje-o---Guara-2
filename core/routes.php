@@ -63,6 +63,7 @@ $routes[] = ['/certificado/gerar', 'AdminController@gerarPDF'];
 $routes[] = ['/certificado/editar', 'AdminController@editarCertificado'];
 $routes[] = ['/certificado/atualizar', 'AdminController@atualizarCertificado'];
 $routes[] = ['/certificado/cadastrar', 'AdminController@cadastrarCertificado'];
+$routes[] = ['/certificado/excluir', 'AdminController@excluirCertificado'];
 
 return $routes;
 

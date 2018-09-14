@@ -362,6 +362,23 @@ abstract class BaseModel {
         }
     }
     
+    
+    
+    public function deleteEstrangeira($tabela,  $where_sql) {
+        try {
+            $r = $this->con->conecta()->prepare("DELETE FROM $tabela WHERE {$where_sql}");
+            
+            $r->execute();
+            if($r->rowCount()) {
+              return TRUE;  
+            } else {
+                return FALSE; 
+            }
+        } catch (\PDOException $ex) {
+             echo $ex->getMessage();
+        }
+    }
+    
     public function updateWithChildRows(array $campos_values, $foreign_keys) {
         try {
 

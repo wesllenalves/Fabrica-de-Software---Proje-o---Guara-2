@@ -67,7 +67,7 @@
                                                 <ul class="table__options-group">
                                                     <li class="table__option"><a href="/certificado/gerar?id=<?= $id ?>"><i class="fa fa-eye"></i> Ver PDF</a></li>
                                                     <li class="table__option"><a href="/certificado/editar?id=<?= $id ?>"><i class="fa fa-pencil"></i> &nbsp;&nbsp;Editar</a></li>
-                                                    <li class="table__option"><a href="/certificado/excluir?id=<?= $id ?>"><i class="fa fa-close"></i> &nbsp;Excluir</a></li>
+                                                    <li class="table__option" title="Excluir Cliente" data-toggle="modal" data-target="#exampleModal" data-whatever="<?= $id ?>"><i class="fa fa-close"></i> &nbsp;Excluir</li>
                                                 </ul>
                                             </td>
                                         </tr>
@@ -76,6 +76,32 @@
 endif;
 ?>
                             </tbody>
+                            
+                            <!-- Modal  Excluir Cliente--> 
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Excluir clientes</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="<?= base_url('') ?>/certificado/excluir" method="POST">
+                                                <h3 style="text-align: center">Deseja realmente excluir este certificado ?</h3>
+                                                <div class="form-group">            
+                                                    <input type="hidden" class="form-control" id="recipient-name" name="id" value="<?= $id ?>">
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-danger">Excluir</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </table>
 
                         <a href="/certificado/cadastro" class="admin-content__plus-button u-margin-top-med">
@@ -89,3 +115,29 @@ endif;
         </div>
     </div>
 </div>
+
+<script type = "text/javascript">
+                    //script para passar o id para modal de excluir
+                    $('#exampleModal').on('show.bs.modal', function (event) {
+                        var button = $(event.relatedTarget) // Button that triggered the modal
+                        var recipient = button.data('whatever') // Extract info from data-* attributes
+                        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                        var modal = $(this)
+
+                        modal.find('.modal-body input').val(recipient)
+                    });
+
+                    $(document).ready(function () {
+
+
+                        $(document).on('click', 'a', function (event) {
+
+                            var os = $(this).attr('os');
+                            $('#idOs').val(os);
+
+                        });
+
+                    });
+
+                </script>

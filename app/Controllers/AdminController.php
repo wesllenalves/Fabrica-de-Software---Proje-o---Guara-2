@@ -100,6 +100,19 @@ class AdminController extends BaseController {
       if ($certificado->atualizar($dados)) $this->redirect("certificados", self::SUCCESS, "Editado com sucesso!");
       else $this->redirect("certificados", self::DANGER, "OPS, algo deu errado!");
    }
+   
+   
+   public function excluirCertificado($request){
+       $id = $request->post->id;       
+       $certificado =  new Certificado();
+       if($certificado->deletar($id)){  
+           $this->redirect("certificados", self::SUCCESS, "Excluido com sucesso!");
+       }else{   
+           $this->redirect("certificados", self::DANGER, "OPS, algo deu errado!");
+       }
+       
+       
+   }
 
     public function index() {
         $this->Trafego();

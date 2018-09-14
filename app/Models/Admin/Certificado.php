@@ -113,4 +113,13 @@ class Certificado extends BaseModel {
                     "idCertificado" => $dados->idCertificado
                ]) ? TRUE : FALSE;    
     }
+    
+    public function deletar($id){
+         $certificado = $this->getCertificadoById($id)[0];         
+         $aluno = $certificado['fkPessoa_aluno'];
+         
+         $this->deleteEstrangeira("pessoa", "idPessoa = $aluno");
+         return TRUE;
+        
+    }
 }
